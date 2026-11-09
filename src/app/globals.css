@@ -1,0 +1,29 @@
+@import "tailwindcss";
+/* Hệ thống giao diện gốc của lighthuman.vn (class lh-*). */
+@import "../styles/lighthuman.css";
+
+/*
+ * Một số class Tailwind tuỳ biến trang gốc dùng trong nội dung bài viết / trang con.
+ * Ánh xạ về biến của theme Light Human.
+ */
+@theme inline {
+  --color-border: var(--border-default, #dde1ea);
+  --color-text-secondary: var(--fg-secondary, #3f4555);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -2,14 +2,15 @@ import { CMS } from "./site";
 
 /**
  * Bộ lọc ngành trên trang /case-studies — đúng thứ tự site gốc
- * (site gốc có hai danh mục cùng tên "Sản xuất", giữ nguyên).
+ * (site gốc có hai danh mục cùng tên "Sản xuất"; xem TODO(BA) bên dưới).
  */
 export const caseCategories = [
   { id: "san-xuat", label: "Sản xuất" },
   { id: "my-pham", label: "Mỹ phẩm" },
   { id: "marketing", label: "Marketing" },
   { id: "giao-duc", label: "Giáo dục" },
-  { id: "fmcg", label: "Sản xuất" },
+  // TODO(BA): the original site labelled this "Sản xuất" too (duplicate); shown as FMCG until confirmed.
+  { id: "fmcg", label: "FMCG" },
 ] as const;
 
 export type CaseCategoryId = (typeof caseCategories)[number]["id"];

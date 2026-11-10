@@ -76,7 +76,7 @@ export const footerNav = [
     links: [
       { label: "Giới thiệu", href: "/dich-vu/gioi-thieu" },
       { label: "Câu chuyện Light Human", href: "/cau-chuyen" },
-      { label: "Đội ngũ", href: "/dich-vu/gioi-thieu" },
+      { label: "Đội ngũ", href: "/dich-vu/gioi-thieu#doi-ngu" },
       { label: "Tin tức", href: "/tin-tuc" },
     ],
   },

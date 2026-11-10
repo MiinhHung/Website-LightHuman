@@ -14,7 +14,6 @@ export function NewsletterSection() {
       <div className="lh-container">
         <div className="lh-news__inner">
           <div>
-            <span className="lh-eyebrow lh-eyebrow--gold">{n.eyebrow}</span>
             <h2 className="lh-h2 lh-mt-md">{n.title}</h2>
             <p>{n.desc}</p>
           </div>

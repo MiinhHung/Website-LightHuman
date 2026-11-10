@@ -31,7 +31,6 @@ export function InsightsBrowser({ query = "" }: { query?: string }) {
         <div className="lh-container">
           <div className="lh-featured__head">
             <div>
-              <span className="lh-eyebrow">{featured.eyebrow}</span>
               <h2 className="lh-h2 lh-mt-md">{featured.title}</h2>
             </div>
           </div>

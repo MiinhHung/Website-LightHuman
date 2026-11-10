@@ -5,12 +5,11 @@ import { rich } from "./rich";
 
 /** "Vì sao chọn Light Human?" — các hàng tính năng xen kẽ (lh-feature-rows). */
 export function FeatureRows({
-  eyebrow,
   title,
   lede,
   items,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lede: string;
   items: IconItem[];
@@ -20,7 +19,6 @@ export function FeatureRows({
       <div className="lh-container">
         <div className="lh-feature-rows">
           <div className="lh-feature-rows__head">
-            <span className="lh-eyebrow">{eyebrow}</span>
             <h2 className="lh-h2 lh-mt-md">{rich(title)}</h2>
             <p className="lh-lede lh-mt-md">{lede}</p>
           </div>

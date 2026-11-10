@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowRight, Award, Briefcase, Building2, Play, Users } from "lucide-react";
+import { ArrowRight, Award, Briefcase, Building2, Users } from "lucide-react";
 import { hero, homeStats, type TrustIcon } from "@/content/home";
-import { site } from "@/content/site";
+import { quoteHref, site } from "@/content/site";
 import { CountUp } from "@/components/ui/CountUp";
 
 const statIcons: Record<TrustIcon, ReactNode> = {
@@ -47,16 +47,13 @@ export function HomeHero() {
           </h1>
           <p className="lh-hero__lede">{hero.lede}</p>
           <div className="lh-hero__ctas">
-            <Link href="/dich-vu" className="lh-hero__cta-primary">
-              Khám phá dịch vụ
+            <Link href={quoteHref} className="lh-hero__cta-primary">
+              Nhận báo giá
               <ArrowRight size={17} strokeWidth={2} />
             </Link>
-            <a href={`${site.jobsUrl}/`} target="_blank" rel="noopener noreferrer" className="lh-hero__cta-ghost">
-              <span className="lh-hero__cta-play" aria-hidden="true">
-                <Play size={15} fill="currentColor" strokeWidth={0} />
-              </span>
-              Tin tuyển dụng
-            </a>
+            <Link href="/dich-vu" className="lh-hero__cta-link">
+              Xem dịch vụ
+            </Link>
           </div>
         </div>
       </div>

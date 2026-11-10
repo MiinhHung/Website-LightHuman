@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { aboutCta, aboutHero } from "@/content/about";
-import { CinematicHero } from "@/components/sections/about/CinematicHero";
+import { PageHeader } from "@/components/sections/PageHeader";
 import { AboutIntro } from "@/components/sections/about/AboutIntro";
 import { AboutStats } from "@/components/sections/about/AboutStats";
 import { CoreValues } from "@/components/sections/about/CoreValues";
@@ -17,7 +17,13 @@ export const instant = false;
 export default function AboutPage() {
   return (
     <>
-      <CinematicHero {...aboutHero} />
+      <PageHeader
+        crumbs={[{ label: "Giới thiệu" }]}
+        title={aboutHero.title}
+        lede={aboutHero.lede}
+        image={aboutHero.image}
+        action={aboutHero.cta}
+      />
       <AboutIntro />
       <AboutStats />
       <CoreValues />

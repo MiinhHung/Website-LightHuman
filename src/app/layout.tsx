@@ -1,12 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Merriweather } from "next/font/google";
+import { Be_Vietnam_Pro, JetBrains_Mono, Merriweather } from "next/font/google";
 import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
-// Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
-const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });
+// Be Vietnam Pro (drawn for Vietnamese diacritics) for text and headings; Merriweather only for quotes.
+const beVietnam = Be_Vietnam_Pro({
+  variable: "--font-be-vietnam",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 const merriweather = Merriweather({
   variable: "--font-merriweather",
   subsets: ["latin", "vietnamese"],
@@ -32,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="lighthuman"
       data-color-scheme="light"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${merriweather.variable} ${jetbrains.variable}`}
+      className={`${beVietnam.variable} ${merriweather.variable} ${jetbrains.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-white">
         <Header />

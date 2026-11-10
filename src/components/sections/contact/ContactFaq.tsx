@@ -13,7 +13,6 @@ export function ContactFaq() {
         <div className="lh-faq">
           <div className="lh-faq__layout">
             <div className="lh-faq__head">
-              <span className="lh-eyebrow lh-faq__eyebrow">{contactFaqHead.eyebrow}</span>
               <h2 className="lh-h2 lh-mt-md">
                 Câu hỏi <em>thường gặp</em>
               </h2>

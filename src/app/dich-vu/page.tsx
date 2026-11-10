@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { services, servicesPage } from "@/content/services";
 import { SuccessStories } from "@/components/sections/SuccessStories";
-import { Partners } from "@/components/sections/Partners";
-import { ServiceHero } from "@/components/sections/services/ServiceHero";
-import { ServiceCatalog } from "@/components/sections/services/ServiceCardsGrid";
-import { ServiceProcess } from "@/components/sections/services/ServiceProcess";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { rich } from "@/components/sections/services/rich";
+import { quoteHref } from "@/content/site";
+import { ServiceGroups } from "@/components/sections/services/ServiceGroups";
 import { CtaBand } from "@/components/sections/services/CtaBand";
 
 export const metadata: Metadata = {
@@ -13,15 +13,17 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  const { hero, grid, process, cta } = servicesPage;
+  const { hero, cta } = servicesPage;
   return (
     <>
-      <ServiceHero hero={hero} />
-      <ServiceCatalog
-        head={{ eyebrow: grid.eyebrow, title: grid.title, lede: grid.lede, link: { label: grid.linkLabel, href: grid.linkHref } }}
-        items={services}
+      <PageHeader
+        crumbs={[{ label: "Dịch vụ" }]}
+        title={rich(hero.title)}
+        lede={hero.lede}
+        image={hero.image}
+        action={{ label: "Nhận báo giá", href: quoteHref }}
       />
-      <ServiceProcess process={process} />
+      <ServiceGroups items={services} />
       <SuccessStories
         title={
           <>
@@ -30,7 +32,6 @@ export default function ServicesPage() {
         }
         lede="Năm câu chuyện, kể bằng lời của chính khách hàng và ứng viên."
       />
-      <Partners />
       <CtaBand cta={cta} />
     </>
   );

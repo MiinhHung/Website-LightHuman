@@ -7,17 +7,25 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { mainNav, quoteHref, site, type NavItem } from "@/content/site";
 
-// Routes that open with a dark cinematic hero; the header sits transparent on top of it.
+// Only the home page opens with the dark cinematic hero; the header sits transparent on top of it.
 // Decided per route, not with CSS :has(): cacheComponents keeps previous routes mounted
 // (hidden), so a hero from the last page would otherwise still match.
 function opensWithDarkHero(pathname: string): boolean {
-  return ["/", "/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/");
+  return pathname === "/";
+}
+
+const matches = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
+// Only the most specific match is active: /dich-vu/gioi-thieu marks "Giới thiệu", not "Dịch vụ" too.
+function activeHref(pathname: string): string | undefined {
+  const hrefs = mainNav.flatMap((i) => (i.external ? [] : [i.href, ...(i.children?.map((c) => c.href) ?? [])]));
+  return hrefs.filter((h) => matches(pathname, h)).sort((a, b) => b.length - a.length)[0];
 }
 
 function isActive(pathname: string, item: NavItem): boolean {
-  if (item.external) return false;
-  if (item.children?.some((c) => pathname === c.href || pathname.startsWith(`${c.href}/`))) return true;
-  return pathname === item.href || pathname.startsWith(`${item.href}/`);
+  const best = activeHref(pathname);
+  if (!best || item.external) return false;
+  return item.href === best || !!item.children?.some((c) => c.href === best);
 }
 
 function NavLink({

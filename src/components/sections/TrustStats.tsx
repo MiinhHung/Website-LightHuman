@@ -12,11 +12,10 @@ const icons: Record<TrustIcon, ReactNode> = {
 
 /** Hàng số liệu (lh-trust) — dùng ở trang chủ và trang Giới thiệu. */
 export function TrustStats({
-  eyebrow,
   title,
   stats,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: ReactNode;
   stats: { icon?: TrustIcon; num: string; label: string }[];
 }) {
@@ -24,7 +23,6 @@ export function TrustStats({
     <section className="lh-section lh-section--compact lh-metrics-row">
       <div className="lh-container">
         <div className="lh-mb-lg">
-          <span className="lh-eyebrow">{eyebrow}</span>
           <h2 className="lh-h2 lh-mt-md">{title}</h2>
         </div>
         <div className="lh-trust" style={{ "--lh-trust-cols": stats.length } as CSSProperties}>

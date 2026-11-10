@@ -4,8 +4,8 @@ import { CMS } from "./site";
 
 export const hero = {
   image: `${CMS}/lighthuman_hero_7ee1a27bba.png`,
-  lede:
-    "Giải pháp tuyển dụng & quản lý nhân sự hiệu quả. Hành trình vạn dặm bắt đầu từ một bước chân - cùng Light Human xây dựng đội ngũ nhân sự tinh hoa, song hành cùng sự phát triển của doanh nghiệp.",
+  // Shortened from the original site copy so the hero reads in one glance.
+  lede: "Giải pháp tuyển dụng và quản lý nhân sự cho doanh nghiệp Việt, từ headhunting cấp cao đến tuyển dụng số lượng lớn.",
 };
 
 export type TrustIcon = "award" | "building" | "briefcase" | "users";
@@ -15,24 +15,6 @@ export const homeStats: { icon: TrustIcon; num: string; label: string }[] = [
   { icon: "building", num: "800+", label: "Khách hàng doanh nghiệp, Đa quốc gia & nội địa" },
   { icon: "briefcase", num: "100+", label: "Dự án mỗi năm, Hoàn thành đúng tiến độ" },
   { icon: "users", num: "36.000+", label: "Ứng viên, Kết nối thành công" },
-];
-
-export const homeServices = [
-  {
-    title: "Tuyển dụng nhân sự số lượng lớn",
-    href: "/dich-vu/tuyen-dung-nhan-su-so-luong-lon",
-    image: `${CMS}/home_mass_hiring_35da30b200.png`,
-  },
-  {
-    title: "Xây dựng thương hiệu tuyển dụng",
-    href: "/dich-vu/xay-dung-thuong-hieu-tuyen-dung",
-    image: `${CMS}/home_employer_branding_8377e1c680.png`,
-  },
-  {
-    title: "Tuyển dụng nhân sự tạm thời",
-    href: "/dich-vu/tuyen-dung-nhan-su-tam-thoi",
-    image: `${CMS}/home_temp_staffing_b552198d35.png`,
-  },
 ];
 
 export type StepIcon = "users" | "search" | "target" | "handshake" | "clipboard" | "sprout";

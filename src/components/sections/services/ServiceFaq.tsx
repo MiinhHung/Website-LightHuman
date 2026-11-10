@@ -9,7 +9,6 @@ export function ServiceFaq({ helper, items }: { helper?: { text: string; linkLab
         <div className="lh-faq">
           <div className="lh-faq__layout">
             <div className="lh-faq__head">
-              <span className="lh-eyebrow lh-faq__eyebrow">FAQ</span>
               <h2 className="lh-h2 lh-mt-md">Câu hỏi thường gặp</h2>
               {helper && (
                 <p className="lh-faq__helper">

@@ -1,32 +1,31 @@
-import { Fragment } from "react";
+import Link from "next/link";
 import { aboutIntro } from "@/content/about";
 
-/** Khối văn bản Sứ mệnh / Tầm nhìn (lh-prose căn giữa, giống nội dung rich-text CMS). */
+/** Mission and vision side by side, then the company motto as a pull quote. */
 export function AboutIntro() {
   const { mission, vision, quote, closing } = aboutIntro;
   return (
-    <section className="lh-section">
+    <section className="lh-section lh-about-intro">
       <div className="lh-container">
-        <div className="lh-prose lh-prose--centered">
+        <div className="lh-about-intro__grid">
           {[mission, vision].map((block) => (
-            <Fragment key={block.id}>
-              <h2 id={block.id} className="text-3xl font-bold mt-8 mb-4">
-                <span>{block.title}</span>
-              </h2>
-              <p className="mb-4 leading-relaxed">
-                <span>{block.text}</span>
-              </p>
-            </Fragment>
+            <article key={block.id} id={block.id} className="lh-about-intro__block">
+              <h2 className="lh-about-intro__title">{block.title}</h2>
+              <p className="lh-about-intro__text">{block.text}</p>
+            </article>
           ))}
-          <blockquote className="border-l-4 border-border pl-4 italic my-4 text-text-secondary">
-            <span>
-              <strong>{quote}</strong>
-            </span>
-          </blockquote>
-          <p className="mb-4 leading-relaxed">
-            <span>{closing}</span>
-          </p>
         </div>
+        <figure className="lh-about-intro__quote">
+          <blockquote>
+            <p>“{quote}”</p>
+          </blockquote>
+          <figcaption>
+            {closing}{" "}
+            <Link href="/cau-chuyen" className="lh-about-intro__link">
+              Đọc câu chuyện Light Human
+            </Link>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

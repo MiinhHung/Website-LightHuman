@@ -12,12 +12,11 @@ const icons: Record<AboutStatIcon, ReactNode> = {
 
 /** "Light Human qua những con số" (lh-metrics-row / lh-trust) của trang Giới thiệu. */
 export function AboutStats() {
-  const { eyebrow, title, items } = aboutStats;
+  const { title, items } = aboutStats;
   return (
     <section className="lh-section lh-section--compact lh-metrics-row">
       <div className="lh-container">
         <div className="lh-mb-lg">
-          <span className="lh-eyebrow">{eyebrow}</span>
           <h2 className="lh-h2 lh-mt-md">{title}</h2>
         </div>
         <div className="lh-trust" style={{ "--lh-trust-cols": items.length } as CSSProperties}>

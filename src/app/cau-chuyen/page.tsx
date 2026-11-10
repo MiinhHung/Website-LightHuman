@@ -44,7 +44,7 @@ export default function StoryPage() {
                 {p}
               </p>
             ))}
-            <Link href="/dich-vu/gioi-thieu" className="lh-story-origin__link">
+            <Link href="/dich-vu/gioi-thieu#doi-ngu" className="lh-story-origin__link">
               Gặp đội ngũ Light Human
             </Link>
           </div>

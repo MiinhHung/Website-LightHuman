@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { caseStudiesPage } from "@/content/case-studies";
-import { CinematicHero } from "@/components/sections/about/CinematicHero";
+import { PageHeader } from "@/components/sections/PageHeader";
 import { CtaBand } from "@/components/sections/about/CtaBand";
 import { CaseStudiesBrowser } from "@/components/sections/case-studies/CaseStudiesBrowser";
 
@@ -13,7 +13,7 @@ export default function CaseStudiesPage() {
   const { hero, allLabel, cta } = caseStudiesPage;
   return (
     <>
-      <CinematicHero {...hero} />
+      <PageHeader crumbs={[{ label: "Case Studies" }]} title={hero.title} lede={hero.lede} image={hero.image} />
       <CaseStudiesBrowser allLabel={allLabel} />
       <CtaBand {...cta} />
     </>

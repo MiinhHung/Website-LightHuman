@@ -12,17 +12,13 @@ const icons: Record<ValueIcon, ReactNode> = {
 
 /** "Giá trị cốt lõi" — lưới thẻ dịch vụ dạng plain (không ảnh). */
 export function CoreValues() {
-  const { eyebrow, title, lede, items } = coreValuesSection;
+  const { title, lede, items } = coreValuesSection;
   return (
     <section className="lh-section lh-section--surface lh-services-grid--null">
       <div className="lh-container">
         <div className="lh-services-grid">
           <div className="lh-services-grid__head">
             <div>
-              <span className="lh-eyebrow lh-eyebrow--with-spark">
-                <span className="lh-spark" aria-hidden="true" />
-                {eyebrow}
-              </span>
               <h2 className="lh-h2 lh-mt-md">{title}</h2>
               <p className="lh-lede lh-mt-md">{lede}</p>
             </div>

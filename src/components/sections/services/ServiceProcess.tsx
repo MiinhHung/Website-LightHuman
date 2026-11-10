@@ -12,8 +12,7 @@ export function ServiceProcess({ process }: { process: ProcessData }) {
       <div className="lh-container">
         <div className="lh-process-steps">
           <div className="lh-process-steps__head">
-            <span className="lh-eyebrow">{process.eyebrow}</span>
-            {process.title && <h2 className="lh-h2 lh-mt-md">{rich(process.title)}</h2>}
+            <h2 className="lh-h2">{process.title ? rich(process.title) : "Quy trình làm việc"}</h2>
             {process.lede && <p className="lh-lede lh-mt-md">{process.lede}</p>}
           </div>
           <ol className="lh-process-steps__list" style={{ "--lh-step-count": steps.length } as CSSProperties}>

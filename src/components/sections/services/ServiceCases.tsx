@@ -6,12 +6,11 @@ import { rich } from "./rich";
 
 /** "Case Studies" ở trang chi tiết dịch vụ — thẻ không có liên kết, không có tag (khác trang chủ). */
 export function ServiceCases({
-  eyebrow,
   title,
   linkLabel,
   items,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   linkLabel: string;
   items: CaseItem[];
@@ -22,7 +21,6 @@ export function ServiceCases({
         <div className="lh-case-studies-grid">
           <div className="lh-case-studies-grid__head">
             <div>
-              <span className="lh-eyebrow">{eyebrow}</span>
               <h2 className="lh-h2 lh-mt-md">{rich(title)}</h2>
             </div>
             <GhostLink href="/case-studies">{linkLabel}</GhostLink>

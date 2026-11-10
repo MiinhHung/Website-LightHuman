@@ -938,26 +938,6 @@
 [data-theme="lighthuman"] .lh-contact-page__form { scroll-margin-top: calc(var(--header-h, 76px) + 16px); padding: clamp(20px, 3.5vw, 40px); background: var(--bg-page); border: 1px solid var(--border-1); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); }
 [data-theme="lighthuman"] .lh-quote-builder { container-type: inline-size; }
 
-/* Loading screen */
-[data-theme="lighthuman"] .lh-loading { display: grid; place-content: center; justify-items: center; gap: 28px; min-height: calc(100dvh - var(--header-h, 76px)); padding: 48px 16px; background: var(--bg-page); }
-[data-theme="lighthuman"] .lh-loading__mark { position: relative; overflow: hidden; }
-[data-theme="lighthuman"] .lh-loading__logo { display: block; width: auto; height: 72px; }
-[data-theme="lighthuman"] .lh-loading__sweep { position: absolute; top: -10%; bottom: -10%; left: -40%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.85), transparent); transform: skewX(-12deg); }
-[data-theme="lighthuman"] .lh-loading__track { position: relative; overflow: hidden; width: 160px; height: 2px; border-radius: 2px; background: var(--ink-100); }
-[data-theme="lighthuman"] .lh-loading__beam { position: absolute; top: 0; bottom: 0; left: 0; width: 40%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--brand-amber), transparent); }
-@media (prefers-reduced-motion: no-preference) {
-  [data-theme="lighthuman"] .lh-loading { animation: lh-fade-in 240ms var(--ease-out) 120ms both; }
-  [data-theme="lighthuman"] .lh-loading__sweep { animation: lh-sweep 1.6s var(--ease-in-out) infinite; }
-  [data-theme="lighthuman"] .lh-loading__beam { animation: lh-beam 1.2s var(--ease-in-out) infinite; }
-}
-@media (prefers-reduced-motion: reduce) {
-  [data-theme="lighthuman"] .lh-loading__sweep { display: none; }
-  [data-theme="lighthuman"] .lh-loading__beam { width: 100%; opacity: 0.6; }
-}
-@keyframes lh-sweep { from { transform: translateX(0) skewX(-12deg); } to { transform: translateX(400%) skewX(-12deg); } }
-@keyframes lh-beam { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
-@keyframes lh-fade-in { from { opacity: 0; } to { opacity: 1; } }
-
 /* Story page */
 [data-theme="lighthuman"] .lh-story-hero { padding-top: clamp(40px, 6vw, 80px); }
 [data-theme="lighthuman"] .lh-story-hero__grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
@@ -1027,7 +1007,6 @@
   [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__copy > :nth-child(2) { animation-delay: 160ms; }
   [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__copy > :nth-child(3) { animation-delay: 260ms; }
   [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__copy > :nth-child(4) { animation-delay: 360ms; }
-  [data-theme="lighthuman"] .lh-hero__stats { animation: lh-rise 800ms var(--ease-out) 480ms both; }
 }
 @keyframes lh-hero-settle { from { transform: scale(1.06); } to { transform: scale(1); } }
 @keyframes lh-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -1091,3 +1070,60 @@
 [data-theme="lighthuman"] .lh-kanban-summary__label { color: var(--ink-500); }
 [data-theme="lighthuman"] .lh-kanban-summary__note { color: var(--ink-500); }
 [data-theme="lighthuman"] .lh-kanban__head { min-height: 46px; align-content: start; }
+
+/* ============================================================================
+ * Loading splash: navy, slides under the transparent header like a hero.
+ * Logo rises in, the crest's rays open behind it and keep turning slowly,
+ * a light sweep crosses the wordmark, a gold beam runs on the track.
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-loading { position: relative; isolation: isolate; overflow: hidden; display: grid; place-items: center; min-height: 100dvh; margin-top: calc(-1 * var(--header-h, 76px)); padding: var(--header-h, 76px) 16px 48px; background: radial-gradient(circle at 50% 46%, #1b3470 0%, var(--brand-navy) 38%, #081430 100%); color: #fff; }
+[data-theme="lighthuman"] body:has(.lh-loading) .lh-header:not([data-solid]) { border-bottom-color: transparent; background: transparent; }
+[data-theme="lighthuman"] body:has(.lh-loading) .lh-header:not([data-solid])::before { opacity: 0; }
+[data-theme="lighthuman"] .lh-loading__rays { position: absolute; left: 50%; top: 46%; z-index: -2; width: 160vmax; height: 160vmax; margin: -80vmax 0 0 -80vmax; background: repeating-conic-gradient(from 0deg, rgba(242, 207, 99, 0.16) 0deg 1.2deg, transparent 1.2deg 10deg); mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 11%, transparent 28%); }
+[data-theme="lighthuman"] .lh-loading__glow { position: absolute; left: 50%; top: 46%; z-index: -1; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: radial-gradient(circle, rgba(242, 207, 99, 0.22), transparent 62%); }
+[data-theme="lighthuman"] .lh-loading__center { display: grid; justify-items: center; gap: 30px; }
+[data-theme="lighthuman"] .lh-loading__mark { position: relative; overflow: hidden; }
+[data-theme="lighthuman"] .lh-loading__logo { display: block; width: auto; height: clamp(64px, 9vw, 92px); }
+[data-theme="lighthuman"] .lh-loading__shine { position: absolute; inset: 0; overflow: hidden; mask-size: 100% 100%; mask-repeat: no-repeat; -webkit-mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; }
+[data-theme="lighthuman"] .lh-loading__sweep { position: absolute; top: -10%; bottom: -10%; left: -45%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.8), transparent); transform: skewX(-14deg); }
+[data-theme="lighthuman"] .lh-loading__track { position: relative; overflow: hidden; width: 180px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.14); }
+[data-theme="lighthuman"] .lh-loading__beam { position: absolute; top: 0; bottom: 0; left: 0; width: 45%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--brand-gold), transparent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-theme="lighthuman"] .lh-loading__rays { animation: lh-rays-open 1.1s var(--ease-out) both, lh-rays-turn 40s linear 1.1s infinite; }
+  [data-theme="lighthuman"] .lh-loading__glow { animation: lh-glow-breathe 2.8s var(--ease-in-out) infinite; }
+  [data-theme="lighthuman"] .lh-loading__mark { animation: lh-logo-rise 800ms var(--ease-out) 120ms both; }
+  [data-theme="lighthuman"] .lh-loading__sweep { animation: lh-sweep 2.2s var(--ease-in-out) 900ms infinite; }
+  [data-theme="lighthuman"] .lh-loading__track { animation: lh-fade-in 400ms var(--ease-out) 500ms both; }
+  [data-theme="lighthuman"] .lh-loading__beam { animation: lh-beam 1.3s var(--ease-in-out) infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="lighthuman"] .lh-loading__sweep { display: none; }
+  [data-theme="lighthuman"] .lh-loading__beam { width: 100%; opacity: 0.6; }
+}
+@keyframes lh-rays-open { from { opacity: 0; transform: scale(0.55) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(0deg); } }
+@keyframes lh-rays-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes lh-glow-breathe { 0%, 100% { opacity: 0.7; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes lh-logo-rise { from { opacity: 0; transform: translateY(14px); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); } }
+@keyframes lh-sweep { from { transform: translateX(0) skewX(-14deg); } to { transform: translateX(420%) skewX(-14deg); } }
+@keyframes lh-beam { from { transform: translateX(-100%); } to { transform: translateX(230%); } }
+@keyframes lh-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ============================================================================
+ * Hero stats bar on load: the glass frame fades in, then each card rises in
+ * turn while its number counts up (CountUp), with a short gold line drawing
+ * across the top of each card.
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-hero__stat { position: relative; }
+[data-theme="lighthuman"] .lh-hero__stat::after { content: ""; position: absolute; top: -1px; left: 26px; right: 26px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--brand-gold), transparent); transform-origin: left; transform: scaleX(0); opacity: 0.9; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-theme="lighthuman"] .lh-hero__stats { animation: lh-fade-in 600ms var(--ease-out) 420ms both; }
+  [data-theme="lighthuman"] .lh-hero__stat { animation: lh-rise 700ms var(--ease-out) both; animation-delay: calc(560ms + var(--i, 0) * 110ms); }
+  [data-theme="lighthuman"] .lh-hero__stat-icon { animation: lh-icon-pop 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(700ms + var(--i, 0) * 110ms); }
+  [data-theme="lighthuman"] .lh-hero__stat::after { animation: lh-line-draw 900ms var(--ease-out) both; animation-delay: calc(800ms + var(--i, 0) * 110ms); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="lighthuman"] .lh-hero__stat::after { transform: scaleX(1); }
+}
+@keyframes lh-icon-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+@keyframes lh-line-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }

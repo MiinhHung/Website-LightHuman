@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ArrowRight, Award, Briefcase, Building2, Play, Users } from "lucide-react";
 import { hero, homeStats, type TrustIcon } from "@/content/home";
 import { site } from "@/content/site";
+import { CountUp } from "@/components/ui/CountUp";
 
 const statIcons: Record<TrustIcon, ReactNode> = {
   award: <Award size={26} strokeWidth={1.75} />,
@@ -61,13 +62,15 @@ export function HomeHero() {
       </div>
       {/* Desktop only; below 1100px the standalone <TrustStats /> row shows the same numbers. */}
       <dl className="lh-hero__stats">
-        {homeStats.map((s) => (
-          <div key={s.num} className="lh-hero__stat">
+        {homeStats.map((s, i) => (
+          <div key={s.num} className="lh-hero__stat" style={{ "--i": i } as CSSProperties}>
             <span className="lh-hero__stat-icon" aria-hidden="true">
               {statIcons[s.icon]}
             </span>
             <dt className="lh-hero__stat-label">{s.label}</dt>
-            <dd className="lh-hero__stat-num">{s.num}</dd>
+            <dd className="lh-hero__stat-num">
+              <CountUp value={s.num} delay={650 + i * 110} />
+            </dd>
           </div>
         ))}
       </dl>

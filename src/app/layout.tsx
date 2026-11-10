@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LiveChat } from "@/components/layout/LiveChat";
 import "./globals.css";
+// Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
+import "@/styles/tools.css";
 
 // Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });

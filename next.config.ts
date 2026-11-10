@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     // Ảnh nội dung lấy từ CMS của Light Human (giống site production).
     remotePatterns: [{ protocol: "https", hostname: "blog.lighthuman.vn", pathname: "/uploads/**" }],
   },
+  // Fonts and logo are read from disk at request time by the quote PDF route.
+  outputFileTracingIncludes: {
+    "/api/quote/pdf": ["./src/lib/quote/pdf/fonts/*.ttf", "./src/lib/quote/pdf/assets/*"],
+  },
   async redirects() {
     // Site gốc dùng cả /blog và /tin-tuc; gom về một nơi.
     return [{ source: "/blog", destination: "/tin-tuc", permanent: true }];

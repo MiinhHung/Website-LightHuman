@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Cấu hình Claude Code cá nhân
 .claude/settings.local.json
+
+# quote PDF samples written by tests (QUOTE_WRITE_SAMPLES=1)
+/tmp/

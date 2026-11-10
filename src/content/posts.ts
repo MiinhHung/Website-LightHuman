@@ -46,7 +46,6 @@ export const insightsPage = {
   featured: {
     eyebrow: "Bài viết nổi bật",
     title: "Mới nhất từ đội ngũ Light Human",
-    allLink: { label: "All reviews →", href: "/blog" },
     empty: "Chưa có bài viết trong chuyên mục này.",
   },
   newsletter: {

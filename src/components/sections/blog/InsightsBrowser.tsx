@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { insightsPage, posts } from "@/content/posts";
@@ -35,9 +34,6 @@ export function InsightsBrowser({ query = "" }: { query?: string }) {
               <span className="lh-eyebrow">{featured.eyebrow}</span>
               <h2 className="lh-h2 lh-mt-md">{featured.title}</h2>
             </div>
-            <Link href={featured.allLink.href} className="lh-btn--link">
-              {featured.allLink.label}
-            </Link>
           </div>
           {items.length > 0 ? (
             <div className="lh-featured__grid">

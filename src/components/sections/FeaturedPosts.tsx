@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { posts, type Post } from "@/content/posts";
 import { Reveal } from "@/components/ui/Reveal";
+import { GhostLink } from "./GhostLink";
 
 export function ReviewTile({ post, lead = false }: { post: Post; lead?: boolean }) {
   return (
@@ -39,9 +40,7 @@ export function FeaturedPosts() {
               Bản tin nổi bật - <em>Chiến lược &amp; câu chuyện</em> nhân sự
             </h2>
           </div>
-          <Link href="/tin-tuc" className="lh-btn--link">
-            All reviews →
-          </Link>
+          <GhostLink href="/tin-tuc">Xem tất cả bài viết</GhostLink>
         </div>
         <div className="lh-featured__grid">
           {posts.slice(0, 3).map((p, i) => (

@@ -25,6 +25,8 @@ export type CaseStudy = {
   category: CaseCategoryId;
   /** Nội dung thẻ trên trang /case-studies (site gốc dùng câu chữ đầy đủ hơn trang chủ). */
   listing: { brand: string; industry: string; headline: string; tags: string[] };
+  /** Lời nhận xét đi kèm câu chuyện (trước đây nằm riêng ở section Testimonials). */
+  quote: { text: string; name: string; role: string };
 };
 
 export const caseStudiesPage = {
@@ -49,7 +51,7 @@ export const caseStudies: CaseStudy[] = [
     brand: "Khả Kim Beauty",
     industry: "Mỹ phẩm",
     headline: "Tái cấu trúc nhân sự hậu Covid - tiết kiệm chi phí và đánh giá lại chức năng nhiệm vụ từng vị trí.",
-    tags: ["Tư vấn cơ cấu nhân sự", "Optimize payroll"],
+    tags: ["Tư vấn cơ cấu nhân sự", "Tối ưu payroll"],
     image: `${CMS}/cs_kha_kim_beauty_4583cff848.png`,
     category: "my-pham",
     listing: {
@@ -58,6 +60,11 @@ export const caseStudies: CaseStudy[] = [
       headline:
         "Tái cấu trúc nhân sự hậu Covid - Khả Kim Beauty tiết kiệm chi phí và đánh giá lại chức năng nhiệm vụ từng vị trí với Light Human.",
       tags: ["Tư vấn cơ cấu nhân sự", "Tối ưu payroll"],
+    },
+    quote: {
+      text: "Trải qua mùa Covid, Khả Kim Beauty phải thực hiện tái cấu trúc nhân sự và điều chỉnh chức năng từng vị trí. Light Human đã đồng hành cùng chúng tôi tối ưu chi phí và xây dựng lại đội ngũ vững mạnh hơn trước.",
+      name: "Mr. Thành",
+      role: "CMO, Khả Kim Beauty",
     },
   },
   {
@@ -74,6 +81,11 @@ export const caseStudies: CaseStudy[] = [
       headline: "Bổ sung kịp thời nhân sự chuyên môn cho Tahefa Corp với chi phí phù hợp - dịch vụ tuyển dụng chuyên sâu.",
       tags: ["Tuyển dụng chuyên môn"],
     },
+    quote: {
+      text: "Công ty của chúng tôi đang sử dụng dịch vụ tuyển dụng nhân sự chuyên môn của Light Human và rất hài lòng với chất lượng ứng viên cũng như tốc độ phản hồi của đội ngũ.",
+      name: "Mr. Huy",
+      role: "Giám Đốc, CTCP SX - TMCN Tân Hiệp Phát",
+    },
   },
   {
     slug: "canawan",
@@ -88,6 +100,11 @@ export const caseStudies: CaseStudy[] = [
       industry: "Marketing / Truyền thông",
       headline: "Trụ sở tại Singapore mở văn phòng ở Việt Nam - Light Human đáp ứng nhu cầu nhân sự cross-border.",
       tags: ["Executive Search", "Mass Hiring"],
+    },
+    quote: {
+      text: "Canawan hoạt động trong lĩnh vực truyền thông - Marketing, trụ sở chính tại Singapore. Light Human đã đáp ứng tốt nhu cầu nhân sự cross-border khi chúng tôi mở văn phòng tại Việt Nam.",
+      name: "Mr. Thanh",
+      role: "Founder, Canawan",
     },
   },
   {
@@ -104,6 +121,11 @@ export const caseStudies: CaseStudy[] = [
       headline: "Kỹ thuật viên vận hành máy được kết nối với công việc yêu thích tại P&G nhờ đội ngũ tư vấn của Light Human.",
       tags: ["Career Coaching"],
     },
+    quote: {
+      text: "Em gửi lời cảm ơn chân thành tới team Light Human đã hỗ trợ em suốt thời gian tìm việc, kết nối em với công việc kỹ thuật vận hành máy tại P&G - đúng chuyên môn và phù hợp với mong muốn.",
+      name: "Lưu Tuyết Hoa",
+      role: "Kỹ thuật viên vận hành máy, P&G",
+    },
   },
   {
     slug: "dh-nguyen-tat-thanh",
@@ -118,6 +140,11 @@ export const caseStudies: CaseStudy[] = [
       industry: "Giáo dục",
       headline: "Sinh viên năm 3 tìm được công việc part-time tại công ty F&B nhờ đội ngũ tư vấn của Light Human.",
       tags: ["Hướng nghiệp"],
+    },
+    quote: {
+      text: "Em vẫn chưa hoàn thành việc học tại trường, nhưng em đã có một công việc part-time đúng định hướng nhờ đội ngũ tư vấn của Light Human. Trải nghiệm rất tận tâm và thực tế.",
+      name: "Nguyễn Thiên Nhiên",
+      role: "Sinh viên năm 3, ĐH Nguyễn Tất Thành",
     },
   },
 ];

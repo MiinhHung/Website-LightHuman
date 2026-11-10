@@ -29,8 +29,6 @@ export function Header() {
           <Image
             src={site.logo}
             alt={site.name}
-            width={site.logoSize.width}
-            height={site.logoSize.height}
             className="lh-wordmark__logo"
             priority
           />

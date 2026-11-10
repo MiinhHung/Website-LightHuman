@@ -1,3 +1,5 @@
+import logoOnDark from "@/assets/brand/logo-on-dark.png";
+
 /**
  * Thông tin chung toàn site (lấy theo lighthuman.vn). Mọi component đọc từ đây.
  */
@@ -11,8 +13,8 @@ export const site = {
     "Light Human - đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Executive Search, Mass Hiring, Employer Branding, đào tạo & tư vấn.",
   url: "https://lighthuman.vn",
   jobsUrl: "https://job.lighthuman.vn",
-  logo: `${CMS}/Logo_Light_Human_01_b1532ad4df.png`,
-  logoSize: { width: 4918, height: 2884 },
+  // Local copy of the CMS logo (Logo_Light_Human_01) with its transparent padding trimmed.
+  logo: logoOnDark,
   legal:
     "© 2026 Light Human. © Light Human Co., Ltd. MST: 0316300874. GPHĐ Dịch Vụ Việc làm: 33093/2024/67/SLĐTBXH-VLATLĐ. Tất cả quyền được bảo lưu.",
   contact: {

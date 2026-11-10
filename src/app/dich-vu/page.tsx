@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { services, servicesPage } from "@/content/services";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { SuccessStories } from "@/components/sections/SuccessStories";
 import { Partners } from "@/components/sections/Partners";
 import { CtaGrid } from "@/components/sections/CtaGrid";
 import { ServiceHero } from "@/components/sections/services/ServiceHero";
@@ -23,7 +23,14 @@ export default function ServicesPage() {
         items={services}
       />
       <ServiceProcess process={process} />
-      <Testimonials />
+      <SuccessStories
+        title={
+          <>
+            Khách hàng nói gì về <em>Light Human</em>
+          </>
+        }
+        lede="Năm câu chuyện, kể bằng lời của chính khách hàng và ứng viên."
+      />
       <Partners />
       <CtaBand cta={cta} />
       <CtaGrid />

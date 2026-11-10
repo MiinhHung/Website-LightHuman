@@ -1,9 +1,10 @@
 import { CMS } from "./site";
 
 /** Logo khách hàng (dải marquee). Thứ tự giống lighthuman.vn. */
-export const partners: { name: string; logo: string }[] = [
+/** `placeholder`: the CMS has no real logo for this client yet; hidden from the wall. */
+export const partners: { name: string; logo: string; placeholder?: boolean }[] = [
   { name: "MINTO", logo: `${CMS}/1669606279786_Minto_profile_photo_a301eeabd6.jpg` },
-  { name: "TEIKA", logo: `${CMS}/default_thumbnail_ce31acdefd.jpg` },
+  { name: "TEIKA", logo: `${CMS}/default_thumbnail_ce31acdefd.jpg`, placeholder: true },
   { name: "POMAXX", logo: `${CMS}/cropped_LOGO_CO_CHU_R_1_08ec110eb0.png` },
   { name: "FECREDIT", logo: `${CMS}/images_30_10a1e87b51.png` },
   { name: "ESORA", logo: `${CMS}/hoc_vien_esora_academy_xuat_sac_do_truong_dai_hoc_amsterdam_ha_lan_1b6e6f69_1698916083034_1698916083152911913124_750414aaaf.png` },

@@ -1,5 +1,7 @@
 "use client";
 
+import type { Ref } from "react";
+import { Download } from "lucide-react";
 import { vi } from "@/content/quote/labels.vi";
 import type { QuoteFormState } from "@/app/lien-he/quote-state";
 
@@ -9,75 +11,73 @@ const vnd = new Intl.NumberFormat("vi-VN", {
   maximumFractionDigits: 0,
 });
 
-/** Renders the Server Action result as a labelled card with PDF download links. */
+type ResultState = Extract<QuoteFormState, { status: "priced" | "manual_required" }>;
+
+/** Outcome card under the form; focusable so the builder can move focus to it after submit. */
 export function QuoteResult({
   state,
   onReset,
+  ref,
 }: {
-  state: QuoteFormState;
+  state: ResultState;
   onReset: () => void;
+  ref?: Ref<HTMLDivElement>;
 }) {
-  if (state.status === "priced") {
-    return (
-      <div className="lh-quote-result lh-quote-result--priced" role="status">
-        <h4>{state.pricingComplete ? vi.result.pricedTitle : vi.result.draftTitle}</h4>
-        <p>{state.pricingComplete ? vi.result.pricedBody : vi.result.draftBody}</p>
-        {/* The seed price is a placeholder; showing it next to an empty PDF would contradict it. */}
-        {state.pricingComplete && (
-          <div className="lh-quote-result__amount">
-            {vnd.format(state.subtotal)}
-            <span className="lh-quote-result__amount-breakdown">
-              {" "}
-              ({vnd.format(state.unitPrice)} × {state.quantity})
-            </span>
-          </div>
-        )}
-        {state.downloads.length > 0 ? (
-          <div className="lh-quote-result__actions">
-            {state.downloads.map((d) => (
+  const priced = state.status === "priced";
+  const title = priced
+    ? state.pricingComplete
+      ? vi.result.pricedTitle
+      : vi.result.draftTitle
+    : vi.result.manualTitle;
+  const body = priced
+    ? state.pricingComplete
+      ? vi.result.pricedBody
+      : vi.result.draftBody
+    : vi.result.manualBody;
+
+  return (
+    <div ref={ref} tabIndex={-1} className="lh-quote-result" role="status">
+      <h4>{title}</h4>
+      <p>{body}</p>
+
+      {/* The seed price is a placeholder; showing it next to an empty PDF would contradict it. */}
+      {priced && state.pricingComplete && (
+        <div className="lh-quote-result__amount">
+          {vnd.format(state.subtotal)}
+          <span className="lh-quote-result__amount-breakdown">
+            {" "}
+            ({vnd.format(state.unitPrice)} × {state.quantity})
+          </span>
+        </div>
+      )}
+
+      <dl className="lh-quote-result__meta">
+        <div>
+          <dt>{priced ? vi.result.code : vi.result.requestCode}:</dt>
+          <dd>{state.code}</dd>
+        </div>
+        <div>
+          <dt>{vi.result.type}:</dt>
+          <dd>{vi.types[state.type]}</dd>
+        </div>
+      </dl>
+
+      <div className="lh-quote-result__actions">
+        {priced &&
+          (state.downloads.length > 0 ? (
+            state.downloads.map((d) => (
               <a key={d.type} href={d.href} className="lh-btn" rel="nofollow noreferrer">
+                <Download size={16} strokeWidth={2} aria-hidden="true" />
                 {d.type === "mass" ? vi.result.downloadMass : vi.result.downloadHunt}
               </a>
-            ))}
-          </div>
-        ) : (
-          <p className="lh-quote-note">{vi.result.downloadUnavailable}</p>
-        )}
-        <div className="lh-quote-result__code">
-          Mã báo giá: {state.code} · Loại: {state.type === "mass" ? vi.types.mass : vi.types.hunt} ·
-          Bảng giá {state.pricingVersion}
-        </div>
-        <div className="lh-quote-result__actions">
-          <button type="button" className="lh-btn--link" onClick={onReset}>
-            Gửi yêu cầu khác →
-          </button>
-        </div>
+            ))
+          ) : (
+            <p className="lh-quote-note">{vi.result.downloadUnavailable}</p>
+          ))}
+        <button type="button" className="lh-btn--link" onClick={onReset}>
+          {vi.result.reset}
+        </button>
       </div>
-    );
-  }
-  if (state.status === "manual_required") {
-    return (
-      <div className="lh-quote-result lh-quote-result--manual" role="status">
-        <h4>{vi.result.manualTitle}</h4>
-        <p>{vi.result.manualBody}</p>
-        <div className="lh-quote-result__code">
-          Mã yêu cầu: {state.code} · Loại: {state.type === "mass" ? vi.types.mass : vi.types.hunt}
-        </div>
-        <div className="lh-quote-result__actions">
-          <button type="button" className="lh-btn--link" onClick={onReset}>
-            Gửi yêu cầu khác →
-          </button>
-        </div>
-      </div>
-    );
-  }
-  if (state.status === "error") {
-    return (
-      <div className="lh-quote-result lh-quote-result--error" role="alert">
-        <h4>{vi.result.errorTitle}</h4>
-        <p>{state.message}</p>
-      </div>
-    );
-  }
-  return null;
+    </div>
+  );
 }

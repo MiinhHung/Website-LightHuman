@@ -11,40 +11,34 @@ export function ContactFields({
   errors: QuoteFormErrors;
   values: QuoteFormValues;
 }) {
+  const shared = { errors, values };
   return (
-    <fieldset className="lh-quote-contact" aria-describedby="quote-contact-hint">
+    <fieldset className="lh-quote-contact">
       <legend className="sr-only">{vi.contact.legend}</legend>
-      <Field
-        name="contact.name"
-        label={`${vi.contact.name} *`}
-        type="text"
-        required
-        errors={errors}
-        values={values}
-      />
+      <Field name="contact.name" label={vi.contact.name} type="text" autoComplete="name" required {...shared} />
       <Field
         name="contact.company"
-        label={`${vi.contact.company} *`}
+        label={vi.contact.company}
         type="text"
+        autoComplete="organization"
         required
-        errors={errors}
-        values={values}
+        {...shared}
       />
       <Field
         name="contact.email"
         label={vi.contact.email}
         type="email"
-        required={false}
-        errors={errors}
-        values={values}
+        autoComplete="email"
+        hintId="quote-contact-hint"
+        {...shared}
       />
       <Field
         name="contact.phone"
         label={vi.contact.phone}
         type="tel"
-        required={false}
-        errors={errors}
-        values={values}
+        autoComplete="tel"
+        hintId="quote-contact-hint"
+        {...shared}
       />
       <p id="quote-contact-hint" className="lh-quote-note lh-quote-contact__hint">
         {vi.contact.needEmailOrPhone}
@@ -57,30 +51,43 @@ function Field({
   name,
   label,
   type,
-  required,
+  autoComplete,
+  required = false,
+  hintId,
   errors,
   values,
 }: {
   name: keyof QuoteFormValues;
   label: string;
   type: string;
-  required: boolean;
+  autoComplete: string;
+  required?: boolean;
+  hintId?: string;
   errors: QuoteFormErrors;
   values: QuoteFormValues;
 }) {
   const error = errors[name];
   const errorId = `${name.replace(/\./g, "-")}-error`;
+  const describedBy = [error ? errorId : null, hintId].filter(Boolean).join(" ") || undefined;
   return (
     <label className="lh-field">
-      <span className="lh-field__label">{label}</span>
+      <span className="lh-field__label">
+        {label}
+        {required && (
+          <span className="lh-quote-req" aria-hidden="true">
+            *
+          </span>
+        )}
+      </span>
       <input
         type={type}
         name={name}
+        autoComplete={autoComplete}
         defaultValue={values[name] ?? ""}
         required={required}
         className="lh-field__input"
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? errorId : undefined}
+        aria-describedby={describedBy}
       />
       {error && (
         <span id={errorId} className="lh-quote-error-text">

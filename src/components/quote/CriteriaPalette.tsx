@@ -1,65 +1,55 @@
 "use client";
 
 import { useDraggable } from "@dnd-kit/core";
-import {
-  CATALOG,
-  type EducationValue,
-  type ExperienceValue,
-  type GroupKey,
-  type IndustryValue,
-  type LanguageValue,
-  type RegionValue,
-} from "@/content/quote/catalog";
+import { Check } from "lucide-react";
+import { CATALOG, type GroupKey } from "@/content/quote/catalog";
 import { vi } from "@/content/quote/labels.vi";
-
-type SelectedState = {
-  industries: readonly IndustryValue[];
-  languages: readonly LanguageValue[];
-  experience: ExperienceValue | null;
-  region: RegionValue | null;
-  education: EducationValue | null;
-};
+import { isValueSelected, type SelectedState } from "./selection";
 
 type Props = {
   selected: SelectedState;
   onToggle: (groupKey: GroupKey, value: string) => void;
 };
 
-/** Left column — every catalogue option rendered as a draggable+clickable chip. */
+/** Every catalogue option as a chip: click/Enter toggles, drag drops into the selection panel. */
 export function CriteriaPalette({ selected, onToggle }: Props) {
   return (
-    <section className="lh-quote-column" aria-label={vi.palette}>
-      <h4>{vi.palette}</h4>
-      <p className="lh-quote-column-hint">{vi.paletteHint}</p>
-      {CATALOG.map((group) => (
-        <div
-          key={group.key}
-          className="lh-quote-group"
-          role="group"
-          aria-label={group.label}
-        >
-          <div className="lh-quote-group__legend">
-            <span>{group.label}</span>
-            <em>
-              {group.required ? "bắt buộc" : "tuỳ chọn"} ·{" "}
-              {group.selectType === "multi" ? "chọn nhiều" : "chọn một"}
-            </em>
+    <div>
+      {CATALOG.map((group) => {
+        const legendId = `quote-group-${group.key}`;
+        const rule = [
+          group.required ? null : vi.group.optional,
+          group.selectType === "multi" ? vi.group.multi : vi.group.single,
+        ]
+          .filter(Boolean)
+          .join(", ");
+        return (
+          <div key={group.key} className="lh-quote-group" role="group" aria-labelledby={legendId}>
+            <span id={legendId} className="lh-quote-group__legend">
+              {group.label}
+              {group.required && (
+                <span className="lh-quote-req" aria-hidden="true">
+                  *
+                </span>
+              )}{" "}
+              <span className="lh-quote-group__rule">({rule})</span>
+            </span>
+            <div className="lh-quote-chip-row">
+              {group.options.map((o) => (
+                <PaletteChip
+                  key={o.value}
+                  groupKey={group.key}
+                  value={o.value}
+                  label={o.label}
+                  isSelected={isValueSelected(selected, group.key, o.value)}
+                  onClick={() => onToggle(group.key, o.value)}
+                />
+              ))}
+            </div>
           </div>
-          <div className="lh-quote-chip-row">
-            {group.options.map((o) => (
-              <PaletteChip
-                key={o.value}
-                groupKey={group.key}
-                value={o.value}
-                label={o.label}
-                isSelected={isValueSelected(selected, group.key, o.value)}
-                onClick={() => onToggle(group.key, o.value)}
-              />
-            ))}
-          </div>
-        </div>
-      ))}
-    </section>
+        );
+      })}
+    </div>
   );
 }
 
@@ -78,7 +68,7 @@ function PaletteChip({
 }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `chip:${groupKey}:${value}`,
-    data: { groupKey, value },
+    data: { groupKey, value, label },
   });
   const classes = [
     "lh-quote-chip",
@@ -96,24 +86,9 @@ function PaletteChip({
       className={classes}
       onClick={onClick}
       aria-pressed={isSelected}
-      aria-label={`${label}${isSelected ? " (đã chọn)" : ""}`}
     >
+      {isSelected && <Check size={14} strokeWidth={2} aria-hidden="true" />}
       {label}
     </button>
   );
-}
-
-function isValueSelected(s: SelectedState, groupKey: GroupKey, value: string): boolean {
-  switch (groupKey) {
-    case "industries":
-      return s.industries.includes(value as IndustryValue);
-    case "languages":
-      return s.languages.includes(value as LanguageValue);
-    case "experience":
-      return s.experience === value;
-    case "region":
-      return s.region === value;
-    case "education":
-      return s.education === value;
-  }
 }

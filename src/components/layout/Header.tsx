@@ -7,6 +7,13 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { mainNav, quoteHref, site, type NavItem } from "@/content/site";
 
+// Routes that open with a dark cinematic hero; the header sits transparent on top of it.
+// Decided per route, not with CSS :has(): cacheComponents keeps previous routes mounted
+// (hidden), so a hero from the last page would otherwise still match.
+function opensWithDarkHero(pathname: string): boolean {
+  return ["/", "/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/");
+}
+
 function isActive(pathname: string, item: NavItem): boolean {
   if (item.external) return false;
   if (item.children?.some((c) => pathname === c.href || pathname.startsWith(`${c.href}/`))) return true;
@@ -44,6 +51,19 @@ export function Header() {
   const [solid, setSolid] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const [overlay, setOverlay] = useState(() => opensWithDarkHero(pathname));
+
+  // Confirm against the rendered page (e.g. an unknown /dich-vu/* slug renders a 404 with no hero).
+  useEffect(() => {
+    const expected = opensWithDarkHero(pathname);
+    const frame = requestAnimationFrame(() => {
+      const hero = Array.from(document.querySelectorAll<HTMLElement>("main .lh-hero--cinematic")).some(
+        (el) => el.offsetParent !== null,
+      );
+      setOverlay(expected && hero);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
 
   // Over a dark hero the header starts transparent; it turns navy once the
   // top-of-page sentinel scrolls out (IntersectionObserver, no scroll handler).
@@ -71,7 +91,7 @@ export function Header() {
   return (
     <>
       <div ref={sentinelRef} className="lh-header-sentinel" aria-hidden="true" />
-      <header className="lh-header" data-solid={solid || open || undefined}>
+      <header className="lh-header" data-overlay={overlay || undefined} data-solid={solid || open || undefined}>
         <div className="lh-header__inner">
           <Link href="/" className="lh-wordmark" aria-label={`${site.name} - Trang chủ`} onClick={close}>
             <Image src={site.logo} alt={site.name} className="lh-wordmark__logo" loading="eager" />

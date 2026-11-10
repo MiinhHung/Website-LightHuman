@@ -233,7 +233,7 @@
   [data-theme="lighthuman"] .lh-process-steps__list { grid-template-columns: 1fr; }
 }
 [data-theme="lighthuman"] .lh-header { z-index: 100; height: var(--header-h,76px); background: var(--brand-navy); border-bottom: 1px solid rgba(255, 255, 255, 0.06); position: sticky; top: 0px; }
-[data-theme="lighthuman"] .lh-header__inner { justify-content: space-between; align-items: center; gap: 16px; max-width: 1280px; height: 100%; margin: 0px auto; padding: 0px clamp(20px, 5vw, 56px); display: flex; }
+[data-theme="lighthuman"] .lh-header__inner { justify-content: space-between; align-items: center; gap: 16px; max-width: var(--container-max); height: 100%; margin: 0px auto; padding: 0px var(--container-pad); display: flex; }
 [data-theme="lighthuman"] .lh-wordmark { min-width: 0px; color: var(--brand-gold); align-items: center; gap: 12px; text-decoration: none; display: inline-flex; }
 [data-theme="lighthuman"] .lh-wordmark__logo { width: auto; height: 46px; transition: opacity var(--dur-fast) var(--ease-out); }
 [data-theme="lighthuman"] .lh-wordmark:hover .lh-wordmark__logo { opacity: 0.88; }
@@ -526,7 +526,7 @@
 [data-theme="lighthuman"] .lh-hero__orbit--gold { border-color: rgba(234, 184, 128, 0.62) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); bottom: 14vh; right: -7vw; transform: rotate(-12deg); }
 [data-theme="lighthuman"] .lh-hero__orbit--blue { border-color: rgba(76, 153, 215, 0.5) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); bottom: 1vh; right: -1vw; transform: rotate(-15deg); }
 [data-theme="lighthuman"] .lh-hero__data-dots { opacity: 0.42; background-image: radial-gradient(rgba(234, 184, 128, 0.32) 1px, rgba(0, 0, 0, 0) 1.5px); background-size: 18px 18px; width: min(58vw, 820px); height: 34vh; position: absolute; bottom: 0px; right: 0px; mask-image: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 46%, rgb(0, 0, 0) 100%); }
-[data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__stage { z-index: 2; align-items: center; max-width: 1480px; padding-top: 24px; padding-bottom: 24px; }
+[data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__stage { z-index: 2; align-items: center; max-width: var(--container-max); padding-top: clamp(32px, 6vh, 64px); padding-bottom: 24px; }
 [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__copy { max-width: 620px; padding: 0px; }
 [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__eyebrow { letter-spacing: 0px; margin-bottom: 30px; font-size: 14px; }
 [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__spark { font-size: 24px; }
@@ -858,7 +858,7 @@
   [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__stage { padding-bottom: 230px; }
   /* The hero renders its own stats bar at this width; the standalone row is for smaller screens. */
   [data-theme="lighthuman"] .lh-hero--cinematic + .lh-metrics-row { display: none; }
-  [data-theme="lighthuman"] .lh-hero__stats { position: absolute; z-index: 3; left: 0; right: 0; bottom: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: calc(1480px - 2 * var(--container-pad)); width: calc(100% - 2 * var(--container-pad)); margin: 0 auto; background: rgba(6, 17, 38, 0.55); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: var(--radius-lg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  [data-theme="lighthuman"] .lh-hero__stats { position: absolute; z-index: 3; left: 0; right: 0; bottom: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: calc(var(--container-max) - 2 * var(--container-pad)); width: calc(100% - 2 * var(--container-pad)); margin: 0 auto; background: rgba(6, 17, 38, 0.55); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: var(--radius-lg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   [data-theme="lighthuman"] .lh-hero__stat { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; align-items: start; padding: 22px 26px; border-left: 1px solid rgba(255, 255, 255, 0.12); }
   [data-theme="lighthuman"] .lh-hero__stat:first-child { border-left: 0; }
   [data-theme="lighthuman"] .lh-hero__stat-icon { grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center; width: 40px; height: 40px; color: rgba(255, 255, 255, 0.92); }
@@ -986,15 +986,15 @@
 
 /* ============================================================================
  * Header over dark heroes: transparent at the top of the page, navy once the
- * sentinel scrolls out (Header sets data-solid). Pages without a cinematic
- * hero always get the navy header.
+ * sentinel scrolls out. Header sets data-overlay on routes that open with a
+ * cinematic hero and data-solid after the first scroll; other pages stay navy.
  * ========================================================================= */
 [data-theme="lighthuman"] .lh-header-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 64px; pointer-events: none; }
 [data-theme="lighthuman"] .lh-header { isolation: isolate; background: transparent; transition: box-shadow var(--dur-slow) var(--ease-out), border-color var(--dur-slow) var(--ease-out); }
 [data-theme="lighthuman"] .lh-header::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--brand-navy); transition: opacity var(--dur-slow) var(--ease-out); }
 [data-theme="lighthuman"] .lh-header[data-solid] { box-shadow: 0 10px 30px rgba(5, 14, 30, 0.22); }
-[data-theme="lighthuman"] body:has(.lh-hero--cinematic) .lh-header:not([data-solid]) { border-bottom-color: transparent; background: linear-gradient(rgba(3, 8, 18, 0.55), rgba(3, 8, 18, 0)); }
-[data-theme="lighthuman"] body:has(.lh-hero--cinematic) .lh-header:not([data-solid])::before { opacity: 0; }
+[data-theme="lighthuman"] .lh-header[data-overlay]:not([data-solid]) { border-bottom-color: transparent; background: linear-gradient(rgba(3, 8, 18, 0.55), rgba(3, 8, 18, 0)); }
+[data-theme="lighthuman"] .lh-header[data-overlay]:not([data-solid])::before { opacity: 0; }
 /* The hero slides up under the sticky header so the two read as one banner. */
 [data-theme="lighthuman"] .lh-hero--cinematic { margin-top: calc(-1 * var(--header-h, 76px)); padding-top: var(--header-h, 76px); }
 @media (min-width: 720px) { [data-theme="lighthuman"] .lh-hero--cinematic { min-height: 100svh; } }
@@ -1077,8 +1077,6 @@
  * a light sweep crosses the wordmark, a gold beam runs on the track.
  * ========================================================================= */
 [data-theme="lighthuman"] .lh-loading { position: relative; isolation: isolate; overflow: hidden; display: grid; place-items: center; min-height: 100dvh; margin-top: calc(-1 * var(--header-h, 76px)); padding: var(--header-h, 76px) 16px 48px; background: radial-gradient(circle at 50% 46%, #1b3470 0%, var(--brand-navy) 38%, #081430 100%); color: #fff; }
-[data-theme="lighthuman"] body:has(.lh-loading) .lh-header:not([data-solid]) { border-bottom-color: transparent; background: transparent; }
-[data-theme="lighthuman"] body:has(.lh-loading) .lh-header:not([data-solid])::before { opacity: 0; }
 [data-theme="lighthuman"] .lh-loading__rays { position: absolute; left: 50%; top: 46%; z-index: -2; width: 160vmax; height: 160vmax; margin: -80vmax 0 0 -80vmax; background: repeating-conic-gradient(from 0deg, rgba(242, 207, 99, 0.16) 0deg 1.2deg, transparent 1.2deg 10deg); mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 11%, transparent 28%); }
 [data-theme="lighthuman"] .lh-loading__glow { position: absolute; left: 50%; top: 46%; z-index: -1; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: radial-gradient(circle, rgba(242, 207, 99, 0.22), transparent 62%); }
 [data-theme="lighthuman"] .lh-loading__center { display: grid; justify-items: center; gap: 30px; }

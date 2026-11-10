@@ -37,7 +37,16 @@ export const site = {
   },
 } as const;
 
-export type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
+export type NavItem = {
+  label: string;
+  href: string;
+  /** Opens off-site (job board) in a new tab. */
+  external?: boolean;
+  children?: { label: string; href: string }[];
+};
+
+/** Single destination for every "get a quote" action: the quote builder on /lien-he. */
+export const quoteHref = "/lien-he#bao-gia";
 
 export const serviceNav = [
   { label: "Headhunting & Executive Search", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap" },
@@ -47,11 +56,18 @@ export const serviceNav = [
 ];
 
 export const mainNav: NavItem[] = [
-  { label: "Giới thiệu", href: "/dich-vu/gioi-thieu" },
+  {
+    label: "Giới thiệu",
+    href: "/dich-vu/gioi-thieu",
+    children: [
+      { label: "Về Light Human", href: "/dich-vu/gioi-thieu" },
+      { label: "Câu chuyện Light Human", href: "/cau-chuyen" },
+    ],
+  },
   { label: "Dịch vụ", href: "/dich-vu", children: serviceNav },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Insights", href: "/tin-tuc" },
-  { label: "Liên hệ", href: "/lien-he" },
+  { label: "Tuyển dụng", href: site.jobsUrl, external: true },
 ];
 
 export const footerNav = [
@@ -59,7 +75,7 @@ export const footerNav = [
     title: "Công ty",
     links: [
       { label: "Giới thiệu", href: "/dich-vu/gioi-thieu" },
-      { label: "Sứ mệnh & Giá trị", href: "/dich-vu/gioi-thieu" },
+      { label: "Câu chuyện Light Human", href: "/cau-chuyen" },
       { label: "Đội ngũ", href: "/dich-vu/gioi-thieu" },
       { label: "Tin tức", href: "/tin-tuc" },
     ],

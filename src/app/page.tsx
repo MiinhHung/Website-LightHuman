@@ -6,7 +6,8 @@ import { HomeServices } from "@/components/sections/HomeServices";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { FeaturedPosts } from "@/components/sections/FeaturedPosts";
-import { CtaGrid } from "@/components/sections/CtaGrid";
+import { ClosingCta } from "@/components/sections/ClosingCta";
+import { quoteHref, site } from "@/content/site";
 
 export default function HomePage() {
   return (
@@ -18,7 +19,12 @@ export default function HomePage() {
       <ProcessSteps />
       <SuccessStories />
       <FeaturedPosts />
-      <CtaGrid />
+      <ClosingCta
+        heading="Bắt đầu với một bản báo giá"
+        desc="Chọn vị trí và yêu cầu ứng viên, nhận mã báo giá ngay. Đội BD liên hệ lại trong 24 giờ làm việc."
+        action={{ label: "Nhận báo giá", href: quoteHref }}
+        secondary={{ label: "Bạn đang tìm việc? Xem việc làm", href: site.jobsUrl }}
+      />
     </>
   );
 }

@@ -74,27 +74,3 @@ export function LinkedinOutlineIcon({ size = 16 }: P) {
     </svg>
   );
 }
-
-export function ArrowLineIcon({ size = 14 }: P) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
-    </svg>
-  );
-}
-
-/** Hình trang trí ở thẻ CTA (tia sáng + hai bong bóng chat). */
-export function CtaDecor({ tone }: { tone: "light" | "dark" }) {
-  const ray = tone === "light" ? "rgba(20,40,90,0.18)" : "rgba(242,207,99,0.3)";
-  const bubble = tone === "light" ? "var(--brand-blue)" : "var(--brand-yellow)";
-  return (
-    <svg className="lh-cta__grid-decor" width="96" height="96" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-        <rect key={deg} x="46" y="6" width="4" height="12" rx="2" fill={ray} transform={`rotate(${deg} 48 48)`} />
-      ))}
-      <rect x="20" y="32" width="42" height="28" rx="10" fill={bubble} />
-      <rect x="36" y="46" width="40" height="26" rx="10" fill={bubble} opacity="0.85" />
-    </svg>
-  );
-}

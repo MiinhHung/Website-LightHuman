@@ -4,7 +4,7 @@ import { services } from "@/content/services";
 import { site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/dich-vu/gioi-thieu", "/dich-vu", "/case-studies", "/tin-tuc", "/lien-he"];
+  const pages = ["", "/dich-vu/gioi-thieu", "/cau-chuyen", "/dich-vu", "/case-studies", "/tin-tuc", "/lien-he"];
   return [
     ...pages.map((p) => ({ url: `${site.url}${p}` })),
     ...services.map((s) => ({ url: `${site.url}/dich-vu/${s.slug}` })),

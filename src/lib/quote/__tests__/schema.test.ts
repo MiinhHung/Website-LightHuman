@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { QUANTITY_MAX, contactSchema, quoteInputSchema, quoteLineSchema } from "../schema";
+import {
+  POSITION_MAX,
+  QUANTITY_MAX,
+  QUOTE_LINES_MAX,
+  contactSchema,
+  quoteInputSchema,
+  quoteLineSchema,
+} from "../schema";
 
 const validContact = {
   name: "Nguyễn Văn A",
@@ -9,6 +16,7 @@ const validContact = {
 };
 
 const validLine = {
+  position: "Công nhân lắp ráp",
   industries: ["SAN_XUAT"],
   languages: [],
   experience: "NONE",
@@ -119,6 +127,7 @@ describe("quoteLineSchema", () => {
 
   it("rejects a missing enum (experience)", () => {
     const withoutExp = {
+      position: validLine.position,
       industries: validLine.industries,
       languages: validLine.languages,
       region: validLine.region,
@@ -130,6 +139,7 @@ describe("quoteLineSchema", () => {
 
   it("defaults languages to [] when omitted", () => {
     const withoutLangs = {
+      position: validLine.position,
       industries: validLine.industries,
       experience: validLine.experience,
       region: validLine.region,
@@ -139,6 +149,22 @@ describe("quoteLineSchema", () => {
     const r = quoteLineSchema.safeParse(withoutLangs);
     expect(r.success).toBe(true);
     if (r.success) expect(r.data.languages).toEqual([]);
+  });
+
+  it("requires a position", () => {
+    expect(quoteLineSchema.safeParse({ ...validLine, position: undefined }).success).toBe(false);
+    expect(quoteLineSchema.safeParse({ ...validLine, position: "   " }).success).toBe(false);
+  });
+
+  it("rejects a position shorter than 2 or longer than 100 characters (after trim)", () => {
+    expect(quoteLineSchema.safeParse({ ...validLine, position: " A " }).success).toBe(false);
+    expect(quoteLineSchema.safeParse({ ...validLine, position: "x".repeat(POSITION_MAX + 1) }).success).toBe(false);
+    expect(quoteLineSchema.safeParse({ ...validLine, position: "x".repeat(POSITION_MAX) }).success).toBe(true);
+  });
+
+  it("trims the position", () => {
+    const r = quoteLineSchema.safeParse({ ...validLine, position: "  Kế toán  " });
+    expect(r.success && r.data.position).toBe("Kế toán");
   });
 });
 
@@ -153,6 +179,12 @@ describe("quoteInputSchema", () => {
 
   it("rejects a quote with no lines", () => {
     expect(quoteInputSchema.safeParse({ contact: validContact, lines: [] }).success).toBe(false);
+  });
+
+  it(`caps the number of lines at ${QUOTE_LINES_MAX} (token size)`, () => {
+    const lines = (n: number) => Array.from({ length: n }, () => validLine);
+    expect(quoteInputSchema.safeParse({ contact: validContact, lines: lines(QUOTE_LINES_MAX) }).success).toBe(true);
+    expect(quoteInputSchema.safeParse({ contact: validContact, lines: lines(QUOTE_LINES_MAX + 1) }).success).toBe(false);
   });
 
   it("rejects a quote whose contact is invalid", () => {

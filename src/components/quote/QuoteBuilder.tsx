@@ -23,6 +23,7 @@ import {
 } from "@/content/quote/catalog";
 import { vi } from "@/content/quote/labels.vi";
 import { classify, type QuoteType } from "@/lib/quote/classify";
+import { POSITION_MAX, POSITION_MIN } from "@/lib/quote/limits";
 import { ContactFields } from "./ContactFields";
 import { CriteriaBoard } from "./CriteriaBoard";
 import { CriteriaPalette } from "./CriteriaPalette";
@@ -192,6 +193,33 @@ export function QuoteBuilder() {
             value={selected.education}
           />
         )}
+
+        <label htmlFor="quote-position" className="lh-field">
+          <span className="lh-field__label">{vi.position} *</span>
+          <input
+            id="quote-position"
+            type="text"
+            name="line.position"
+            minLength={POSITION_MIN}
+            maxLength={POSITION_MAX}
+            required
+            placeholder={vi.positionPlaceholder}
+            defaultValue={values["line.position"] ?? ""}
+            className="lh-field__input"
+            aria-invalid={errors["lines.0.position"] ? true : undefined}
+            aria-describedby={
+              errors["lines.0.position"] ? "quote-position-error" : "quote-position-hint"
+            }
+          />
+          {errors["lines.0.position"] && (
+            <span id="quote-position-error" className="lh-quote-error-text">
+              {errors["lines.0.position"]}
+            </span>
+          )}
+          <span id="quote-position-hint" className="lh-quote-note">
+            {vi.positionHint}
+          </span>
+        </label>
 
         <label htmlFor="quote-quantity" className="lh-field">
           <span className="lh-field__label">{vi.quantity} *</span>

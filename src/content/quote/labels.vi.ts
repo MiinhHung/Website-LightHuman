@@ -16,6 +16,10 @@ export const vi = {
   boardEmpty: "Chưa có hạng mục nào. Hãy thêm từ cột bên trái.",
   removeChip: "Bỏ chọn",
 
+  position: "Vị trí tuyển dụng",
+  positionPlaceholder: "Ví dụ: Telesale tài chính",
+  positionHint: "Tên vị trí sẽ in trên bản báo phí (2–100 ký tự).",
+
   quantity: "Số lượng",
   quantityHint: "Số lượng người cần tuyển (≥ 1).",
 

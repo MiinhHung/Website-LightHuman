@@ -26,6 +26,7 @@ export type QuoteFormValues = {
   "contact.company"?: string;
   "contact.email"?: string;
   "contact.phone"?: string;
+  "line.position"?: string;
   "line.quantity"?: string;
 };
 
@@ -79,6 +80,7 @@ export async function createQuoteAction(
     },
     lines: [
       {
+        position: str(formData.get("line.position")),
         industries: formData
           .getAll("line.industries")
           .filter((v): v is string => typeof v === "string"),
@@ -99,6 +101,7 @@ export async function createQuoteAction(
     "contact.company": input.contact.company,
     "contact.email": input.contact.email,
     "contact.phone": input.contact.phone,
+    "line.position": input.lines[0].position,
     "line.quantity": input.lines[0].quantity,
   };
 

@@ -22,7 +22,9 @@ import {
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_VN = /^(\+?84|0)[\d\s.-]{8,12}$/;
 
-export const QUANTITY_MAX = 10_000;
+import { POSITION_MAX, POSITION_MIN, QUANTITY_MAX, QUOTE_LINES_MAX } from "./limits";
+
+export { POSITION_MAX, POSITION_MIN, QUANTITY_MAX, QUOTE_LINES_MAX };
 
 // ---- Contact ---------------------------------------------------------------
 
@@ -63,6 +65,11 @@ export type ContactInput = z.infer<typeof contactSchema>;
 // ---- Quote line ------------------------------------------------------------
 
 export const quoteLineSchema = z.object({
+  position: z
+    .string("Vui lòng nhập vị trí tuyển dụng.")
+    .trim()
+    .min(POSITION_MIN, `Vị trí tuyển dụng cần ít nhất ${POSITION_MIN} ký tự.`)
+    .max(POSITION_MAX, `Vị trí tuyển dụng tối đa ${POSITION_MAX} ký tự.`),
   industries: z.array(z.enum(INDUSTRY_VALUES)).min(1, "Chọn ít nhất 1 chuyên ngành."),
   languages: z.array(z.enum(LANGUAGE_VALUES)).default([]),
   experience: z.enum(EXPERIENCE_VALUES),
@@ -82,7 +89,10 @@ export type QuoteLineInput = z.infer<typeof quoteLineSchema>;
 
 export const quoteInputSchema = z.object({
   contact: contactSchema,
-  lines: z.array(quoteLineSchema).min(1, "Cần ít nhất một dòng yêu cầu."),
+  lines: z
+    .array(quoteLineSchema)
+    .min(1, "Cần ít nhất một dòng yêu cầu.")
+    .max(QUOTE_LINES_MAX, `Tối đa ${QUOTE_LINES_MAX} vị trí cho mỗi yêu cầu.`),
   // Honeypot — bots happily fill fields they can't see. Humans must leave it empty.
   website: z.string().max(0).optional(),
 });

@@ -11,54 +11,27 @@
  *   - On failure: returns field-keyed errors and the user's own values so the
  *     client re-renders without losing input.
  *
- * Phase 3 minimal: no PDF route, no webhook notification. Those plug in at
- * phase 5–6 without changing this file's contract.
+ * Types and the initial state live in ./quote-state (a "use server" module
+ * may only export async functions).
  */
 
-import type { QuoteType } from "@/lib/quote/classify";
 import { createQuote } from "@/lib/quote/create-quote";
 import { quoteInputSchema } from "@/lib/quote/schema";
-
-export type QuoteFormErrors = Record<string, string>;
-
-export type QuoteFormValues = {
-  "contact.name"?: string;
-  "contact.company"?: string;
-  "contact.email"?: string;
-  "contact.phone"?: string;
-  "line.position"?: string;
-  "line.quantity"?: string;
-};
-
-export type QuoteFormState =
-  | { status: "idle" }
-  | {
-      status: "error";
-      message: string;
-      errors: QuoteFormErrors;
-      values: QuoteFormValues;
-    }
-  | {
-      status: "priced";
-      code: string;
-      type: QuoteType;
-      currency: "VND";
-      unitPrice: number;
-      subtotal: number;
-      quantity: number;
-      pricingVersion: string;
-    }
-  | {
-      status: "manual_required";
-      code: string;
-      type: QuoteType;
-      reason: string;
-    };
-
-export const initialQuoteState: QuoteFormState = { status: "idle" };
+import { isPricingComplete } from "@/lib/quote/snapshot";
+import { getQuoteTokenSecret, quotePdfPath, signQuoteToken } from "@/lib/quote/token";
+import type { QuoteDownload, QuoteFormErrors, QuoteFormState, QuoteFormValues } from "./quote-state";
 
 function str(v: FormDataEntryValue | null | undefined): string {
   return typeof v === "string" ? v : "";
+}
+
+// One signed token, one link per quote type present (Mass and/or Hunt PDF).
+function buildDownloads(snapshot: ReturnType<typeof createQuote>["snapshot"], now: Date): QuoteDownload[] {
+  const secret = getQuoteTokenSecret();
+  if (!secret) return [];
+  const token = signQuoteToken(snapshot, secret, now);
+  const types = [...new Set(snapshot.lines.map((l) => l.type))];
+  return types.map((type) => ({ type, href: quotePdfPath(token, type) }));
 }
 
 export async function createQuoteAction(
@@ -121,7 +94,8 @@ export async function createQuoteAction(
     };
   }
 
-  const result = createQuote(parsed.data);
+  const now = new Date();
+  const result = createQuote(parsed.data, now);
   const line0 = result.lines[0];
 
   if (result.status === "priced" && line0.matched) {
@@ -134,6 +108,8 @@ export async function createQuoteAction(
       subtotal: line0.subtotal ?? 0,
       quantity: line0.quantity,
       pricingVersion: line0.pricingVersion,
+      pricingComplete: isPricingComplete(result.snapshot),
+      downloads: buildDownloads(result.snapshot, now),
     };
   }
 

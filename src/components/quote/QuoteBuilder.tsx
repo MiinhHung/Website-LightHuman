@@ -9,10 +9,8 @@ import {
   type DragEndEvent,
 } from "@dnd-kit/core";
 import { useActionState, useMemo, useState } from "react";
-import {
-  createQuoteAction,
-  initialQuoteState,
-} from "@/app/lien-he/quote-action";
+import { createQuoteAction } from "@/app/lien-he/quote-action";
+import { initialQuoteState } from "@/app/lien-he/quote-state";
 import {
   type EducationValue,
   type ExperienceValue,

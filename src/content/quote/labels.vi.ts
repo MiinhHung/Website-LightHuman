@@ -46,8 +46,13 @@ export const vi = {
     manualTitle: "Yêu cầu đang được xem xét",
     manualBody:
       "Trường hợp này cần BD của chúng tôi khảo giá thủ công. Đội BD sẽ liên hệ trong 24 giờ làm việc.",
-    downloadMass: "Tải báo giá (Mass)",
-    downloadHunt: "Tải báo giá (Hunt)",
+    // TODO: copy pending approval.
+    draftTitle: "Bản báo phí đã được tạo",
+    draftBody:
+      "Bản báo phí đã được tạo nhưng chưa có đơn giá. Bộ phận BD sẽ liên hệ để hoàn thiện.",
+    downloadMass: "Tải báo phí PDF (Mass)",
+    downloadHunt: "Tải báo phí PDF (Hunt)",
+    downloadUnavailable: "Chưa tạo được liên kết tải PDF, đội BD sẽ gửi bản báo phí qua email.",
     errorTitle: "Chưa gửi được yêu cầu",
     errorBody: "Vui lòng thử lại hoặc gọi hotline.",
   },

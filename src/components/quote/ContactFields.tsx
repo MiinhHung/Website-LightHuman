@@ -1,7 +1,7 @@
 "use client";
 
 import { vi } from "@/content/quote/labels.vi";
-import type { QuoteFormErrors, QuoteFormValues } from "@/app/lien-he/quote-action";
+import type { QuoteFormErrors, QuoteFormValues } from "@/app/lien-he/quote-state";
 
 /** Contact fieldset wired to the Server Action's error/values shape. */
 export function ContactFields({

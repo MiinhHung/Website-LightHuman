@@ -1252,3 +1252,10 @@
 [data-theme="lighthuman"] .lh-subnav__cta:hover { background: var(--brand-gold-bright); }
 @media (max-width: 639px) { [data-theme="lighthuman"] .lh-subnav__cta { display: none; } }
 [data-theme="lighthuman"] .lh-anchor { scroll-margin-top: calc(var(--header-h, 76px) + 64px); }
+
+/* Six nav items (with "Công cụ"): tighten spacing on small laptops so the nav stays on one line. */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  [data-theme="lighthuman"] .lh-nav a.lh-nav__link, [data-theme="lighthuman"] a.lh-nav__link { padding: 10px 9px; font-size: 14px; }
+  [data-theme="lighthuman"] .lh-header__inner { gap: 12px; }
+  [data-theme="lighthuman"] .lh-header__cta { min-width: 0; padding: 10px 16px; }
+}

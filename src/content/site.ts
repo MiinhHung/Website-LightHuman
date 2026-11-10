@@ -55,6 +55,12 @@ export const serviceNav = [
   { label: "Đào tạo & Tư vấn nhân sự", href: "/dich-vu/dao-tao-tuyen-dung" },
 ];
 
+/** Light Human Toolkit — các công cụ tương tác (/cong-cu). */
+export const toolNav = [
+  { label: "Tính lương Gross ⇄ Net 2026", href: "/cong-cu/tinh-luong-gross-net" },
+  { label: "Tính lãi kép & lợi nhuận đầu tư", href: "/cong-cu/tinh-lai-kep" },
+];
+
 export const mainNav: NavItem[] = [
   {
     label: "Giới thiệu",
@@ -67,6 +73,7 @@ export const mainNav: NavItem[] = [
   { label: "Dịch vụ", href: "/dich-vu", children: serviceNav },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Insights", href: "/tin-tuc" },
+  { label: "Công cụ", href: "/cong-cu", children: toolNav },
   { label: "Tuyển dụng", href: site.jobsUrl, external: true },
 ];
 
@@ -86,6 +93,8 @@ export const footerNav = [
     links: [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Insights", href: "/tin-tuc" },
+      { label: "Tính lương Gross ⇄ Net", href: "/cong-cu/tinh-luong-gross-net" },
+      { label: "Tính lãi kép", href: "/cong-cu/tinh-lai-kep" },
       { label: "Liên hệ", href: "/lien-he" },
       { label: "FAQ", href: "/lien-he#faq" },
     ],

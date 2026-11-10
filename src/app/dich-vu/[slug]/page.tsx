@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getService, services } from "@/content/services";
 import { Partners } from "@/components/sections/Partners";
-import { PageHeader } from "@/components/sections/PageHeader";
-import { rich } from "@/components/sections/services/rich";
-import { quoteHref } from "@/content/site";
+import { ServiceHero } from "@/components/sections/services/ServiceHero";
 import { ServiceScope } from "@/components/sections/services/ServiceCardsGrid";
 import { FeatureRows } from "@/components/sections/services/FeatureRows";
 import { ServiceProcess } from "@/components/sections/services/ServiceProcess";
@@ -49,13 +47,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
 
   return (
     <div className="lh-service-detail">
-      <PageHeader
-        crumbs={[{ label: "Dịch vụ", href: "/dich-vu" }, { label: service.name }]}
-        title={rich(hero.title)}
-        lede={hero.lede}
-        image={hero.image}
-        action={{ label: hero.cta ?? "Nhận báo giá", href: quoteHref }}
-      />
+      <ServiceHero hero={hero} />
       <ServiceSubnav items={subnav} />
       {service.partners && <Partners eyebrow="Được tin tưởng bởi" />}
       {scope && (

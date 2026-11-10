@@ -4,8 +4,7 @@ import { CMS } from "./site";
 
 export const aboutHero = {
   eyebrow: "Về Light Human",
-  // TODO: Vietnamese rendering of the original "Building Better Teams, One Hire At A Time"; awaiting approval.
-  title: "Xây dựng đội ngũ vững mạnh, từ từng người phù hợp",
+  title: "Building Better Teams, One Hire At A Time",
   lede: "Light Human - đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Giải pháp nhân sự ánh sáng - đồng hành cùng doanh nghiệp Việt và quốc tế.",
   image: `${CMS}/hero_about_c25f683d35.png`,
   cta: { label: "Liên hệ tư vấn", href: "/lien-he" },

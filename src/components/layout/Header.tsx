@@ -7,11 +7,11 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { mainNav, quoteHref, site, type NavItem } from "@/content/site";
 
-// Only the home page opens with the dark cinematic hero; the header sits transparent on top of it.
+// Routes that open with a dark cinematic hero; the header sits transparent on top of it.
 // Decided per route, not with CSS :has(): cacheComponents keeps previous routes mounted
 // (hidden), so a hero from the last page would otherwise still match.
 function opensWithDarkHero(pathname: string): boolean {
-  return pathname === "/";
+  return ["/", "/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/");
 }
 
 const matches = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);

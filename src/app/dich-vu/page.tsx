@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { services, servicesPage } from "@/content/services";
 import { SuccessStories } from "@/components/sections/SuccessStories";
-import { PageHeader } from "@/components/sections/PageHeader";
-import { rich } from "@/components/sections/services/rich";
-import { quoteHref } from "@/content/site";
+import { ServiceHero } from "@/components/sections/services/ServiceHero";
 import { ServiceGroups } from "@/components/sections/services/ServiceGroups";
 import { CtaBand } from "@/components/sections/services/CtaBand";
 
@@ -16,13 +14,7 @@ export default function ServicesPage() {
   const { hero, cta } = servicesPage;
   return (
     <>
-      <PageHeader
-        crumbs={[{ label: "Dịch vụ" }]}
-        title={rich(hero.title)}
-        lede={hero.lede}
-        image={hero.image}
-        action={{ label: "Nhận báo giá", href: quoteHref }}
-      />
+      <ServiceHero hero={hero} />
       <ServiceGroups items={services} />
       <SuccessStories
         title={

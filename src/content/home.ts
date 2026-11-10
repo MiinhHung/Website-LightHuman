@@ -4,8 +4,8 @@ import { CMS } from "./site";
 
 export const hero = {
   image: `${CMS}/lighthuman_hero_7ee1a27bba.png`,
-  // Shortened from the original site copy so the hero reads in one glance.
-  lede: "Giải pháp tuyển dụng và quản lý nhân sự cho doanh nghiệp Việt, từ headhunting cấp cao đến tuyển dụng số lượng lớn.",
+  lede:
+    "Giải pháp tuyển dụng & quản lý nhân sự hiệu quả. Hành trình vạn dặm bắt đầu từ một bước chân - cùng Light Human xây dựng đội ngũ nhân sự tinh hoa, song hành cùng sự phát triển của doanh nghiệp.",
 };
 
 export type TrustIcon = "award" | "building" | "briefcase" | "users";

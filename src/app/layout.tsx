@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono, Merriweather } from "next/font/google";
 import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { LiveChat } from "@/components/layout/LiveChat";
 import "./globals.css";
 
 // Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
@@ -37,7 +36,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-screen flex-col bg-white">
         <Header />
         <main className="flex-1">{children}</main>
-        <LiveChat />
         <Footer />
       </body>
     </html>

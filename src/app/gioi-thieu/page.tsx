@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: aboutHero.lede,
 };
 
+export const instant = false;
+
 export default function AboutPage() {
   return (
     <>

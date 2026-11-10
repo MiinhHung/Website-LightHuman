@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { footerNav, site } from "@/content/site";
-import { FacebookOutlineIcon, LinkedinOutlineIcon, YoutubeOutlineIcon } from "@/components/icons/BrandIcons";
+
 
 export function Footer() {
   return (
@@ -20,17 +20,6 @@ export function Footer() {
               />
             </Link>
             <p className="lh-footer__tagline">{site.description}</p>
-            <div className="lh-footer__socials">
-              <a href={site.socials.youtube} aria-label="youtube" target="_blank" rel="noopener noreferrer">
-                <YoutubeOutlineIcon />
-              </a>
-              <a href={site.socials.facebook} aria-label="facebook" target="_blank" rel="noopener noreferrer">
-                <FacebookOutlineIcon />
-              </a>
-              <a href={site.socials.linkedin} aria-label="linkedin" target="_blank" rel="noopener noreferrer">
-                <LinkedinOutlineIcon />
-              </a>
-            </div>
           </div>
 
           {footerNav.map((col) => (

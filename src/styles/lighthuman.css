@@ -807,3 +807,68 @@
 .lh-mb-lg { margin-bottom: 24px; }
 :root { --max-width-content: 880px; --max-width-page: 1280px; --sidebar-width: 280px; --spacing-content: 4rem; --font-size-body: 19px; --line-height-body: 1.75; --ease-out: cubic-bezier(.22,1,.36,1); --ease-in-out: cubic-bezier(.65,0,.35,1); --dur-fast: .15s; --dur-base: .22s; --dur-slow: .4s; --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px; --space-32: 128px; --radius-xs: 4px; --radius-xl: 20px; --radius-pill: 999px; }
 :root[data-theme="lighthuman"] { --color-primary: #14285a; --color-secondary: #0d1a3d; --color-accent: #f2cf63; --color-bg-primary: #FFFFFF; --color-bg-secondary: #F8F9FB; --color-text-primary: #14171F; --color-text-secondary: #3F4555; --color-border: #DDE1EA; --color-link: #b88436; --color-link-hover: #14285a; --font-heading: 'Merriweather', ui-serif, Georgia, serif; --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif; --content-max-width: 720px; --header-height: 76px; --border-radius: 12px; }
+
+/* ============================================================================
+ * Báo giá tuyển dụng kéo thả (/lien-he) — Quote builder.
+ * All classes are prefixed `lh-quote-*` and scoped to the Light Human theme.
+ * ========================================================================= */
+
+[data-theme="lighthuman"] .lh-quote-builder { display: flex; flex-direction: column; gap: 20px; }
+
+[data-theme="lighthuman"] .lh-quote-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 900px) {
+  [data-theme="lighthuman"] .lh-quote-grid { grid-template-columns: 1fr 1.1fr; align-items: start; }
+}
+
+[data-theme="lighthuman"] .lh-quote-column { background: var(--bg-surface, #F4F6FA); border: 1px solid var(--border-1); border-radius: 16px; padding: 18px; }
+[data-theme="lighthuman"] .lh-quote-column h4 { margin: 0 0 4px; font-size: 15px; color: var(--ink-800); font-weight: 700; }
+[data-theme="lighthuman"] .lh-quote-column-hint { color: var(--ink-500); font-size: 12.5px; margin: 0 0 12px; }
+
+[data-theme="lighthuman"] .lh-quote-group { margin-top: 14px; }
+[data-theme="lighthuman"] .lh-quote-group__legend { font-size: 12.5px; color: var(--ink-700); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+[data-theme="lighthuman"] .lh-quote-group__legend em { font-style: normal; color: var(--ink-400); font-size: 11.5px; }
+
+[data-theme="lighthuman"] .lh-quote-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+[data-theme="lighthuman"] .lh-quote-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; background: var(--bg-page); border: 1px solid var(--border-1); color: var(--ink-800); border-radius: 999px; font-size: 13px; cursor: pointer; transition: border-color .14s var(--ease-out), background .14s var(--ease-out), color .14s var(--ease-out); user-select: none; font-family: inherit; font-weight: 500; touch-action: none; }
+[data-theme="lighthuman"] .lh-quote-chip:hover { border-color: var(--brand-gold); }
+[data-theme="lighthuman"] .lh-quote-chip:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 2px; }
+[data-theme="lighthuman"] .lh-quote-chip--selected { background: var(--brand-navy); color: #fff; border-color: var(--brand-navy); }
+[data-theme="lighthuman"] .lh-quote-chip--selected:hover { background: var(--brand-navy-deep, var(--brand-navy)); border-color: var(--brand-navy-deep, var(--brand-navy)); }
+[data-theme="lighthuman"] .lh-quote-chip--dragging { opacity: 0.45; }
+[data-theme="lighthuman"] .lh-quote-chip-x { font-size: 12px; opacity: 0.85; }
+
+[data-theme="lighthuman"] .lh-quote-drop-zone { min-height: 48px; border: 1.5px dashed var(--border-1); border-radius: 12px; padding: 10px; transition: background .14s var(--ease-out), border-color .14s var(--ease-out); }
+[data-theme="lighthuman"] .lh-quote-drop-zone--empty { color: var(--ink-400); font-size: 12.5px; display: flex; align-items: center; justify-content: center; }
+[data-theme="lighthuman"] .lh-quote-drop-zone--active { border-color: var(--brand-gold); background: color-mix(in srgb, var(--brand-gold) 8%, transparent); }
+
+[data-theme="lighthuman"] .lh-quote-multi-language { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+[data-theme="lighthuman"] .lh-quote-summary { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; background: var(--bg-page); border: 1px solid var(--border-1); border-radius: 12px; }
+[data-theme="lighthuman"] .lh-quote-summary__row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+[data-theme="lighthuman"] .lh-quote-summary__label { font-size: 13px; color: var(--ink-600); }
+
+[data-theme="lighthuman"] .lh-quote-type-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+[data-theme="lighthuman"] .lh-quote-type-badge--mass { background: color-mix(in srgb, #2563eb 12%, transparent); color: #1d4ed8; }
+[data-theme="lighthuman"] .lh-quote-type-badge--hunt { background: color-mix(in srgb, #ca8a04 15%, transparent); color: #854d0e; }
+[data-theme="lighthuman"] .lh-quote-type-badge--pending { background: var(--border-1); color: var(--ink-500); }
+
+[data-theme="lighthuman"] .lh-quote-note { font-size: 11.5px; color: var(--ink-400); }
+
+[data-theme="lighthuman"] .lh-quote-form { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+
+[data-theme="lighthuman"] .lh-quote-contact { display: grid; grid-template-columns: 1fr; gap: 14px; border: 0; padding: 0; margin: 0; }
+@media (min-width: 640px) { [data-theme="lighthuman"] .lh-quote-contact { grid-template-columns: 1fr 1fr; } }
+[data-theme="lighthuman"] .lh-quote-contact__hint { grid-column: 1 / -1; margin: 0; }
+
+[data-theme="lighthuman"] .lh-quote-error-text { color: #dc2626; font-size: 12px; margin-top: 6px; display: block; }
+
+[data-theme="lighthuman"] .lh-quote-result { padding: 18px 20px; border-radius: 16px; border: 1px solid var(--border-1); }
+[data-theme="lighthuman"] .lh-quote-result--priced { background: color-mix(in srgb, #16a34a 8%, transparent); border-color: color-mix(in srgb, #16a34a 30%, var(--border-1)); }
+[data-theme="lighthuman"] .lh-quote-result--manual { background: color-mix(in srgb, #ea580c 8%, transparent); border-color: color-mix(in srgb, #ea580c 30%, var(--border-1)); }
+[data-theme="lighthuman"] .lh-quote-result--error { background: color-mix(in srgb, #dc2626 8%, transparent); border-color: color-mix(in srgb, #dc2626 30%, var(--border-1)); }
+[data-theme="lighthuman"] .lh-quote-result h4 { margin: 0 0 6px; font-size: 16px; color: var(--ink-800); }
+[data-theme="lighthuman"] .lh-quote-result p { margin: 0; color: var(--ink-700); font-size: 14px; }
+[data-theme="lighthuman"] .lh-quote-result__amount { font-family: var(--font-jetbrains-mono), ui-monospace, monospace; font-size: 24px; font-weight: 700; color: var(--brand-navy); margin-top: 8px; }
+[data-theme="lighthuman"] .lh-quote-result__amount-breakdown { font-size: 13px; color: var(--ink-500); font-weight: 500; }
+[data-theme="lighthuman"] .lh-quote-result__code { font-family: var(--font-jetbrains-mono), ui-monospace, monospace; font-size: 12.5px; color: var(--ink-500); margin-top: 6px; }
+[data-theme="lighthuman"] .lh-quote-result__actions { margin-top: 10px; }

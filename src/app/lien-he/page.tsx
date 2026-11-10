@@ -5,9 +5,11 @@ import { ContactMapRow } from "@/components/sections/contact/ContactMapRow";
 import { ContactFaq } from "@/components/sections/contact/ContactFaq";
 
 export const metadata: Metadata = {
-  title: "Liên hệ",
-  description: "Gửi tin nhắn hoặc đặt lịch tư vấn miễn phí với đội ngũ tư vấn nhân sự của Light Human.",
+  title: "Liên hệ & Báo giá",
+  description: "Nhận báo giá tuyển dụng nhanh chóng và đặt lịch tư vấn miễn phí với đội ngũ nhân sự Light Human.",
 };
+
+export const instant = false;
 
 export default function ContactPage() {
   return (

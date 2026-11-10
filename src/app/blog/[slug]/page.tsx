@@ -6,6 +6,10 @@ import { ArticleHead } from "@/components/sections/blog/ArticleHead";
 import { ArticleAside } from "@/components/sections/blog/ArticleAside";
 import { RelatedPosts } from "@/components/sections/blog/RelatedPosts";
 
+// Every slug is prebuilt via generateStaticParams, but the page body depends on
+// `params`, so a navigation can't show a shared shell first; allow it to block.
+export const instant = false;
+
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }

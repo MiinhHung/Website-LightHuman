@@ -13,7 +13,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     // Site gốc dùng cả /blog và /tin-tuc; gom về một nơi.
-    return [{ source: "/blog", destination: "/tin-tuc", permanent: true }];
+    return [
+      { source: "/blog", destination: "/tin-tuc", permanent: true },
+      // The About page moved under /dich-vu; keep old links and search results working.
+      { source: "/gioi-thieu", destination: "/dich-vu/gioi-thieu", permanent: true },
+    ];
   },
   turbopack: {
     rules: {

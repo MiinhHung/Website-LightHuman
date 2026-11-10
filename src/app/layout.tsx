@@ -31,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="vi"
       data-theme="lighthuman"
       data-color-scheme="light"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${merriweather.variable} ${jetbrains.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-white">

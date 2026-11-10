@@ -10,6 +10,10 @@ import { ServiceCases } from "@/components/sections/services/ServiceCases";
 import { ServiceFaq } from "@/components/sections/services/ServiceFaq";
 import { CtaBand } from "@/components/sections/services/CtaBand";
 
+// Every slug is prebuilt via generateStaticParams, but the page body depends on
+// `params`, so a navigation can't show a shared shell first; allow it to block.
+export const instant = false;
+
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }

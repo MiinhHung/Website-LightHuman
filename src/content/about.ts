@@ -1,6 +1,6 @@
 import { CMS } from "./site";
 
-/** Trang /gioi-thieu — nội dung lấy theo lighthuman.vn/gioi-thieu. */
+/** Trang /dich-vu/gioi-thieu — nội dung lấy theo lighthuman.vn/gioi-thieu. */
 
 export const aboutHero = {
   eyebrow: "Về Light Human",

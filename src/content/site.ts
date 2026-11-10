@@ -47,7 +47,7 @@ export const serviceNav = [
 ];
 
 export const mainNav: NavItem[] = [
-  { label: "Giới thiệu", href: "/gioi-thieu" },
+  { label: "Giới thiệu", href: "/dich-vu/gioi-thieu" },
   { label: "Dịch vụ", href: "/dich-vu", children: serviceNav },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Insights", href: "/tin-tuc" },
@@ -58,9 +58,9 @@ export const footerNav = [
   {
     title: "Công ty",
     links: [
-      { label: "Giới thiệu", href: "/gioi-thieu" },
-      { label: "Sứ mệnh & Giá trị", href: "/gioi-thieu" },
-      { label: "Đội ngũ", href: "/gioi-thieu" },
+      { label: "Giới thiệu", href: "/dich-vu/gioi-thieu" },
+      { label: "Sứ mệnh & Giá trị", href: "/dich-vu/gioi-thieu" },
+      { label: "Đội ngũ", href: "/dich-vu/gioi-thieu" },
       { label: "Tin tức", href: "/tin-tuc" },
     ],
   },

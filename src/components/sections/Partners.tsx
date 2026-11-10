@@ -7,7 +7,7 @@ import { partners } from "@/content/partners";
  * CMS logos come in mixed formats (JPEG with backgrounds, padded PNGs), so each
  * one sits in a fixed white tile to keep the rhythm even.
  */
-export function Partners({ eyebrow = "Được tin tưởng bởi" }: { eyebrow?: string }) {
+export function Partners({ eyebrow }: { eyebrow?: string }) {
   const logos = partners.filter((p) => !p.placeholder);
   const half = Math.ceil(logos.length / 2);
   const rows = [logos.slice(0, half), logos.slice(half)];
@@ -16,7 +16,7 @@ export function Partners({ eyebrow = "Được tin tưởng bởi" }: { eyebrow?
     <section className="lh-section lh-section--compact lh-partners">
       <div className="lh-container">
         <div className="lh-partners__head">
-          <span className="lh-eyebrow">{eyebrow}</span>
+          {eyebrow && <span className="lh-eyebrow">{eyebrow}</span>}
           <h2 className="lh-h2 lh-partners__heading">
             Khách hàng <em>tiêu biểu</em>
           </h2>

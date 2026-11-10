@@ -12,11 +12,7 @@ export function HomeServices() {
         <div className="lh-services-grid">
           <div className="lh-services-grid__head">
             <div>
-              <span className="lh-eyebrow lh-eyebrow--with-spark">
-                <span className="lh-spark" aria-hidden="true" />
-                Dịch vụ
-              </span>
-              <h2 className="lh-h2 lh-mt-md">
+              <h2 className="lh-h2">
                 Giải pháp nhân sự <em>toàn diện</em> từ Light Human
               </h2>
               <p className="lh-lede lh-mt-md">

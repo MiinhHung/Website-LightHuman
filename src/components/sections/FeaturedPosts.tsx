@@ -35,8 +35,7 @@ export function FeaturedPosts() {
       <div className="lh-container">
         <div className="lh-featured__head">
           <div>
-            <span className="lh-eyebrow">Insights</span>
-            <h2 className="lh-h2 lh-mt-md">
+            <h2 className="lh-h2">
               Bản tin nổi bật - <em>Chiến lược &amp; câu chuyện</em> nhân sự
             </h2>
           </div>

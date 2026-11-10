@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getService, services } from "@/content/services";
 import { Partners } from "@/components/sections/Partners";
-import { CtaGrid } from "@/components/sections/CtaGrid";
 import { ServiceHero } from "@/components/sections/services/ServiceHero";
 import { ServiceScope } from "@/components/sections/services/ServiceCardsGrid";
 import { FeatureRows } from "@/components/sections/services/FeatureRows";
@@ -33,7 +32,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
   return (
     <div className="lh-service-detail">
       <ServiceHero hero={hero} />
-      {service.partners && <Partners />}
+      {service.partners && <Partners eyebrow="Được tin tưởng bởi" />}
       {scope && <ServiceScope head={{ eyebrow: scope.eyebrow, title: scope.title }} items={scope.items} />}
       <FeatureRows {...features} />
       <ServiceProcess process={process} />
@@ -49,7 +48,6 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
           {ctaBand}
         </>
       )}
-      <CtaGrid />
     </div>
   );
 }

@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
-import { hero } from "@/content/home";
+import type { ReactNode } from "react";
+import { ArrowRight, Award, Briefcase, Building2, Play, Users } from "lucide-react";
+import { hero, homeStats, type TrustIcon } from "@/content/home";
 import { site } from "@/content/site";
+
+const statIcons: Record<TrustIcon, ReactNode> = {
+  award: <Award size={26} strokeWidth={1.75} />,
+  building: <Building2 size={26} strokeWidth={1.75} />,
+  briefcase: <Briefcase size={26} strokeWidth={1.75} />,
+  users: <Users size={26} strokeWidth={1.75} />,
+};
 
 /** Hero điện ảnh của trang chủ (ảnh nền toàn khung, quỹ đạo trang trí). */
 export function HomeHero() {
@@ -51,6 +59,18 @@ export function HomeHero() {
           </div>
         </div>
       </div>
+      {/* Desktop only; below 1100px the standalone <TrustStats /> row shows the same numbers. */}
+      <dl className="lh-hero__stats">
+        {homeStats.map((s) => (
+          <div key={s.num} className="lh-hero__stat">
+            <span className="lh-hero__stat-icon" aria-hidden="true">
+              {statIcons[s.icon]}
+            </span>
+            <dt className="lh-hero__stat-label">{s.label}</dt>
+            <dd className="lh-hero__stat-num">{s.num}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

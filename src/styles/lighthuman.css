@@ -969,3 +969,56 @@
 [data-theme="lighthuman"] .lh-case-card__quote figcaption { margin-top: 10px; font-size: 13px; color: var(--ink-500); }
 [data-theme="lighthuman"] .lh-case-card__quote figcaption strong { color: var(--ink-800); font-weight: 700; }
 [data-theme="lighthuman"] .lh-case-card__industry { color: var(--ink-500); }
+
+/* ============================================================================
+ * Home hero: smaller headline (3 lines, not 5) and the four stats as one glass
+ * bar along the bottom instead of cards scattered over the people in the photo.
+ * ========================================================================= */
+@media (min-width: 720px) {
+  [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__title { font-size: 52px; }
+}
+@media (min-width: 1180px) {
+  [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__title { font-size: 60px; }
+}
+@media (min-width: 1440px) {
+  [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__title { font-size: 64px; }
+}
+@media (min-width: 1100px) {
+  [data-theme="lighthuman"] .lh-hero--cinematic .lh-hero__stage { padding-bottom: 230px; }
+  /* The hero renders its own stats bar at this width; the standalone row is for smaller screens. */
+  [data-theme="lighthuman"] .lh-hero--cinematic + .lh-metrics-row { display: none; }
+  [data-theme="lighthuman"] .lh-hero__stats { position: absolute; z-index: 3; left: 0; right: 0; bottom: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: calc(1480px - 2 * var(--container-pad)); width: calc(100% - 2 * var(--container-pad)); margin: 0 auto; background: rgba(6, 17, 38, 0.55); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: var(--radius-lg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  [data-theme="lighthuman"] .lh-hero__stat { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; align-items: start; padding: 22px 26px; border-left: 1px solid rgba(255, 255, 255, 0.12); }
+  [data-theme="lighthuman"] .lh-hero__stat:first-child { border-left: 0; }
+  [data-theme="lighthuman"] .lh-hero__stat-icon { grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center; width: 40px; height: 40px; color: rgba(255, 255, 255, 0.92); }
+  [data-theme="lighthuman"] .lh-hero__stat:nth-child(3) .lh-hero__stat-icon { color: var(--brand-gold); }
+  [data-theme="lighthuman"] .lh-hero__stat-num { grid-column: 2; grid-row: 1; margin: 0 0 6px; font-size: 30px; font-weight: 800; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+  [data-theme="lighthuman"] .lh-hero__stat-label { grid-column: 2; grid-row: 2; margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.8); }
+}
+@media (max-width: 1099.98px) {
+  [data-theme="lighthuman"] .lh-hero__stats { display: none; }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  [data-theme="lighthuman"] .lh-hero__stats { background: rgba(6, 17, 38, 0.9); }
+}
+
+/* Core values: four items, so 1 / 2 / 4 columns (never 3 + 1). */
+[data-theme="lighthuman"] .lh-services-grid__items.lh-values-grid { grid-template-columns: 1fr; }
+@media (min-width: 640px) { [data-theme="lighthuman"] .lh-services-grid__items.lh-values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { [data-theme="lighthuman"] .lh-services-grid__items.lh-values-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ============================================================================
+ * Contrast pass (WCAG AA on white / --bg-surface):
+ * - eyebrows: navy text, gold stays on the spark mark (#dca54b text was 2.2:1);
+ * - gold italic words in h2: amber-deep (3.3:1, passes for large text);
+ * - process step copy on navy was inheriting --ink-500 from the light variant.
+ * Dark sections keep the brighter gold.
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-eyebrow { color: var(--brand-navy-soft); }
+[data-theme="lighthuman"] .lh-h2 em { color: var(--brand-amber-deep); }
+[data-theme="lighthuman"] [class*="--dark"] .lh-h2 em { color: var(--brand-amber); }
+[data-theme="lighthuman"] section.lh-process-steps--dark .lh-lede { color: rgba(255, 255, 255, 0.78); }
+[data-theme="lighthuman"] section.lh-process-steps--dark .lh-process-steps .lh-process-steps__desc { color: rgba(255, 255, 255, 0.72); }
+[data-theme="lighthuman"] .lh-service-detail section.lh-process-steps--dark .lh-process-steps .lh-process-steps__desc { color: var(--ink-700); }
+[data-theme="lighthuman"] .lh-service-detail section.lh-process-steps--dark .lh-lede { color: var(--ink-600); }
+[data-theme="lighthuman"] .lh-partners__heading:first-child { margin-top: 0; }

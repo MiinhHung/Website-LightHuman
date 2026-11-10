@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { services, servicesPage } from "@/content/services";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { Partners } from "@/components/sections/Partners";
-import { CtaGrid } from "@/components/sections/CtaGrid";
 import { ServiceHero } from "@/components/sections/services/ServiceHero";
 import { ServiceCatalog } from "@/components/sections/services/ServiceCardsGrid";
 import { ServiceProcess } from "@/components/sections/services/ServiceProcess";
@@ -33,7 +32,6 @@ export default function ServicesPage() {
       />
       <Partners />
       <CtaBand cta={cta} />
-      <CtaGrid />
     </>
   );
 }

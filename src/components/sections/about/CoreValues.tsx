@@ -27,7 +27,7 @@ export function CoreValues() {
               <p className="lh-lede lh-mt-md">{lede}</p>
             </div>
           </div>
-          <div className="lh-services-grid__items">
+          <div className="lh-services-grid__items lh-values-grid">
             {items.map((v, i) => (
               <Reveal key={v.title} delay={i * 80}>
                 <div className="lh-service-card lh-service-card--plain">

@@ -75,7 +75,3 @@ export function applyRemove(s: SelectedState, key: GroupKey, value: string): Sel
       return { ...s, education: null };
   }
 }
-
-export function applyToggle(s: SelectedState, key: GroupKey, value: string): SelectedState {
-  return isValueSelected(s, key, value) ? applyRemove(s, key, value) : applyAdd(s, key, value);
-}

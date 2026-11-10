@@ -2,25 +2,25 @@
 
 import {
   DndContext,
+  DragOverlay,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
   type Active,
   type DragEndEvent,
+  type DragStartEvent,
 } from "@dnd-kit/core";
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { createQuoteAction } from "@/app/lien-he/quote-action";
 import { initialQuoteState } from "@/app/lien-he/quote-state";
-import type { GroupKey } from "@/content/quote/catalog";
 import { vi } from "@/content/quote/labels.vi";
 import { classify, type QuoteType } from "@/lib/quote/classify";
 import { POSITION_MAX, POSITION_MIN, QUANTITY_MAX } from "@/lib/quote/limits";
 import { ContactFields } from "./ContactFields";
-import { CriteriaPalette } from "./CriteriaPalette";
+import { CardOverlay, CriteriaKanban, poolId, zoneId, type CardData } from "./CriteriaKanban";
 import { QuoteResult } from "./QuoteResult";
-import { SELECTION_DROP_ID, SelectionPanel } from "./SelectionPanel";
-import { EMPTY_SELECTED, applyAdd, applyRemove, applyToggle, type SelectedState } from "./selection";
+import { EMPTY_SELECTED, applyAdd, applyRemove, type SelectedState } from "./selection";
 
 const LINE_ERROR_KEYS = [
   "lines.0.industries",
@@ -29,10 +29,8 @@ const LINE_ERROR_KEYS = [
   "lines.0.education",
 ] as const;
 
-type ChipData = { groupKey: GroupKey; value: string; label: string };
-
 function chipLabel(active: Active): string {
-  return (active.data.current as ChipData | undefined)?.label ?? String(active.id);
+  return (active.data.current as CardData | undefined)?.label ?? String(active.id);
 }
 
 /**
@@ -42,6 +40,7 @@ function chipLabel(active: Active): string {
  */
 export function QuoteBuilder() {
   const [selected, setSelected] = useState<SelectedState>(EMPTY_SELECTED);
+  const [dragging, setDragging] = useState<CardData | null>(null);
   const [state, formAction, pending] = useActionState(createQuoteAction, initialQuoteState);
   const formRef = useRef<HTMLFormElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -71,10 +70,20 @@ export function QuoteBuilder() {
     resultRef.current?.focus({ preventScroll: true });
   }, [state]);
 
+  function handleDragStart(e: DragStartEvent) {
+    setDragging((e.active.data.current as CardData | undefined) ?? null);
+  }
+
+  // A card only lands in its own column: pool -> lane adds, lane -> pool removes.
   function handleDragEnd(e: DragEndEvent) {
-    if (e.over?.id !== SELECTION_DROP_ID) return;
-    const data = e.active.data.current as ChipData | undefined;
-    if (data) setSelected((s) => applyAdd(s, data.groupKey, data.value));
+    setDragging(null);
+    const data = e.active.data.current as CardData | undefined;
+    if (!data || !e.over) return;
+    if (data.from === "pool" && e.over.id === zoneId(data.groupKey)) {
+      setSelected((s) => applyAdd(s, data.groupKey, data.value));
+    } else if (data.from === "zone" && e.over.id === poolId(data.groupKey)) {
+      setSelected((s) => applyRemove(s, data.groupKey, data.value));
+    }
   }
 
   const suggestion: QuoteType | null = useMemo(() => {
@@ -171,31 +180,30 @@ export function QuoteBuilder() {
           <DndContext
             id="quote-builder-dnd"
             sensors={sensors}
+            onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
+            onDragCancel={() => setDragging(null)}
             accessibility={{
               announcements: {
                 onDragStart: ({ active }) => `Đã nhấc thẻ ${chipLabel(active)}.`,
                 onDragOver: ({ active, over }) =>
-                  over
-                    ? `Thẻ ${chipLabel(active)} đang ở trên khung ${vi.panel.title}.`
-                    : `Đang kéo thẻ ${chipLabel(active)}.`,
+                  over ? `Thẻ ${chipLabel(active)} đang ở trên vùng thả.` : `Đang kéo thẻ ${chipLabel(active)}.`,
                 onDragEnd: ({ active, over }) =>
-                  over ? `Đã thêm ${chipLabel(active)}.` : `Đã huỷ kéo ${chipLabel(active)}.`,
+                  over ? `Đã thả thẻ ${chipLabel(active)}.` : `Đã huỷ kéo ${chipLabel(active)}.`,
                 onDragCancel: ({ active }) => `Đã huỷ kéo ${chipLabel(active)}.`,
               },
             }}
           >
-            <div className="lh-quote-criteria">
-              <CriteriaPalette
-                selected={selected}
-                onToggle={(g, v) => setSelected((s) => applyToggle(s, g, v))}
-              />
-              <SelectionPanel
-                selected={selected}
-                suggestion={suggestion}
-                onRemove={(g, v) => setSelected((s) => applyRemove(s, g, v))}
-              />
-            </div>
+            <CriteriaKanban
+              selected={selected}
+              dragging={dragging}
+              suggestion={suggestion}
+              onAdd={(g, v) => setSelected((s) => applyAdd(s, g, v))}
+              onRemove={(g, v) => setSelected((s) => applyRemove(s, g, v))}
+            />
+            <DragOverlay dropAnimation={{ duration: 220, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
+              {dragging ? <CardOverlay card={dragging} /> : null}
+            </DragOverlay>
           </DndContext>
         </section>
 

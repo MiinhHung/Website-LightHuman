@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <div className="lh-loading" role="status" aria-live="polite">
       <div className="lh-loading__mark">
-        <Image src={logoOnLight} alt="" className="lh-loading__logo" priority />
+        <Image src={logoOnLight} alt="" className="lh-loading__logo" loading="eager" />
         <span className="lh-loading__sweep" aria-hidden="true" />
       </div>
       <span className="lh-loading__track" aria-hidden="true">

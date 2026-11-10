@@ -21,7 +21,7 @@ export function HomeHero() {
           src={hero.image}
           alt="Con người xuất sắc kiến tạo doanh nghiệp phi thường."
           fill
-          priority
+          preload
           sizes="100vw"
           className="lh-hero__bg-img"
         />

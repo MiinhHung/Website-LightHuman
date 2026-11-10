@@ -28,7 +28,7 @@ export default function StoryPage() {
               src={storyPage.image}
               alt={storyPage.imageAlt}
               fill
-              priority
+              preload
               sizes="(min-width: 1024px) 560px, 100vw"
             />
           </div>

@@ -20,7 +20,7 @@ export const vi = {
     },
     criteria: {
       title: "Yêu cầu ứng viên",
-      desc: "Bấm để chọn, hoặc kéo thẻ vào khung Đã chọn.",
+      desc: "Kéo thẻ từ \"Có thể chọn\" lên ô phía trên của mỗi cột, hoặc bấm vào thẻ. Kéo ngược xuống hoặc bấm × để bỏ.",
     },
     contact: {
       title: "Thông tin liên hệ",

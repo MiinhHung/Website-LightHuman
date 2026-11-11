@@ -5,6 +5,8 @@ import { ArrowRight, Award, Briefcase, Building2, Play, Users } from "lucide-rea
 import { hero, homeStats, type TrustIcon } from "@/content/home";
 import { site } from "@/content/site";
 import { CountUp } from "@/components/ui/CountUp";
+import { homeEn } from "@/content/en/home";
+import type { Locale } from "@/i18n/config";
 
 const statIcons: Record<TrustIcon, ReactNode> = {
   award: <Award size={26} strokeWidth={1.75} />,
@@ -14,13 +16,15 @@ const statIcons: Record<TrustIcon, ReactNode> = {
 };
 
 /** Hero điện ảnh của trang chủ (ảnh nền toàn khung, quỹ đạo trang trí). */
-export function HomeHero() {
+export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
+  const en = locale === "en" ? homeEn.hero : null;
+  const stats = locale === "en" ? homeEn.stats : homeStats;
   return (
     <section className="lh-hero lh-hero--dark lh-hero--cinematic">
       <div className="lh-hero__bg">
         <Image
           src={hero.image}
-          alt="Con người xuất sắc kiến tạo doanh nghiệp phi thường."
+          alt={en?.imageAlt ?? "Con người xuất sắc kiến tạo doanh nghiệp phi thường."}
           fill
           preload
           sizes="100vw"
@@ -43,26 +47,38 @@ export function HomeHero() {
             {site.name}
           </span>
           <h1 className="lh-hero__title">
-            Con người <em>xuất sắc</em> kiến tạo doanh nghiệp <em>phi thường.</em>
+            {en ? (
+              <>
+                {en.title.before}
+                <em>{en.title.em1}</em>
+                {en.title.middle}
+                <em>{en.title.em2}</em>
+                {en.title.after}
+              </>
+            ) : (
+              <>
+                Con người <em>xuất sắc</em> kiến tạo doanh nghiệp <em>phi thường.</em>
+              </>
+            )}
           </h1>
-          <p className="lh-hero__lede">{hero.lede}</p>
+          <p className="lh-hero__lede">{en?.lede ?? hero.lede}</p>
           <div className="lh-hero__ctas">
-            <Link href="/dich-vu" className="lh-hero__cta-primary">
-              Khám phá dịch vụ
+            <Link href={en?.primary.href ?? "/dich-vu"} className="lh-hero__cta-primary">
+              {en?.primary.label ?? "Khám phá dịch vụ"}
               <ArrowRight size={17} strokeWidth={2} />
             </Link>
             <a href={`${site.jobsUrl}/`} target="_blank" rel="noopener noreferrer" className="lh-hero__cta-ghost">
               <span className="lh-hero__cta-play" aria-hidden="true">
                 <Play size={15} fill="currentColor" strokeWidth={0} />
               </span>
-              Tin tuyển dụng
+              {en?.jobs ?? "Tin tuyển dụng"}
             </a>
           </div>
         </div>
       </div>
       {/* Desktop only; below 1100px the standalone <TrustStats /> row shows the same numbers. */}
       <dl className="lh-hero__stats">
-        {homeStats.map((s, i) => (
+        {stats.map((s, i) => (
           <div key={s.num} className="lh-hero__stat" style={{ "--i": i } as CSSProperties}>
             <span className="lh-hero__stat-icon" aria-hidden="true">
               {statIcons[s.icon]}

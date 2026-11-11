@@ -241,32 +241,9 @@
 @media (max-width: 767.98px) {
   [data-theme="lighthuman"] .lh-wordmark__logo { height: 38px; }
 }
-[data-theme="lighthuman"] .lh-nav-desktop { display: none; }
-@media (min-width: 980px) {
-  [data-theme="lighthuman"] .lh-nav-desktop { display: block; }
-}
-[data-theme="lighthuman"] .lh-nav { align-items: center; gap: 10px; margin: 0px; padding: 0px; list-style: none; display: flex; }
-[data-theme="lighthuman"] .lh-nav__item { position: relative; }
-[data-theme="lighthuman"] .lh-nav a.lh-nav__link, [data-theme="lighthuman"] a.lh-nav__link { color: rgba(255, 255, 255, 0.85); transition: color .14s var(--ease-out); align-items: center; gap: 6px; padding: 10px 14px; font-size: 15px; font-weight: 500; text-decoration: none; display: inline-flex; }
-[data-theme="lighthuman"] .lh-nav a.lh-nav__link:hover, [data-theme="lighthuman"] a.lh-nav__link:hover { color: var(--fg-inverse); }
-[data-theme="lighthuman"] .lh-nav__item--has-menu > .lh-nav__link::after { content: "▾"; opacity: 0.55; font-size: 9px; }
-[data-theme="lighthuman"] .lh-nav__submenu { background: var(--brand-navy-soft); opacity: 0; visibility: hidden; z-index: 50; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; min-width: 280px; margin: 0px; padding: 8px; list-style: none; transition: opacity 0.14s, transform 0.14s, visibility 0.14s; position: absolute; top: calc(100% + 4px); left: 0px; transform: translateY(-4px); box-shadow: rgba(0, 0, 0, 0.4) 0px 24px 60px; }
-[data-theme="lighthuman"] .lh-nav__item--has-menu:hover .lh-nav__submenu, [data-theme="lighthuman"] .lh-nav__item--has-menu:focus-within .lh-nav__submenu { opacity: 1; visibility: visible; transform: translateY(0px); }
-[data-theme="lighthuman"] .lh-nav__sublink { color: rgba(255, 255, 255, 0.85); transition: background .14s var(--ease-out); border-radius: 8px; padding: 10px 14px; font-size: 14px; text-decoration: none; display: block; }
-[data-theme="lighthuman"] .lh-nav__sublink:hover { background: rgba(255, 255, 255, 0.05); }
 [data-theme="lighthuman"] .lh-header__actions { align-items: center; gap: 18px; display: flex; }
 [data-theme="lighthuman"] .lh-header__cta { background: var(--brand-gold); color: var(--brand-navy-deep); transition: background .14s var(--ease-out); border-radius: 999px; align-items: center; gap: 10px; padding: 11px 20px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-flex; }
 [data-theme="lighthuman"] .lh-header__cta:hover { background: var(--brand-gold-bright); }
-[data-theme="lighthuman"] .lh-mobile-trigger { cursor: pointer; width: 40px; height: 40px; color: var(--fg-inverse); background: 0px 0px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px; place-items: center; font-size: 18px; display: inline-grid; }
-@media (min-width: 980px) {
-  [data-theme="lighthuman"] .lh-mobile-trigger { display: none; }
-}
-[data-theme="lighthuman"] .lh-mobile-drawer { top: var(--header-h,76px); z-index: 99; background: var(--brand-navy); padding: 24px; position: fixed; bottom: 0px; left: 0px; right: 0px; overflow: auto; }
-[data-theme="lighthuman"] .lh-mobile-drawer__list { margin: 0px; padding: 0px; list-style: none; }
-[data-theme="lighthuman"] .lh-mobile-drawer__item { border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
-[data-theme="lighthuman"] .lh-mobile-drawer__link { color: var(--fg-inverse); padding: 18px 0px; font-size: 18px; font-weight: 600; text-decoration: none; display: block; }
-[data-theme="lighthuman"] .lh-mobile-drawer__sub { margin: 0px; padding: 0px 0px 12px; list-style: none; }
-[data-theme="lighthuman"] .lh-mobile-drawer__sublink { color: rgba(255, 255, 255, 0.6); padding: 8px 0px 8px 16px; font-size: 14px; text-decoration: none; display: block; }
 [data-theme="lighthuman"] .lh-footer { background: var(--brand-navy-deep); color: rgba(255, 255, 255, 0.7); padding: 48px clamp(20px, 5vw, 56px) 32px; position: relative; overflow: hidden; }
 [data-theme="lighthuman"] .lh-footer::before { content: ""; opacity: 0.6; pointer-events: none; background-image: radial-gradient(rgba(234, 184, 128, 0.05) 1px, rgba(0, 0, 0, 0) 1px); background-size: 14px 14px; position: absolute; inset: 0px; }
 [data-theme="lighthuman"] .lh-footer__inner { max-width: 1280px; margin: 0px auto; position: relative; }
@@ -902,14 +879,8 @@
 
 /* Header: active page, external job-board link, quote CTA */
 /* Underline as a background stripe: an inset box-shadow bends up the rounded corners into thin side lines. */
-[data-theme="lighthuman"] .lh-nav__item[data-active] > .lh-nav__link { color: #fff; background: linear-gradient(var(--brand-gold), var(--brand-gold)) center bottom / calc(100% - 28px) 2px no-repeat; }
-[data-theme="lighthuman"] .lh-nav__link:focus-visible, [data-theme="lighthuman"] .lh-nav__sublink:focus-visible, [data-theme="lighthuman"] .lh-header__cta:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 3px; border-radius: 6px; }
-[data-theme="lighthuman"] .lh-nav__link svg { opacity: 0.7; }
-[data-theme="lighthuman"] .lh-nav__sublink[aria-current="page"] { color: var(--brand-gold); }
 [data-theme="lighthuman"] .lh-header__cta { min-width: 112px; justify-content: center; text-decoration: none; transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
 [data-theme="lighthuman"] .lh-header__cta:active { transform: translateY(1px); }
-[data-theme="lighthuman"] .lh-mobile-drawer__link { display: flex; align-items: center; gap: 8px; }
-[data-theme="lighthuman"] .lh-mobile-drawer__cta { display: flex; width: 100%; margin-top: 28px; padding-block: 14px; font-size: 16px; }
 @media (max-width: 420px) { [data-theme="lighthuman"] .lh-header__actions > .lh-header__cta { min-width: 0; padding: 10px 16px; } }
 
 /* Closing band (one per page) */
@@ -1194,9 +1165,3 @@
 @media (max-width: 639px) { [data-theme="lighthuman"] .lh-subnav__cta { display: none; } }
 [data-theme="lighthuman"] .lh-anchor { scroll-margin-top: calc(var(--header-h, 76px) + 64px); }
 
-/* Six nav items (with "Công cụ"): tighten spacing on small laptops so the nav stays on one line. */
-@media (min-width: 1024px) and (max-width: 1279.98px) {
-  [data-theme="lighthuman"] .lh-nav a.lh-nav__link, [data-theme="lighthuman"] a.lh-nav__link { padding: 10px 9px; font-size: 14px; }
-  [data-theme="lighthuman"] .lh-header__inner { gap: 12px; }
-  [data-theme="lighthuman"] .lh-header__cta { min-width: 0; padding: 10px 16px; }
-}

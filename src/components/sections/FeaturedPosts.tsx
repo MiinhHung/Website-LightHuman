@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { posts, type Post } from "@/content/posts";
 import { GhostLink } from "./GhostLink";
+import { homeEn } from "@/content/en/home";
+import type { Locale } from "@/i18n/config";
 
 export function ReviewTile({ post, lead = false }: { post: Post; lead?: boolean }) {
   return (
@@ -28,38 +30,51 @@ export function ReviewTile({ post, lead = false }: { post: Post; lead?: boolean 
 }
 
 /** Home insights: one lead story with its cover, two more as compact rows. */
-export function FeaturedPosts() {
+export function FeaturedPosts({ locale = "vi" }: { locale?: Locale }) {
   const [lead, ...rest] = posts.slice(0, 3);
+  const en = locale === "en" ? homeEn.insights : null;
+  const readTime = (min: number) => (en ? en.readTime(min) : `${min} phút đọc`);
+  // English page, Vietnamese articles: mark the article text so screen readers switch voice.
+  const lang = en ? "vi" : undefined;
   return (
     <section className="lh-section lh-insights">
       <div className="lh-container">
         <div className="lh-insights__head">
-          <h2 className="lh-h2">Góc nhìn nhân sự từ Light Human</h2>
-          <GhostLink href="/tin-tuc">Xem tất cả bài viết</GhostLink>
+          <div>
+            <h2 className="lh-h2">{en?.heading ?? "Góc nhìn nhân sự từ Light Human"}</h2>
+            {en && <p className="lh-insights__note">{en.note}</p>}
+          </div>
+          <GhostLink href="/tin-tuc">{en?.viewAll ?? "Xem tất cả bài viết"}</GhostLink>
         </div>
         <div className="lh-insights__grid">
-          <Link href={`/blog/${lead.slug}`} className="lh-insights__lead">
+          <Link href={`/blog/${lead.slug}`} className="lh-insights__lead" hrefLang={lang}>
             <div className="lh-insights__lead-media">
               <Image src={lead.image} alt={lead.title} fill sizes="(min-width: 1024px) 640px, 100vw" />
             </div>
             <p className="lh-insights__meta">
-              {lead.category}, {lead.readMinutes} phút đọc
+              <span lang={lang}>{lead.category}</span>, {readTime(lead.readMinutes)}
             </p>
-            <h3 className="lh-insights__lead-title">{lead.title}</h3>
-            <p className="lh-insights__excerpt">{lead.excerpt}</p>
+            <h3 className="lh-insights__lead-title" lang={lang}>
+              {lead.title}
+            </h3>
+            <p className="lh-insights__excerpt" lang={lang}>
+              {lead.excerpt}
+            </p>
           </Link>
           <ul className="lh-insights__list">
             {rest.map((p) => (
               <li key={p.slug}>
-                <Link href={`/blog/${p.slug}`} className="lh-insights__row">
+                <Link href={`/blog/${p.slug}`} className="lh-insights__row" hrefLang={lang}>
                   <div className="lh-insights__thumb">
                     <Image src={p.image} alt="" fill sizes="160px" />
                   </div>
                   <div>
                     <p className="lh-insights__meta">
-                      {p.category}, {p.readMinutes} phút đọc
+                      <span lang={lang}>{p.category}</span>, {readTime(p.readMinutes)}
                     </p>
-                    <h3 className="lh-insights__row-title">{p.title}</h3>
+                    <h3 className="lh-insights__row-title" lang={lang}>
+                      {p.title}
+                    </h3>
                     <p className="lh-insights__date">{p.dateLabel}</p>
                   </div>
                 </Link>

@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cong-cu",
     "/cong-cu/tinh-luong-gross-net",
     "/cong-cu/tinh-lai-kep",
+    "/en",
   ];
   return [
     ...pages.map((p) => ({ url: `${site.url}${p}` })),

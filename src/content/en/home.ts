@@ -58,7 +58,6 @@ export const homeEn = {
     lede:
       "Recruitment and HR solutions that work. Every long journey starts with a single step: build a standout team with Light Human, one that grows as your business grows.",
     primary: { label: "Explore our services", href: "/dich-vu" },
-    jobs: "Open positions",
   },
 
   stats: [
@@ -191,4 +190,30 @@ export const homeEn = {
     action: { label: "Get a quote", href: quoteHref },
     secondary: { label: "Looking for a job? See openings", href: site.jobsUrl },
   },
+};
+
+export const homeVideoEn = {
+  play: "Watch our story",
+  close: "Close video",
+  dialog: "Light Human introduction film (in Vietnamese)",
+};
+
+export const manifestoEn = {
+  eyebrow: "What we believe",
+  segments: [
+    { text: "One right person can change" },
+    { text: "a whole team.", em: true },
+    { text: "Our job is to find that person, and stay with you until they" },
+    { text: "truly stay.", em: true },
+  ] as { text: string; em?: boolean }[],
+  sign: "The Light Human team",
+};
+
+export const homeChaptersEn = {
+  partners: "Clients",
+  services: "Services",
+  toolkit: "Tools",
+  stories: "Stories",
+  process: "Process",
+  insights: "Insights",
 };

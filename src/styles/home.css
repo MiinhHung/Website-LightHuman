@@ -189,3 +189,129 @@
   [data-theme="lighthuman"] .lh-hero--home .lh-intent { height: 42px; padding-right: 12px; gap: 8px; font-size: 14.5px; }
   [data-theme="lighthuman"] .lh-hero--home .lh-intent__icon { width: 30px; height: 30px; }
 }
+
+/* =========================================================================
+ * Video lightbox (hero "watch our story")
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-video-trigger { padding: 0; border: 0; background: none; cursor: pointer; font: inherit; font-size: 16px; }
+[data-theme="lighthuman"] .lh-video-trigger:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 6px; border-radius: 999px; }
+[data-theme="lighthuman"] .lh-video-trigger__play { position: relative; transition: transform 0.25s var(--ease-out), background-color 0.25s var(--ease-out); }
+[data-theme="lighthuman"] .lh-video-trigger:hover .lh-video-trigger__play { transform: scale(1.08); background: var(--brand-gold); }
+/* Soft sonar ring: signals "this plays" without autoplaying anything. */
+[data-theme="lighthuman"] .lh-video-trigger__play::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid rgba(255, 255, 255, 0.55);
+  animation: lh-sonar 2.4s var(--ease-out) infinite;
+}
+@keyframes lh-sonar { from { opacity: 0.9; scale: 1; } to { opacity: 0; scale: 1.7; } }
+
+/* Tailwind preflight zeroes margins; a modal dialog needs margin: auto to centre. */
+[data-theme="lighthuman"] .lh-video { margin: auto; width: min(1120px, 92vw, calc((100vh - 160px) * 16 / 9)); max-width: none; max-height: none; padding: 0; border: 0; background: transparent; overflow: visible; }
+[data-theme="lighthuman"] .lh-video::backdrop { background: rgba(4, 9, 22, 0.86); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+[data-theme="lighthuman"] .lh-video[open] { animation: lh-video-in 0.32s var(--ease-out); }
+@keyframes lh-video-in { from { opacity: 0; scale: 0.96; } to { opacity: 1; scale: 1; } }
+[data-theme="lighthuman"] .lh-video__frame { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 18px; background: #000; box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6); }
+[data-theme="lighthuman"] .lh-video__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+[data-theme="lighthuman"] .lh-video__close {
+  position: absolute; top: -56px; right: 0; display: grid; place-items: center; width: 44px; height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer;
+}
+[data-theme="lighthuman"] .lh-video__close:hover { background: rgba(255, 255, 255, 0.18); }
+[data-theme="lighthuman"] .lh-video__close:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 2px; }
+
+/* =========================================================================
+ * Chapter marks ("01  Khách hàng")
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-chapter { position: relative; }
+[data-theme="lighthuman"] .lh-chapter > :not(.lh-chapter__mark) { padding-top: calc(var(--section-py) + 34px); }
+[data-theme="lighthuman"] .lh-chapter__mark {
+  position: absolute; z-index: 3; top: clamp(20px, 2.6vw, 30px); left: 0; right: 0; pointer-events: none;
+  display: flex; align-items: center; gap: 14px;
+  color: var(--ink-400); font: 500 12px/1 var(--font-jetbrains-mono), var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase;
+}
+[data-theme="lighthuman"] .lh-chapter__n { color: var(--brand-amber-deep); font-weight: 600; }
+[data-theme="lighthuman"] .lh-chapter__rule { flex: 0 0 clamp(40px, 6vw, 88px); height: 1px; background: currentColor; transform-origin: left center; }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__mark { color: rgba(255, 255, 255, 0.5); }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__n { color: var(--brand-gold); }
+
+/* =========================================================================
+ * Manifesto: fully lit by default (no scroll-timeline support / reduced motion).
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-manifesto {
+  position: relative; color: #fff;
+  background:
+    radial-gradient(50% 60% at 85% 20%, rgba(242, 207, 99, 0.12), transparent 70%),
+    radial-gradient(60% 70% at 10% 90%, rgba(55, 142, 204, 0.14), transparent 70%),
+    var(--brand-navy-deep);
+}
+[data-theme="lighthuman"] .lh-manifesto__stick { display: flex; align-items: center; padding: var(--section-py-loose) 0; }
+[data-theme="lighthuman"] .lh-manifesto__eyebrow { margin: 0 0 28px; color: var(--brand-gold); font: 600 12.5px/1 var(--font-sans); letter-spacing: 0.2em; text-transform: uppercase; }
+[data-theme="lighthuman"] .lh-manifesto__text { max-width: 1040px; margin: 0; font-family: var(--font-display); font-size: clamp(30px, 4.4vw, 62px); font-weight: 700; line-height: 1.22; letter-spacing: -0.015em; }
+[data-theme="lighthuman"] .lh-manifesto__w { color: #fff; }
+[data-theme="lighthuman"] .lh-manifesto__w--em { color: var(--brand-gold); font-style: italic; }
+[data-theme="lighthuman"] .lh-manifesto__sign { display: flex; align-items: center; gap: 14px; margin: 36px 0 0; color: rgba(255, 255, 255, 0.6); font-size: 15px; }
+[data-theme="lighthuman"] .lh-manifesto__sign::before { content: ""; width: 40px; height: 1px; background: var(--brand-gold); }
+
+/* Reading progress bar under the header (home only). */
+[data-theme="lighthuman"] .lh-home__progress { display: none; }
+
+/* =========================================================================
+ * Scroll-driven effects. Only where scroll timelines are supported and the
+ * visitor has not asked for reduced motion; the rules above are the complete
+ * static fallback.
+ * ========================================================================= */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-theme="lighthuman"] .lh-home__progress {
+      display: block; position: fixed; z-index: 98; top: var(--header-h, 76px); left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--brand-amber), var(--brand-gold));
+      transform-origin: 0 50%; animation: lh-progress linear both; animation-timeline: scroll(root);
+    }
+    @keyframes lh-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* Hero depth: the photo drifts slower than the page, the copy lifts and fades. */
+    [data-theme="lighthuman"] .lh-hero--home .lh-hero__bg { animation: lh-par-bg linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    @keyframes lh-par-bg { to { transform: translateY(14vh) scale(1.06); } }
+    [data-theme="lighthuman"] .lh-hero--home .lh-hero__stage { animation: lh-par-copy linear both; animation-timeline: scroll(root); animation-range: 10vh 75vh; }
+    @keyframes lh-par-copy { to { opacity: 0; transform: translateY(-70px); } }
+
+    /* Chapter rule draws in, label follows. */
+    [data-theme="lighthuman"] .lh-chapter__rule { animation: lh-rule-draw linear both; animation-timeline: view(); animation-range: entry 20% cover 30%; }
+    @keyframes lh-rule-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    [data-theme="lighthuman"] .lh-chapter__label { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 40% cover 32%; }
+
+    /* Manifesto: tall section, sticky statement, words light up in reading order. */
+    [data-theme="lighthuman"] .lh-manifesto { height: 240vh; view-timeline-name: --mf; }
+    [data-theme="lighthuman"] .lh-manifesto__stick { position: sticky; top: 0; height: 100vh; padding: 0; }
+    [data-theme="lighthuman"] .lh-manifesto__w { color: rgba(255, 255, 255, 0.14); animation: lh-word-lit linear both; animation-timeline: --mf; animation-range: contain calc(var(--p) * 1%) contain calc(var(--p) * 1% + 9%); }
+    [data-theme="lighthuman"] .lh-manifesto__w--em { color: rgba(242, 207, 99, 0.16); animation-name: lh-word-gold; }
+    @keyframes lh-word-lit { to { color: #fff; } }
+    @keyframes lh-word-gold { to { color: var(--brand-gold); } }
+    [data-theme="lighthuman"] .lh-manifesto__sign { animation: lh-fade-up linear both; animation-timeline: --mf; animation-range: contain 74% contain 84%; }
+
+    /* Media reveals: photos open out of a rounded window. */
+    [data-theme="lighthuman"] .lh-home .lh-showcase__media,
+    [data-theme="lighthuman"] .lh-home .lh-stories__photo { animation: lh-window linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    @keyframes lh-window { from { clip-path: inset(10% 8% 10% 8% round 28px); } to { clip-path: inset(0 0 0 0 round 0); } }
+
+    [data-theme="lighthuman"] .lh-home .lh-showcase__list > li { animation: lh-slide-in linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+    @keyframes lh-slide-in { from { opacity: 0; transform: translateX(-28px); } }
+
+    [data-theme="lighthuman"] .lh-home .lh-insights__lead,
+    [data-theme="lighthuman"] .lh-home .lh-insights__list > li,
+    [data-theme="lighthuman"] .lh-home .lh-partners__head { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    @keyframes lh-fade-up { from { opacity: 0; transform: translateY(36px); } }
+
+    [data-theme="lighthuman"] .lh-home .lh-closing__band { animation: lh-band-in linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+    @keyframes lh-band-in { from { transform: scale(0.93); border-radius: 48px; opacity: 0.4; } }
+    [data-theme="lighthuman"] .lh-home .lh-closing__rays { animation: lh-rays-turn linear both; animation-timeline: view(); }
+    @keyframes lh-rays-turn { from { rotate: -12deg; } to { rotate: 12deg; } }
+  }
+  @media (prefers-reduced-motion: no-preference) and (max-width: 767.98px) {
+    [data-theme="lighthuman"] .lh-manifesto { height: 200vh; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="lighthuman"] .lh-video-trigger__play::after,
+  [data-theme="lighthuman"] .lh-video[open] { animation: none; }
+}
+[data-theme="lighthuman"] .lh-manifesto__stick > .lh-container { width: 100%; }

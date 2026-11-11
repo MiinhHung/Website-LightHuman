@@ -8,6 +8,8 @@ import "./globals.css";
 import "@/styles/tools.css";
 // Insights listing (/tin-tuc) — class lh-ins-*.
 import "@/styles/insights.css";
+// Quote builder card table (/lien-he#bao-gia) — class lh-qb-*.
+import "@/styles/quote-board.css";
 
 // Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });

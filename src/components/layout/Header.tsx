@@ -45,7 +45,7 @@ const ICONS: Record<NavIcon, ReactNode> = {
 // (hidden), so a hero from the last page would otherwise still match.
 function opensWithDarkHero(pathname: string): boolean {
   return (
-    ["/", "/en", "/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/")
+    ["/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/")
   );
 }
 

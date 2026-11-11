@@ -25,7 +25,6 @@ export function VideoFeature({
           <p className="lh-lede">{lede}</p>
         </div>
         <VideoLightbox
-          variant="poster"
           videoId={v.id}
           title={v.title}
           poster={v.poster}

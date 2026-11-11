@@ -51,25 +51,14 @@ export const homeEn = {
   metaDescription:
     "Light Human is an HR consultancy and headhunting firm in Vietnam: executive search, mass recruitment, employer branding, training and advisory.",
 
-  hero: {
-    imageAlt: "Exceptional people build extraordinary companies.",
-    title: { before: "Exceptional ", em1: "people", middle: " build ", em2: "extraordinary", after: " companies." },
-    lede:
-      "Recruitment and HR solutions that work. Every long journey starts with a single step: build a standout team with Light Human, one that grows as your business grows.",
-    primary: { label: "Explore our services", href: "/dich-vu" },
-  },
-
   stats: [
     { icon: "award", num: "6+", label: "Years of experience, 1,200+ HR projects" },
     { icon: "building", num: "800+", label: "Corporate clients, local and multinational" },
     { icon: "briefcase", num: "100+", label: "Projects a year, delivered on schedule" },
     { icon: "users", num: "36,000+", label: "Candidates placed" },
   ] satisfies { icon: TrustIcon; num: string; label: string }[],
-  statsTitle: "The numbers speak for us",
 
   services: {
-    heading: "Six services, one HR partner",
-    lede: "From finding a senior executive to staffing a new production line with hundreds of people, Light Human runs the whole process.",
     /** Keyed by service slug; images come from the Vietnamese service data. */
     items: {
       "tuyen-dung-nhan-su-cao-cap": {
@@ -158,9 +147,6 @@ export const homeEn = {
   },
 
   process: {
-    title: "Six steps we take with you",
-    lede: "From understanding your needs to continuous improvement, every step has an owner and a measurable result.",
-    stepLabel: "Step",
     steps: [
       { icon: "users", title: "Listen and understand", desc: "Get a full picture of your needs and core goals" },
       { icon: "search", title: "Analyse in depth", desc: "Assess your industry, culture and current team" },
@@ -212,3 +198,24 @@ export const homeChaptersEn = {
 };
 
 export const partnerStripEn = "Chosen by 800+ companies";
+
+export const edHeroEn = {
+  kicker: "Strategic HR partner",
+  title: { before: "Exceptional ", em1: "people", middle: " build ", em2: "extraordinary companies." },
+  lede: "Headhunting, mass recruitment and HR advisory for more than 800 Vietnamese and international companies.",
+  primary: { label: "Get a quote", href: quoteHref },
+  secondary: { label: "Explore our services", href: "/dich-vu" },
+  imageAlt: "A Light Human consultant meeting a candidate",
+  film: "Our story on film",
+};
+
+export const servicesHeadEn = {
+  title: "Six services, one HR partner",
+  lede: "From finding a senior executive to staffing a new production line with hundreds of people, Light Human runs the whole process.",
+  all: "Services overview",
+};
+
+export const processHeadEn = {
+  title: "Six steps, each with a named owner",
+  lede: "From understanding your needs to continuous improvement, you always know where the project stands and who is on it.",
+};

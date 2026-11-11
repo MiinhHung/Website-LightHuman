@@ -27,3 +27,48 @@ export const processSteps: { icon: StepIcon; title: string; desc: string }[] = [
   { icon: "clipboard", title: "Đo lường & đánh giá", desc: "Theo dõi KPIs, đánh giá minh bạch hiệu quả giải pháp" },
   { icon: "sprout", title: "Tối ưu & phát triển", desc: "Liên tục cải tiến, hỗ trợ doanh nghiệp phát triển bền vững" },
 ];
+
+export type IntentIcon = "executive" | "mass" | "temporary" | "branding";
+
+/** Hero shortcut: "what do you need?" chips that route straight to a service. */
+export const heroIntents = {
+  label: "Bạn đang cần tuyển",
+  items: [
+    { icon: "executive", label: "Lãnh đạo, quản lý", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap" },
+    { icon: "mass", label: "Hàng trăm nhân sự", href: "/dich-vu/tuyen-dung-nhan-su-so-luong-lon" },
+    { icon: "temporary", label: "Nhân sự thời vụ", href: "/dich-vu/tuyen-dung-nhan-su-tam-thoi" },
+    { icon: "branding", label: "Thu hút nhân tài", href: "/dich-vu/xay-dung-thuong-hieu-tuyen-dung" },
+  ] satisfies { icon: IntentIcon; label: string; href: string }[],
+};
+
+/** "Try it now" band: live salary preview + quote board and compound teasers. */
+export const homeToolkit = {
+  eyebrow: "Thử ngay · Miễn phí",
+  title: "Tính trước, quyết nhanh hơn",
+  lede: "Công cụ đội tư vấn Light Human dùng mỗi ngày khi chốt offer và lập báo giá, nay mở cho bạn. Không cần đăng ký.",
+  salary: {
+    tag: "Lương Gross ⇄ Net 2026",
+    title: "Gross bao nhiêu thì thực nhận bao nhiêu?",
+    gross: "Lương Gross mỗi tháng",
+    dependents: "Người phụ thuộc",
+    net: "Thực nhận (Net)",
+    insurance: "Bảo hiểm",
+    tax: "Thuế TNCN",
+    note: "Luật 2026, vùng I, đóng bảo hiểm trên lương Gross.",
+    cta: "Xem bảng tính chi tiết",
+    unit: "đ",
+  },
+  quote: {
+    tag: "Báo giá tuyển dụng",
+    title: "Kéo thẻ, nhận báo giá",
+    body: "Chọn chuyên ngành, kinh nghiệm, khu vực như xếp bài lên bàn. Báo giá lập ngay, đội BD liên hệ trong 24 giờ làm việc.",
+    cards: ["Kế toán", "3–5 năm", "TP. HCM", "Đại học"],
+    sheet: "Báo giá",
+    cta: "Thử bàn báo giá",
+  },
+  compound: {
+    tag: "Lãi kép",
+    title: "Gửi 5 triệu mỗi tháng, 10 năm sau có bao nhiêu?",
+    cta: "Tính lãi kép",
+  },
+};

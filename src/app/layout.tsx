@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 // Header nav, dropdown panels, language switch, mobile drawer — class lh-nav*, lh-mega*, lh-lang*, lh-drawer*.
 import "@/styles/header.css";
+// Home page sections added in the redesign — class lh-intent*, lh-kit*.
+import "@/styles/home.css";
 // Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
 import "@/styles/tools.css";
 // Insights listing (/tin-tuc) — class lh-ins-*.

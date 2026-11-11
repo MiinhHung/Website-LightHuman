@@ -1,0 +1,191 @@
+/* =========================================================================
+ * Home page: hero intent chips (lh-intent*) and the "try it now" toolkit
+ * band (lh-kit*).
+ * ========================================================================= */
+
+/* ---- Hero: "what do you need to hire?" ------------------------------- */
+[data-theme="lighthuman"] .lh-intents { margin: 28px 0 30px; }
+[data-theme="lighthuman"] .lh-intents__label {
+  margin: 0 0 12px; color: rgba(255, 255, 255, 0.6); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+[data-theme="lighthuman"] .lh-intents__list { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; max-width: 640px; }
+[data-theme="lighthuman"] .lh-intents__list > li { animation: lh-intent-in 0.5s var(--ease-out) backwards; animation-delay: calc(380ms + var(--i, 0) * 70ms); }
+@keyframes lh-intent-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+
+[data-theme="lighthuman"] .lh-intent {
+  display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 14px 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  color: #fff; font-size: 15px; font-weight: 500; text-decoration: none; white-space: nowrap;
+  transition: border-color 0.2s var(--ease-out), background-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-intent__icon {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px;
+  background: rgba(242, 207, 99, 0.16); color: var(--brand-gold);
+  transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-intent__go { opacity: 0.45; transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out); }
+[data-theme="lighthuman"] .lh-intent:hover { border-color: rgba(242, 207, 99, 0.7); background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+[data-theme="lighthuman"] .lh-intent:hover .lh-intent__icon { background: var(--brand-gold); color: var(--brand-navy-deep); }
+[data-theme="lighthuman"] .lh-intent:hover .lh-intent__go { opacity: 1; transform: translate(2px, -2px); }
+[data-theme="lighthuman"] .lh-intent:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 3px; }
+@media (max-width: 639.98px) {
+  [data-theme="lighthuman"] .lh-intents { margin: 22px 0 26px; }
+  [data-theme="lighthuman"] .lh-intents__list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  [data-theme="lighthuman"] .lh-intent { width: 100%; height: auto; min-height: 46px; padding: 6px 10px 6px 6px; font-size: 14px; white-space: normal; line-height: 1.25; }
+  [data-theme="lighthuman"] .lh-intent__icon { flex: none; }
+  [data-theme="lighthuman"] .lh-intent__go { display: none; }
+}
+
+/* ---- Toolkit band ------------------------------------------------------ */
+[data-theme="lighthuman"] .lh-kit {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(60% 80% at 0% 0%, rgba(242, 207, 99, 0.16), transparent 60%),
+    radial-gradient(50% 70% at 100% 100%, rgba(20, 40, 90, 0.08), transparent 60%),
+    var(--brand-cream);
+}
+[data-theme="lighthuman"] .lh-kit__head { max-width: 680px; margin-bottom: clamp(32px, 4vw, 48px); }
+[data-theme="lighthuman"] .lh-kit__head .lh-lede { margin: 14px 0 0; }
+[data-theme="lighthuman"] .lh-kit__eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px;
+  background: var(--brand-navy); color: var(--brand-gold); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+}
+[data-theme="lighthuman"] .lh-kit__grid { display: grid; gap: 20px; }
+@media (min-width: 1024px) { [data-theme="lighthuman"] .lh-kit__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; } }
+
+[data-theme="lighthuman"] .lh-kit__tag {
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+  color: var(--brand-amber-deep); font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+[data-theme="lighthuman"] .lh-kit__tag--dark { color: var(--brand-gold); }
+[data-theme="lighthuman"] .lh-kit__title { display: block; margin: 10px 0 0; color: var(--ink-800); font-family: var(--font-display); font-size: clamp(21px, 2.2vw, 26px); font-weight: 700; line-height: 1.25; }
+[data-theme="lighthuman"] .lh-kit__title--light { color: #fff; }
+
+/* Salary card */
+[data-theme="lighthuman"] .lh-kit__salary {
+  display: flex; flex-direction: column; padding: clamp(24px, 3vw, 36px); border-radius: 24px;
+  background: #fff; border: 1px solid rgba(220, 165, 75, 0.25); box-shadow: 0 30px 60px -30px rgba(20, 40, 90, 0.25);
+}
+[data-theme="lighthuman"] .lh-kit__field { display: grid; gap: 10px; margin-top: 26px; }
+[data-theme="lighthuman"] .lh-kit__field--row { grid-template-columns: 1fr auto; align-items: center; margin-top: 22px; }
+[data-theme="lighthuman"] .lh-kit__label { color: var(--ink-500); font-size: 13.5px; font-weight: 600; }
+[data-theme="lighthuman"] .lh-kit__gross { color: var(--ink-800); font-family: var(--font-jetbrains-mono), var(--font-mono); font-size: clamp(24px, 2.6vw, 30px); font-weight: 600; letter-spacing: -0.02em; }
+[data-theme="lighthuman"] .lh-kit__gross span { color: var(--ink-400); font-size: 0.6em; }
+
+[data-theme="lighthuman"] .lh-kit__range {
+  --fill: 18%;
+  width: 100%; height: 28px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none;
+}
+[data-theme="lighthuman"] .lh-kit__range::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-navy) var(--fill), var(--lh-ink-100) var(--fill));
+}
+[data-theme="lighthuman"] .lh-kit__range::-moz-range-track { height: 6px; border-radius: 999px; background: var(--lh-ink-100); }
+[data-theme="lighthuman"] .lh-kit__range::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--brand-navy); }
+[data-theme="lighthuman"] .lh-kit__range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 999px;
+  background: var(--brand-gold); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(20, 40, 90, 0.35);
+  transition: transform 0.15s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-kit__range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 999px; background: var(--brand-gold); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(20, 40, 90, 0.35); }
+[data-theme="lighthuman"] .lh-kit__range:active::-webkit-slider-thumb { transform: scale(1.15); }
+[data-theme="lighthuman"] .lh-kit__range:focus-visible { outline: 2px solid var(--brand-navy); outline-offset: 4px; border-radius: 6px; }
+
+[data-theme="lighthuman"] .lh-kit__deps { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--lh-ink-50); border: 1px solid var(--lh-ink-100); }
+[data-theme="lighthuman"] .lh-kit__dep {
+  width: 38px; height: 34px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  color: var(--ink-600); font: 600 14px/1 var(--font-sans); transition: background-color 0.15s var(--ease-out), color 0.15s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-kit__dep[aria-checked="true"] { background: var(--brand-navy); color: #fff; }
+[data-theme="lighthuman"] .lh-kit__dep:focus-visible { outline: 2px solid var(--brand-navy); outline-offset: 2px; }
+
+[data-theme="lighthuman"] .lh-kit__result { margin-top: 26px; padding: 22px; border-radius: 18px; background: var(--brand-navy); color: #fff; }
+[data-theme="lighthuman"] .lh-kit__result .lh-kit__label { color: rgba(255, 255, 255, 0.6); }
+[data-theme="lighthuman"] .lh-kit__net { margin: 6px 0 16px; color: var(--brand-gold); font-family: var(--font-jetbrains-mono), var(--font-mono); font-size: clamp(32px, 4vw, 44px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+[data-theme="lighthuman"] .lh-kit__net > span:last-child { color: rgba(242, 207, 99, 0.6); font-size: 0.5em; }
+[data-theme="lighthuman"] .lh-kit__bar { display: flex; gap: 3px; height: 10px; overflow: hidden; border-radius: 999px; }
+[data-theme="lighthuman"] .lh-kit__bar > span { min-width: 3px; border-radius: 999px; transition: width 0.45s var(--ease-out); }
+[data-theme="lighthuman"] .lh-kit__bar-net { background: var(--brand-gold); }
+[data-theme="lighthuman"] .lh-kit__bar-ins { background: #7d93c9; }
+[data-theme="lighthuman"] .lh-kit__bar-tax { background: #e08a6b; }
+[data-theme="lighthuman"] .lh-kit__legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 14px 0 0; }
+[data-theme="lighthuman"] .lh-kit__legend > div { display: flex; align-items: baseline; gap: 8px; font-size: 13.5px; }
+[data-theme="lighthuman"] .lh-kit__legend dt { display: inline-flex; align-items: center; gap: 7px; color: rgba(255, 255, 255, 0.65); }
+[data-theme="lighthuman"] .lh-kit__legend dd { margin: 0; font-family: var(--font-jetbrains-mono), var(--font-mono); font-variant-numeric: tabular-nums; }
+[data-theme="lighthuman"] .lh-kit__dot { width: 8px; height: 8px; border-radius: 999px; }
+[data-theme="lighthuman"] .lh-kit__dot--ins { background: #7d93c9; }
+[data-theme="lighthuman"] .lh-kit__dot--tax { background: #e08a6b; }
+
+[data-theme="lighthuman"] .lh-kit__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 20px; }
+[data-theme="lighthuman"] .lh-kit__note { margin: 0; color: var(--ink-500); font-size: 13px; }
+[data-theme="lighthuman"] .lh-kit__link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-navy); font-size: 14.5px; font-weight: 700; text-decoration: none; }
+[data-theme="lighthuman"] .lh-kit__link svg { transition: transform 0.18s var(--ease-out); }
+[data-theme="lighthuman"] .lh-kit__link:hover svg { transform: translateX(3px); }
+
+/* Side: quote board teaser + compound mini card */
+[data-theme="lighthuman"] .lh-kit__side { display: grid; gap: 20px; align-content: start; }
+[data-theme="lighthuman"] .lh-kit__quote {
+  position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column;
+  padding: clamp(24px, 3vw, 32px); border-radius: 24px; text-decoration: none; color: #fff;
+  background: radial-gradient(120% 120% at 100% 0%, var(--brand-navy-soft), var(--brand-navy) 50%, var(--brand-navy-deep));
+}
+[data-theme="lighthuman"] .lh-kit__body { margin-top: 10px; color: rgba(255, 255, 255, 0.72); font-size: 14.5px; line-height: 1.6; }
+[data-theme="lighthuman"] .lh-kit__cta {
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin-top: 20px; padding: 12px 20px; border-radius: 999px;
+  background: var(--brand-gold); color: var(--brand-navy-deep); font-size: 14.5px; font-weight: 700;
+  transition: background-color 0.18s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-kit__quote:hover .lh-kit__cta { background: var(--brand-gold-bright); }
+[data-theme="lighthuman"] .lh-kit__quote:focus-visible { outline: 3px solid var(--brand-gold); outline-offset: 3px; }
+
+/* Mini "deal": four cards fly onto a quote sheet, then loop. */
+[data-theme="lighthuman"] .lh-kit__deal { position: relative; display: block; height: 150px; margin: 18px 0 8px; }
+[data-theme="lighthuman"] .lh-kit__sheet {
+  position: absolute; right: 0; top: 4px; width: 46%; height: 140px; padding: 14px; border-radius: 12px;
+  background: #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); transform: rotate(2deg);
+}
+[data-theme="lighthuman"] .lh-kit__sheet-title { display: block; color: var(--brand-navy); font-family: var(--font-display); font-size: 14px; font-weight: 700; }
+[data-theme="lighthuman"] .lh-kit__sheet-line { display: block; height: 6px; margin-top: 8px; border-radius: 4px; background: var(--lh-ink-100); }
+[data-theme="lighthuman"] .lh-kit__sheet-line--short { width: 60%; }
+[data-theme="lighthuman"] .lh-kit__card {
+  position: absolute; left: calc(var(--i) * 22px); top: calc(24px + var(--i) * 8px); display: grid; place-items: center;
+  min-width: 104px; height: 40px; padding: 0 14px; border-radius: 10px; transform-origin: left top;
+  background: var(--brand-gold); color: var(--brand-navy-deep); font-size: 13px; font-weight: 700; white-space: nowrap;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3); rotate: calc(-8deg + var(--i) * 4deg);
+  animation: lh-kit-deal 6.4s var(--ease-out) infinite; animation-delay: calc(var(--i) * 0.4s);
+}
+[data-theme="lighthuman"] .lh-kit__card:nth-child(odd) { background: #fff; }
+/* Each card slides from the deck onto its own row of the sheet, rests, then fades back. */
+@keyframes lh-kit-deal {
+  0%, 10% { opacity: 1; }
+  30%, 76% { opacity: 1; left: calc(54% + 14px); top: calc(44px + var(--i) * 22px); scale: 0.66; rotate: 0deg; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18); }
+  88% { opacity: 0; left: calc(54% + 14px); top: calc(44px + var(--i) * 22px); scale: 0.66; rotate: 0deg; }
+  89%, 100% { opacity: 0; }
+}
+[data-theme="lighthuman"] .lh-kit__mini {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; align-items: center;
+  padding: 20px 22px; border-radius: 20px; background: #fff; border: 1px solid rgba(220, 165, 75, 0.25);
+  color: inherit; text-decoration: none; transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-kit__mini:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -24px rgba(20, 40, 90, 0.35); }
+[data-theme="lighthuman"] .lh-kit__mini-icon { grid-row: span 2; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--brand-blue-tint); color: var(--brand-navy); }
+[data-theme="lighthuman"] .lh-kit__mini-tag { display: block; color: var(--brand-amber-deep); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+[data-theme="lighthuman"] .lh-kit__mini-title { display: block; margin-top: 4px; color: var(--ink-800); font-size: 15.5px; font-weight: 600; line-height: 1.4; }
+[data-theme="lighthuman"] .lh-kit__mini-go { grid-column: 2; display: inline-flex; align-items: center; gap: 6px; color: var(--brand-navy); font-size: 13.5px; font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="lighthuman"] .lh-intents__list > li { animation: none; }
+  [data-theme="lighthuman"] .lh-kit__card { animation: none; }
+  [data-theme="lighthuman"] .lh-kit__bar > span { transition: none; }
+}
+
+/* Desktop: the stats bar sits inside the hero, so keep copy + chips + CTAs within one screen. */
+@media (min-width: 1100px) {
+  [data-theme="lighthuman"] .lh-hero--home .lh-hero__stage { padding-top: 28px; padding-bottom: 196px; }
+  [data-theme="lighthuman"] .lh-hero--home .lh-intents { margin: 22px 0 24px; }
+  [data-theme="lighthuman"] .lh-hero--home .lh-intents__list { flex-wrap: nowrap; max-width: none; gap: 8px; }
+  [data-theme="lighthuman"] .lh-hero--home .lh-intent { height: 42px; padding-right: 12px; gap: 8px; font-size: 14.5px; }
+  [data-theme="lighthuman"] .lh-hero--home .lh-intent__icon { width: 30px; height: 30px; }
+}

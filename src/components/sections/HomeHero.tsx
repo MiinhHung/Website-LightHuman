@@ -1,12 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowRight, Award, Briefcase, Building2, Play, Users } from "lucide-react";
-import { hero, homeStats, type TrustIcon } from "@/content/home";
+import { ArrowRight, ArrowUpRight, Award, Briefcase, Building2, Clock, Crown, Megaphone, Play, Users } from "lucide-react";
+import { hero, heroIntents, homeStats, type IntentIcon, type TrustIcon } from "@/content/home";
 import { site } from "@/content/site";
 import { CountUp } from "@/components/ui/CountUp";
-import { homeEn } from "@/content/en/home";
+import { heroIntentsEn, homeEn } from "@/content/en/home";
 import type { Locale } from "@/i18n/config";
+
+const intentIcons: Record<IntentIcon, ReactNode> = {
+  executive: <Crown size={17} strokeWidth={1.75} />,
+  mass: <Users size={17} strokeWidth={1.75} />,
+  temporary: <Clock size={17} strokeWidth={1.75} />,
+  branding: <Megaphone size={17} strokeWidth={1.75} />,
+};
 
 const statIcons: Record<TrustIcon, ReactNode> = {
   award: <Award size={26} strokeWidth={1.75} />,
@@ -19,8 +26,9 @@ const statIcons: Record<TrustIcon, ReactNode> = {
 export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
   const en = locale === "en" ? homeEn.hero : null;
   const stats = locale === "en" ? homeEn.stats : homeStats;
+  const intents = locale === "en" ? heroIntentsEn : heroIntents;
   return (
-    <section className="lh-hero lh-hero--dark lh-hero--cinematic">
+    <section className="lh-hero lh-hero--dark lh-hero--cinematic lh-hero--home">
       <div className="lh-hero__bg">
         <Image
           src={hero.image}
@@ -62,6 +70,24 @@ export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
             )}
           </h1>
           <p className="lh-hero__lede">{en?.lede ?? hero.lede}</p>
+          <nav className="lh-intents" aria-labelledby="lh-intents-label">
+            <p id="lh-intents-label" className="lh-intents__label">
+              {intents.label}
+            </p>
+            <ul className="lh-intents__list">
+              {intents.items.map((it, i) => (
+                <li key={it.href} style={{ "--i": i } as CSSProperties}>
+                  <Link href={it.href} className="lh-intent" hrefLang={en ? "vi" : undefined}>
+                    <span className="lh-intent__icon" aria-hidden="true">
+                      {intentIcons[it.icon]}
+                    </span>
+                    {it.label}
+                    <ArrowUpRight className="lh-intent__go" size={15} strokeWidth={2} aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <div className="lh-hero__ctas">
             <Link href={en?.primary.href ?? "/dich-vu"} className="lh-hero__cta-primary">
               {en?.primary.label ?? "Khám phá dịch vụ"}

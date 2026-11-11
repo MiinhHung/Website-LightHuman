@@ -1,5 +1,46 @@
-import type { StepIcon, TrustIcon } from "../home";
+import type { heroIntents, homeToolkit, StepIcon, TrustIcon } from "../home";
 import { quoteHref, site } from "../site";
+
+export const heroIntentsEn: typeof heroIntents = {
+  label: "You need to hire",
+  items: [
+    { icon: "executive", label: "Executives and managers", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap" },
+    { icon: "mass", label: "Hundreds of staff", href: "/dich-vu/tuyen-dung-nhan-su-so-luong-lon" },
+    { icon: "temporary", label: "Seasonal staff", href: "/dich-vu/tuyen-dung-nhan-su-tam-thoi" },
+    { icon: "branding", label: "Better talent", href: "/dich-vu/xay-dung-thuong-hieu-tuyen-dung" },
+  ],
+};
+
+export const homeToolkitEn: typeof homeToolkit = {
+  eyebrow: "Try it now · Free",
+  title: "Run the numbers, decide faster",
+  lede: "The tools Light Human advisers use every day for offers and quotes, now open to you. No sign-up.",
+  salary: {
+    tag: "Gross ⇄ Net salary 2026",
+    title: "How much of a gross salary do you take home?",
+    gross: "Gross salary per month",
+    dependents: "Dependants",
+    net: "Take-home (net)",
+    insurance: "Insurance",
+    tax: "Income tax",
+    note: "Vietnam's 2026 rules, region I, insurance on the full gross salary.",
+    cta: "See the full breakdown",
+    unit: "₫",
+  },
+  quote: {
+    tag: "Recruitment quote",
+    title: "Drag cards, get a quote",
+    body: "Pick the field, experience and location like dealing cards onto a table. The quote is ready instantly and our team follows up within one working day.",
+    cards: ["Accounting", "3–5 years", "Ho Chi Minh City", "Bachelor's"],
+    sheet: "Quote",
+    cta: "Try the quote board",
+  },
+  compound: {
+    tag: "Compound interest",
+    title: "Save 5 million a month: what do you have in 10 years?",
+    cta: "Calculate",
+  },
+};
 
 /**
  * English home page (/en). Same structure and images as the Vietnamese page;

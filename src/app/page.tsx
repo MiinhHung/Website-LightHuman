@@ -3,6 +3,7 @@ import { HomeHero } from "@/components/sections/HomeHero";
 import { TrustStats } from "@/components/sections/TrustStats";
 import { Partners } from "@/components/sections/Partners";
 import { HomeServices } from "@/components/sections/HomeServices";
+import { HomeToolkit } from "@/components/sections/HomeToolkit";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { FeaturedPosts } from "@/components/sections/FeaturedPosts";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <TrustStats eyebrow="Đối tác nhân sự chiến lược" title="Con số nói lên chính chúng tôi" stats={homeStats} />
       <Partners />
       <HomeServices />
+      <HomeToolkit />
       <SuccessStories />
       <ProcessSteps />
       <FeaturedPosts />

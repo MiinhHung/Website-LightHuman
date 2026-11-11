@@ -11,6 +11,8 @@ import { quoteHref } from "@/content/site";
 const { hero, allLabel, filters, featured, browse } = insightsPage;
 
 type Sort = "newest" | "quick";
+
+const PAGE_SIZE = 12;
 type Filters = { q: string; cat: string; tag: string; sort: Sort };
 
 function normalize(s: string) {
@@ -55,9 +57,11 @@ function syncUrl(f: Filters) {
  */
 export function InsightsHub({ initial }: { initial?: Partial<Filters> }) {
   const [f, setF] = useState<Filters>({ q: "", cat: "all", tag: "", sort: "newest", ...initial });
+  const [shown, setShown] = useState(PAGE_SIZE);
   const update = (patch: Partial<Filters>) => {
     const next = { ...f, ...patch };
     setF(next);
+    setShown(PAGE_SIZE);
     syncUrl(next);
   };
 
@@ -213,13 +217,28 @@ export function InsightsHub({ initial }: { initial?: Partial<Filters> }) {
             </div>
 
             {items.length > 0 ? (
-              <ul className="lh-ins-cards">
-                {items.map((p, i) => (
-                  <li key={p.slug} style={{ animationDelay: `${i * 70}ms` }}>
-                    <PostCard post={p} activeTag={f.tag} onTag={(slug) => update({ tag: slug })} />
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ul className="lh-ins-cards">
+                  {items.slice(0, shown).map((p, i) => (
+                    <li key={p.slug} style={{ animationDelay: `${(i % PAGE_SIZE) * 60}ms` }}>
+                      <PostCard post={p} activeTag={f.tag} onTag={(slug) => update({ tag: slug })} />
+                    </li>
+                  ))}
+                </ul>
+                {items.length > shown && (
+                  <div className="lh-ins-more">
+                    <p>
+                      {browse.showing} {shown}/{items.length} {browse.resultsAll}
+                    </p>
+                    <span className="lh-ins-more__bar" aria-hidden="true">
+                      <span style={{ width: `${(shown / items.length) * 100}%` }} />
+                    </span>
+                    <button type="button" className="lh-ins-more__btn" onClick={() => setShown((n) => n + PAGE_SIZE)}>
+                      {browse.loadMore}
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="lh-ins-empty">
                 <Search size={28} strokeWidth={1.5} aria-hidden="true" />

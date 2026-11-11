@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getPost, posts } from "@/content/posts";
+import { getPostBody } from "@/content/post-bodies";
 import { ArticleCrumbs } from "@/components/sections/blog/ArticleCrumbs";
 import { ArticleHead } from "@/components/sections/blog/ArticleHead";
 import { ArticleAside } from "@/components/sections/blog/ArticleAside";
@@ -29,6 +31,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
+  const bodyHtml = getPostBody(slug);
 
   return (
     <article className="lh-article lh-article--editorial">
@@ -37,15 +40,15 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         {/* Site gốc dùng <main> lồng trong <main>; ở đây dùng <div> cho HTML hợp lệ — CSS chỉ bám class. */}
         <div className="lh-article-main">
           <ArticleHead post={post} />
-          {post.bodyHtml && (
-            // Rich-text của chính site (src/content/posts.ts), không phải dữ liệu người dùng nhập.
-            <div className="lh-article-prose" dangerouslySetInnerHTML={{ __html: post.bodyHtml }} />
+          {bodyHtml && (
+            // Rich-text của chính site (posts.ts / CMS Light Human đã escape khi sync), không phải dữ liệu người dùng nhập.
+            <div className="lh-article-prose" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
           )}
           <div className="lh-article-tags">
             {post.tags.map((t) => (
-              <a key={t.slug} href={`/tag/${t.slug}`} className="lh-chip">
+              <Link key={t.slug} href={`/tin-tuc?tag=${t.slug}`} className="lh-chip">
                 #{t.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { CMS } from "./site";
+import cmsPosts from "./generated/cms-posts.json";
 
 export type PostTag = { label: string; slug: string };
 
@@ -42,7 +43,7 @@ export const insightsPage = {
     image: `${CMS}/hero_insights_d1c022601d.png`,
   },
   allLabel: "Tất cả",
-  filters: ["Blog Nhân Sự", "Sự Kiện", "Nhà Light Human"],
+  filters: ["Insights", "Blog Nhân Sự", "Sự Kiện", "Nhà Light Human"],
   featured: {
     eyebrow: "Bài viết nổi bật",
     title: "Mới nhất từ đội ngũ Light Human",
@@ -62,6 +63,8 @@ export const insightsPage = {
     sortNewest: "Mới nhất",
     sortQuick: "Đọc nhanh",
     clear: "Xoá bộ lọc",
+    showing: "Đang xem",
+    loadMore: "Xem thêm bài viết",
     emptyTitle: "Chưa tìm thấy bài phù hợp",
     emptyBody: "Thử từ khoá khác hoặc xem toàn bộ bài viết của đội ngũ Light Human.",
     emptyCta: "Xem tất cả bài viết",
@@ -122,7 +125,8 @@ const bodies = {
 };
 
 /** Bài viết nổi bật — theo lighthuman.vn. URL chi tiết: /blog/[slug] (giống site gốc). */
-export const posts: Post[] = [
+/** Bài viết tay (HTML sao từ trang gốc) — giữ nguyên, đứng đầu danh sách. */
+const handPosts: Post[] = [
   {
     slug: "bi-kip-cho-nha-tuyen-dung-thu-hut-nhan-tai-hau-covid-19",
     title: "Bí kíp cho nhà tuyển dụng thu hút nhân tài hậu Covid-19",
@@ -215,8 +219,19 @@ export const archivePosts: PostSummary[] = [
   },
 ];
 
+/**
+ * Mọi bài có trang chi tiết: bài viết tay trước, rồi toàn bộ bài từ CMS (`npm run sync:posts`
+ * sinh src/content/generated/*). Nội dung HTML của bài CMS nằm ở post-bodies.ts (chỉ server).
+ */
+const handSlugs = new Set(handPosts.map((p) => p.slug));
+export const posts: Post[] = [
+  ...handPosts,
+  ...(cmsPosts as Post[]).filter((p) => !handSlugs.has(p.slug)),
+];
+
 /** Mọi bài, mới nhất trước. */
-const allPosts: PostSummary[] = [...posts, ...archivePosts];
+const postSlugs = new Set(posts.map((p) => p.slug));
+const allPosts: PostSummary[] = [...posts, ...archivePosts.filter((p) => !postSlugs.has(p.slug))];
 
 export function getPost(slug: string) {
   return posts.find((p) => p.slug === slug);

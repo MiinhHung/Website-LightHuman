@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { insightsPage } from "@/content/posts";
-import { CinematicHero } from "@/components/sections/about/CinematicHero";
-import { InsightsBrowser, InsightsBrowserWithQuery } from "@/components/sections/blog/InsightsBrowser";
+import { InsightsHub, InsightsHubWithQuery } from "@/components/sections/blog/InsightsHub";
 import { NewsletterSection } from "@/components/sections/blog/NewsletterSection";
 
 export const metadata: Metadata = {
@@ -13,9 +12,8 @@ export const metadata: Metadata = {
 export default function InsightsPage() {
   return (
     <>
-      <CinematicHero {...insightsPage.hero} />
-      <Suspense fallback={<InsightsBrowser />}>
-        <InsightsBrowserWithQuery />
+      <Suspense fallback={<InsightsHub />}>
+        <InsightsHubWithQuery />
       </Suspense>
       <NewsletterSection />
     </>

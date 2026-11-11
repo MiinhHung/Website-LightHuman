@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 // Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
 import "@/styles/tools.css";
+// Insights listing (/tin-tuc) — class lh-ins-*.
+import "@/styles/insights.css";
 
 // Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });

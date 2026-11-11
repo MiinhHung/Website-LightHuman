@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, Award, Briefcase, Building2, Clock, Crown, Megaphone, Play, Users } from "lucide-react";
-import { hero, heroIntents, homeStats, type IntentIcon, type TrustIcon } from "@/content/home";
+import { ArrowRight, ArrowUpRight, Award, Briefcase, Building2, Clock, Crown, Megaphone, Users } from "lucide-react";
+import { hero, heroIntents, homeStats, homeVideo, type IntentIcon, type TrustIcon } from "@/content/home";
 import { site } from "@/content/site";
 import { CountUp } from "@/components/ui/CountUp";
-import { heroIntentsEn, homeEn } from "@/content/en/home";
+import { heroIntentsEn, homeEn, homeVideoEn } from "@/content/en/home";
+import { VideoLightbox } from "./VideoLightbox";
 import type { Locale } from "@/i18n/config";
 
 const intentIcons: Record<IntentIcon, ReactNode> = {
@@ -27,6 +28,7 @@ export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
   const en = locale === "en" ? homeEn.hero : null;
   const stats = locale === "en" ? homeEn.stats : homeStats;
   const intents = locale === "en" ? heroIntentsEn : heroIntents;
+  const video = locale === "en" ? homeVideoEn : homeVideo;
   return (
     <section className="lh-hero lh-hero--dark lh-hero--cinematic lh-hero--home">
       <div className="lh-hero__bg">
@@ -93,12 +95,13 @@ export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
               {en?.primary.label ?? "Khám phá dịch vụ"}
               <ArrowRight size={17} strokeWidth={2} />
             </Link>
-            <a href={`${site.jobsUrl}/`} target="_blank" rel="noopener noreferrer" className="lh-hero__cta-ghost">
-              <span className="lh-hero__cta-play" aria-hidden="true">
-                <Play size={15} fill="currentColor" strokeWidth={0} />
-              </span>
-              {en?.jobs ?? "Tin tuyển dụng"}
-            </a>
+            <VideoLightbox
+              videoId={site.introVideo.id}
+              title={site.introVideo.title}
+              label={video.play}
+              closeLabel={video.close}
+              dialogLabel={video.dialog}
+            />
           </div>
         </div>
       </div>

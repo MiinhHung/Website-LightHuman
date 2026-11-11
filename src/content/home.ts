@@ -72,3 +72,35 @@ export const homeToolkit = {
     cta: "Tính lãi kép",
   },
 };
+
+/** Hero play button: opens the company film in a lightbox. */
+export const homeVideo = {
+  play: "Xem phim giới thiệu",
+  close: "Đóng video",
+  dialog: "Phim giới thiệu Light Human",
+};
+
+/**
+ * Scroll-lit statement between the client logos and the services. Segments
+ * marked `em` are lit in gold; the rest in white.
+ */
+export const manifesto = {
+  eyebrow: "Điều Light Human tin",
+  segments: [
+    { text: "Một người đúng có thể thay đổi" },
+    { text: "cả một đội.", em: true },
+    { text: "Việc của chúng tôi là tìm ra người đó, rồi đồng hành đến khi họ" },
+    { text: "thật sự ở lại.", em: true },
+  ] as { text: string; em?: boolean }[],
+  sign: "Đội ngũ Light Human",
+};
+
+/** Magazine-style chapter marks above each home section. */
+export const homeChapters = {
+  partners: "Khách hàng",
+  services: "Dịch vụ",
+  toolkit: "Công cụ",
+  stories: "Câu chuyện",
+  process: "Quy trình",
+  insights: "Góc nhìn",
+};

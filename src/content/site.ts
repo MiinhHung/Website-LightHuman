@@ -14,6 +14,8 @@ export const site = {
     "Light Human - đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Executive Search, Mass Hiring, Employer Branding, đào tạo & tư vấn.",
   url: "https://lighthuman.vn",
   jobsUrl: "https://job.lighthuman.vn",
+  /** Company introduction film on the Light Human YouTube channel. */
+  introVideo: { id: "w1UOWmfwSmk", title: "Giới thiệu Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng - Light Human" },
   // Local copy of the CMS logo (Logo_Light_Human_01) with its transparent padding trimmed.
   logo: logoOnDark,
   legal:

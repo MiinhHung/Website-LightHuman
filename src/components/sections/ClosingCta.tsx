@@ -11,7 +11,9 @@ export function ClosingCta({
   desc,
   action,
   secondary,
+  newTab = "(mở tab mới)",
 }: {
+  newTab?: string;
   heading: ReactNode;
   desc: string;
   action: { label: string; href: string };
@@ -34,7 +36,7 @@ export function ClosingCta({
               <a href={secondary.href} target="_blank" rel="noopener noreferrer" className="lh-closing__secondary">
                 {secondary.label}
                 <ArrowUpRight size={15} strokeWidth={2} aria-hidden="true" />
-                <span className="sr-only"> (mở tab mới)</span>
+                <span className="sr-only"> {newTab}</span>
               </a>
             )}
           </div>

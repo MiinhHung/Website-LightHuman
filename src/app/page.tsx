@@ -7,7 +7,11 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { FeaturedPosts } from "@/components/sections/FeaturedPosts";
 import { ClosingCta } from "@/components/sections/ClosingCta";
+import type { Metadata } from "next";
 import { quoteHref, site } from "@/content/site";
+import { alternatesFor } from "@/i18n/config";
+
+export const metadata: Metadata = { alternates: { canonical: "/", ...alternatesFor("/") } };
 
 export default function HomePage() {
   return (

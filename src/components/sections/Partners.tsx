@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import { partners } from "@/content/partners";
 
@@ -7,7 +7,19 @@ import { partners } from "@/content/partners";
  * CMS logos come in mixed formats (JPEG with backgrounds, padded PNGs), so each
  * one sits in a fixed white tile to keep the rhythm even.
  */
-export function Partners({ eyebrow }: { eyebrow?: string }) {
+export function Partners({
+  eyebrow,
+  heading = (
+    <>
+      Khách hàng <em>tiêu biểu</em>
+    </>
+  ),
+  lede = "Hơn 800 doanh nghiệp trong nước và quốc tế đã chọn Light Human làm đối tác tuyển dụng.",
+}: {
+  eyebrow?: string;
+  heading?: ReactNode;
+  lede?: string;
+}) {
   const logos = partners.filter((p) => !p.placeholder);
   const half = Math.ceil(logos.length / 2);
   const rows = [logos.slice(0, half), logos.slice(half)];
@@ -17,12 +29,8 @@ export function Partners({ eyebrow }: { eyebrow?: string }) {
       <div className="lh-container">
         <div className="lh-partners__head">
           {eyebrow && <span className="lh-eyebrow">{eyebrow}</span>}
-          <h2 className="lh-h2 lh-partners__heading">
-            Khách hàng <em>tiêu biểu</em>
-          </h2>
-          <p className="lh-partners__lede">
-            Hơn 800 doanh nghiệp trong nước và quốc tế đã chọn Light Human làm đối tác tuyển dụng.
-          </p>
+          <h2 className="lh-h2 lh-partners__heading">{heading}</h2>
+          <p className="lh-partners__lede">{lede}</p>
         </div>
       </div>
 

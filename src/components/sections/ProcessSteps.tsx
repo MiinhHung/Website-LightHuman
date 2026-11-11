@@ -21,7 +21,9 @@ export function ProcessSteps({
   title = "Sáu bước Light Human đồng hành cùng bạn",
   lede = "Từ thấu hiểu nhu cầu đến tối ưu liên tục, mỗi bước đều có người chịu trách nhiệm và kết quả đo được.",
   steps = processSteps,
+  stepLabel = "Bước",
 }: {
+  stepLabel?: string;
   title?: ReactNode;
   lede?: ReactNode;
   steps?: { icon: StepIcon; title: string; desc: string }[];
@@ -43,7 +45,7 @@ export function ProcessSteps({
                 {icons[s.icon]}
               </span>
               <div>
-                <p className="lh-light__num">Bước {i + 1}</p>
+                <p className="lh-light__num">{stepLabel} {i + 1}</p>
                 <h3 className="lh-light__step-title">{s.title}</h3>
                 <p className="lh-light__desc">{s.desc}</p>
               </div>

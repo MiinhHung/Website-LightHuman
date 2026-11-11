@@ -4,6 +4,8 @@ import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
+// Header nav, dropdown panels, language switch, mobile drawer — class lh-nav*, lh-mega*, lh-lang*, lh-drawer*.
+import "@/styles/header.css";
 // Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
 import "@/styles/tools.css";
 

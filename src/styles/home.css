@@ -48,10 +48,6 @@
 }
 [data-theme="lighthuman"] .lh-kit__head { max-width: 680px; margin-bottom: clamp(32px, 4vw, 48px); }
 [data-theme="lighthuman"] .lh-kit__head .lh-lede { margin: 14px 0 0; }
-[data-theme="lighthuman"] .lh-kit__eyebrow {
-  display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px;
-  background: var(--brand-navy); color: var(--brand-gold); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-}
 [data-theme="lighthuman"] .lh-kit__grid { display: grid; gap: 20px; }
 @media (min-width: 1024px) { [data-theme="lighthuman"] .lh-kit__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; } }
 
@@ -221,8 +217,10 @@
 /* =========================================================================
  * Chapter marks ("01  Khách hàng")
  * ========================================================================= */
-[data-theme="lighthuman"] .lh-chapter { position: relative; }
-[data-theme="lighthuman"] .lh-chapter > :not(.lh-chapter__mark) { padding-top: calc(var(--section-py) + 34px); }
+[data-theme="lighthuman"] .lh-chapter { position: relative; scroll-margin-top: var(--header-h, 76px); }
+[data-theme="lighthuman"] .lh-chapter__mark + * { padding-top: calc(var(--section-py) + 40px); }
+[data-theme="lighthuman"] .lh-chapter[data-next] > .lh-chapter__mark + * { padding-bottom: calc(var(--section-py) + 44px); }
+[data-theme="lighthuman"] .lh-chapter[data-tone] > .lh-manifesto.lh-manifesto { padding: 0; }
 [data-theme="lighthuman"] .lh-chapter__mark {
   position: absolute; z-index: 3; top: clamp(20px, 2.6vw, 30px); left: 0; right: 0; pointer-events: none;
   display: flex; align-items: center; gap: 14px;
@@ -243,8 +241,7 @@
     radial-gradient(60% 70% at 10% 90%, rgba(55, 142, 204, 0.14), transparent 70%),
     var(--brand-navy-deep);
 }
-[data-theme="lighthuman"] .lh-manifesto__stick { display: flex; align-items: center; padding: var(--section-py-loose) 0; }
-[data-theme="lighthuman"] .lh-manifesto__eyebrow { margin: 0 0 28px; color: var(--brand-gold); font: 600 12.5px/1 var(--font-sans); letter-spacing: 0.2em; text-transform: uppercase; }
+[data-theme="lighthuman"] .lh-manifesto__stick { display: flex; align-items: center; padding: calc(var(--section-py-loose) + 30px) 0 calc(var(--section-py-loose) + 40px); }
 [data-theme="lighthuman"] .lh-manifesto__text { max-width: 1040px; margin: 0; font-family: var(--font-display); font-size: clamp(30px, 4.4vw, 62px); font-weight: 700; line-height: 1.22; letter-spacing: -0.015em; }
 [data-theme="lighthuman"] .lh-manifesto__w { color: #fff; }
 [data-theme="lighthuman"] .lh-manifesto__w--em { color: var(--brand-gold); font-style: italic; }
@@ -280,7 +277,7 @@
     [data-theme="lighthuman"] .lh-chapter__label { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 40% cover 32%; }
 
     /* Manifesto: tall section, sticky statement, words light up in reading order. */
-    [data-theme="lighthuman"] .lh-manifesto { height: 240vh; view-timeline-name: --mf; }
+    [data-theme="lighthuman"] .lh-manifesto { height: 170vh; view-timeline-name: --mf; }
     [data-theme="lighthuman"] .lh-manifesto__stick { position: sticky; top: 0; height: 100vh; padding: 0; }
     [data-theme="lighthuman"] .lh-manifesto__w { color: rgba(255, 255, 255, 0.14); animation: lh-word-lit linear both; animation-timeline: --mf; animation-range: contain calc(var(--p) * 1%) contain calc(var(--p) * 1% + 9%); }
     [data-theme="lighthuman"] .lh-manifesto__w--em { color: rgba(242, 207, 99, 0.16); animation-name: lh-word-gold; }
@@ -296,9 +293,9 @@
     [data-theme="lighthuman"] .lh-home .lh-showcase__list > li { animation: lh-slide-in linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
     @keyframes lh-slide-in { from { opacity: 0; transform: translateX(-28px); } }
 
-    [data-theme="lighthuman"] .lh-home .lh-insights__lead,
-    [data-theme="lighthuman"] .lh-home .lh-insights__list > li,
-    [data-theme="lighthuman"] .lh-home .lh-partners__head { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    [data-theme="lighthuman"] .lh-home .lh-stories__tabs,
+    [data-theme="lighthuman"] .lh-home .lh-kit__grid { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+    [data-theme="lighthuman"] .lh-chapter__next-link { animation: lh-fade-up linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
     @keyframes lh-fade-up { from { opacity: 0; transform: translateY(36px); } }
 
     [data-theme="lighthuman"] .lh-home .lh-closing__band { animation: lh-band-in linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
@@ -307,7 +304,7 @@
     @keyframes lh-rays-turn { from { rotate: -12deg; } to { rotate: 12deg; } }
   }
   @media (prefers-reduced-motion: no-preference) and (max-width: 767.98px) {
-    [data-theme="lighthuman"] .lh-manifesto { height: 200vh; }
+    [data-theme="lighthuman"] .lh-manifesto { height: 150vh; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -315,3 +312,83 @@
   [data-theme="lighthuman"] .lh-video[open] { animation: none; }
 }
 [data-theme="lighthuman"] .lh-manifesto__stick > .lh-container { width: 100%; }
+
+/* =========================================================================
+ * Story rhythm on the home page: one heading style, three backgrounds
+ * (white / navy / cream), tighter spacing, chapter teasers.
+ * ========================================================================= */
+[data-theme="lighthuman"] .lh-chapter__next { position: absolute; left: 0; right: 0; bottom: clamp(28px, 3.4vw, 40px); z-index: 3; }
+[data-theme="lighthuman"] .lh-chapter__next-link {
+  display: inline-flex; align-items: center; gap: 12px; color: var(--ink-500);
+  font: 500 12px/1 var(--font-jetbrains-mono), var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
+}
+[data-theme="lighthuman"] .lh-chapter__next-prefix { color: var(--ink-400); }
+[data-theme="lighthuman"] .lh-chapter__next-prefix::after { content: ""; display: inline-block; width: 28px; height: 1px; margin-left: 12px; vertical-align: middle; background: currentColor; }
+[data-theme="lighthuman"] .lh-chapter__next-link:hover { color: var(--brand-navy); }
+[data-theme="lighthuman"] .lh-chapter__next-link:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 6px; border-radius: 4px; }
+[data-theme="lighthuman"] .lh-chapter__next-arrow { color: var(--brand-amber-deep); animation: lh-nudge 1.8s var(--ease-out) infinite; }
+@keyframes lh-nudge { 0%, 100% { translate: 0 0; } 50% { translate: 0 4px; } }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__next-link { color: rgba(255, 255, 255, 0.7); }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__next-prefix { color: rgba(255, 255, 255, 0.45); }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__next-link:hover { color: #fff; }
+[data-theme="lighthuman"] .lh-chapter[data-tone="dark"] .lh-chapter__next-arrow { color: var(--brand-gold); }
+
+/* One heading voice: the process title used Inter 54/800 while every other chapter used Merriweather 40/700. */
+[data-theme="lighthuman"] .lh-home .lh-light__title {
+  max-width: 16ch; font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2;
+}
+[data-theme="lighthuman"] .lh-home .lh-light__lede { font-size: 16px; }
+[data-theme="lighthuman"] .lh-home .lh-light__steps { gap: clamp(20px, 2.6vw, 30px); }
+[data-theme="lighthuman"] .lh-home .lh-light__step-title { font-size: clamp(18px, 1.8vw, 21px); }
+[data-theme="lighthuman"] .lh-home .lh-light__desc { margin-top: 4px; font-size: 15px; }
+[data-theme="lighthuman"] .lh-home .lh-light__intro { top: calc(var(--header-h, 76px) + 72px); }
+
+/* Backgrounds: white → navy → white → cream (the last chapter holds tools + CTA together). */
+[data-theme="lighthuman"] .lh-home .lh-stories { background: #fff; }
+[data-theme="lighthuman"] .lh-home .lh-chapter:last-child { background: var(--brand-cream); }
+[data-theme="lighthuman"] .lh-home .lh-kit { background: transparent; padding-bottom: 24px; }
+[data-theme="lighthuman"] .lh-home .lh-closing { padding-top: 24px; background: transparent; }
+[data-theme="lighthuman"] .lh-home .lh-showcase__head,
+[data-theme="lighthuman"] .lh-home .lh-kit__head { margin-bottom: clamp(28px, 3.4vw, 40px); }
+
+/* ---- Client strip under the hero ---------------------------------------- */
+[data-theme="lighthuman"] .lh-strip { padding-block: 22px; border-bottom: 1px solid var(--border-default); background: #fff; }
+[data-theme="lighthuman"] .lh-strip__inner { display: grid; gap: 14px; align-items: center; }
+@media (min-width: 900px) { [data-theme="lighthuman"] .lh-strip__inner { grid-template-columns: 200px minmax(0, 1fr); gap: 32px; } }
+[data-theme="lighthuman"] .lh-strip__label { margin: 0; color: var(--ink-500); font-size: 13.5px; font-weight: 600; line-height: 1.45; }
+[data-theme="lighthuman"] .lh-strip__logo { flex: none; display: grid; place-items: center; width: 132px; height: 52px; margin-right: 28px; }
+[data-theme="lighthuman"] .lh-strip__logo img { width: auto; height: auto; max-width: 100%; max-height: 44px; object-fit: contain; filter: grayscale(1); opacity: 0.7; transition: filter 0.25s var(--ease-out), opacity 0.25s var(--ease-out); }
+[data-theme="lighthuman"] .lh-strip__logo:hover img { filter: none; opacity: 1; }
+[data-theme="lighthuman"] .lh-strip__marquee:hover .lh-partners__track { animation-play-state: paused; }
+
+/* ---- Film poster (About, Contact) --------------------------------------- */
+[data-theme="lighthuman"] .lh-video-feature { background: var(--bg-surface); }
+[data-theme="lighthuman"] .lh-video-feature__grid { display: grid; gap: 28px; align-items: center; }
+@media (min-width: 1024px) { [data-theme="lighthuman"] .lh-video-feature__grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; } }
+[data-theme="lighthuman"] .lh-video-feature__copy .lh-h2 { margin: 12px 0 0; }
+[data-theme="lighthuman"] .lh-video-feature__copy .lh-lede { margin: 14px 0 0; }
+[data-theme="lighthuman"] .lh-video-poster {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; padding: 0; border: 0; border-radius: 20px;
+  background: var(--brand-navy-deep); cursor: pointer; box-shadow: 0 30px 60px -28px rgba(20, 40, 90, 0.45);
+}
+[data-theme="lighthuman"] .lh-video-poster__img { object-fit: cover; transition: transform 0.6s var(--ease-out); }
+[data-theme="lighthuman"] .lh-video-poster:hover .lh-video-poster__img { transform: scale(1.04); }
+[data-theme="lighthuman"] .lh-video-poster__shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 14, 34, 0.75), rgba(7, 14, 34, 0.1) 55%); }
+[data-theme="lighthuman"] .lh-video-poster__play {
+  position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 76px; height: 76px; padding-left: 4px;
+  border-radius: 999px; background: var(--brand-gold); color: var(--brand-navy-deep); translate: -50% -50%;
+  box-shadow: 0 0 0 10px rgba(242, 207, 99, 0.22); transition: scale 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+[data-theme="lighthuman"] .lh-video-poster:hover .lh-video-poster__play { scale: 1.08; box-shadow: 0 0 0 16px rgba(242, 207, 99, 0.18); }
+[data-theme="lighthuman"] .lh-video-poster__meta {
+  position: absolute; left: 22px; bottom: 18px; display: inline-flex; align-items: center; gap: 12px;
+  color: #fff; font-size: 15px; font-weight: 600;
+}
+[data-theme="lighthuman"] .lh-video-poster__time { padding: 3px 8px; border-radius: 6px; background: rgba(0, 0, 0, 0.55); font: 500 12.5px/1.2 var(--font-jetbrains-mono), var(--font-mono); }
+[data-theme="lighthuman"] .lh-video-poster:focus-visible { outline: 3px solid var(--brand-gold); outline-offset: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="lighthuman"] .lh-chapter__next-arrow { animation: none; }
+  [data-theme="lighthuman"] .lh-video-poster__img,
+  [data-theme="lighthuman"] .lh-video-poster__play { transition: none; }
+}

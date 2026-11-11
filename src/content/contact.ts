@@ -7,6 +7,15 @@ export const contactFormCopy = {
   submit: "Gửi yêu cầu",
 } as const;
 
+/** Film block between the quote builder and the FAQ. */
+export const contactVideo = {
+  eyebrow: "Chưa sẵn sàng báo giá?",
+  title: "Xem Light Human làm việc thế nào",
+  lede: "Bốn phút về đội ngũ, quy trình và khách hàng của chúng tôi. Khi cần, bộ báo giá phía trên luôn ở đây.",
+  play: "Xem phim",
+  close: "Đóng video",
+};
+
 export const contactFaqHead = {
   eyebrow: "FAQ",
   helper: "Không tìm thấy câu trả lời?",

@@ -43,7 +43,6 @@ export const heroIntents = {
 
 /** "Try it now" band: live salary preview + quote board and compound teasers. */
 export const homeToolkit = {
-  eyebrow: "Thử ngay · Miễn phí",
   title: "Tính trước, quyết nhanh hơn",
   lede: "Công cụ đội tư vấn Light Human dùng mỗi ngày khi chốt offer và lập báo giá, nay mở cho bạn. Không cần đăng ký.",
   salary: {
@@ -85,7 +84,6 @@ export const homeVideo = {
  * marked `em` are lit in gold; the rest in white.
  */
 export const manifesto = {
-  eyebrow: "Điều Light Human tin",
   segments: [
     { text: "Một người đúng có thể thay đổi" },
     { text: "cả một đội.", em: true },
@@ -95,12 +93,18 @@ export const manifesto = {
   sign: "Đội ngũ Light Human",
 };
 
-/** Magazine-style chapter marks above each home section. */
+/**
+ * The home page reads as one story: each chapter is the question a visitor
+ * would ask next, and the end of each chapter teases the following one.
+ */
 export const homeChapters = {
-  partners: "Khách hàng",
-  services: "Dịch vụ",
-  toolkit: "Công cụ",
-  stories: "Câu chuyện",
-  process: "Quy trình",
-  insights: "Góc nhìn",
+  belief: "Điều chúng tôi tin",
+  services: "Chúng tôi làm gì",
+  process: "Làm như thế nào",
+  stories: "Kết quả ra sao",
+  start: "Bắt đầu từ đâu",
+  next: "Tiếp theo",
 };
+
+/** One-line client strip under the hero. */
+export const partnerStrip = "Hơn 800 doanh nghiệp đã chọn Light Human";

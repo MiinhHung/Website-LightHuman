@@ -5,7 +5,11 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   images: {
     // Ảnh nội dung lấy từ CMS của Light Human (giống site production).
-    remotePatterns: [{ protocol: "https", hostname: "blog.lighthuman.vn", pathname: "/uploads/**" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "blog.lighthuman.vn", pathname: "/uploads/**" },
+      // Poster of the company film (site.introVideo).
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+    ],
   },
   // Fonts and logo are read from disk at request time by the quote PDF route.
   outputFileTracingIncludes: {

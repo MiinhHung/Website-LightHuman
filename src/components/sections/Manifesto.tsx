@@ -17,7 +17,6 @@ export function Manifesto({ locale = "vi" }: { locale?: Locale }) {
     <section className="lh-manifesto" aria-labelledby="lh-manifesto-text">
       <div className="lh-manifesto__stick">
         <div className="lh-container">
-          <p className="lh-manifesto__eyebrow">{t.eyebrow}</p>
           <p id="lh-manifesto-text" className="lh-manifesto__text">
             {words.map(({ w, em }, i) => (
               <span

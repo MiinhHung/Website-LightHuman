@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { homeChaptersEn as ch, homeEn, partnerStripEn } from "@/content/en/home";
 import { alternatesFor } from "@/i18n/config";
-import { HomeHero } from "@/components/sections/HomeHero";
-import { TrustStats } from "@/components/sections/TrustStats";
+import { EdHero } from "@/components/home/EdHero";
+import { EdServices } from "@/components/home/EdServices";
+import { EdProcess } from "@/components/home/EdProcess";
 import { PartnerStrip } from "@/components/sections/PartnerStrip";
 import { Manifesto } from "@/components/sections/Manifesto";
-import { HomeServices } from "@/components/sections/HomeServices";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { HomeToolkit } from "@/components/sections/HomeToolkit";
 import { ClosingCta } from "@/components/sections/ClosingCta";
@@ -20,21 +19,20 @@ export const metadata: Metadata = {
 };
 
 export default function HomePageEn() {
-  const { stories, process, closing } = homeEn;
+  const { stories, closing } = homeEn;
   return (
-    <div className="lh-home">
+    <div className="lh-home lh-ed">
       <div className="lh-home__progress" aria-hidden="true" />
-      <HomeHero locale="en" />
-      <TrustStats title={homeEn.statsTitle} stats={homeEn.stats} />
+      <EdHero locale="en" />
       <PartnerStrip label={partnerStripEn} />
-      <Chapter n={1} label={ch.belief} tone="dark" next={{ prefix: ch.next, label: ch.services }}>
+      <Chapter n={1} label={ch.belief} next={{ prefix: ch.next, label: ch.services }}>
         <Manifesto locale="en" />
       </Chapter>
       <Chapter n={2} label={ch.services} next={{ prefix: ch.next, label: ch.process }}>
-        <HomeServices locale="en" />
+        <EdServices locale="en" />
       </Chapter>
-      <Chapter n={3} label={ch.process} tone="dark" next={{ prefix: ch.next, label: ch.stories }}>
-        <ProcessSteps title={process.title} lede={process.lede} steps={process.steps} stepLabel={process.stepLabel} />
+      <Chapter n={3} label={ch.process} next={{ prefix: ch.next, label: ch.stories }}>
+        <EdProcess locale="en" />
       </Chapter>
       <Chapter n={4} label={ch.stories} next={{ prefix: ch.next, label: ch.start }}>
         <SuccessStories

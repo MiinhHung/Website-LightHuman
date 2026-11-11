@@ -1,11 +1,9 @@
-import { CMS } from "./site";
+import { CMS, quoteHref } from "./site";
 
 /** Nội dung trang chủ, theo lighthuman.vn. */
 
 export const hero = {
   image: `${CMS}/lighthuman_hero_7ee1a27bba.png`,
-  lede:
-    "Giải pháp tuyển dụng & quản lý nhân sự hiệu quả. Hành trình vạn dặm bắt đầu từ một bước chân - cùng Light Human xây dựng đội ngũ nhân sự tinh hoa, song hành cùng sự phát triển của doanh nghiệp.",
 };
 
 export type TrustIcon = "award" | "building" | "briefcase" | "users";
@@ -108,3 +106,25 @@ export const homeChapters = {
 
 /** One-line client strip under the hero. */
 export const partnerStrip = "Hơn 800 doanh nghiệp đã chọn Light Human";
+
+/** Editorial home: short hero copy (the long CMS lede stays in `hero.lede`). */
+export const edHero = {
+  kicker: "Đối tác nhân sự chiến lược",
+  title: { before: "Con người ", em1: "xuất sắc", middle: " kiến tạo doanh nghiệp ", em2: "phi thường." },
+  lede: "Headhunting, tuyển dụng số lượng lớn và tư vấn nhân sự cho hơn 800 doanh nghiệp trong nước và quốc tế.",
+  primary: { label: "Nhận báo giá", href: quoteHref },
+  secondary: { label: "Khám phá dịch vụ", href: "/dich-vu" },
+  imageAlt: "Chuyên viên Light Human trao đổi cùng ứng viên",
+  film: "Phim giới thiệu",
+};
+
+export const servicesHead = {
+  title: "Sáu dịch vụ, một đầu mối nhân sự",
+  lede: "Từ tìm lãnh đạo cấp cao đến tuyển hàng trăm người cho dây chuyền mới, Light Human lo trọn quy trình.",
+  all: "Xem tổng quan dịch vụ",
+};
+
+export const processHead = {
+  title: "Sáu bước, mỗi bước có người chịu trách nhiệm",
+  lede: "Từ thấu hiểu nhu cầu đến tối ưu liên tục, bạn luôn biết dự án đang ở đâu và ai đang lo.",
+};

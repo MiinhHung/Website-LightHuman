@@ -440,7 +440,6 @@
 [data-theme="lighthuman"] .lh-article-prose .lh-cta__band,
 [data-theme="lighthuman"] .lh-article-prose .lh-cta--dark .lh-cta__band,
 [data-theme="lighthuman"] .lh-article-prose .lh-cta--light .lh-cta__band { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 24px; padding: clamp(28px, 4vw, 44px); border: 0; border-radius: 20px; background: radial-gradient(120% 140% at 100% 0%, var(--brand-navy-soft) 0%, var(--brand-navy) 45%, var(--brand-navy-deep) 100%); color: #fff; }
-@media (min-width: 720px) { [data-theme="lighthuman"] .lh-article-prose .lh-cta__band { grid-template-columns: minmax(0, 1fr) auto; gap: 32px; } }
 [data-theme="lighthuman"] .lh-article-prose .lh-cta__band::before { display: none; }
 [data-theme="lighthuman"] .lh-cta__swirl { position: absolute; z-index: -1; top: -150px; right: -120px; width: 380px; height: 380px; opacity: 0.55; pointer-events: none; }
 [data-theme="lighthuman"] .lh-article-prose .lh-cta__heading { margin: 0; color: #fff; font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 24px); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }

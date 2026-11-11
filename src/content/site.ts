@@ -15,7 +15,13 @@ export const site = {
   url: "https://lighthuman.vn",
   jobsUrl: "https://job.lighthuman.vn",
   /** Company introduction film on the Light Human YouTube channel. */
-  introVideo: { id: "w1UOWmfwSmk", title: "Giới thiệu Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng - Light Human" },
+  introVideo: {
+    id: "w1UOWmfwSmk",
+    title: "Giới thiệu Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng - Light Human",
+    // YouTube's own thumbnail; host allowed in next.config.ts remotePatterns.
+    poster: "https://i.ytimg.com/vi/w1UOWmfwSmk/maxresdefault.jpg",
+    duration: "4:32",
+  },
   // Local copy of the CMS logo (Logo_Light_Human_01) with its transparent padding trimmed.
   logo: logoOnDark,
   legal:

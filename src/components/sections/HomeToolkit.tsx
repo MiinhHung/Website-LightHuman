@@ -49,7 +49,6 @@ export function HomeToolkit({ locale = "vi" }: { locale?: Locale }) {
     <section className="lh-section lh-kit" aria-labelledby="lh-kit-title">
       <div className="lh-container">
         <div className="lh-kit__head">
-          <p className="lh-kit__eyebrow">{t.eyebrow}</p>
           <h2 id="lh-kit-title" className="lh-h2">
             {t.title}
           </h2>

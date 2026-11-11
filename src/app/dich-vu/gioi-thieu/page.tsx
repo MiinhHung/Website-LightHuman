@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { aboutCta, aboutHero } from "@/content/about";
+import { aboutCta, aboutHero, aboutVideo } from "@/content/about";
 import { CinematicHero } from "@/components/sections/about/CinematicHero";
 import { AboutIntro } from "@/components/sections/about/AboutIntro";
 import { AboutStats } from "@/components/sections/about/AboutStats";
 import { CoreValues } from "@/components/sections/about/CoreValues";
 import { TeamGrid } from "@/components/sections/about/TeamGrid";
 import { CtaBand } from "@/components/sections/about/CtaBand";
+import { VideoFeature } from "@/components/sections/VideoFeature";
 
 export const metadata: Metadata = {
   title: "Giới thiệu",
@@ -19,6 +20,7 @@ export default function AboutPage() {
     <>
       <CinematicHero {...aboutHero} />
       <AboutIntro />
+      <VideoFeature {...aboutVideo} />
       <AboutStats />
       <CoreValues />
       <TeamGrid />

@@ -12,7 +12,6 @@ export const heroIntentsEn: typeof heroIntents = {
 };
 
 export const homeToolkitEn: typeof homeToolkit = {
-  eyebrow: "Try it now · Free",
   title: "Run the numbers, decide faster",
   lede: "The tools Light Human advisers use every day for offers and quotes, now open to you. No sign-up.",
   salary: {
@@ -67,11 +66,6 @@ export const homeEn = {
     { icon: "users", num: "36,000+", label: "Candidates placed" },
   ] satisfies { icon: TrustIcon; num: string; label: string }[],
   statsTitle: "The numbers speak for us",
-
-  partners: {
-    heading: { before: "Trusted by ", em: "leading companies" },
-    lede: "More than 800 Vietnamese and international businesses have chosen Light Human as their recruitment partner.",
-  },
 
   services: {
     heading: "Six services, one HR partner",
@@ -199,7 +193,6 @@ export const homeVideoEn = {
 };
 
 export const manifestoEn = {
-  eyebrow: "What we believe",
   segments: [
     { text: "One right person can change" },
     { text: "a whole team.", em: true },
@@ -210,10 +203,12 @@ export const manifestoEn = {
 };
 
 export const homeChaptersEn = {
-  partners: "Clients",
-  services: "Services",
-  toolkit: "Tools",
-  stories: "Stories",
-  process: "Process",
-  insights: "Insights",
+  belief: "What we believe",
+  services: "What we do",
+  process: "How we work",
+  stories: "What it delivers",
+  start: "Where to start",
+  next: "Next",
 };
+
+export const partnerStripEn = "Chosen by 800+ companies";

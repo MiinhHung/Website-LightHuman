@@ -105,7 +105,6 @@ export const homeChapters = {
 };
 
 /** One-line client strip under the hero. */
-export const partnerStrip = "Hơn 800 doanh nghiệp đã chọn Light Human";
 
 /** Editorial home: short hero copy (the long CMS lede stays in `hero.lede`). */
 export const edHero = {

@@ -197,7 +197,6 @@ export const homeChaptersEn = {
   next: "Next",
 };
 
-export const partnerStripEn = "Chosen by 800+ companies";
 
 export const edHeroEn = {
   kicker: "Strategic HR partner",

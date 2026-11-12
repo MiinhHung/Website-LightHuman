@@ -3,6 +3,7 @@ import { caseStudiesPage } from "@/content/case-studies";
 import { CinematicHero } from "@/components/sections/about/CinematicHero";
 import { CtaBand } from "@/components/sections/about/CtaBand";
 import { CaseStudiesBrowser } from "@/components/sections/case-studies/CaseStudiesBrowser";
+import { Partners } from "@/components/sections/Partners";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -15,6 +16,7 @@ export default function CaseStudiesPage() {
     <>
       <CinematicHero {...hero} />
       <CaseStudiesBrowser allLabel={allLabel} />
+      <Partners showLink={false} />
       <CtaBand {...cta} />
     </>
   );

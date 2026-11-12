@@ -7,6 +7,7 @@ import { CoreValues } from "@/components/sections/about/CoreValues";
 import { TeamGrid } from "@/components/sections/about/TeamGrid";
 import { CtaBand } from "@/components/sections/about/CtaBand";
 import { VideoFeature } from "@/components/sections/VideoFeature";
+import { Partners } from "@/components/sections/Partners";
 
 export const metadata: Metadata = {
   title: "Giới thiệu",
@@ -22,6 +23,7 @@ export default function AboutPage() {
       <AboutIntro />
       <VideoFeature {...aboutVideo} />
       <AboutStats />
+      <Partners />
       <CoreValues />
       <TeamGrid />
       <CtaBand {...aboutCta} />

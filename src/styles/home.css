@@ -111,16 +111,6 @@
 [data-theme="lighthuman"] .lh-ed-stats__num { order: -1; margin: 0; color: var(--brand-navy); font-family: var(--font-display); font-size: clamp(32px, 3.4vw, 46px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
 [data-theme="lighthuman"] .lh-ed-stats__label { color: var(--ink-500); font-size: 14px; line-height: 1.45; }
 
-/* ---- Client strip under the hero ------------------------------------------ */
-[data-theme="lighthuman"] .lh-strip { padding-block: 22px; border-block: 1px solid var(--border-default); background: #fff; }
-[data-theme="lighthuman"] .lh-strip__inner { display: grid; gap: 14px; align-items: center; }
-@media (min-width: 900px) { [data-theme="lighthuman"] .lh-strip__inner { grid-template-columns: 200px minmax(0, 1fr); gap: 32px; } }
-[data-theme="lighthuman"] .lh-strip__label { margin: 0; color: var(--ink-500); font-size: 13.5px; font-weight: 600; line-height: 1.45; }
-[data-theme="lighthuman"] .lh-strip__logo { flex: none; display: grid; place-items: center; width: 132px; height: 52px; margin-right: 28px; }
-[data-theme="lighthuman"] .lh-strip__logo img { width: auto; height: auto; max-width: 100%; max-height: 44px; object-fit: contain; filter: grayscale(1); opacity: 0.7; transition: filter 0.25s var(--ease-out), opacity 0.25s var(--ease-out); }
-[data-theme="lighthuman"] .lh-strip__logo:hover img { filter: none; opacity: 1; }
-[data-theme="lighthuman"] .lh-strip__marquee:hover .lh-partners__track { animation-play-state: paused; }
-
 /* ---- Chapters: mark on top, teaser for the next one at the bottom ---------- */
 [data-theme="lighthuman"] .lh-chapter { position: relative; scroll-margin-top: var(--header-h, 76px); }
 [data-theme="lighthuman"] .lh-ed .lh-chapter__mark + * { padding-top: calc(var(--ed-gap) + 24px); padding-bottom: var(--ed-gap); }

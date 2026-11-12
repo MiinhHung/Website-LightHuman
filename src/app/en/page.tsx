@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { homeChaptersEn as ch, homeEn, partnerStripEn } from "@/content/en/home";
+import { homeChaptersEn as ch, homeEn } from "@/content/en/home";
 import { alternatesFor } from "@/i18n/config";
 import { EdHero } from "@/components/home/EdHero";
 import { EdServices } from "@/components/home/EdServices";
 import { EdProcess } from "@/components/home/EdProcess";
-import { PartnerStrip } from "@/components/sections/PartnerStrip";
+import { Partners } from "@/components/sections/Partners";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { HomeToolkit } from "@/components/sections/HomeToolkit";
@@ -24,7 +24,7 @@ export default function HomePageEn() {
     <div className="lh-home lh-ed">
       <div className="lh-home__progress" aria-hidden="true" />
       <EdHero locale="en" />
-      <PartnerStrip label={partnerStripEn} />
+      <Partners locale="en" />
       <Chapter n={1} label={ch.belief} next={{ prefix: ch.next, label: ch.services }}>
         <Manifesto locale="en" />
       </Chapter>

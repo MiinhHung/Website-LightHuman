@@ -68,3 +68,19 @@ export const partners: { name: string; logo: string; placeholder?: boolean }[] =
   { name: "Amtiano", logo: `${CMS}/images_40_85647459a6.png` },
   { name: "Shacman", logo: `${CMS}/images_39_997f2ff4ec.png` },
 ];
+
+/** Copy for the client logo wall, shared by home, About, case studies, services and contact. */
+export const clientWall = {
+  vi: {
+    count: "800+",
+    heading: "doanh nghiệp đã chọn Light Human",
+    lede: "Từ tập đoàn tài chính, BPO đa quốc gia đến chuỗi bán lẻ và nhà máy, các doanh nghiệp trong nước và quốc tế tin tưởng giao bài toán nhân sự cho Light Human.",
+    link: { label: "Xem câu chuyện khách hàng", href: "/case-studies" },
+  },
+  en: {
+    count: "800+",
+    heading: "companies have chosen Light Human",
+    lede: "From financial groups and global BPOs to retail chains and factories, local and international businesses trust Light Human with their hiring.",
+    link: { label: "Read client stories", href: "/case-studies" },
+  },
+} as const;

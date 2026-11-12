@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContactQuote } from "@/components/sections/contact/ContactQuote";
 import { ContactFaq } from "@/components/sections/contact/ContactFaq";
 import { VideoFeature } from "@/components/sections/VideoFeature";
+import { Partners } from "@/components/sections/Partners";
 import { contactVideo } from "@/content/contact";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactQuote />
+      <Partners />
       <VideoFeature {...contactVideo} />
       <ContactFaq />
     </>

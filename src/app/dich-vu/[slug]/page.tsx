@@ -49,7 +49,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
     <div className="lh-service-detail">
       <ServiceHero hero={hero} />
       <ServiceSubnav items={subnav} />
-      {service.partners && <Partners eyebrow="Được tin tưởng bởi" />}
+      {service.partners && <Partners />}
       {scope && (
         <div id="pham-vi" className="lh-anchor">
           <ServiceScope head={{ eyebrow: scope.eyebrow, title: scope.title }} items={scope.items} />

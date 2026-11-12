@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { homeChapters as ch, partnerStrip } from "@/content/home";
+import { homeChapters as ch } from "@/content/home";
 import { quoteHref, site } from "@/content/site";
 import { alternatesFor } from "@/i18n/config";
 import { EdHero } from "@/components/home/EdHero";
 import { EdServices } from "@/components/home/EdServices";
 import { EdProcess } from "@/components/home/EdProcess";
-import { PartnerStrip } from "@/components/sections/PartnerStrip";
+import { Partners } from "@/components/sections/Partners";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { SuccessStories } from "@/components/sections/SuccessStories";
 import { HomeToolkit } from "@/components/sections/HomeToolkit";
@@ -20,7 +20,7 @@ export default function HomePage() {
     <div className="lh-home lh-ed">
       <div className="lh-home__progress" aria-hidden="true" />
       <EdHero />
-      <PartnerStrip label={partnerStrip} />
+      <Partners />
       <Chapter n={1} label={ch.belief} next={{ prefix: ch.next, label: ch.services }}>
         <Manifesto />
       </Chapter>

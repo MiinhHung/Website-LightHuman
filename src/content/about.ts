@@ -26,6 +26,15 @@ export const aboutIntro = {
     "Sức cạnh tranh của một tổ chức phụ thuộc vào chất lượng vốn con người - việc lựa chọn nhân tài đúng tạo nền móng cho sự thành công của các đối tác kinh doanh.",
 };
 
+/** Company film block (after mission and vision). */
+export const aboutVideo = {
+  eyebrow: "Phim giới thiệu",
+  title: "Light Human trong bốn phút",
+  lede: "Con người, cách làm việc và những doanh nghiệp đã đồng hành cùng Light Human, kể bằng hình ảnh.",
+  play: "Xem phim",
+  close: "Đóng video",
+};
+
 export type AboutStatIcon = "briefcase" | "users-round" | "building-2" | "heart-handshake";
 
 export const aboutStats = {

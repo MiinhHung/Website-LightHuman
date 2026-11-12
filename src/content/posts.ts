@@ -1,4 +1,5 @@
 import { CMS } from "./site";
+import cmsPosts from "./generated/cms-posts.json";
 
 export type PostTag = { label: string; slug: string };
 
@@ -42,11 +43,42 @@ export const insightsPage = {
     image: `${CMS}/hero_insights_d1c022601d.png`,
   },
   allLabel: "Tất cả",
-  filters: ["Blog Nhân Sự", "Sự Kiện", "Nhà Light Human"],
+  filters: ["Insights", "Blog Nhân Sự", "Sự Kiện", "Nhà Light Human"],
   featured: {
     eyebrow: "Bài viết nổi bật",
     title: "Mới nhất từ đội ngũ Light Human",
     empty: "Chưa có bài viết trong chuyên mục này.",
+  },
+  /** Masthead + feed layout (search, topics, sidebar). */
+  browse: {
+    searchLabel: "Tìm bài viết",
+    searchPlaceholder: "Tìm bài viết, ví dụ: onboarding",
+    topicsLabel: "Chủ đề:",
+    featuredBadge: "Bài nổi bật",
+    readMore: "Đọc bài",
+    minutes: "phút đọc",
+    resultsAll: "bài viết",
+    resultsFor: "kết quả cho",
+    sortLabel: "Sắp xếp",
+    sortNewest: "Mới nhất",
+    sortQuick: "Đọc nhanh",
+    clear: "Xoá bộ lọc",
+    showing: "Đang xem",
+    loadMore: "Xem thêm bài viết",
+    emptyTitle: "Chưa tìm thấy bài phù hợp",
+    emptyBody: "Thử từ khoá khác hoặc xem toàn bộ bài viết của đội ngũ Light Human.",
+    emptyCta: "Xem tất cả bài viết",
+    asideTopics: "Chủ đề được quan tâm",
+    asideTools: "Công cụ miễn phí",
+    tools: [
+      { label: "Tính lương Gross ⇄ Net 2026", href: "/cong-cu/tinh-luong-gross-net", desc: "Quy đổi lương, thuế TNCN và chi phí doanh nghiệp" },
+      { label: "Tính lãi kép", href: "/cong-cu/tinh-lai-kep", desc: "Dự báo tiền gửi, lợi nhuận đầu tư theo năm" },
+    ],
+    consult: {
+      title: "Đang cần tuyển nhân sự?",
+      body: "Chọn vị trí và yêu cầu ứng viên để nhận báo giá — đội BD liên hệ trong 24 giờ làm việc.",
+      cta: "Nhận báo giá",
+    },
   },
   newsletter: {
     eyebrow: "Đăng ký nhận tin",
@@ -93,7 +125,8 @@ const bodies = {
 };
 
 /** Bài viết nổi bật — theo lighthuman.vn. URL chi tiết: /blog/[slug] (giống site gốc). */
-export const posts: Post[] = [
+/** Bài viết tay (HTML sao từ trang gốc) — giữ nguyên, đứng đầu danh sách. */
+const handPosts: Post[] = [
   {
     slug: "bi-kip-cho-nha-tuyen-dung-thu-hut-nhan-tai-hau-covid-19",
     title: "Bí kíp cho nhà tuyển dụng thu hút nhân tài hậu Covid-19",
@@ -186,8 +219,19 @@ export const archivePosts: PostSummary[] = [
   },
 ];
 
+/**
+ * Mọi bài có trang chi tiết: bài viết tay trước, rồi toàn bộ bài từ CMS (`npm run sync:posts`
+ * sinh src/content/generated/*). Nội dung HTML của bài CMS nằm ở post-bodies.ts (chỉ server).
+ */
+const handSlugs = new Set(handPosts.map((p) => p.slug));
+export const posts: Post[] = [
+  ...handPosts,
+  ...(cmsPosts as Post[]).filter((p) => !handSlugs.has(p.slug)),
+];
+
 /** Mọi bài, mới nhất trước. */
-const allPosts: PostSummary[] = [...posts, ...archivePosts];
+const postSlugs = new Set(posts.map((p) => p.slug));
+const allPosts: PostSummary[] = [...posts, ...archivePosts.filter((p) => !postSlugs.has(p.slug))];
 
 export function getPost(slug: string) {
   return posts.find((p) => p.slug === slug);

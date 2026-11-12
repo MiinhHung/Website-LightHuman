@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ContactQuote } from "@/components/sections/contact/ContactQuote";
 import { ContactFaq } from "@/components/sections/contact/ContactFaq";
+import { VideoFeature } from "@/components/sections/VideoFeature";
+import { contactVideo } from "@/content/contact";
 
 export const metadata: Metadata = {
   title: "Liên hệ & Báo giá",
@@ -13,6 +15,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactQuote />
+      <VideoFeature {...contactVideo} />
       <ContactFaq />
     </>
   );

@@ -4,8 +4,16 @@ import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
+// Header nav, dropdown panels, language switch, mobile drawer — class lh-nav*, lh-mega*, lh-lang*, lh-drawer*.
+import "@/styles/header.css";
+// Home page sections added in the redesign — class lh-intent*, lh-kit*.
+import "@/styles/home.css";
 // Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
 import "@/styles/tools.css";
+// Insights listing (/tin-tuc) — class lh-ins-*.
+import "@/styles/insights.css";
+// Quote builder card table (/lien-he#bao-gia) — class lh-qb-*.
+import "@/styles/quote-board.css";
 
 // Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });

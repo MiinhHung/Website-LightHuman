@@ -19,6 +19,7 @@ import {
   Megaphone,
   Menu,
   Phone,
+  Receipt,
   TrendingUp,
   Users,
   X,
@@ -37,6 +38,7 @@ const ICONS: Record<NavIcon, ReactNode> = {
   career: <Compass size={18} strokeWidth={1.75} />,
   branding: <Megaphone size={18} strokeWidth={1.75} />,
   salary: <Calculator size={18} strokeWidth={1.75} />,
+  tax: <Receipt size={18} strokeWidth={1.75} />,
   compound: <TrendingUp size={18} strokeWidth={1.75} />,
 };
 

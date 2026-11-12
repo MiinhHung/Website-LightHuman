@@ -23,6 +23,13 @@ export const tools: ToolCard[] = [
     forWho: "Ứng viên · HR · Headhunter",
   },
   {
+    slug: "tinh-thue-thu-nhap-ca-nhan",
+    name: "Tính thuế thu nhập cá nhân 2026",
+    desc: "Thuế TNCN theo biểu 5 bậc mới cho cả ba trường hợp: hợp đồng từ 3 tháng, dưới 3 tháng và người không cư trú. So sánh ngay với luật cũ.",
+    tag: "Lương & thuế",
+    forWho: "Người đi làm · Kế toán · HR",
+  },
+  {
     slug: "tinh-lai-kep",
     name: "Tính lãi kép & lợi nhuận đầu tư",
     desc: "Dự báo giá trị tiền gửi, khoản đầu tư theo thời gian — biểu đồ tăng trưởng, bảng từng năm và công thức điền sẵn số của bạn.",
@@ -240,4 +247,129 @@ export const compoundTool = {
   },
   disclaimer:
     "Công cụ do Light Human phát triển, kết quả mang tính minh họa dựa trên lãi suất cố định do bạn nhập; không phải lời khuyên đầu tư. Lợi nhuận thực tế phụ thuộc sản phẩm, biến động thị trường, thuế và phí.",
+};
+
+export const pitTool = {
+  title: "Tính thuế thu nhập cá nhân 2026",
+  description:
+    "Công cụ tính thuế TNCN 2026 của Light Human: biểu thuế 5 bậc, giảm trừ 15,5 triệu, khấu trừ 10% với hợp đồng dưới 3 tháng, thuế 20% cho người không cư trú. So sánh với luật cũ, xem ngưỡng bắt đầu nộp thuế.",
+  hero: {
+    eyebrow: "Light Human Toolkit · Lương & thuế",
+    lede: "Biết chính xác mỗi tháng bạn nộp bao nhiêu thuế, rơi vào bậc nào, nộp ít hơn bao nhiêu so với luật cũ, và lương tăng thêm thì thuế tăng thêm bao nhiêu.",
+    image: {
+      src: `${CMS}/01_executive_search_1489950848.png`,
+      alt: "Chuyên viên tư vấn trao đổi với khách hàng tại văn phòng",
+    },
+    /** Sample shown on the floating tax slip; numbers come from the tool itself. */
+    sample: { income: 30_000_000, dependents: 1 },
+    facts: [
+      { value: "5 bậc", label: "Biểu thuế mới, 5% → 35%" },
+      { value: "15,5 tr", label: "Giảm trừ bản thân / tháng" },
+      { value: "10%", label: "HĐ dưới 3 tháng, từ 2 triệu/lần" },
+      { value: "20%", label: "Cá nhân không cư trú" },
+    ],
+  },
+  presets: [10_000_000, 20_000_000, 30_000_000, 50_000_000, 80_000_000],
+  cases: {
+    resident: {
+      label: "HĐLĐ từ 3 tháng",
+      short: "Biểu lũy tiến 5 bậc",
+      desc: "Cá nhân cư trú ký hợp đồng lao động từ 3 tháng trở lên: được trừ bảo hiểm và giảm trừ gia cảnh, phần còn lại tính theo biểu lũy tiến.",
+    },
+    short: {
+      label: "HĐ dưới 3 tháng",
+      short: "Khấu trừ 10%",
+      desc: "Không ký hợp đồng lao động hoặc hợp đồng dưới 3 tháng (thử việc, cộng tác viên, thời vụ): doanh nghiệp khấu trừ 10% trên mỗi lần chi trả từ 2.000.000đ.",
+    },
+    nonresident: {
+      label: "Không cư trú",
+      short: "Thuế suất 20%",
+      desc: "Người nước ngoài ở Việt Nam dưới 183 ngày trong năm và không có nơi ở thường xuyên: 20% trên thu nhập chịu thuế, không được giảm trừ gia cảnh.",
+    },
+  },
+  exemptHint:
+    "Phần lương tăng ca, làm đêm cao hơn giờ thường; phụ cấp độc hại, nguy hiểm; phụ cấp khu vực, thu hút; trợ cấp theo Bộ luật Lao động, Luật BHXH…",
+  steps: [
+    {
+      n: "01",
+      title: "Tách phần thu nhập miễn thuế",
+      body: "Thu nhập chịu thuế = tổng thu nhập − các khoản miễn thuế. Với tiền tăng ca, chỉ phần trả cao hơn lương giờ thường mới được miễn.",
+    },
+    {
+      n: "02",
+      title: "Trừ bảo hiểm và giảm trừ gia cảnh",
+      body: "Trừ tiếp bảo hiểm bắt buộc người lao động đóng (10,5%), 15,5 triệu cho bản thân và 6,2 triệu cho mỗi người phụ thuộc. Còn lại là thu nhập tính thuế.",
+    },
+    {
+      n: "03",
+      title: "Áp biểu thuế 5 bậc",
+      body: "Chia thu nhập tính thuế theo từng bậc 5%, 10%, 20%, 30%, 35% rồi cộng lại. Mỗi bậc chỉ áp lên phần thu nhập nằm trong bậc đó.",
+    },
+  ],
+  exemptList: {
+    title: "Khoản nào không tính thuế?",
+    items: [
+      "Phần tiền lương làm đêm, làm thêm giờ trả cao hơn lương giờ làm việc bình thường",
+      "Phụ cấp độc hại, nguy hiểm; phụ cấp khu vực, phụ cấp thu hút",
+      "Phụ cấp quốc phòng, an ninh; phụ cấp đặc thù ngành nghề",
+      "Trợ cấp thai sản, tai nạn lao động, thôi việc, mất việc, thất nghiệp theo Bộ luật Lao động và Luật BHXH",
+      "Trợ cấp khó khăn đột xuất, trợ cấp một lần khi sinh con hoặc nhận con nuôi",
+    ],
+    source: "Theo Luật Thuế thu nhập cá nhân số 109/2025/QH15 và Thông tư 111/2013/TT-BTC.",
+  },
+  advice: {
+    eyebrow: "Góc tư vấn từ Light Human",
+    title: "Tăng lương 1 triệu,",
+    titleEm: "thực nhận thêm bao nhiêu?",
+    paragraphs: [
+      "Biểu lũy tiến chỉ áp thuế suất cao hơn lên phần thu nhập vượt ngưỡng, không áp lên toàn bộ lương. Vì vậy lên bậc thuế không bao giờ làm bạn thực nhận ít đi.",
+      "Khi thương lượng tăng lương, hãy nhìn vào ô \"Mỗi 1 triệu tăng thêm\" trong kết quả: đó là phần thuế phải nộp thêm thực tế, sau khi đã trừ bảo hiểm.",
+    ],
+    checklist: [
+      "Đăng ký người phụ thuộc với doanh nghiệp ngay khi đủ điều kiện",
+      "Tách rõ tiền tăng ca, phụ cấp miễn thuế trên bảng lương",
+      "Giữ chứng từ khấu trừ 10% để quyết toán hoàn thuế",
+      "Quyết toán cuối năm nếu có thu nhập từ nhiều nơi",
+    ],
+  },
+  faqHead: {
+    eyebrow: "FAQ",
+    helper: "Cần tư vấn cơ cấu lương, thưởng cho đội ngũ?",
+    helperLink: "Trao đổi với Light Human",
+  },
+  faqs: [
+    {
+      q: "Thu nhập bao nhiêu thì phải nộp thuế TNCN năm 2026?",
+      a: "Với người ký hợp đồng từ 3 tháng, đóng bảo hiểm trên toàn bộ lương và không có người phụ thuộc, thu nhập khoảng 17,32 triệu đồng/tháng trở xuống chưa phải nộp thuế. Mỗi người phụ thuộc nâng ngưỡng này thêm khoảng 6,93 triệu đồng. Công cụ hiển thị ngưỡng chính xác theo số người phụ thuộc bạn nhập.",
+    },
+    {
+      q: "Biểu thuế 5 bậc áp dụng từ khi nào?",
+      a: "Luật Thuế thu nhập cá nhân số 109/2025/QH15 có hiệu lực từ 01/07/2026, nhưng quy định với thu nhập từ tiền lương, tiền công của cá nhân cư trú được áp dụng từ kỳ tính thuế năm 2026, tức từ 01/01/2026. Biểu mới gồm 5 bậc: 5%, 10%, 20%, 30% và 35%.",
+    },
+    {
+      q: "Thử việc có phải nộp thuế TNCN không?",
+      a: "Nếu ký hợp đồng thử việc riêng hoặc hợp đồng dưới 3 tháng, doanh nghiệp khấu trừ 10% trên mỗi lần chi trả từ 2.000.000đ. Đây là khoản tạm khấu trừ: cuối năm, nếu tổng thu nhập sau giảm trừ gia cảnh chưa đến mức phải nộp thuế, bạn được hoàn lại khi quyết toán. Nếu thu nhập cả năm thấp và chỉ có một nguồn, bạn có thể làm cam kết 08/CK-TNCN để không bị khấu trừ.",
+    },
+    {
+      q: "Tiền tăng ca có bị tính thuế không?",
+      a: "Chỉ phần trả cao hơn lương giờ làm việc bình thường được miễn thuế. Ví dụ lương giờ thường 100.000đ, giờ tăng ca được trả 150.000đ thì 50.000đ mỗi giờ được miễn; 100.000đ còn lại vẫn tính thuế. Hãy nhập tổng phần chênh lệch này vào ô \"Thu nhập miễn thuế\".",
+    },
+    {
+      q: "Người nước ngoài nộp thuế TNCN thế nào?",
+      a: "Người nước ngoài có mặt tại Việt Nam từ 183 ngày trong năm hoặc có nơi ở thường xuyên được xem là cá nhân cư trú và tính thuế như người Việt Nam. Nếu không đáp ứng điều kiện đó, họ là cá nhân không cư trú, nộp 20% trên thu nhập chịu thuế và không được giảm trừ gia cảnh.",
+    },
+    {
+      q: "Kết quả có dùng để quyết toán thuế được không?",
+      a: "Kết quả chỉ mang tính tham khảo cho thu nhập tiền lương, tiền công hằng tháng từ một nơi. Công cụ chưa tính thưởng, thu nhập từ nhiều nơi, các khoản đóng góp từ thiện, quỹ hưu trí tự nguyện hay quyết toán cả năm. Khi quyết toán, hãy đối chiếu với kế toán doanh nghiệp hoặc cơ quan thuế.",
+    },
+  ],
+  cta: {
+    title: "Thuế đã rõ —",
+    titleEm: "giờ là offer đúng giá",
+    body: "Light Human giúp doanh nghiệp xây dựng mức offer cạnh tranh theo thị trường và tìm đúng ứng viên cho các vị trí quản lý, chuyên gia.",
+    primary: { label: "Yêu cầu tư vấn tuyển dụng", href: "/lien-he" },
+    secondary: { label: "Tính lương Gross ⇄ Net", href: "/cong-cu/tinh-luong-gross-net" },
+  },
+  disclaimer:
+    "Công cụ do Light Human phát triển, chỉ mang tính tham khảo và không thay thế tư vấn thuế chuyên môn.",
 };

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Calculator, Lightbulb, Sparkles, TrendingUp, type LucideIcon } from "lucide-react";
+import { ArrowRight, Calculator, Lightbulb, Receipt, Sparkles, TrendingUp, type LucideIcon } from "lucide-react";
 
 const TOOL_ICONS: Record<string, LucideIcon> = {
   "tinh-luong-gross-net": Calculator,
+  "tinh-thue-thu-nhap-ca-nhan": Receipt,
   "tinh-lai-kep": TrendingUp,
 };
 import { tools, toolsHub } from "@/content/tools";

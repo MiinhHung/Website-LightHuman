@@ -57,6 +57,7 @@ export type NavIcon =
   | "career"
   | "branding"
   | "salary"
+  | "tax"
   | "compound";
 
 export type NavLink = { label: string; href: string; desc?: string; icon?: NavIcon };
@@ -88,6 +89,7 @@ export const serviceNav = [
 /** Light Human Toolkit — các công cụ tương tác (/cong-cu). */
 export const toolNav = [
   { label: "Tính lương Gross ⇄ Net 2026", href: "/cong-cu/tinh-luong-gross-net" },
+  { label: "Tính thuế thu nhập cá nhân", href: "/cong-cu/tinh-thue-thu-nhap-ca-nhan" },
   { label: "Tính lãi kép & lợi nhuận đầu tư", href: "/cong-cu/tinh-lai-kep" },
 ];
 
@@ -128,6 +130,7 @@ export const mainNav: NavItem[] = [
     overview: "Tất cả công cụ",
     children: [
       { label: "Tính lương Gross ⇄ Net 2026", href: "/cong-cu/tinh-luong-gross-net", desc: "Theo mức giảm trừ và biểu thuế mới", icon: "salary" },
+      { label: "Tính thuế TNCN", href: "/cong-cu/tinh-thue-thu-nhap-ca-nhan", desc: "Biểu 5 bậc, HĐ dưới 3 tháng, không cư trú", icon: "tax" },
       { label: "Tính lãi kép", href: "/cong-cu/tinh-lai-kep", desc: "Tiền gửi, đầu tư định kỳ, lợi nhuận", icon: "compound" },
     ],
   },
@@ -172,6 +175,7 @@ export const mainNavEn: NavItem[] = [
     overview: "All tools",
     children: [
       { label: "Gross ⇄ Net salary 2026", href: "/cong-cu/tinh-luong-gross-net", desc: "Vietnam's new deductions and tax brackets", icon: "salary" },
+      { label: "Personal income tax", href: "/cong-cu/tinh-thue-thu-nhap-ca-nhan", desc: "5 brackets, short contracts, non-residents", icon: "tax" },
       { label: "Compound interest", href: "/cong-cu/tinh-lai-kep", desc: "Savings, regular investing, returns", icon: "compound" },
     ],
   },
@@ -196,6 +200,7 @@ export const footerNav: FooterCol[] = [
     links: [
       { label: "Dự án tiêu biểu", href: "/case-studies" },
       { label: "Tính lương Gross ⇄ Net", href: "/cong-cu/tinh-luong-gross-net" },
+      { label: "Tính thuế TNCN", href: "/cong-cu/tinh-thue-thu-nhap-ca-nhan" },
       { label: "Tính lãi kép", href: "/cong-cu/tinh-lai-kep" },
       { label: "Liên hệ", href: "/lien-he" },
       { label: "Câu hỏi thường gặp", href: "/lien-he#faq" },
@@ -227,6 +232,7 @@ const footerNavEn: FooterCol[] = [
     links: [
       { label: "Case studies", href: "/case-studies" },
       { label: "Gross ⇄ Net salary", href: "/cong-cu/tinh-luong-gross-net" },
+      { label: "Personal income tax", href: "/cong-cu/tinh-thue-thu-nhap-ca-nhan" },
       { label: "Compound interest", href: "/cong-cu/tinh-lai-kep" },
       { label: "Contact", href: "/lien-he" },
       { label: "FAQ", href: "/lien-he#faq" },

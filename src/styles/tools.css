@@ -2286,3 +2286,36 @@
     break-inside: avoid;
   }
 }
+
+/* =========================================================================
+ * Thuế TNCN (/cong-cu/tinh-thue-thu-nhap-ca-nhan)
+ * ========================================================================= */
+@media (min-width: 1140px) {
+  [data-theme="lighthuman"] .lht-breakdown--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Two quick facts under the split bar: marginal tax and tax-free threshold. */
+[data-theme="lighthuman"] .lht-pit-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 18px; }
+[data-theme="lighthuman"] .lht-pit-facts > div {
+  display: grid; gap: 4px; padding: 12px 14px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+}
+[data-theme="lighthuman"] .lht-pit-facts span { color: rgba(255, 255, 255, 0.62); font-size: 12.5px; }
+[data-theme="lighthuman"] .lht-pit-facts strong { color: #fff; font-family: var(--font-jetbrains-mono), var(--font-mono); font-size: 15px; font-weight: 600; }
+
+[data-theme="lighthuman"] .lht-pit-notes { display: grid; gap: 12px; margin: 4px 0 0; padding: 0 0 0 18px; color: rgba(255, 255, 255, 0.78); font-size: 14.5px; line-height: 1.6; }
+[data-theme="lighthuman"] .lht-pit-notes li::marker { color: var(--brand-gold); }
+
+/* Guide: the three cases. */
+[data-theme="lighthuman"] .lht-pit-cases { display: grid; gap: 16px; margin: 0 0 clamp(40px, 5vw, 56px); padding: 0; list-style: none; }
+@media (min-width: 900px) { [data-theme="lighthuman"] .lht-pit-cases { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+[data-theme="lighthuman"] .lht-pit-case { padding: 24px; border-radius: 18px; background: #fff; border: 1px solid var(--border-default); }
+[data-theme="lighthuman"] .lht-pit-case__rate {
+  display: inline-block; padding: 5px 10px; border-radius: 999px; background: var(--brand-navy); color: var(--brand-gold);
+  font-size: 12.5px; font-weight: 700;
+}
+[data-theme="lighthuman"] .lht-pit-case h3 { margin: 14px 0 0; color: var(--ink-900); font-size: 18px; font-weight: 700; }
+[data-theme="lighthuman"] .lht-pit-case p { margin: 8px 0 0; color: var(--ink-600); font-size: 15px; line-height: 1.6; }
+[data-theme="lighthuman"] .lht-pit-subhead { margin: 0 0 18px; color: var(--ink-800); font-size: 18px; font-weight: 700; }
+[data-theme="lighthuman"] .lht-pit-exempt__title { margin-top: 28px; }
+[data-theme="lighthuman"] .lht-pit-exempt { margin-top: 12px; }

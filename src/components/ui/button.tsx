@@ -17,6 +17,15 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        // Light Human brand variants (replace the old .lh-btn / .lh-btn--link classes).
+        brand:
+          "border-brand-navy bg-brand-navy font-semibold tracking-[0.01em] text-white hover:border-brand-navy-deep hover:bg-brand-navy-deep",
+        gold: "bg-gold font-semibold text-navy-950 shadow-md hover:bg-gold-hover focus-visible:ring-gold/50",
+        text: "h-auto gap-2 px-0 py-1 font-semibold text-brand-navy hover:text-brand-navy-deep",
+        // On navy grounds (home hero, dark bands).
+        inverse: "bg-white font-semibold text-brand-navy hover:bg-brand-blue-tint focus-visible:ring-white/50",
+        "inverse-outline":
+          "border-white/30 bg-transparent font-semibold text-white hover:border-white/60 hover:bg-white/10 focus-visible:ring-white/50",
       },
       size: {
         default:
@@ -30,6 +39,9 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        brand: "h-auto gap-2.5 rounded-md px-[22px] py-3.5 text-sm leading-none",
+        "brand-lg": "h-auto gap-2.5 rounded-md px-[26px] py-4 text-[15px] leading-none",
+        pill: "h-13 gap-2.5 rounded-full px-7 text-[15px] [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5",
       },
     },
     defaultVariants: {

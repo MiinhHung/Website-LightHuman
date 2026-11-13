@@ -5,8 +5,24 @@
       "args": ["-y", "@playwright/mcp@latest"]
     },
     "github": {
-      "command": "npm",
-      "args": ["-y", "@github/mcp@latest"]
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      }
+    },
+    "chrome-devtools": {
+      "description": "A Model Context Protocol server for interacting with Chrome DevTools, enabling browser automation, debugging, and performance analysis capabilities.",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.12.0"]
+    },
+    "context7": {
+      "description": "Context7 by Upstash pulls up-to-date, version-specific documentation and code examples straight from the source and injects them into your prompt. Add 'use context7' to any prompt to activate.",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@4.5.1"],
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      }
     }
   }
 }

@@ -23,14 +23,6 @@ const nextConfig: NextConfig = {
       { source: "/gioi-thieu", destination: "/dich-vu/gioi-thieu", permanent: true },
     ];
   },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
 };
 
 export default nextConfig;

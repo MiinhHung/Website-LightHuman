@@ -7,7 +7,15 @@ import { CMS } from "./site";
  * flagged TODO(BA) and must be confirmed before launch.
  */
 
+export const storyMeta = {
+  title: "Câu chuyện Light Human: hành trình từ TP.HCM",
+  description:
+    "Hành trình của Light Human từ những ngày đầu tại TP. Hồ Chí Minh: người sáng lập, các mốc phát triển, giấy phép dịch vụ việc làm và chặng đường phía trước.",
+};
+
 export const storyPage = {
+  kicker: "Câu chuyện",
+  crumb: "Câu chuyện",
   title: "Câu chuyện Light Human",
   lede: "Hành trình từ những ngày đầu tại TP. Hồ Chí Minh đến đối tác tuyển dụng của hơn 800 doanh nghiệp.",
   image: `${CMS}/hero_about_c25f683d35.png`,
@@ -70,6 +78,12 @@ export const storyMilestones: StoryMilestone[] = [
     ],
   },
 ];
+
+export const storyTimeline = {
+  title: "Hành trình *từng chặng*",
+  lede: "Mốc nào chưa có năm chính xác, chúng tôi ghi theo giai đoạn.",
+  aheadWhen: "Phía trước",
+};
 
 export const storyAhead = {
   title: "Chặng tiếp theo",

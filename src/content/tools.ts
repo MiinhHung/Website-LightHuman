@@ -8,6 +8,8 @@ import { CMS } from "./site";
 
 export type ToolCard = {
   slug: string;
+  /** Icon name from the mock's Phosphor set (`src/content/mk/icons.json`). */
+  icon: string;
   name: string;
   desc: string;
   tag: string;
@@ -17,6 +19,7 @@ export type ToolCard = {
 export const tools: ToolCard[] = [
   {
     slug: "tinh-luong-gross-net",
+    icon: "salary",
     name: "Tính lương Gross ⇄ Net 2026",
     desc: "Quy đổi hai chiều theo biểu thuế 5 bậc mới, kèm bảng chi phí doanh nghiệp và so sánh hai offer.",
     tag: "Lương & thuế",
@@ -24,6 +27,7 @@ export const tools: ToolCard[] = [
   },
   {
     slug: "tinh-thue-thu-nhap-ca-nhan",
+    icon: "tax",
     name: "Tính thuế thu nhập cá nhân 2026",
     desc: "Thuế TNCN theo biểu 5 bậc mới cho cả ba trường hợp: hợp đồng từ 3 tháng, dưới 3 tháng và người không cư trú. So sánh ngay với luật cũ.",
     tag: "Lương & thuế",
@@ -31,6 +35,7 @@ export const tools: ToolCard[] = [
   },
   {
     slug: "tinh-lai-kep",
+    icon: "compound",
     name: "Tính lãi kép & lợi nhuận đầu tư",
     desc: "Dự báo giá trị tiền gửi, khoản đầu tư theo thời gian — biểu đồ tăng trưởng, bảng từng năm và công thức điền sẵn số của bạn.",
     tag: "Tài chính cá nhân",
@@ -48,6 +53,12 @@ export const toolsHub = {
     alt: "Bàn làm việc với sổ tay, máy tính bảng hiển thị biểu đồ và tách cà phê",
   },
   badge: { title: "Miễn phí · Không cần đăng nhập", body: "Cập nhật theo quy định lương, thuế mới nhất 2026" },
+  /** Appended to the badge on each calculator hero. */
+  badgeNote: "Số liệu tham khảo.",
+  startLabel: "Bắt đầu tính",
+  openLabel: "Mở công cụ",
+  listLabel: "Danh sách công cụ",
+  faqTitle: "Câu hỏi *thường gặp*",
   suggest: {
     title: "Bạn cần một công cụ khác?",
     body: "Gợi ý cho chúng tôi công cụ bạn muốn có — tính BHXH một lần, trợ cấp thôi việc, lương tháng 13…",
@@ -57,6 +68,11 @@ export const toolsHub = {
 
 export const salaryTool = {
   title: "Tính lương Gross sang Net và ngược lại 2026",
+  heroTitle: "Tính lương Gross ⇄ Net *chuẩn 2026*",
+  crumb: "Tính lương Gross ⇄ Net",
+  calcTitle: "Máy tính lương Gross Net",
+  resultRef: "Số liệu tham khảo cho cá nhân cư trú, hợp đồng từ 3 tháng.",
+  guide: { kicker: "Cách công cụ tính", title: "Gross ra Net trong *3 bước*" },
   description:
     "Công cụ tính lương Gross ⇄ Net chuẩn 2026 của Light Human: biểu thuế TNCN 5 bậc, giảm trừ gia cảnh 15,5 triệu, lương cơ sở 2,53 triệu. Có chi phí doanh nghiệp và so sánh offer.",
   hero: {
@@ -156,6 +172,10 @@ export const salaryTool = {
 
 export const compoundTool = {
   title: "Tính lãi kép, giá trị tiền gửi và lợi nhuận đầu tư",
+  heroTitle: "Tính lãi kép & *lợi nhuận đầu tư*",
+  crumb: "Tính lãi kép",
+  calcTitle: "Máy tính lãi kép",
+  resultRef: "Số liệu minh họa với lãi suất cố định, không phải lời khuyên đầu tư.",
   description:
     "Công cụ tính lãi kép miễn phí của Light Human: dự báo giá trị tiền gửi tiết kiệm, khoản đầu tư có góp thêm hằng tháng, kèm biểu đồ tăng trưởng, bảng từng năm và công thức chi tiết.",
   hero: {
@@ -187,6 +207,7 @@ export const compoundTool = {
     eyebrow: "Lãi đơn hay lãi kép?",
     title: "Cùng 100 triệu, 8%/năm —",
     titleEm: "khác nhau ở đâu?",
+    example: "Ví dụ: 100.000.000đ, lãi suất 8%/năm, ghép lãi hằng năm, không góp thêm.",
     body: "Lãi đơn chỉ tính trên tiền gốc. Lãi kép nhập tiền lãi vào gốc sau mỗi kỳ, nên kỳ sau lãi được tính trên số tiền lớn hơn. Khoảng cách giữa hai cách tính nhỏ trong vài năm đầu, rồi nới rộng rất nhanh.",
   },
   tips: [
@@ -251,6 +272,17 @@ export const compoundTool = {
 
 export const pitTool = {
   title: "Tính thuế thu nhập cá nhân 2026",
+  heroTitle: "Tính thuế thu nhập cá nhân *chuẩn 2026*",
+  crumb: "Tính thuế TNCN",
+  calcTitle: "Máy tính thuế thu nhập cá nhân",
+  resultRef: "Số liệu tham khảo cho thu nhập tiền lương, tiền công hằng tháng từ một nơi.",
+  guide: {
+    kicker: "Cách công cụ tính",
+    title: "Ba trường hợp, *ba cách tính*",
+    stepsTitle: "Với hợp đồng từ 3 tháng: 3 bước",
+  },
+  /** Added to the first two items of the 2026 legal basis. */
+  legalExtra: "Thông tư 111/2013/TT-BTC — khấu trừ 10% với hợp đồng dưới 3 tháng; thuế suất 20% với cá nhân không cư trú",
   description:
     "Công cụ tính thuế TNCN 2026 của Light Human: biểu thuế 5 bậc, giảm trừ 15,5 triệu, khấu trừ 10% với hợp đồng dưới 3 tháng, thuế 20% cho người không cư trú. So sánh với luật cũ, xem ngưỡng bắt đầu nộp thuế.",
   hero: {

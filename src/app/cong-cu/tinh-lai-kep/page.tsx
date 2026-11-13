@@ -2,12 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { compoundTool } from "@/content/tools";
 import { site } from "@/content/site";
-import { ToolHero } from "@/components/tools/ToolHero";
-import { ToolFaq } from "@/components/tools/ToolFaq";
-import { ToolCta } from "@/components/tools/ToolCta";
-import { CompoundCalculator, CompoundCalculatorWithQuery } from "@/components/tools/compound/CompoundCalculator";
-import { CompoundGuide } from "@/components/tools/compound/CompoundGuide";
-import { GrowthArt } from "@/components/tools/compound/GrowthArt";
+import { CalcCta, CalcFaq, CalcHero, CompoundGuide } from "@/components/mk/tools/parts";
+import { CompoundCalc, CompoundCalcWithQuery } from "@/components/mk/tools/CompoundCalc";
 
 export const metadata: Metadata = {
   title: compoundTool.title,
@@ -40,28 +36,16 @@ const jsonLd = {
 };
 
 export default function CompoundToolPage() {
-  const { hero, faqHead, faqs, cta, disclaimer } = compoundTool;
   return (
-    <div className="lht-page">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <ToolHero
-        crumbs={[{ label: "Trang chủ", href: "/" }, { label: "Công cụ", href: "/cong-cu" }, { label: "Tính lãi kép" }]}
-        eyebrow={hero.eyebrow}
-        title={
-          <>
-            Tính lãi kép & <em>lợi nhuận đầu tư</em>
-          </>
-        }
-        lede={hero.lede}
-        facts={hero.facts}
-        media={<GrowthArt {...hero.sample} />}
-      />
-      <Suspense fallback={<CompoundCalculator />}>
-        <CompoundCalculatorWithQuery />
+      <CalcHero tool={compoundTool} />
+      <Suspense fallback={<CompoundCalc />}>
+        <CompoundCalcWithQuery />
       </Suspense>
       <CompoundGuide />
-      <ToolFaq eyebrow={faqHead.eyebrow} helper={faqHead.helper} helperLink={faqHead.helperLink} items={faqs} />
-      <ToolCta cta={cta} disclaimer={disclaimer} />
-    </div>
+      <CalcFaq prefix="lk" tool={compoundTool} />
+      <CalcCta cta={compoundTool.cta} />
+    </>
   );
 }

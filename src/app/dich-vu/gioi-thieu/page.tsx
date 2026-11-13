@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { aboutCta, aboutHero, aboutVideo } from "@/content/about";
-import { CinematicHero } from "@/components/sections/about/CinematicHero";
-import { AboutIntro } from "@/components/sections/about/AboutIntro";
-import { AboutStats } from "@/components/sections/about/AboutStats";
-import { CoreValues } from "@/components/sections/about/CoreValues";
-import { TeamGrid } from "@/components/sections/about/TeamGrid";
-import { CtaBand } from "@/components/sections/about/CtaBand";
-import { VideoFeature } from "@/components/sections/VideoFeature";
-import { Partners } from "@/components/sections/Partners";
+import { aboutCta, aboutHero, aboutMeta, aboutVideo } from "@/content/about";
+import { AboutIntro, AboutStats, CoreValues, Team, VideoFeature } from "@/components/mk/about/AboutSections";
+import { HeroPhoto } from "@/components/mk/about/PageHero";
+import { PartnersBand } from "@/components/mk/home/HomeSections";
+import { Btn, BtnIco, CtaBand } from "@/components/mk/ui";
 
 export const metadata: Metadata = {
-  title: "Giới thiệu",
-  description: aboutHero.lede,
+  title: aboutMeta.title,
+  description: aboutMeta.description,
 };
 
 export const instant = false;
@@ -19,14 +15,30 @@ export const instant = false;
 export default function AboutPage() {
   return (
     <>
-      <CinematicHero {...aboutHero} />
+      <HeroPhoto
+        image={aboutHero.image}
+        alt={aboutHero.imageAlt}
+        crumb={aboutHero.crumb}
+        kicker={aboutHero.eyebrow}
+        title={aboutHero.title}
+        lede={aboutHero.lede}
+        actions={
+          <>
+            <Btn label={aboutHero.cta.label} href={aboutHero.cta.href} kind="gold" />
+            <button className="btn btn-ghost" type="button" data-video-open="">
+              <span>{aboutVideo.play}</span>
+              <BtnIco name="play" />
+            </button>
+          </>
+        }
+      />
       <AboutIntro />
-      <VideoFeature {...aboutVideo} />
+      <VideoFeature />
       <AboutStats />
-      <Partners />
       <CoreValues />
-      <TeamGrid />
-      <CtaBand {...aboutCta} />
+      <Team />
+      <PartnersBand />
+      <CtaBand title={aboutCta.heading} desc={aboutCta.desc} action={aboutCta.action} secondary={aboutCta.secondary} />
     </>
   );
 }

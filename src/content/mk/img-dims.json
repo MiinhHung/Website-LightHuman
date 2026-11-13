@@ -1,0 +1,566 @@
+{
+"/img/favicon.png": [
+64,
+64
+],
+"/img/logo-on-dark.png": [
+570,
+240
+],
+"/img/logo-on-light.png": [
+570,
+240
+],
+"/img/bai-viet/1-19-b92e359d78.webp": [
+1000,
+417
+],
+"/img/bai-viet/2-sinh-vien-tham-gia-hoat-dong-noi-chi-tai-booth.webp": [
+1000,
+667
+],
+"/img/bai-viet/3-0a87633ea8.webp": [
+1200,
+675
+],
+"/img/bai-viet/38273-0a8366321a.webp": [
+1000,
+667
+],
+"/img/bai-viet/65cb7127c500e5780e0031c9-onboarding-process-3pha.webp": [
+1000,
+474
+],
+"/img/bai-viet/685c29300334ae67acf03fb4-67859049c02d67b2cfccff9.webp": [
+1000,
+571
+],
+"/img/bai-viet/a23c3fcf-image-ad23634119.webp": [
+1000,
+665
+],
+"/img/bai-viet/aiinvietnam-d1599d5903.webp": [
+1000,
+447
+],
+"/img/bai-viet/anh-1-thumnail-88c05d22fa.webp": [
+1000,
+667
+],
+"/img/bai-viet/best-strategies-to-attract-and-retain-gen-z-empl.webp": [
+1000,
+584
+],
+"/img/bai-viet/career-coaching-for-senior-executives-reaching-n.webp": [
+1000,
+667
+],
+"/img/bai-viet/chien-luoc-chon-viec-dung-d1f83897f1.webp": [
+1200,
+675
+],
+"/img/bai-viet/cost-per-hire-c5fb15282d.webp": [
+1000,
+563
+],
+"/img/bai-viet/culture-evp-and-employer-brand-social-4bd9646940.webp": [
+1000,
+523
+],
+"/img/bai-viet/culture-evp-and-employer-brand-social-bcc3e3fafe.webp": [
+1000,
+523
+],
+"/img/bai-viet/data-analyst-working-on-business-analytics-dashb.webp": [
+1000,
+667
+],
+"/img/bai-viet/digital-transformation-is-ai-transformation-scal.webp": [
+1000,
+667
+],
+"/img/bai-viet/download-4baf38d282.webp": [
+1000,
+667
+],
+"/img/bai-viet/employee-engagement-models-thumbnail-264a47bfab.webp": [
+1000,
+523
+],
+"/img/bai-viet/group-of-employees-participating-in-egagement-ac.webp": [
+1000,
+667
+],
+"/img/bai-viet/hinh-tren-web-8fa7ce6e30.webp": [
+1200,
+628
+],
+"/img/bai-viet/how-great-managers-motivate-their-employees-1918.webp": [
+1000,
+667
+],
+"/img/bai-viet/interview-2-0007fa58f6.webp": [
+960,
+934
+],
+"/img/bai-viet/job-interview-success-tips-b5255cb277.webp": [
+1000,
+563
+],
+"/img/bai-viet/kpi-dashboard-template-featured-image-46fd095c1d.webp": [
+1000,
+563
+],
+"/img/bai-viet/lh-talkshow-cv-vu-xuan-vinh-cover-bf66a44d70.webp": [
+1000,
+667
+],
+"/img/bai-viet/mass-hiring-2x-909ba9af19.webp": [
+1000,
+427
+],
+"/img/bai-viet/osw-fx-xhv2-d1-u-dsfa-q18-djqe3mgw-ba2f7727bf.webp": [
+1000,
+561
+],
+"/img/bai-viet/professional-cover-letter-example-template-d6c50.webp": [
+773,
+1000
+],
+"/img/bai-viet/recruitment-advertising-channels-2e3a3e5f7d.webp": [
+1000,
+600
+],
+"/img/bai-viet/screen-shot-2024-09-07-at-14-07-52-f50993ca72.webp": [
+1000,
+629
+],
+"/img/bai-viet/screen-shot-2024-09-07-at-14-39-30-93b2b44f9f.webp": [
+1000,
+548
+],
+"/img/bai-viet/talent-acquisition-vs-recruitment-the-difference.webp": [
+1000,
+523
+],
+"/img/bai-viet/talent-management-framework-example-social-2cb50.webp": [
+1000,
+523
+],
+"/img/bai-viet/truong-cao-dang-dai-viet-sai-gon-co-so-can-tho-t.webp": [
+1000,
+566
+],
+"/img/bai-viet/welcome-message-new-employee-54a361eb7b.webp": [
+1000,
+534
+],
+"/img/bai-viet/who-is-generation-alpha-1230x690-3ae9527873.webp": [
+1000,
+625
+],
+"/img/bai-viet/z4922310863892-6da6a1b7f976760877e73deb81550434-.webp": [
+1000,
+667
+],
+"/img/bai-viet/z6980124168565-2fe26a7a877500392a33f2c285513ebd-.webp": [
+1000,
+750
+],
+"/img/case/cs-canawan-52c2c825eb.webp": [
+1400,
+1050
+],
+"/img/case/cs-kha-kim-beauty-4583cff848.webp": [
+1400,
+1050
+],
+"/img/case/cs-pg-operator-849ec8d77f.webp": [
+1400,
+1050
+],
+"/img/case/cs-student-fnb-3ba2ed39d8.webp": [
+1400,
+1050
+],
+"/img/case/cs-tan-hiep-phat-4888a599fc.webp": [
+1400,
+1050
+],
+"/img/case/hero-case-studies-f56ba15689.webp": [
+1400,
+788
+],
+"/img/dich-vu/01-executive-search-1489950848.webp": [
+1400,
+788
+],
+"/img/dich-vu/02-mass-hiring-be2b05f192.webp": [
+1400,
+788
+],
+"/img/dich-vu/03-employer-branding-de017b1d9f.webp": [
+1400,
+788
+],
+"/img/dich-vu/04-training-620b2066d4.webp": [
+1400,
+788
+],
+"/img/dich-vu/05-career-counseling-48fda77e5d.webp": [
+1400,
+788
+],
+"/img/dich-vu/07-temp-staffing-6ecce3b3bd.webp": [
+1400,
+788
+],
+"/img/dich-vu/download-41a86d2e70.webp": [
+800,
+533
+],
+"/img/dich-vu/download-8dfb9c65cf.webp": [
+800,
+601
+],
+"/img/dich-vu/download-bd1cb79223.webp": [
+800,
+534
+],
+"/img/dich-vu/hero-services-d63db67f3f.webp": [
+1400,
+788
+],
+"/img/dich-vu/industry-career-switch-6a47cc9805.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-ecommerce-9c7c4dda81.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-events-cad1b9323b.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-finance-fcba9116e4.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-fnb-1f1bea02ff.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-healthcare-b0dd13dd80.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-manufacturing-e0751552a1.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-mid-management-7be5ee86a6.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-retail-31799ec687.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-services-63961c2cc0.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-students-f792a4151d.webp": [
+1400,
+1050
+],
+"/img/dich-vu/industry-tech-2befd2528e.webp": [
+1400,
+1050
+],
+"/img/logo/1669606279786-minto-profile-photo-a301eeabd6.webp": [
+360,
+360
+],
+"/img/logo/1683531989-6458a8d61187f-6846ad2a3b.webp": [
+360,
+360
+],
+"/img/logo/1783870152974-1646628912926thietkekhongten3-a4da.webp": [
+360,
+206
+],
+"/img/logo/bluecyber-limited-company-logo-f7a2833243.webp": [
+200,
+200
+],
+"/img/logo/cropped-logo-co-chu-r-1-08ec110eb0.webp": [
+360,
+103
+],
+"/img/logo/default-thumbnail-ce31acdefd.webp": [
+360,
+373
+],
+"/img/logo/download-1-4daba931b8.webp": [
+219,
+230
+],
+"/img/logo/download-7477bd0aca.webp": [
+225,
+225
+],
+"/img/logo/hoc-vien-esora-academy-xuat-sac-do-truong-dai-ho.webp": [
+360,
+197
+],
+"/img/logo/hpc-logo-746531c528.webp": [
+350,
+350
+],
+"/img/logo/images-1-508dc72e6e.webp": [
+360,
+253
+],
+"/img/logo/images-10-2b14a5db7c.webp": [
+300,
+300
+],
+"/img/logo/images-10-37ccbe3b7d.webp": [
+360,
+360
+],
+"/img/logo/images-11-3aa56bcec7.webp": [
+360,
+360
+],
+"/img/logo/images-12-6639491c59.webp": [
+360,
+360
+],
+"/img/logo/images-12-cd57b02a22.webp": [
+360,
+360
+],
+"/img/logo/images-13-08d53374eb.webp": [
+360,
+198
+],
+"/img/logo/images-14-3225c4b82a.webp": [
+360,
+347
+],
+"/img/logo/images-15-a2c8bec82a.webp": [
+300,
+300
+],
+"/img/logo/images-15-be4e858a52.webp": [
+360,
+212
+],
+"/img/logo/images-16-920098ac3a.webp": [
+280,
+104
+],
+"/img/logo/images-16-93a8ecfd1d.webp": [
+360,
+123
+],
+"/img/logo/images-17-3e1a45f942.webp": [
+360,
+360
+],
+"/img/logo/images-18-9c670f5e5f.webp": [
+248,
+203
+],
+"/img/logo/images-19-34f677f764.webp": [
+360,
+360
+],
+"/img/logo/images-2-4af32352a5.webp": [
+360,
+358
+],
+"/img/logo/images-2-fbc9d72373.webp": [
+292,
+307
+],
+"/img/logo/images-20-3e7d2d061a.webp": [
+360,
+97
+],
+"/img/logo/images-21-4ccc556190.webp": [
+360,
+360
+],
+"/img/logo/images-22-b244266de6.webp": [
+360,
+193
+],
+"/img/logo/images-23-fe14f2dbc4.webp": [
+360,
+360
+],
+"/img/logo/images-24-f324f3eda4.webp": [
+360,
+360
+],
+"/img/logo/images-25-0825aa6b97.webp": [
+360,
+360
+],
+"/img/logo/images-26-01775b6076.webp": [
+360,
+242
+],
+"/img/logo/images-27-8c2adb831e.webp": [
+360,
+189
+],
+"/img/logo/images-28-78981ef968.webp": [
+360,
+360
+],
+"/img/logo/images-29-e14ba99aef.webp": [
+360,
+360
+],
+"/img/logo/images-3-fe65a0dc6b.webp": [
+360,
+200
+],
+"/img/logo/images-30-10a1e87b51.webp": [
+360,
+360
+],
+"/img/logo/images-31-8f5ae2a2df.webp": [
+360,
+360
+],
+"/img/logo/images-32-7e9dc526eb.webp": [
+360,
+360
+],
+"/img/logo/images-33-21cd5594b4.webp": [
+360,
+360
+],
+"/img/logo/images-34-e37d76b6e1.webp": [
+360,
+331
+],
+"/img/logo/images-35-6badd4593e.webp": [
+360,
+360
+],
+"/img/logo/images-36-1000ba5a35.webp": [
+360,
+206
+],
+"/img/logo/images-37-d0cb2c293b.webp": [
+360,
+365
+],
+"/img/logo/images-38-c254d34998.webp": [
+360,
+223
+],
+"/img/logo/images-39-997f2ff4ec.webp": [
+228,
+221
+],
+"/img/logo/images-4-7e92c3563f.webp": [
+360,
+360
+],
+"/img/logo/images-4-c037c6327c.webp": [
+360,
+360
+],
+"/img/logo/images-40-85647459a6.webp": [
+225,
+225
+],
+"/img/logo/images-5-2fe2d5fa10.webp": [
+360,
+360
+],
+"/img/logo/images-5-eba19c5cd5.webp": [
+360,
+360
+],
+"/img/logo/images-6-4254dadcb2.webp": [
+360,
+360
+],
+"/img/logo/images-6-d181d9cfba.webp": [
+360,
+360
+],
+"/img/logo/images-7-0fa2b91434.webp": [
+360,
+360
+],
+"/img/logo/images-7176cb49f0.webp": [
+360,
+344
+],
+"/img/logo/images-8-00d4c7d64c.webp": [
+360,
+260
+],
+"/img/logo/images-8-77379602e2.webp": [
+360,
+271
+],
+"/img/logo/images-9-85ad42d4fc.webp": [
+360,
+360
+],
+"/img/logo/images-9-db39cd4ba7.webp": [
+225,
+225
+],
+"/img/logo/logo-mgvinhphuc-84eca12ffe.webp": [
+270,
+83
+],
+"/img/logo/logo-san-pham-vichem-600x600-945d071ead.webp": [
+360,
+360
+],
+"/img/logo/u-x-wx-bb-x2-whqtlkyc-pt-n4ed-qob-gt10j-ot-17328.webp": [
+360,
+360
+],
+"/img/trang/gemini-generated-image-3pqrq63pqrq63pqr-b4b98019.webp": [
+1008,
+1049
+],
+"/img/trang/gemini-generated-image-gi5qlegi5qlegi5q-eee261e8.webp": [
+1008,
+1051
+],
+"/img/trang/gemini-generated-image-kvlldjkvlldjkvll-d9d3f096.webp": [
+1053,
+1024
+],
+"/img/trang/hero-about-c25f683d35.webp": [
+1600,
+900
+],
+"/img/trang/hero-insights-d1c022601d.webp": [
+1600,
+900
+],
+"/img/trang/lighthuman-hero-7ee1a27bba.webp": [
+1672,
+941
+],
+"/img/trang/video-poster.webp": [
+1280,
+720
+]
+}

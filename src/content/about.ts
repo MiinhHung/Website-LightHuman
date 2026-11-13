@@ -1,24 +1,38 @@
-import { CMS } from "./site";
+import { CMS, quoteHref, site } from "./site";
 
 /** Trang /dich-vu/gioi-thieu — nội dung lấy theo lighthuman.vn/gioi-thieu. */
+
+export const aboutMeta = {
+  title: "Về Light Human: đội ngũ tư vấn nhân sự",
+  description:
+    "Light Human là Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng: sứ mệnh, giá trị cốt lõi, đội ngũ sáng lập và những con số sau sáu năm tuyển dụng cho doanh nghiệp.",
+};
+
+/** Breadcrumb copy shared by the inner-page heroes (about, story, privacy). */
+export const crumbsCopy = { label: "Đường dẫn", home: "Trang chủ" };
 
 export const aboutHero = {
   eyebrow: "Về Light Human",
   title: "Building Better Teams, One Hire At A Time",
   lede: "Light Human - đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Giải pháp nhân sự ánh sáng - đồng hành cùng doanh nghiệp Việt và quốc tế.",
   image: `${CMS}/hero_about_c25f683d35.png`,
-  cta: { label: "Liên hệ tư vấn", href: "/lien-he" },
+  imageAlt: "Đội ngũ Light Human trao đổi cùng khách hàng",
+  crumb: "Giới thiệu",
+  cta: { label: "Nhận báo giá", href: quoteHref },
 };
 
 export const aboutIntro = {
   mission: {
     id: "su-menh",
     title: "Sứ mệnh",
+    /** One-sentence version shown on the page (shortened from `text`, no new claims). */
+    short: "Cầu nối giữa doanh nghiệp cần nhân tài và chuyên gia cần nơi nuôi dưỡng sự nghiệp lâu dài.",
     text: "Light Human là cầu nối giữa doanh nghiệp tìm kiếm nhân tài phù hợp với sự phát triển của công ty, đồng thời kết nối những chuyên gia có năng lực với môi trường nuôi dưỡng sự nghiệp lâu dài.",
   },
   vision: {
     id: "tam-nhin",
     title: "Tầm nhìn",
+    short: "Công ty tuyển dụng am hiểu sâu sắc nhất, nằm trong 5 thương hiệu hàng đầu giai đoạn 2020-2025.",
     text: "Trở thành công ty dịch vụ tuyển dụng am hiểu sâu sắc nhất và đáp ứng chuyên nghiệp nhất các nhu cầu tuyển dụng của doanh nghiệp - thiết lập Light Human như một trong 5 thương hiệu dịch vụ tuyển dụng hàng đầu Việt Nam (2020-2025).",
   },
   quote: "Hành trình vạn dặm, bắt đầu từ một bước chân",
@@ -39,7 +53,8 @@ export type AboutStatIcon = "briefcase" | "users-round" | "building-2" | "heart-
 
 export const aboutStats = {
   eyebrow: "Con số",
-  title: "Light Human qua những con số",
+  // TODO(BA): "Sáu năm" comes from the mock (6+ năm kinh nghiệm); confirm against the founding year.
+  title: "Sáu năm, *tính bằng con người*",
   items: [
     { icon: "briefcase", num: "1.200+", label: "Dự án hoàn thành" },
     { icon: "users-round", num: "36K+", label: "Ứng viên tiềm năng" },
@@ -59,23 +74,29 @@ export const coreValuesSection = {
       icon: "heart-handshake",
       title: "Tận tâm",
       desc: "Coi nhu cầu của khách hàng và ứng viên như của chính mình - đồng hành đến khi thành công.",
+      proof: { text: "Bảo hành 60 ngày cho mỗi ứng viên tuyển số lượng lớn, 6 tháng với nhân sự cấp cao: nghỉ việc thì thay miễn phí.", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap", label: "Xem chính sách bảo hành" },
     },
     {
       icon: "shield-check",
       title: "Chuyên nghiệp",
       desc: "Quy trình chuẩn hóa, am hiểu sâu sắc thị trường lao động Việt Nam.",
+      proof: { text: "Một quy trình 6 bước cho mọi dự án, mỗi dự án có người phụ trách riêng, không dùng chung đội với khách khác.", href: "/dich-vu", label: "Xem quy trình" },
     },
     {
       icon: "sparkles",
       title: "Đổi mới",
       desc: "Tích hợp công nghệ video, công cụ thông minh và phân tích dữ liệu vào quy trình tuyển dụng.",
+      proof: { text: "Công cụ tính lương, thuế và lập báo giá chạy ngay trên website, không cần đăng nhập.", href: "/cong-cu", label: "Mở công cụ" },
     },
     {
       icon: "sprout",
       title: "Bền vững",
       desc: "Tập trung vào mối quan hệ dài hạn - nhân sự gắn bó, doanh nghiệp phát triển.",
+      proof: { text: "Đồng hành 90 ngày đầu của ứng viên cấp cao, và cố vấn 30-60 ngày sau mỗi khóa đào tạo.", href: "/dich-vu/dao-tao-tuyen-dung", label: "Xem cam kết sau khóa" },
     },
-  ] satisfies { icon: ValueIcon; title: string; desc: string }[],
+  ] satisfies { icon: ValueIcon; title: string; desc: string; proof: { text: string; href: string; label: string } }[],
+  // Each value is backed by a commitment already stated on a service page (services.ts FAQ/scope).
+  proofKicker: "Thể hiện qua",
 };
 
 export const teamSection = {
@@ -107,5 +128,6 @@ export const teamSection = {
 export const aboutCta = {
   heading: "Tham gia hành trình cùng Light Human",
   desc: "Bạn là doanh nghiệp cần tư vấn nhân sự, hay ứng viên tìm kiếm cơ hội? Hãy kết nối với chúng tôi.",
-  action: { label: "Liên hệ ngay", href: "/lien-he" },
+  action: { label: "Nhận báo giá", href: quoteHref },
+  secondary: { label: "Bạn đang tìm việc? Xem việc làm", href: site.jobsUrl },
 };

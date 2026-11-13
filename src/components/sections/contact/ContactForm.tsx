@@ -4,6 +4,7 @@ import { useActionState, type ReactNode } from "react";
 import { submitContact } from "@/app/lien-he/actions";
 import { contactFormCopy } from "@/content/contact";
 import { serviceOptions, type ContactField, type ContactState } from "@/lib/contact-schema";
+import { Button } from "@/components/ui/button";
 import { ContactIcon } from "./ContactIcon";
 
 const initialState: ContactState = { status: "idle" };
@@ -110,10 +111,10 @@ export function ContactForm() {
         </span>
         {contactFormCopy.privacy}
       </p>
-      <button type="submit" className="lh-btn lh-btn--lg" disabled={pending}>
+      <Button type="submit" variant="brand" size="brand-lg" disabled={pending}>
         {pending ? "Đang gửi…" : contactFormCopy.submit}
         <span aria-hidden="true">→</span>
-      </button>
+      </Button>
     </form>
   );
 }

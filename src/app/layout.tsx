@@ -1,30 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Merriweather } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Overlays } from "@/components/mk/Overlays";
+import { Runtime, RuntimeChrome } from "@/components/mk/Runtime";
+// Brand + feature stylesheets are pulled in by globals.css (legacy `lh` layer, mock `mk` layer).
 import "./globals.css";
-// Header nav, dropdown panels, language switch, mobile drawer — class lh-nav*, lh-mega*, lh-lang*, lh-drawer*.
-import "@/styles/header.css";
-// Home page sections added in the redesign — class lh-intent*, lh-kit*.
-import "@/styles/home.css";
-// Light Human Toolkit (/cong-cu) — class lht-*, dùng token của theme lighthuman.
-import "@/styles/tools.css";
-// Insights listing (/tin-tuc) — class lh-ins-*.
-import "@/styles/insights.css";
-// Quote builder card table (/lien-he#bao-gia) — class lh-qb-*.
-import "@/styles/quote-board.css";
 
-// Font giống site gốc: Inter (thân bài), Merriweather (tiêu đề), JetBrains Mono (số thứ tự).
-const inter = Inter({ variable: "--font-inter", subsets: ["latin", "vietnamese"], display: "swap" });
-const merriweather = Merriweather({
-  variable: "--font-merriweather",
+// Archivo with its width axis: the mock's display type is the wide cut (font-stretch 108–125%).
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "700", "900"],
+  axes: ["wdth"],
   style: ["normal", "italic"],
   display: "swap",
 });
-const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin", "vietnamese"], display: "swap" });
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", locale: "vi_VN", siteName: site.name },
 };
 
-export const viewport: Viewport = { themeColor: "#14285a" };
+export const viewport: Viewport = { themeColor: "#0d1a3d" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -42,12 +39,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="lighthuman"
       data-color-scheme="light"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${merriweather.variable} ${jetbrains.variable}`}
+      // `js` gates the mock's entrance states (clip reveals); Next always runs JS.
+      className={`js ${archivo.variable} ${jetbrains.variable}`}
     >
-      <body className="flex min-h-screen flex-col bg-white">
+      <body>
+        <a className="skip" href="#noi-dung">
+          Bỏ qua, tới nội dung chính
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="noi-dung">{children}</main>
         <Footer />
+        <Overlays />
+        <RuntimeChrome />
+        <Runtime />
       </body>
     </html>
   );

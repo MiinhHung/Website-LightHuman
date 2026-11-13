@@ -1,0 +1,297 @@
+/* Parallax -> Features -> Testimonials (trang chủ). Class tiền tố sx-, không đụng CSS cũ.
+   Parallax và Features chuyển sang phong cách nền sáng cao cấp (light/paper/cream), nhịp tương phản thanh lịch với hero tối.
+   Testimonials giữ nền sáng nhẹ.
+   Viết bằng px, chạy `node tools/px2rem.js assets/css/sections.css` để co theo chuẩn 80% của site. */
+
+/* ---------------------------------------------------------------- 1. theme mapping: chỉ trỏ về biến có sẵn của style.css */
+:root {
+  --sx-bg: var(--paper);
+  --sx-fg: var(--ink);
+  --sx-card: #fff;
+  --sx-muted: var(--mist);
+  --sx-muted-fg: var(--muted);
+  --sx-border: rgba(20, 40, 90, .14);
+  --sx-primary: var(--navy-900);
+  --sx-primary-fg: #f4f6fb;
+  --sx-accent: var(--mist);
+  --sx-warm: var(--gold);
+  --sx-warm-line: var(--amber);
+  --sx-warm-glow: rgba(242, 207, 99, .22);
+  --sx-cool: var(--navy-600);
+  --sx-cool-glow: rgba(31, 53, 118, .12);
+}
+.sx-dark {
+  --sx-bg: var(--navy-950);
+  --sx-fg: #f4f6fb;
+  --sx-card: rgba(244, 246, 251, .06);
+  --sx-muted: rgba(244, 246, 251, .08);
+  --sx-muted-fg: var(--muted-on-dark);
+  --sx-border: rgba(231, 235, 243, .14);
+  --sx-primary: var(--gold);
+  --sx-primary-fg: var(--navy-900);
+  --sx-accent: rgba(244, 246, 251, .1);
+  --sx-warm-glow: rgba(242, 207, 99, .2);
+  --sx-cool-glow: rgba(88, 126, 235, .26);
+}
+.sx-parallax, .sx-features, .sx-testimonials { --accent: var(--amber-deep); --fg: var(--ink); --fg-2: var(--muted); --rule: var(--line); background: var(--sx-bg); color: var(--sx-fg); }
+.sx-dark { --accent: var(--gold); --fg: #f4f6fb; --fg-2: var(--muted-on-dark); --rule: var(--line-dark); }
+.sx-badge { display: inline-flex; align-items: center; padding: 0.375rem 0.875rem; border: 1.5px solid var(--sx-border); border-radius: 62.4375rem; background: #ffffff; font-family: var(--mono); font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--navy-800); box-shadow: 0 2px 0.375rem rgba(20, 40, 90, .04); }
+.sx-dark .sx-badge { border-color: rgba(242, 207, 99, .4); background: rgba(10, 20, 48, .5); color: var(--gold); }
+.sx-title { max-width: 20ch; margin-inline: auto; color: var(--navy-950); }
+.sx-title em { color: var(--amber-deep); font-style: normal; }
+.sx-dark .sx-title { color: #f4f6fb; }
+.sx-dark .sx-title em { color: var(--gold); }
+.sx-lede { max-width: 52ch; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.65; color: var(--muted); text-wrap: pretty; }
+.sx-dark .sx-lede { color: var(--muted-on-dark); }
+
+/* ---------------------------------------------------------------- 2. thanh tiến độ cuộn (JS tạo phần tử, bám mép trên, nằm trên header 0.1875rem) */
+.sx-progress { position: fixed; inset: 0 0 auto 0; z-index: 41; height: 0.1875rem; pointer-events: none; }
+.sx-progress-bar { height: 100%; background: var(--sx-warm); transform: scaleX(0); transform-origin: left; will-change: transform; }
+
+/* ---------------------------------------------------------------- 3. quy trình đa tầng (khung đối nghịch, nền sáng sang trọng, margin giãn rộng) */
+.sx-parallax { position: relative; padding: clamp(6.5rem, 11vw, 10rem) var(--gutter); background: radial-gradient(85% 60% at 50% 0%, #eef3fa 0%, var(--paper) 70%); overflow: hidden; }
+.sx-layers-wrap { display: flex; flex-direction: column; gap: clamp(3.5rem, 6vw, 5.5rem); max-width: 82.5rem; margin-inline: auto; }
+.sx-layers-head { display: grid; justify-items: center; text-align: center; gap: 1.25rem; max-width: 50rem; margin-inline: auto; }
+.sx-layers-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.25rem; align-items: start; }
+
+/* Khung chung cho các lớp */
+.sx-layer-card { position: relative; display: flex; flex-direction: column; gap: 1.25rem; padding: 2.75rem 2.25rem 2.5rem; min-height: 25.5rem; transition: transform .4s var(--ease-spring), border-color .35s var(--ease-out), box-shadow .4s var(--ease-out), background .35s var(--ease-out); overflow: hidden; }
+
+/* Khung đối nghịch 1: Lớp lẻ (01, 03) - Tone Cool Pure White & góc bo hướng ngoài */
+.sx-layer-card.is-alt-cool {
+  border-radius: 2rem 0.625rem 2rem 0.625rem;
+  background: #ffffff;
+  border: 1.5px solid rgba(20, 40, 90, .14);
+  box-shadow: 0 1rem 2.5rem -1rem rgba(20, 40, 90, .08), 0 0.25rem 0.75rem rgba(20, 40, 90, .03);
+}
+.sx-layer-card.is-alt-cool:hover {
+  transform: translateY(-0.375rem);
+  border-color: var(--navy-600);
+  box-shadow: 0 1.5rem 3.5rem -0.75rem rgba(20, 40, 90, .16), 0 0.5rem 1.25rem rgba(20, 40, 90, .06);
+}
+.sx-layer-card.is-alt-cool .sx-layer-badge { color: var(--navy-800); background: rgba(20, 40, 90, .06); border: 1px solid rgba(20, 40, 90, .14); }
+.sx-layer-card.is-alt-cool .sx-layer-ico { background: rgba(20, 40, 90, .06); color: var(--navy-800); border: 1px solid rgba(20, 40, 90, .1); }
+.sx-layer-card.is-alt-cool .sx-layer-title { color: var(--navy-950); }
+.sx-layer-card.is-alt-cool .sx-layer-desc { color: var(--muted); }
+.sx-layer-card.is-alt-cool .sx-layer-foot { border-top: 1px solid rgba(20, 40, 90, .1); }
+.sx-layer-card.is-alt-cool .sx-layer-tag { color: var(--navy-800); font-weight: 600; }
+
+/* Khung đối nghịch 2: Lớp chẵn (02, 04) - Tone Warm Amber Gold & góc bo hướng ngược lại, so le dốc xuống */
+.sx-layer-card.is-alt-warm {
+  border-radius: 0.625rem 2rem 0.625rem 2rem;
+  background: linear-gradient(165deg, #ffffff 0%, #fffdf4 40%, #fff8e8 100%);
+  border: 1.5px solid rgba(212, 160, 23, .45);
+  box-shadow: 0 1.25rem 2.75rem -1rem rgba(212, 160, 23, .18), 0 0.5rem 1rem -0.5rem rgba(20, 40, 90, .04);
+}
+.sx-layer-card.is-alt-warm:hover {
+  transform: translateY(calc(var(--warm-shift, 2.25rem) - 0.375rem));
+  border-color: var(--amber-deep);
+  box-shadow: 0 1.75rem 3.5rem -0.75rem rgba(212, 160, 23, .28), 0 0.75rem 1.5rem -0.5rem rgba(20, 40, 90, .08);
+}
+.sx-layer-card.is-alt-warm .sx-layer-badge { color: var(--amber-deep); background: rgba(242, 207, 99, .25); border: 1px solid rgba(212, 160, 23, .45); font-weight: 600; }
+.sx-layer-card.is-alt-warm .sx-layer-ico { background: rgba(242, 207, 99, .25); color: var(--amber-deep); border: 1px solid rgba(212, 160, 23, .35); }
+.sx-layer-card.is-alt-warm .sx-layer-title { color: var(--navy-950); }
+.sx-layer-card.is-alt-warm .sx-layer-desc { color: var(--muted); }
+.sx-layer-card.is-alt-warm .sx-layer-foot { border-top: 1px solid rgba(212, 160, 23, .2); }
+.sx-layer-card.is-alt-warm .sx-layer-tag { color: var(--amber-deep); font-weight: 600; }
+
+/* Chi tiết nội dung trong thẻ lớp */
+.sx-layer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.sx-layer-badge { font-family: var(--mono); font-size: 0.75rem; letter-spacing: .12em; text-transform: uppercase; padding: 0.3125rem 0.6875rem; border-radius: 62.4375rem; }
+.sx-layer-ico { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 0.875rem; transition: transform .3s var(--ease-spring); }
+.sx-layer-card:hover .sx-layer-ico { transform: scale(1.08); }
+.sx-layer-ico .ico { width: 1.375rem; height: 1.375rem; }
+.sx-layer-title { margin: 0; font-family: var(--display); font-stretch: 110%; font-size: 1.3125rem; font-weight: 650; line-height: 1.25; }
+.sx-layer-desc { margin: 0; font-size: 0.9375rem; line-height: 1.65; }
+.sx-layer-foot { margin-top: auto; padding-top: 1.25rem; }
+.sx-layer-tag { display: inline-flex; font-family: var(--mono); font-size: 0.7188rem; letter-spacing: .08em; text-transform: uppercase; }
+
+@media (min-width: 1025px) {
+  /* So le dốc nhịp đối nghịch trên màn hình lớn */
+  .sx-layer-card.is-alt-warm { margin-top: 2.25rem; --warm-shift: 2.25rem; }
+}
+@media (max-width: 1024px) {
+  .sx-layers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+  .sx-layer-card { min-height: 22rem; }
+}
+@media (max-width: 640px) {
+  .sx-layers-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .sx-layer-card { min-height: auto; padding: 2.25rem 1.75rem; }
+}
+
+/* ---------------------------------------------------------------- 4. features (dạng khung xếp lớp, có chiều sâu, nền sáng ấm cream) */
+.sx-features {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 6vw, 5rem);
+  padding: clamp(6rem, 10vw, 9rem) var(--gutter);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 40%, var(--cream) 100%);
+  position: relative;
+}
+.sx-head { max-width: 50rem; margin-inline: auto; text-align: center; }
+.sx-head-in { display: grid; justify-items: center; gap: 1.25rem; }
+.sx-features .sx-title { font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.06; max-width: 18ch; color: var(--navy-950); }
+
+/* Khung bọc các lớp thẻ xếp chồng (Stacking Cards) */
+.sx-stack-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  width: 100%;
+  max-width: 82.5rem;
+  margin-inline: auto;
+  position: relative;
+}
+
+.sx-stack-layer {
+  width: 100%;
+  position: relative;
+}
+
+/* Lớp 1 (3 thẻ đầu: 01, 02, 03) */
+.sx-layer-1 {
+  z-index: 1;
+}
+
+/* Lớp 2 (3 thẻ sau: 04, 05, 06) trượt xếp lớp lên trên lớp 1 */
+.sx-layer-2 {
+  z-index: 2;
+}
+
+.sx-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.sx-cell {
+  height: 100%;
+}
+
+/* Khung card thu hút với dải ánh sáng mờ viền trên, nền trắng tinh khôi và hiệu ứng viền xếp lớp */
+.sx-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  padding: 2.75rem 2.25rem 2.25rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  border: 1.5px solid rgba(20, 40, 90, .12);
+  box-shadow: 0 1rem 2.25rem -1rem rgba(20, 40, 90, .07), 0 0.25rem 0.75rem rgba(20, 40, 90, .03);
+  transition: transform .4s var(--ease-spring), border-color .35s var(--ease-out), box-shadow .4s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Dải ánh sáng vàng kim viền trên */
+.sx-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  opacity: .6;
+  transition: opacity .35s var(--ease-out);
+}
+
+/* Lớp viền xếp tầng tạo chiều sâu cho khung */
+.sx-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+.sx-card:hover {
+  transform: translateY(-0.375rem);
+  border-color: var(--amber-deep);
+  box-shadow: 0 1.5rem 3.5rem -1rem rgba(20, 40, 90, .14), 0 0.5rem 1.25rem rgba(212, 160, 23, .1);
+}
+.sx-card:hover::before { opacity: 1; height: 0.1875rem; }
+
+.sx-card-head { display: flex; align-items: center; justify-content: space-between; }
+.sx-num { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: -.02em; color: var(--amber-deep); }
+.sx-icon { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border-radius: 1rem; background: rgba(242, 207, 99, .2); color: var(--amber-deep); border: 1.5px solid rgba(212, 160, 23, .3); transition: background .3s var(--ease-out), transform .35s var(--ease-spring), border-color .3s; }
+.sx-icon .ico { display: block; width: 1.625rem; height: 1.625rem; }
+.sx-card:hover .sx-icon { background: rgba(242, 207, 99, .32); border-color: var(--amber-deep); transform: scale(1.06); }
+.sx-card-body { display: grid; gap: 0.75rem; }
+.sx-card-title { margin: 0; font-family: var(--display); font-stretch: 110%; font-size: 1.25rem; font-weight: 650; line-height: 1.25; letter-spacing: -.015em; color: var(--navy-950); }
+.sx-card-body p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); }
+.sx-more { display: inline-flex; align-items: center; align-self: stretch; gap: 0.375rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(20, 40, 90, .1); font-family: var(--mono); font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-900); font-weight: 600; text-decoration: none; transition: color .2s var(--ease-out); }
+.sx-more .ico { width: 0.875rem; height: 0.875rem; margin-left: auto; color: var(--amber-deep); transition: transform .35s var(--ease-spring); }
+.sx-more:hover { color: var(--amber-deep); }
+.sx-more:hover .ico { transform: translate(0.1875rem, -0.1875rem); }
+.sx-more:focus-visible { outline: 2px solid var(--amber-deep); outline-offset: 0.1875rem; border-radius: 0.375rem; }
+
+@media (min-width: 768px) {
+  .sx-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+}
+
+@media (min-width: 1024px) {
+  .sx-grid { grid-template-columns: repeat(3, 1fr); gap: 2.25rem; }
+  
+  /* Bố cục xếp lớp đa tầng khi cuộn (Stacking layers) */
+  .sx-stack-wrap {
+    gap: 3.5rem;
+  }
+  
+  .sx-layer-1 {
+    position: sticky;
+    top: calc(var(--header-h, 4.75rem) + 1.5rem);
+    transition: transform 0.4s var(--ease-out), opacity 0.4s var(--ease-out);
+  }
+  
+  .sx-layer-2 {
+    position: sticky;
+    top: calc(var(--header-h, 4.75rem) + 3rem);
+    margin-top: 1.5rem;
+  }
+  
+  .sx-layer-2 .sx-card {
+    box-shadow: 0 -0.5rem 2rem -0.5rem rgba(20, 40, 90, 0.12),
+                0 1.5rem 3.5rem -1rem rgba(20, 40, 90, 0.14),
+                0 0.5rem 1.25rem rgba(212, 160, 23, 0.08);
+    border-color: rgba(212, 160, 23, 0.35);
+  }
+}
+
+@media (max-width: 640px) {
+  .sx-stack-layer .sx-cell {
+    position: sticky;
+    top: calc(var(--header-h, 4.75rem) + 0.75rem + var(--card-index, 0) * 0.75rem);
+    z-index: calc(var(--card-index, 0) + 1);
+  }
+  .sx-stack-layer .sx-card {
+    box-shadow: 0 -0.25rem 1.25rem -0.25rem rgba(20, 40, 90, 0.1),
+                0 0.75rem 2rem -0.5rem rgba(20, 40, 90, 0.12);
+  }
+}
+
+/* ---------------------------------------------------------------- 5. testimonials / marquee (nền sáng) */
+.sx-testimonials { padding: 5rem var(--gutter); overflow: hidden; }
+.sx-center { text-align: center; }
+.sx-testimonials .sx-title { max-width: none; font-size: clamp(2.25rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.04em; }
+.sx-sub { margin-top: 0.875rem; text-align: center; font-size: clamp(1.15rem, 1.7vw, 1.5rem); letter-spacing: -.015em; color: var(--sx-muted-fg); }
+.sx-marquee { display: flex; margin-top: 3.5rem; overflow-x: auto; scrollbar-width: none; border: 1px solid var(--sx-border); background: var(--sx-muted); -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+.sx-marquee::-webkit-scrollbar { display: none; }
+.sx-marquee.is-running { overflow: hidden; }
+.sx-track { display: flex; flex: none; min-width: 100%; align-items: stretch; }
+.sx-marquee.is-running .sx-track { animation: sx-marquee var(--sx-duration, 60s) linear infinite; }
+.sx-marquee.is-running:hover .sx-track, .sx-marquee.is-running:focus-within .sx-track { animation-play-state: paused; }
+@keyframes sx-marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+.sx-item { display: flex; flex: none; flex-direction: column; width: 24rem; margin-inline: -0.25rem; }
+.sx-item:nth-child(odd) { flex-direction: column-reverse; }
+.sx-t-card { display: flex; flex: 1; flex-direction: column; margin: 0; padding: 1.5rem; border: 1.5px solid var(--sx-border); border-radius: 0.75rem; background: var(--sx-bg); box-shadow: 0 1px 0.25rem rgba(13, 26, 61, .05); }
+.sx-t-top { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1rem; }
+.sx-avatar { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--navy-800); color: var(--gold); font-family: var(--display); font-weight: 700; font-size: 1.125rem; }
+.sx-who { display: grid; gap: 0.125rem; font-size: 0.875rem; }
+.sx-who strong { font-weight: 600; color: var(--navy-950); }
+.sx-who span { color: var(--muted); font-size: 0.8125rem; }
+.sx-t-link { margin-left: auto; color: var(--muted); transition: color .2s var(--ease-out), transform .3s var(--ease-spring); }
+.sx-t-link:hover { color: var(--amber-deep); transform: translate(2px, -2px); }
+.sx-t-card blockquote { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--ink); }
+.sx-logo { display: grid; place-items: center; height: 3.5rem; margin-top: 0.75rem; border: 1.5px dashed var(--sx-border); border-radius: 0.5rem; font-family: var(--display); font-weight: 700; color: var(--muted); }

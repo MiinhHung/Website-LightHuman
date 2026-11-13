@@ -2,45 +2,42 @@
 
 import { vi } from "@/content/quote/labels.vi";
 import type { QuoteFormErrors, QuoteFormValues } from "@/app/lien-he/quote-state";
+import { Req } from "./Deck";
 
-/** Contact fieldset wired to the Server Action's error/values shape. */
-export function ContactFields({
-  errors,
-  values,
-}: {
-  errors: QuoteFormErrors;
-  values: QuoteFormValues;
-}) {
-  const shared = { errors, values };
+type Shared = { errors: QuoteFormErrors; values: QuoteFormValues; locked: boolean };
+
+/** Mock `.qd-contact`: "Người nhận báo giá" on the paper, keyed by the Server Action's field names. */
+export function ContactFields(shared: Shared) {
   return (
-    <fieldset className="lh-quote-contact">
-      <legend className="sr-only">{vi.contact.legend}</legend>
-      <Field name="contact.name" label={vi.contact.name} type="text" autoComplete="name" required {...shared} />
-      <Field
-        name="contact.company"
-        label={vi.contact.company}
-        type="text"
-        autoComplete="organization"
-        required
-        {...shared}
-      />
-      <Field
-        name="contact.email"
-        label={vi.contact.email}
-        type="email"
-        autoComplete="email"
-        hintId="quote-contact-hint"
-        {...shared}
-      />
-      <Field
-        name="contact.phone"
-        label={vi.contact.phone}
-        type="tel"
-        autoComplete="tel"
-        hintId="quote-contact-hint"
-        {...shared}
-      />
-      <p id="quote-contact-hint" className="lh-quote-note lh-quote-contact__hint">
+    <fieldset className="qd-contact">
+      <legend>{vi.board.recipient}</legend>
+      <div className="qd-contact-grid">
+        <Field id="bg-name" name="contact.name" label={vi.contact.name} type="text" auto="name" required {...shared} />
+        <Field id="bg-company" name="contact.company" label={vi.contact.company} type="text" auto="organization" required {...shared} />
+        <Field
+          id="bg-email"
+          name="contact.email"
+          label={vi.contact.email}
+          type="email"
+          auto="email"
+          inputMode="email"
+          placeholder="ban@congty.vn"
+          hint
+          {...shared}
+        />
+        <Field
+          id="bg-phone"
+          name="contact.phone"
+          label={vi.contact.phone}
+          type="tel"
+          auto="tel"
+          inputMode="tel"
+          placeholder="0901 234 567"
+          hint
+          {...shared}
+        />
+      </div>
+      <p className="qd-fine" id="bg-contact-hint">
         {vi.contact.needEmailOrPhone}
       </p>
     </fieldset>
@@ -48,52 +45,51 @@ export function ContactFields({
 }
 
 function Field({
+  id,
   name,
   label,
   type,
-  autoComplete,
+  auto,
   required = false,
-  hintId,
+  hint = false,
+  inputMode,
+  placeholder,
   errors,
   values,
-}: {
+  locked,
+}: Shared & {
+  id: string;
   name: keyof QuoteFormValues;
   label: string;
   type: string;
-  autoComplete: string;
+  auto: string;
   required?: boolean;
-  hintId?: string;
-  errors: QuoteFormErrors;
-  values: QuoteFormValues;
+  hint?: boolean;
+  inputMode?: "email" | "tel";
+  placeholder?: string;
 }) {
   const error = errors[name];
-  const errorId = `${name.replace(/\./g, "-")}-error`;
-  const describedBy = [error ? errorId : null, hintId].filter(Boolean).join(" ") || undefined;
   return (
-    <label className="lh-field">
-      <span className="lh-field__label">
+    <label className="qd-field" htmlFor={id}>
+      <span>
         {label}
-        {required && (
-          <span className="lh-quote-req" aria-hidden="true">
-            *
-          </span>
-        )}
+        {required && <Req />}
       </span>
       <input
-        type={type}
+        id={id}
         name={name}
-        autoComplete={autoComplete}
+        type={type}
+        autoComplete={auto}
+        inputMode={inputMode}
+        placeholder={placeholder}
         defaultValue={values[name] ?? ""}
-        required={required}
-        className="lh-field__input"
+        readOnly={locked}
         aria-invalid={error ? true : undefined}
-        aria-describedby={describedBy}
+        aria-describedby={`${id}-err${hint ? " bg-contact-hint" : ""}`}
       />
-      {error && (
-        <span id={errorId} className="lh-quote-error-text">
-          {error}
-        </span>
-      )}
+      <span className="qd-err" id={`${id}-err`}>
+        {error}
+      </span>
     </label>
   );
 }

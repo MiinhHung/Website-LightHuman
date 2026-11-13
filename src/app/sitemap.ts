@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cong-cu/tinh-luong-gross-net",
     "/cong-cu/tinh-thue-thu-nhap-ca-nhan",
     "/cong-cu/tinh-lai-kep",
+    "/chinh-sach-bao-mat",
     "/en",
   ];
   return [

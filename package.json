@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "sync:posts": "node scripts/sync-cms-posts.mjs"
+    "sync:posts": "node scripts/sync-cms-posts.mjs",
+    "lint:css": "stylelint \"src/styles/**/*.css\""
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -18,25 +19,27 @@
     "@react-pdf/renderer": "4.9.0",
     "@shadcn/react": "^0.3.1",
     "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "cn": "^0.5.2",
+    "gsap": "^3.12.5",
     "lucide-react": "^1.70.0",
     "next": "16.4.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-resizable-panels": "^4.21.0",
-    "tailwind-merge": "^3.7.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "stylelint": "^18.0.0",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "typescript-eslint": "^8.36.0",
     "vitest": "^5.1.0"
   }
 }

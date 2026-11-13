@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, MapPin, Phone } from "lucide-react";
 import { chrome, site } from "@/content/site";
 import { localeFromPath } from "@/i18n/config";
+import { fixCopy } from "@/lib/mk";
+import { Ico, MkLink } from "@/components/mk/ui";
+import { NotifyForm } from "@/components/mk/NotifyForm";
 import { LanguageSwitch } from "./LanguageSwitch";
 
 // Client component only to read the locale from the URL (the root layout renders it on every route).
@@ -13,63 +15,70 @@ export function Footer() {
   const pathname = usePathname();
   const locale = localeFromPath(pathname);
   const t = chrome[locale];
+  const c = site.contact;
 
   return (
-    <footer className="lh-footer" lang={locale}>
-      <div className="lh-footer__inner">
-        <div className="lh-footer__top">
-          <div className="lh-footer__brand">
-            <Link href={locale === "en" ? "/en" : "/"} className="lh-wordmark" aria-label={t.homeLabel}>
-              <Image src={site.logo} alt={site.name} className="lh-wordmark__logo" />
-            </Link>
-            <p className="lh-footer__tagline">{t.tagline}</p>
-            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--footer" />
-          </div>
-
-          {t.footer.map((col) => (
-            <div key={col.title} className="lh-footer__col">
-              <h4>{col.title}</h4>
-              <ul>
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link href={l.href}>{l.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <div className="lh-footer__col lh-footer__col--contact">
-            <div className="lh-footer__col-title">{t.contactTitle}</div>
-            <div className="lh-footer__contact-row">
-              <span className="lh-footer__contact-icon" aria-hidden="true">
-                <MapPin size={16} strokeWidth={1.75} />
-              </span>
-              <span className="lh-footer__contact-text" lang="vi">
-                {site.contact.address}
-              </span>
-            </div>
-            <div className="lh-footer__contact-row">
-              <span className="lh-footer__contact-icon" aria-hidden="true">
-                <Phone size={16} strokeWidth={1.75} />
-              </span>
-              <a className="lh-footer__contact-text" href={site.contact.phoneHref}>
-                {site.contact.phone}
-              </a>
-            </div>
-            <div className="lh-footer__contact-row">
-              <span className="lh-footer__contact-icon" aria-hidden="true">
-                <Mail size={16} strokeWidth={1.75} />
-              </span>
-              <a className="lh-footer__contact-text" href={`mailto:${site.contact.email}`}>
-                {site.contact.email}
-              </a>
-            </div>
-          </div>
+    <footer className="site-footer tone-deep" lang={locale}>
+      <div className="wrap footer-grid">
+        <div className="f-brand">
+          <Link className="brand" href={locale === "en" ? "/en" : "/"} aria-label={t.homeLabel}>
+            <Image src={site.logo} alt={site.name} />
+          </Link>
+          <address>
+            <a href={c.phoneHref}>
+              <Ico name="phone" />
+              {c.phone}
+            </a>
+            <a href={`mailto:${c.email}`}>
+              <Ico name="envelope" />
+              {c.email}
+            </a>
+            <span>
+              <Ico name="pin" />
+              {c.address}
+            </span>
+          </address>
         </div>
-        <div className="lh-footer__bottom">
-          <span>{t.legal}</span>
+        {t.footer.map((col) => (
+          <div key={col.title} className="f-col">
+            <h2 className="f-h">{col.title}</h2>
+            <ul>
+              {col.links.map((l) => (
+                <li key={l.label}>
+                  <MkLink href={l.href}>{fixCopy(l.label)}</MkLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <div className="f-col f-news">
+          <h2 className="f-h">Góc nhìn mỗi tuần</h2>
+          <NotifyForm inline />
         </div>
+      </div>
+      <div className="wrap footer-base">
+        <p className="legal">{fixCopy(t.legal)}</p>
+        <ul className="f-social">
+          <li>
+            <a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook Light Human">
+              <Ico name="facebook" />
+            </a>
+          </li>
+          <li>
+            <a href={site.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn Light Human">
+              <Ico name="linkedin" />
+            </a>
+          </li>
+          <li>
+            <a href={site.socials.youtube} target="_blank" rel="noopener" aria-label="YouTube Light Human">
+              <Ico name="youtube" />
+            </a>
+          </li>
+        </ul>
+        <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--footer" />
+        <Link className="f-policy" href="/chinh-sach-bao-mat">
+          Chính sách bảo mật
+        </Link>
       </div>
     </footer>
   );

@@ -1,47 +1,43 @@
 import type { Metadata } from "next";
-import { homeChapters as ch } from "@/content/home";
-import { quoteHref, site } from "@/content/site";
 import { alternatesFor } from "@/i18n/config";
-import { EdHero } from "@/components/home/EdHero";
-import { EdServices } from "@/components/home/EdServices";
-import { EdProcess } from "@/components/home/EdProcess";
-import { Partners } from "@/components/sections/Partners";
-import { Manifesto } from "@/components/sections/Manifesto";
-import { SuccessStories } from "@/components/sections/SuccessStories";
-import { HomeToolkit } from "@/components/sections/HomeToolkit";
-import { ClosingCta } from "@/components/sections/ClosingCta";
-import { Chapter } from "@/components/sections/Chapter";
+import {
+  CasesStage,
+  HomeHero,
+  HomeProcess,
+  Manifesto,
+  PartnersBand,
+  PostsIndex,
+  QuoteCta,
+  ServicesAcc,
+  SxFeatures,
+  SxParallax,
+  SxTestimonials,
+  Toolkit,
+} from "@/components/mk/home/HomeSections";
 
-export const metadata: Metadata = { alternates: { canonical: "/", ...alternatesFor("/") } };
+export const metadata: Metadata = {
+  title: { absolute: "Headhunting & tuyển dụng số lượng lớn | Light Human" },
+  description:
+    "Light Human tuyển nhân sự cấp cao, tuyển số lượng lớn và tư vấn nhân sự cho hơn 800 doanh nghiệp. Nhận báo giá tuyển dụng trong vài phút ngay trên website.",
+  alternates: { canonical: "/", ...alternatesFor("/") },
+};
 
-// Editorial story: belief → what we do → how → results → where to start.
+// Order and grounds as in the approved mock: photo, deep, navy, paper, navy, paper, layers, why, voices, mist, paper, gold.
 export default function HomePage() {
   return (
-    <div className="lh-home lh-ed">
-      <div className="lh-home__progress" aria-hidden="true" />
-      <EdHero />
-      <Partners />
-      <Chapter n={1} label={ch.belief} next={{ prefix: ch.next, label: ch.services }}>
-        <Manifesto />
-      </Chapter>
-      <Chapter n={2} label={ch.services} next={{ prefix: ch.next, label: ch.process }}>
-        <EdServices />
-      </Chapter>
-      <Chapter n={3} label={ch.process} next={{ prefix: ch.next, label: ch.stories }}>
-        <EdProcess />
-      </Chapter>
-      <Chapter n={4} label={ch.stories} next={{ prefix: ch.next, label: ch.start }}>
-        <SuccessStories />
-      </Chapter>
-      <Chapter n={5} label={ch.start}>
-        <HomeToolkit />
-        <ClosingCta
-          heading="Bắt đầu với một bản báo giá"
-          desc="Chọn vị trí và yêu cầu ứng viên, nhận mã báo giá ngay. Đội BD liên hệ lại trong 24 giờ làm việc."
-          action={{ label: "Nhận báo giá", href: quoteHref }}
-          secondary={{ label: "Bạn đang tìm việc? Xem việc làm", href: site.jobsUrl }}
-        />
-      </Chapter>
-    </div>
+    <>
+      <HomeHero />
+      <PartnersBand />
+      <Manifesto />
+      <ServicesAcc />
+      <HomeProcess />
+      <CasesStage />
+      <SxParallax />
+      <SxFeatures />
+      <SxTestimonials />
+      <Toolkit />
+      <PostsIndex />
+      <QuoteCta />
+    </>
   );
 }

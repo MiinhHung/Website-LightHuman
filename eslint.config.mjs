@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     // Thư viện skill / repo tham khảo, không thuộc mã nguồn site:
     "ClaudeMD/**",
     ".claude/**",
+    ".agents/**",
+    ".superdesign/**",
   ]),
 ]);
 

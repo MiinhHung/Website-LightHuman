@@ -250,7 +250,7 @@ export const chrome = {
     openMenu: "Mở menu",
     closeMenu: "Đóng menu",
     newTab: "(mở tab mới)",
-    quote: "Báo giá",
+    quote: "Nhận báo giá",
     language: "Ngôn ngữ",
     /** Shown on links that lead to a page in the other language. */
     otherLang: "",

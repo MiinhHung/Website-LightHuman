@@ -51,3 +51,6 @@ next-env.d.ts
 
 # quote PDF samples written by tests (QUOTE_WRITE_SAMPLES=1)
 /tmp/
+
+# Superdesign scratch HTML
+.superdesign/tmp/

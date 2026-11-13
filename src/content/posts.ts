@@ -43,6 +43,15 @@ export const insightsPage = {
     image: `${CMS}/hero_insights_d1c022601d.png`,
   },
   allLabel: "Tất cả",
+  meta: {
+    title: "Góc nhìn nhân sự: bài viết và sự kiện",
+    description:
+      "Bài viết của đội tư vấn Light Human về tuyển dụng, giữ chân nhân tài, lương thưởng, thương hiệu tuyển dụng và các sự kiện nhân sự. Lọc theo chuyên mục, tìm nhanh.",
+  },
+  crumbs: { home: "Trang chủ", current: "Góc nhìn" },
+  heroAlt: "Bản tin và Insights nhân sự - Light Human",
+  categoriesLabel: "Chuyên mục",
+  weekly: { label: "Nhận bài qua email", title: "Một bài mới, *mỗi tuần*" },
   filters: ["Insights", "Blog Nhân Sự", "Sự Kiện", "Nhà Light Human"],
   featured: {
     eyebrow: "Bài viết nổi bật",
@@ -112,6 +121,18 @@ export const postPageCopy = {
     shareDesc: "Nếu bạn thấy bài viết hữu ích, đừng ngần ngại chia sẻ đến mọi người nhé!",
   },
   relatedTitle: "Bài viết liên quan",
+  article: {
+    crumbs: { home: "Trang chủ", insights: "Góc nhìn" },
+    author: "Light Human",
+    minutes: "phút đọc",
+    tocLabel: "Mục lục",
+    tocTitle: "Trong bài này",
+    shareTitle: "Chia sẻ",
+    shareFacebook: "Chia sẻ lên Facebook",
+    shareLinkedin: "Chia sẻ lên LinkedIn",
+    copyLink: "Sao chép liên kết",
+    readNext: "Đọc tiếp",
+  },
 };
 
 /** Thân bài gốc (HTML rich-text từ CMS, trích nguyên văn từ lighthuman.vn). */

@@ -1,4 +1,4 @@
-import type { heroIntents, homeToolkit, StepIcon, TrustIcon } from "../home";
+import type { heroIntents, homeToolkit, layerItems, layersHead, mkHome, StepIcon, TrustIcon, whyHead } from "../home";
 import { quoteHref, site } from "../site";
 
 export const heroIntentsEn: typeof heroIntents = {
@@ -39,6 +39,14 @@ export const homeToolkitEn: typeof homeToolkit = {
     title: "Save 5 million a month: what do you have in 10 years?",
     cta: "Calculate",
   },
+  tax: {
+    tag: "Income tax 2026",
+    title: "The new scale has 5 brackets",
+    upTo: "Up to",
+    over: "Over",
+    unit: "m",
+    cta: "Calculate income tax",
+  },
 };
 
 /**
@@ -52,10 +60,10 @@ export const homeEn = {
     "Light Human is an HR consultancy and headhunting firm in Vietnam: executive search, mass recruitment, employer branding, training and advisory.",
 
   stats: [
-    { icon: "award", num: "6+", label: "Years of experience, 1,200+ HR projects" },
-    { icon: "building", num: "800+", label: "Corporate clients, local and multinational" },
-    { icon: "briefcase", num: "100+", label: "Projects a year, delivered on schedule" },
-    { icon: "users", num: "36,000+", label: "Candidates placed" },
+    { icon: "award", num: "6+", label: "years of experience" },
+    { icon: "building", num: "800+", label: "client companies" },
+    { icon: "briefcase", num: "1,200+", label: "HR projects" },
+    { icon: "users", num: "36,000+", label: "candidates placed" },
   ] satisfies { icon: TrustIcon; num: string; label: string }[],
 
   services: {
@@ -192,6 +200,7 @@ export const homeChaptersEn = {
   belief: "What we believe",
   services: "What we do",
   process: "How we work",
+  layers: "Behind every hire",
   stories: "What it delivers",
   start: "Where to start",
   next: "Next",
@@ -217,4 +226,52 @@ export const servicesHeadEn = {
 export const processHeadEn = {
   title: "Six steps, each with a named owner",
   lede: "From understanding your needs to continuous improvement, you always know where the project stands and who is on it.",
+};
+
+export const layersHeadEn: typeof layersHead = {
+  kicker: "How a hire runs",
+  title: { before: "Every hire has ", em: "several layers behind it" },
+  lede: "From the candidate profile to the first day at work, each layer has its own owner and its own quality check.",
+  layer: "Layer",
+};
+
+export const layerItemsEn: typeof layerItems = [
+  { icon: "briefcase", title: "Brief & profile", desc: "Define the project, the organisation's culture and a detailed target candidate profile.", tag: "Industry expertise" },
+  { icon: "branding", title: "Multi-channel sourcing", desc: "Spread the job across our partner network and existing candidate pools.", tag: "Wide reach" },
+  { icon: "clipboard-check", title: "Screening", desc: "Fast shortlists against your criteria, reference checks and independent behavioural interviews.", tag: "Three-round review" },
+  { icon: "award", title: "Handover & guarantee", desc: "Hand over the hire with a written guarantee and support through a 60-day probation.", tag: "Written commitment" },
+];
+
+export const whyHeadEn: typeof whyHead = {
+  kicker: "Why us",
+  title: { before: "Why companies choose ", em: "Light Human" },
+  lede: "Six points drawn from how we run each service: a dedicated owner, ready candidate pools, system integration and written commitments.",
+};
+
+/** English why-us cards (the Vietnamese page picks them from services.ts features). */
+export const whyItemsEn: { icon: string; title: string; desc: string; service: string; href: string }[] = [
+  { icon: "users-round", title: "Dedicated recruiters", desc: "Each project has its own PM and recruiter team; your pipeline is never shared with another client.", service: "Executive search", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap" },
+  { icon: "globe", title: "A strong candidate network", desc: "Direct access to candidates through our network in Vietnam and abroad.", service: "Executive search", href: "/dich-vu/tuyen-dung-nhan-su-cao-cap" },
+  { icon: "clock", title: "Pre-screened candidates", desc: "Candidates are interviewed in advance; shortlists arrive within 48–72 hours for most roles.", service: "Temporary staffing", href: "/dich-vu/tuyen-dung-nhan-su-tam-thoi" },
+  { icon: "shield-check", title: "Clear, written SLAs", desc: "Written targets for CVs per week, interview rates and time to onboard.", service: "Mass recruitment", href: "/dich-vu/tuyen-dung-nhan-su-so-luong-lon" },
+  { icon: "target", title: "Plugs into your ATS", desc: "Candidates go straight into your ATS/HRIS, with no manual re-entry.", service: "Mass recruitment", href: "/dich-vu/tuyen-dung-nhan-su-so-luong-lon" },
+  { icon: "graduation-cap", title: "30–60 days of coaching", desc: "On-the-job coaching after training, with an expert reviewing how your team applies it.", service: "Recruitment training", href: "/dich-vu/dao-tao-tuyen-dung" },
+];
+
+export const processActionEn = { label: "Get a quote", href: quoteHref };
+
+export const mkHomeEn: typeof mkHome = {
+  services: { title: "Six ways we *find the right people*", lede: "From a single director to a thousand workers for a new production line.", all: "All services", more: "See the service" },
+  process: { title: "How *we work*", lede: "Six steps we repeat on every project, from one director to a thousand workers.", cta: "Get a quote" },
+  cases: { title: "What it *delivers*", all: "See all stories", more: "Read the story", tablist: "Clients" },
+  testimonials: { title: "What clients say", sub: "From companies and candidates who worked with Light Human (translated from Vietnamese)", more: "Read the story" },
+  toolkit: { kicker: "Light Human Toolkit", taxTag: "Income tax 2026", taxTitle: "The new 5-bracket scale", taxBody: "Residents, contracts under 3 months, non-residents.", taxCta: "Calculate tax" },
+  posts: { title: "Insights *from our advisers*", all: "All articles", minutes: "min read" },
+  statsLabel: "Light Human in numbers",
+  cta: {
+    title: "Start with a quote",
+    desc: "Choose the role and candidate requirements and get a quote code straight away. Our business team will follow up within one working day.",
+    action: { label: "Get a quote", href: quoteHref },
+    secondary: { label: "Looking for a job? See openings", href: site.jobsUrl },
+  },
 };

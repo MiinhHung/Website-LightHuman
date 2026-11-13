@@ -38,6 +38,18 @@ export const caseStudiesPage = {
     image: `${CMS}/hero_case_studies_f56ba15689.png`,
   },
   allLabel: "Tất cả",
+  meta: {
+    title: "Dự án tuyển dụng tiêu biểu",
+    description:
+      "Câu chuyện khách hàng của Light Human: tái cấu trúc nhân sự, tuyển dụng cho nhà máy, doanh nghiệp marketing và hành trình ứng viên, lọc theo ngành.",
+  },
+  crumbs: { home: "Trang chủ", current: "Dự án" },
+  heroAlt: "Doanh nhân xem báo cáo tuyển dụng",
+  browse: {
+    heading: "Danh sách dự án",
+    filterLabel: "Lọc theo ngành",
+    empty: "Chưa có dự án trong nhóm ngành này.",
+  },
   cta: {
     heading: "Bạn muốn trở thành câu chuyện tiếp theo?",
     desc: "Liên hệ Light Human để nhận tư vấn giải pháp nhân sự phù hợp với doanh nghiệp của bạn.",

@@ -1,4 +1,4 @@
-import { CMS, quoteHref } from "./site";
+import { CMS, quoteHref, site } from "./site";
 
 /** Nội dung trang chủ, theo lighthuman.vn. */
 
@@ -9,10 +9,10 @@ export const hero = {
 export type TrustIcon = "award" | "building" | "briefcase" | "users";
 
 export const homeStats: { icon: TrustIcon; num: string; label: string }[] = [
-  { icon: "award", num: "6+", label: "Năm kinh nghiệm, 1.200+ dự án nhân sự" },
-  { icon: "building", num: "800+", label: "Khách hàng doanh nghiệp, Đa quốc gia & nội địa" },
-  { icon: "briefcase", num: "100+", label: "Dự án mỗi năm, Hoàn thành đúng tiến độ" },
-  { icon: "users", num: "36.000+", label: "Ứng viên, Kết nối thành công" },
+  { icon: "award", num: "6+", label: "năm kinh nghiệm" },
+  { icon: "building", num: "800+", label: "doanh nghiệp tin chọn" },
+  { icon: "briefcase", num: "1.200+", label: "dự án nhân sự" },
+  { icon: "users", num: "36.000+", label: "ứng viên được kết nối" },
 ];
 
 export type StepIcon = "users" | "search" | "target" | "handshake" | "clipboard" | "sprout";
@@ -68,6 +68,14 @@ export const homeToolkit = {
     title: "Gửi 5 triệu mỗi tháng, 10 năm sau có bao nhiêu?",
     cta: "Tính lãi kép",
   },
+  tax: {
+    tag: "Thuế TNCN 2026",
+    title: "Biểu thuế mới còn 5 bậc",
+    upTo: "Đến",
+    over: "Trên",
+    unit: "tr",
+    cta: "Tính thuế TNCN",
+  },
 };
 
 /** Hero play button: opens the company film in a lightbox. */
@@ -99,6 +107,7 @@ export const homeChapters = {
   belief: "Điều chúng tôi tin",
   services: "Chúng tôi làm gì",
   process: "Làm như thế nào",
+  layers: "Phía sau mỗi lần tuyển",
   stories: "Kết quả ra sao",
   start: "Bắt đầu từ đâu",
   next: "Tiếp theo",
@@ -127,3 +136,57 @@ export const processHead = {
   title: "Sáu bước, mỗi bước có người chịu trách nhiệm",
   lede: "Từ thấu hiểu nhu cầu đến tối ưu liên tục, bạn luôn biết dự án đang ở đâu và ai đang lo.",
 };
+
+/** Copy of the home sections as approved in the static mock (E:/ClaudeMD/website/LightHuman). */
+export const mkHome = {
+  services: { title: "Sáu cách chúng tôi *tìm đúng người*", lede: "Từ một vị trí giám đốc đến một nghìn công nhân cho dây chuyền mới.", all: "Tất cả dịch vụ", more: "Xem dịch vụ" },
+  process: { title: "Làm *như thế nào*", lede: "Sáu bước lặp lại cho mọi dự án, từ một vị trí giám đốc đến một nghìn công nhân.", cta: "Nhận báo giá" },
+  cases: { title: "Kết quả *ra sao*", all: "Xem tất cả câu chuyện", more: "Xem câu chuyện", tablist: "Khách hàng" },
+  testimonials: { title: "Khách hàng nói gì", sub: "Lời từ doanh nghiệp và ứng viên đã làm việc với Light Human", more: "Xem câu chuyện" },
+  toolkit: { kicker: "Light Human Toolkit", taxTag: "Thuế TNCN 2026", taxTitle: "Biểu thuế 5 bậc mới", taxBody: "Cư trú, hợp đồng dưới 3 tháng, người không cư trú.", taxCta: "Tính thuế" },
+  posts: { title: "Góc nhìn *từ đội tư vấn*", all: "Tất cả bài viết", minutes: "phút đọc" },
+  statsLabel: "Light Human qua các con số",
+  cta: {
+    title: "Bắt đầu với một bản báo giá",
+    desc: "Chọn vị trí và yêu cầu ứng viên, nhận mã báo giá ngay. Đội BD liên hệ lại trong 24 giờ làm việc.",
+    action: { label: "Nhận báo giá", href: quoteHref },
+    secondary: { label: "Bạn đang tìm việc? Xem việc làm", href: site.jobsUrl },
+  },
+};
+
+export type LayerIcon = "briefcase" | "branding" | "clipboard-check" | "award";
+
+/** "Mỗi lần tuyển có nhiều lớp phía sau": four alternating cool / warm cards. */
+export const layersHead = {
+  kicker: "Quy trình vận hành",
+  title: { before: "Mỗi lần tuyển có ", em: "nhiều lớp phía sau" },
+  lede: "Từ chân dung ứng viên đến ngày nhận việc, mỗi lớp có đội ngũ chuyên gia phụ trách riêng và tiêu chuẩn kiểm soát chất lượng độc lập.",
+  layer: "Lớp",
+};
+
+// TODO(BA): "Đánh giá 3 vòng" và bảo hành 60 ngày lấy từ bản mẫu, chưa đối chiếu hợp đồng mẫu.
+export const layerItems: { icon: LayerIcon; title: string; desc: string; tag: string }[] = [
+  { icon: "briefcase", title: "Phân tích & Chân dung", desc: "Xác định đặc tính dự án, văn hóa tổ chức và chân dung ứng viên mục tiêu chi tiết.", tag: "Chuyên môn ngành" },
+  { icon: "branding", title: "Đăng tin đa kênh", desc: "Phân phối thông điệp tuyển dụng rộng rãi trên hệ thống đối tác và nguồn ứng viên sẵn có.", tag: "Tiếp cận đa tầng" },
+  { icon: "clipboard-check", title: "Sàng lọc hồ sơ", desc: "Shortlist nhanh theo tiêu chí, kiểm tra tham chiếu và phỏng vấn hành vi độc lập.", tag: "Đánh giá 3 vòng" },
+  { icon: "award", title: "Bàn giao & Bảo hành", desc: "Bàn giao nhân sự hoàn chỉnh, cam kết bảo hành và đồng hành trong 60 ngày thử việc.", tag: "Cam kết văn bản" },
+];
+
+/** "Vì sao doanh nghiệp chọn Light Human": six real points picked from the services' own "why us" lists. */
+export const whyHead = {
+  kicker: "Lợi thế",
+  title: { before: "Vì sao doanh nghiệp chọn ", em: "Light Human" },
+  lede: "Sáu điểm lấy từ cách chúng tôi vận hành từng dịch vụ: người phụ trách riêng, nguồn ứng viên sẵn có, tích hợp hệ thống và cam kết bằng văn bản.",
+};
+
+/** [service slug, index in its features.items, icon]. */
+export const whyPicks: [string, number, string][] = [
+  ["tuyen-dung-nhan-su-so-luong-lon", 0, "users-round"],
+  ["tuyen-dung-nhan-su-cao-cap", 1, "globe"],
+  ["tuyen-dung-nhan-su-tam-thoi", 0, "clock"],
+  ["tuyen-dung-nhan-su-so-luong-lon", 3, "shield-check"],
+  ["tuyen-dung-nhan-su-so-luong-lon", 2, "target"],
+  ["dao-tao-tuyen-dung", 3, "graduation-cap"],
+];
+
+export const processAction = { label: "Nhận báo giá", href: quoteHref };

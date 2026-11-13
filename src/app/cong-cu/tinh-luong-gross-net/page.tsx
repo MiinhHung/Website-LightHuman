@@ -2,12 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { salaryTool } from "@/content/tools";
 import { site } from "@/content/site";
-import { ToolHero } from "@/components/tools/ToolHero";
-import { ToolFaq } from "@/components/tools/ToolFaq";
-import { SalaryCalculator, SalaryCalculatorWithQuery } from "@/components/tools/salary/SalaryCalculator";
-import { SalaryGuide } from "@/components/tools/salary/SalaryGuide";
-import { SalaryCta } from "@/components/tools/salary/SalaryCta";
-import { PayslipBadge } from "@/components/tools/salary/PayslipBadge";
+import { CalcCta, CalcFaq, CalcHero, SalaryGuide } from "@/components/mk/tools/parts";
+import { SalaryCalc, SalaryCalcWithQuery } from "@/components/mk/tools/SalaryCalc";
 
 export const metadata: Metadata = {
   title: salaryTool.title,
@@ -40,29 +36,16 @@ const jsonLd = {
 };
 
 export default function SalaryToolPage() {
-  const { hero, faqHead, faqs } = salaryTool;
   return (
-    <div className="lht-page">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <ToolHero
-        crumbs={[{ label: "Trang chủ", href: "/" }, { label: "Công cụ", href: "/cong-cu" }, { label: "Tính lương Gross ⇄ Net" }]}
-        eyebrow={hero.eyebrow}
-        title={
-          <>
-            Tính lương Gross ⇄ Net <em>chuẩn 2026</em>
-          </>
-        }
-        lede={hero.lede}
-        facts={hero.facts}
-        image={hero.image}
-        badge={<PayslipBadge gross={hero.sampleGross} />}
-      />
-      <Suspense fallback={<SalaryCalculator />}>
-        <SalaryCalculatorWithQuery />
+      <CalcHero tool={salaryTool} />
+      <Suspense fallback={<SalaryCalc />}>
+        <SalaryCalcWithQuery />
       </Suspense>
       <SalaryGuide />
-      <ToolFaq eyebrow={faqHead.eyebrow} helper={faqHead.helper} helperLink={faqHead.helperLink} items={faqs} />
-      <SalaryCta />
-    </div>
+      <CalcFaq prefix="lg" tool={salaryTool} />
+      <CalcCta cta={salaryTool.cta} />
+    </>
   );
 }

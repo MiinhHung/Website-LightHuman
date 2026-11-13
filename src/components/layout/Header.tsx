@@ -3,53 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState, type FocusEvent, type KeyboardEvent, type ReactNode } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  Building2,
-  Calculator,
-  ChevronDown,
-  Clock,
-  Compass,
-  Crown,
-  GraduationCap,
-  Mail,
-  Megaphone,
-  Menu,
-  Phone,
-  Receipt,
-  TrendingUp,
-  Users,
-  X,
-} from "lucide-react";
-import { chrome, quoteHref, site, type Chrome, type NavIcon, type NavItem, type NavLink as NavEntry } from "@/content/site";
-import { localeFromPath, type Locale } from "@/i18n/config";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { chrome, quoteHref, site, type NavItem } from "@/content/site";
+import { localeFromPath } from "@/i18n/config";
+import { fixCopy } from "@/lib/mk";
+import { BtnIco, Ico } from "@/components/mk/ui";
 import { LanguageSwitch } from "./LanguageSwitch";
-
-const ICONS: Record<NavIcon, ReactNode> = {
-  company: <Building2 size={18} strokeWidth={1.75} />,
-  story: <BookOpen size={18} strokeWidth={1.75} />,
-  executive: <Crown size={18} strokeWidth={1.75} />,
-  mass: <Users size={18} strokeWidth={1.75} />,
-  temporary: <Clock size={18} strokeWidth={1.75} />,
-  training: <GraduationCap size={18} strokeWidth={1.75} />,
-  career: <Compass size={18} strokeWidth={1.75} />,
-  branding: <Megaphone size={18} strokeWidth={1.75} />,
-  salary: <Calculator size={18} strokeWidth={1.75} />,
-  tax: <Receipt size={18} strokeWidth={1.75} />,
-  compound: <TrendingUp size={18} strokeWidth={1.75} />,
-};
-
-// Routes that open with a dark cinematic hero; the header sits transparent on top of it.
-// Decided per route, not with CSS :has(): cacheComponents keeps previous routes mounted
-// (hidden), so a hero from the last page would otherwise still match.
-function opensWithDarkHero(pathname: string): boolean {
-  return (
-    ["/dich-vu", "/case-studies", "/tin-tuc"].includes(pathname) || pathname.startsWith("/dich-vu/")
-  );
-}
 
 const matches = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -59,223 +18,13 @@ function activeHref(pathname: string, nav: NavItem[]): string | undefined {
   return hrefs.filter((h) => matches(pathname, h)).sort((a, b) => b.length - a.length)[0];
 }
 
-function isActive(best: string | undefined, item: NavItem): boolean {
-  if (!best || item.external) return false;
-  return item.href === best || !!item.children?.some((c) => c.href === best);
-}
+const isCurrent = (best: string | undefined, item: NavItem) =>
+  !!best && !item.external && (item.href === best || !!item.children?.some((c) => c.href === best));
 
-/** A link that leads out of the current locale (English menu → Vietnamese-only page). */
-function crossesLocale(href: string, locale: Locale) {
-  return locale === "en" && !href.startsWith("http") && localeFromPath(href) !== "en";
-}
-
-function LangTag({ href, locale, t }: { href: string; locale: Locale; t: Chrome }) {
-  if (!crossesLocale(href, locale)) return null;
-  return (
-    <span className="lh-nav__lang" title={t.otherLang}>
-      VI
-    </span>
-  );
-}
-
-function ExternalLink({ item, className, t, onClick }: { item: NavItem; className: string; t: Chrome; onClick?: () => void }) {
-  return (
-    <a href={item.href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
-      {item.label}
-      <ArrowUpRight size={14} strokeWidth={2} aria-hidden="true" />
-      <span className="sr-only"> {t.newTab}</span>
-    </a>
-  );
-}
-
-function PanelLink({
-  link,
-  current,
-  locale,
-  t,
-  onNavigate,
-}: {
-  link: NavEntry;
-  current: boolean;
-  locale: Locale;
-  t: Chrome;
-  onNavigate: () => void;
-}) {
-  return (
-    <Link
-      href={link.href}
-      className="lh-mega__link"
-      aria-current={current ? "page" : undefined}
-      hrefLang={crossesLocale(link.href, locale) ? "vi" : undefined}
-      onClick={onNavigate}
-    >
-      {link.icon && (
-        <span className="lh-mega__icon" aria-hidden="true">
-          {ICONS[link.icon]}
-        </span>
-      )}
-      <span className="lh-mega__text">
-        <span className="lh-mega__label">
-          {link.label}
-          <LangTag href={link.href} locale={locale} t={t} />
-        </span>
-        {link.desc && <span className="lh-mega__desc">{link.desc}</span>}
-      </span>
-    </Link>
-  );
-}
-
-/** Desktop dropdown: opens on hover (mouse), click, or keyboard; Escape closes it. */
-function MenuItem({
-  item,
-  active,
-  best,
-  open,
-  locale,
-  t,
-  onOpen,
-  onClose,
-}: {
-  item: NavItem;
-  active: boolean;
-  best: string | undefined;
-  open: boolean;
-  locale: Locale;
-  t: Chrome;
-  onOpen: (key: string | null, delay?: number) => void;
-  onClose: () => void;
-}) {
-  const panelId = useId();
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const children = item.children ?? [];
-  const wide = !!item.promo;
-
-  function onKeyDown(e: KeyboardEvent<HTMLLIElement>) {
-    if (e.key === "Escape" && open) {
-      e.stopPropagation();
-      onClose();
-      triggerRef.current?.focus();
-    }
-  }
-
-  function onBlur(e: FocusEvent<HTMLLIElement>) {
-    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) onOpen(null);
-  }
-
-  return (
-    <li
-      className={wide ? "lh-nav__item lh-nav__item--wide" : "lh-nav__item"}
-      data-active={active || undefined}
-      data-open={open || undefined}
-      onPointerEnter={(e) => e.pointerType === "mouse" && onOpen(item.href, 60)}
-      onPointerLeave={(e) => e.pointerType === "mouse" && onOpen(null, 160)}
-      onKeyDown={onKeyDown}
-      onBlur={onBlur}
-    >
-      <button
-        ref={triggerRef}
-        type="button"
-        className="lh-nav__link"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => onOpen(open ? null : item.href)}
-      >
-        {item.label}
-        <ChevronDown className="lh-nav__chevron" size={15} strokeWidth={2.25} aria-hidden="true" />
-      </button>
-      <div id={panelId} className={wide ? "lh-mega lh-mega--wide" : "lh-mega"} hidden={!open}>
-        <div className="lh-mega__body">
-          <ul className={children.length > 3 ? "lh-mega__grid lh-mega__grid--2" : "lh-mega__grid"}>
-            {children.map((c) => (
-              <li key={c.href + c.label}>
-                <PanelLink link={c} current={c.href === best} locale={locale} t={t} onNavigate={onClose} />
-              </li>
-            ))}
-          </ul>
-          {item.promo && (
-            <Link href={item.promo.href} className="lh-mega__promo" onClick={onClose}>
-              <span className="lh-mega__promo-rays" aria-hidden="true" />
-              <span className="lh-mega__promo-title">{item.promo.title}</span>
-              <span className="lh-mega__promo-body">{item.promo.body}</span>
-              <span className="lh-mega__promo-cta">
-                {item.promo.cta}
-                <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
-              </span>
-            </Link>
-          )}
-        </div>
-        {item.overview && (
-          <Link href={item.href} className="lh-mega__overview" onClick={onClose}>
-            {item.overview}
-            <LangTag href={item.href} locale={locale} t={t} />
-            <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
-          </Link>
-        )}
-      </div>
-    </li>
-  );
-}
-
-function MobileGroup({
-  item,
-  best,
-  locale,
-  t,
-  onNavigate,
-}: {
-  item: NavItem;
-  best: string | undefined;
-  locale: Locale;
-  t: Chrome;
-  onNavigate: () => void;
-}) {
-  const [expanded, setExpanded] = useState(() => isActive(best, item));
-  const listId = useId();
-  return (
-    <li className="lh-drawer__item">
-      <button
-        type="button"
-        className="lh-drawer__link"
-        aria-expanded={expanded}
-        aria-controls={listId}
-        onClick={() => setExpanded((v) => !v)}
-      >
-        {item.label}
-        <ChevronDown className="lh-drawer__chevron" size={18} strokeWidth={2} aria-hidden="true" />
-      </button>
-      <ul id={listId} className="lh-drawer__sub" hidden={!expanded}>
-        {item.children?.map((c) => (
-          <li key={c.href + c.label}>
-            <Link
-              href={c.href}
-              className="lh-drawer__sublink"
-              aria-current={c.href === best ? "page" : undefined}
-              onClick={onNavigate}
-            >
-              {c.icon && (
-                <span className="lh-drawer__icon" aria-hidden="true">
-                  {ICONS[c.icon]}
-                </span>
-              )}
-              {c.label}
-              <LangTag href={c.href} locale={locale} t={t} />
-            </Link>
-          </li>
-        ))}
-        {item.overview && (
-          <li>
-            <Link href={item.href} className="lh-drawer__overview" onClick={onNavigate}>
-              {item.overview}
-              <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
-            </Link>
-          </li>
-        )}
-      </ul>
-    </li>
-  );
-}
-
-/** Sticky navy header: dropdown panels on desktop, full-screen drawer on mobile. */
+/**
+ * Fixed header from the mock: transparent over a photo hero (`data-mode="over"`),
+ * navy-900 once the sentinel scrolls out; solid from the start on pages without one.
+ */
 export function Header() {
   const pathname = usePathname();
   const locale = localeFromPath(pathname);
@@ -283,193 +32,240 @@ export function Header() {
   const best = activeHref(pathname, t.nav);
   const home = locale === "en" ? "/en" : "/";
 
-  const [drawer, setDrawer] = useState(false);
-  const [menu, setMenu] = useState<string | null>(null);
+  const [mode, setMode] = useState<"over" | "solid">("solid");
   const [solid, setSolid] = useState(false);
-  const [overlay, setOverlay] = useState(() => opensWithDarkHero(pathname));
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLElement>(null);
+  const [panel, setPanel] = useState<number | null>(null);
+  const [menu, setMenu] = useState(false);
+  const [menuIn, setMenuIn] = useState(false);
+  const sentinel = useRef<HTMLDivElement>(null);
   const timer = useRef<number | undefined>(undefined);
 
-  function openMenu(key: string | null, delay = 0) {
-    window.clearTimeout(timer.current);
-    if (delay) timer.current = window.setTimeout(() => setMenu(key), delay);
-    else setMenu(key);
+  // A new route closes any open menu (state reset during render, not in an effect).
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
+    setPanel(null);
+    setMenu(false);
+    setMenuIn(false);
   }
-  const closeMenu = () => openMenu(null);
-  const closeAll = () => {
-    closeMenu();
-    setDrawer(false);
-  };
 
-  // <html lang> is rendered once by the root layout; keep it in step with the page language.
+  // The page decides: a photo hero (.hero-home / .hero-page) lets the header float over it.
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
-
-  // Confirm against the rendered page (e.g. an unknown /dich-vu/* slug renders a 404 with no hero).
-  useEffect(() => {
-    const expected = opensWithDarkHero(pathname);
-    const frame = requestAnimationFrame(() => {
-      const hero = Array.from(document.querySelectorAll<HTMLElement>("main .lh-hero--cinematic")).some(
-        (el) => el.offsetParent !== null,
-      );
-      setOverlay(expected && hero);
-    });
-    return () => cancelAnimationFrame(frame);
+    const id = requestAnimationFrame(() => setMode(document.querySelector(".hero-home, .hero-page") ? "over" : "solid"));
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
-  // Over a dark hero the header starts transparent; it turns navy once the
-  // top-of-page sentinel scrolls out (IntersectionObserver, no scroll handler).
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setSolid(!entry.isIntersecting));
+    const el = sentinel.current;
+    if (!el || mode !== "over") return;
+    const io = new IntersectionObserver(([e]) => setSolid(!e.isIntersecting));
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [mode, pathname]);
 
   useEffect(() => {
-    if (!menu) return;
+    if (panel === null) return;
     const onDown = (e: PointerEvent) => {
-      if (!headerRef.current?.contains(e.target as Node)) setMenu(null);
+      if (!(e.target as Element).closest("[data-panel]")) setPanel(null);
     };
-    document.addEventListener("pointerdown", onDown);
-    return () => document.removeEventListener("pointerdown", onDown);
-  }, [menu]);
+    document.addEventListener("click", onDown as EventListener);
+    return () => document.removeEventListener("click", onDown as EventListener);
+  }, [panel]);
 
   useEffect(() => {
-    document.body.style.overflow = drawer ? "hidden" : "";
-    if (!drawer) return;
-    const onKey = (e: globalThis.KeyboardEvent) => e.key === "Escape" && setDrawer(false);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [drawer]);
+    document.body.style.overflow = menu ? "hidden" : "";
+    if (!menu) return;
+    // Open on the next frame so the staggered items transition in.
+    const id = requestAnimationFrame(() => setMenuIn(true));
+    return () => cancelAnimationFrame(id);
+  }, [menu]);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
+  const closeMenu = () => {
+    setMenu(false);
+    setMenuIn(false);
+  };
+
+  const fine = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const open = (i: number) => {
+    window.clearTimeout(timer.current);
+    setPanel(i);
+  };
+  const leave = () => {
+    timer.current = window.setTimeout(() => setPanel(null), 160);
+  };
+
+  let k = 0;
+
   return (
     <>
-      <div ref={sentinelRef} className="lh-header-sentinel" aria-hidden="true" />
       <header
-        ref={headerRef}
+        className={`site-header${mode === "over" && solid ? " is-solid" : ""}${menu ? " menu-open" : ""}`}
+        data-header=""
+        data-mode={mode}
         lang={locale}
-        className="lh-header"
-        data-overlay={overlay || undefined}
-        data-solid={solid || drawer || !!menu || undefined}
       >
-        <div className="lh-header__inner">
-          <Link href={home} className="lh-wordmark" aria-label={t.homeLabel} onClick={closeAll}>
-            <Image src={site.logo} alt={site.name} className="lh-wordmark__logo" loading="eager" />
+        <div className="wrap header-inner">
+          <Link className="brand" href={home} aria-label={t.homeLabel}>
+            <Image src={site.logo} alt={site.name} preload />
           </Link>
-
-          <nav aria-label={t.mainNavLabel} className="lh-nav-desktop">
-            <ul className="lh-nav">
-              {t.nav.map((item) => {
-                const active = isActive(best, item);
-                if (item.children) {
+          <nav className="nav" aria-label={t.mainNavLabel}>
+            <ul className="nav-list">
+              {t.nav.map((n, i) => {
+                const on = isCurrent(best, n);
+                if (!n.children) {
                   return (
-                    <MenuItem
-                      key={item.href}
-                      item={item}
-                      active={active}
-                      best={best}
-                      open={menu === item.href}
-                      locale={locale}
-                      t={t}
-                      onOpen={openMenu}
-                      onClose={closeMenu}
-                    />
+                    <li key={n.href}>
+                      {n.external ? (
+                        <a className="nav-link" href={n.href} target="_blank" rel="noopener">
+                          {n.label}
+                          <Ico name="arrow-up-right" className="ico-xs" />
+                        </a>
+                      ) : (
+                        <Link className="nav-link" href={n.href} aria-current={on ? "page" : undefined}>
+                          {n.label}
+                        </Link>
+                      )}
+                    </li>
                   );
                 }
+                const isOpen = panel === i;
                 return (
-                  <li key={item.href} className="lh-nav__item" data-active={active || undefined}>
-                    {item.external ? (
-                      <ExternalLink item={item} className="lh-nav__link" t={t} />
+                  <li
+                    key={n.href}
+                    className={`has-panel${isOpen ? " is-open" : ""}`}
+                    data-panel=""
+                    onPointerEnter={() => fine() && open(i)}
+                    onPointerLeave={() => fine() && leave()}
+                    onKeyDown={(e) => e.key === "Escape" && setPanel(null)}
+                    onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && setPanel(null)}
+                  >
+                    <button
+                      className="nav-link"
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={`panel-${i}`}
+                      data-current={on ? "true" : undefined}
+                      onClick={() => (isOpen ? setPanel(null) : open(i))}
+                    >
+                      {n.label}
+                      <Ico name="caret-down" className="ico-xs" />
+                    </button>
+                    <div className={`nav-panel${n.promo ? " nav-panel-wide" : ""}`} id={`panel-${i}`}>
+                      <ul>
+                        {n.children.map((c) => (
+                          <li key={c.href + c.label}>
+                            <Link href={c.href} aria-current={c.href === best ? "page" : undefined} onClick={() => setPanel(null)}>
+                              <span className="np-ico">
+                                <Ico name={c.icon ?? "arrow-right"} />
+                              </span>
+                              <span>
+                                <strong>{c.label}</strong>
+                                {c.desc && <small>{fixCopy(c.desc)}</small>}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      {n.promo && (
+                        <Link className="nav-promo" href={n.promo.href} onClick={() => setPanel(null)}>
+                          <strong>{n.promo.title}</strong>
+                          <span>{n.promo.body}</span>
+                          <em>
+                            {n.promo.cta}
+                            <Ico name="arrow-right" />
+                          </em>
+                        </Link>
+                      )}
+                      {n.overview && (
+                        <Link className="np-all" href={n.href} onClick={() => setPanel(null)}>
+                          {n.overview}
+                          <Ico name="arrow-right" />
+                        </Link>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          <div className="header-cta">
+            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--bar" />
+            <Link className="btn btn-gold btn-sm" href={quoteHref} data-magnetic="">
+              <span>{t.quote}</span>
+              <BtnIco />
+            </Link>
+            <button
+              className="burger"
+              type="button"
+              aria-expanded={menu}
+              aria-controls="menu-di-dong"
+              onClick={() => (menu ? closeMenu() : setMenu(true))}
+            >
+              <span className="sr-only">{menu ? t.closeMenu : t.openMenu}</span>
+              <i />
+              <i />
+            </button>
+          </div>
+        </div>
+        <div
+          className={`mobile-menu${menuIn ? " is-open" : ""}`}
+          id="menu-di-dong"
+          hidden={!menu}
+          onKeyDown={(e) => e.key === "Escape" && closeMenu()}
+        >
+          <nav aria-label={t.mainNavLabel}>
+            <ul className="mm-list">
+              {t.nav.map((n) => {
+                const groupK = k++;
+                const sub = n.children?.map((c) => ({ c, k: k++ })) ?? [];
+                return (
+                  <li key={n.href} className="mm-group" style={{ "--k": groupK } as CSSProperties}>
+                    {n.external ? (
+                      <a className="mm-top" href={n.href} target="_blank" rel="noopener">
+                        {n.label}
+                        <Ico name="arrow-up-right" />
+                      </a>
                     ) : (
-                      <Link
-                        href={item.href}
-                        className="lh-nav__link"
-                        aria-current={active ? "page" : undefined}
-                        hrefLang={crossesLocale(item.href, locale) ? "vi" : undefined}
-                        title={crossesLocale(item.href, locale) ? t.otherLang : undefined}
-                      >
-                        {item.label}
+                      <Link className="mm-top" href={n.href} aria-current={n.href === best ? "page" : undefined} onClick={closeMenu}>
+                        {n.label}
                       </Link>
+                    )}
+                    {sub.length > 0 && (
+                      <ul className="mm-sub">
+                        {sub.map(({ c, k: ck }) => (
+                          <li key={c.href + c.label} style={{ "--k": ck } as CSSProperties}>
+                            <Link href={c.href} aria-current={c.href === best ? "page" : undefined} onClick={closeMenu}>
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </li>
                 );
               })}
             </ul>
           </nav>
-
-          <div className="lh-header__actions">
-            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--bar" />
-            <Link href={quoteHref} className="lh-header__cta">
-              {t.quote}
+          <div className="mm-foot">
+            <Link className="btn btn-gold" href={quoteHref} onClick={closeMenu}>
+              <span>{t.quote}</span>
+              <BtnIco />
             </Link>
-            <button
-              type="button"
-              className="lh-mobile-trigger"
-              aria-label={drawer ? t.closeMenu : t.openMenu}
-              aria-expanded={drawer}
-              aria-controls="lh-mobile-drawer"
-              onClick={() => setDrawer((v) => !v)}
-            >
-              {drawer ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
-            </button>
+            <a className="mm-contact" href={site.contact.phoneHref}>
+              <Ico name="phone" />
+              {site.contact.phone}
+            </a>
+            <a className="mm-contact" href={`mailto:${site.contact.email}`}>
+              <Ico name="envelope" />
+              {site.contact.email}
+            </a>
+            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--drawer" onSwitch={closeMenu} />
           </div>
         </div>
-
-        {drawer && (
-          <div id="lh-mobile-drawer" className="lh-drawer" role="dialog" aria-modal="true" aria-label={t.mainNavLabel}>
-            <nav aria-label={t.mainNavLabel}>
-              <ul className="lh-drawer__list">
-                {t.nav.map((item) =>
-                  item.children ? (
-                    <MobileGroup key={item.href} item={item} best={best} locale={locale} t={t} onNavigate={closeAll} />
-                  ) : (
-                    <li key={item.href} className="lh-drawer__item">
-                      {item.external ? (
-                        <ExternalLink item={item} className="lh-drawer__link" t={t} onClick={closeAll} />
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className="lh-drawer__link"
-                          aria-current={isActive(best, item) ? "page" : undefined}
-                          onClick={closeAll}
-                        >
-                          {item.label}
-                          <LangTag href={item.href} locale={locale} t={t} />
-                        </Link>
-                      )}
-                    </li>
-                  ),
-                )}
-              </ul>
-            </nav>
-            <div className="lh-drawer__foot">
-              <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--drawer" onSwitch={closeAll} />
-              <Link href={quoteHref} className="lh-header__cta lh-drawer__cta" onClick={closeAll}>
-                {t.quote}
-              </Link>
-              <div className="lh-drawer__contact">
-                <a href={site.contact.phoneHref}>
-                  <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
-                  {site.contact.phone}
-                </a>
-                <a href={`mailto:${site.contact.email}`}>
-                  <Mail size={16} strokeWidth={1.75} aria-hidden="true" />
-                  {site.contact.email}
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
       </header>
+      <div className="header-sentinel" ref={sentinel} aria-hidden="true" />
     </>
   );
 }

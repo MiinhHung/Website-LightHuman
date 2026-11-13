@@ -940,3 +940,26 @@ export const servicesPage = {
     label: "Liên hệ tư vấn",
   } satisfies CtaBandData,
 };
+
+/** Copy the approved mock adds around the service data (E:/ClaudeMD/website/LightHuman, dich-vu.html + service template). */
+export const servicesMk = {
+  meta: {
+    title: "Dịch vụ tuyển dụng và tư vấn nhân sự",
+    description:
+      "Sáu dịch vụ của Light Human: tuyển nhân sự cấp cao, tuyển số lượng lớn, nhân sự tạm thời, thương hiệu tuyển dụng, đào tạo tuyển dụng và hướng nghiệp cá nhân.",
+  },
+  heroAlt: "Chuyên viên Light Human làm việc cùng doanh nghiệp",
+  quoteLabel: "Nhận báo giá",
+  casesTitle: "Dự án *tiêu biểu*",
+  crumbs: { label: "Đường dẫn", home: "Trang chủ", services: "Dịch vụ" },
+  subnav: {
+    label: "Mục trong trang",
+    scope: "Phạm vi",
+    features: "Khác biệt",
+    process: "Quy trình",
+    cases: "Dự án",
+    faq: "Hỏi đáp",
+  },
+  faqTitle: "Câu hỏi *thường gặp*",
+  related: "Dịch vụ khác",
+};

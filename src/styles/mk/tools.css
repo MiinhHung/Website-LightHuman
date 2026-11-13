@@ -1,0 +1,238 @@
+/* Light Human - giao diện 3 công cụ tính. Biến màu, .chip, .stepper, .input-wrap, .shell/.core lấy từ style.css. */
+
+/* ------------------------------------------------ hero */
+.calc-badge { display: grid; gap: 2px; align-self: center; padding-left: 1rem; border-left: 1px solid var(--line-dark); font-size: 0.8438rem; line-height: 1.45; color: var(--muted-on-dark); }
+.calc-badge strong { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.calc-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: clamp(1rem, 3vw, 2.5rem); border-top: 1px solid var(--line-dark); }
+.calc-facts div { display: flex; flex-direction: column-reverse; gap: 0.375rem; padding: 1.25rem 1.25rem 0 0; }
+.calc-facts div + div { padding-left: 1.25rem; border-left: 1px solid var(--line-dark); }
+.calc-facts dd { margin: 0; font-family: var(--display); font-stretch: 112%; font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1; color: var(--gold); }
+.calc-facts dt { font-family: var(--mono); font-size: 0.7188rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-on-dark); }
+
+/* ------------------------------------------------ khung máy tính */
+.calc-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(1rem, 2.4vw, 2rem); align-items: start; }
+.calc-form { min-width: 0; }
+.calc-form .core { display: grid; gap: 1.625rem; padding: clamp(1.25rem, 3vw, 2.25rem); }
+.calc-form-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding-bottom: 1.125rem; border-bottom: 1px solid var(--line); }
+.calc-step { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.calc-reset { min-height: 2.5rem; padding: 0.375rem 1rem; border: 1px solid var(--line); border-radius: 62.4375rem; background: transparent; color: var(--navy-800); font-size: 0.875rem; font-weight: 600; transition: border-color .3s var(--ease-out), background .3s var(--ease-out); }
+.calc-reset:hover { border-color: var(--navy-600); background: var(--mist); }
+
+.calc-field { display: grid; gap: 0.625rem; min-width: 0; }
+.calc-field[hidden], [data-resident-only][hidden] { display: none; }
+.calc-label { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+.calc-hint { font-size: 0.8438rem; line-height: 1.5; color: var(--muted); }
+.calc-hint-ico { display: flex; gap: 0.5rem; align-items: flex-start; margin-top: -0.75rem; }
+.calc-field .calc-hint-ico { margin-top: 0; }
+.calc-hint-ico .ico, .calc-ref .ico, .calc-legal .fine .ico { flex: none; width: 1rem; height: 1rem; margin-top: 2px; }
+.calc-err { margin: 0; }
+.calc-err[hidden], .calc-hint[hidden] { display: none; }
+.calc-money input { font-variant-numeric: tabular-nums; }
+.calc-money:has(input[aria-invalid="true"]), .calc-num:has(input[aria-invalid="true"]) { border-color: #b42318; }
+.calc-chips, .calc-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip-sm { min-height: 2.25rem; padding: 0.375rem 0.875rem; font-size: 0.8438rem; font-variant-numeric: tabular-nums; }
+.calc-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.25rem 1.75rem; align-items: start; }
+.calc-sub { margin-top: 0.25rem; }
+
+.calc-fieldset { margin: 0; padding: 0; border: 0; }
+.calc-fieldset legend { padding: 0; margin-bottom: 0.625rem; }
+.calc-radios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; }
+.calc-radio { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.875rem 1rem; border: 1px solid var(--line); border-radius: var(--r-input); background: #fff; cursor: pointer; transition: border-color .3s var(--ease-out), background .3s var(--ease-out); }
+.calc-radio:hover { border-color: var(--navy-600); }
+.calc-radio:has(input:checked) { border-color: var(--navy-800); background: var(--mist); }
+.calc-radio input { flex: none; width: 1.125rem; height: 1.125rem; margin: 2px 0 0; accent-color: var(--navy-800); }
+.calc-radio span { display: grid; gap: 2px; }
+.calc-radio strong { font-size: 0.9063rem; color: var(--ink); }
+.calc-radio small { font-size: 0.8125rem; line-height: 1.45; color: var(--muted); }
+
+/* nhóm đánh số (lãi kép) */
+.calc-group { display: grid; grid-template-columns: 2.125rem minmax(0, 1fr); gap: 0.875rem; }
+.calc-group-n { display: grid; place-items: center; width: 2.125rem; height: 2.125rem; border-radius: 50%; background: var(--mist); color: var(--navy-800); font-family: var(--mono); font-size: 0.8125rem; font-weight: 500; }
+
+/* thanh trượt + ô số */
+.calc-range-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.calc-num { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0 0.75rem; min-height: 2.75rem; border: 1px solid var(--line); border-radius: var(--r-input); background: #fff; transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+.calc-num:focus-within { border-color: var(--navy-600); box-shadow: 0 0 0 0.25rem rgba(31, 53, 118, .14); }
+.calc-num input { width: 4.2em; border: 0; background: none; font-family: var(--display); font-size: 1.0625rem; font-weight: 600; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; }
+.calc-num input:focus { outline: none; }
+.calc-num em { font-style: normal; font-size: 0.8125rem; color: var(--muted); white-space: nowrap; }
+.calc-range input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.75rem; margin: 0; background: transparent; cursor: pointer; }
+.calc-range input[type="range"]::-webkit-slider-runnable-track { height: 0.375rem; border-radius: 62.4375rem; background: linear-gradient(to right, var(--navy-800) var(--p, 0%), var(--mist) var(--p, 0%)); }
+.calc-range input[type="range"]::-moz-range-track { height: 0.375rem; border-radius: 62.4375rem; background: linear-gradient(to right, var(--navy-800) var(--p, 0%), var(--mist) var(--p, 0%)); }
+.calc-range input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 1.5rem; height: 1.5rem; margin-top: -0.5625rem; border: 0.1875rem solid var(--navy-800); border-radius: 50%; background: var(--gold); box-shadow: 0 2px 0.5rem rgba(13, 26, 61, .25); transition: transform .3s var(--ease-spring); }
+.calc-range input[type="range"]::-moz-range-thumb { width: 1.125rem; height: 1.125rem; border: 0.1875rem solid var(--navy-800); border-radius: 50%; background: var(--gold); }
+.calc-range input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.15); }
+.calc-marks { position: relative; height: 1rem; margin: -0.25rem 0.75rem 0; font-family: var(--mono); font-size: 0.6875rem; color: var(--muted); }
+.calc-marks span { position: absolute; left: var(--at); transform: translateX(-50%); }
+
+/* tùy chọn nâng cao */
+.calc-adv { border-top: 1px solid var(--line); padding-top: 1.125rem; }
+.calc-adv summary { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; font-weight: 600; cursor: pointer; list-style: none; }
+.calc-adv summary::-webkit-details-marker, .calc-legal summary::-webkit-details-marker { display: none; }
+.calc-adv summary small { font-family: var(--mono); font-size: 0.7188rem; font-weight: 400; letter-spacing: .06em; color: var(--muted); }
+.calc-legal-ico { display: inline-grid; margin-left: auto; transition: transform .4s var(--ease-spring); }
+.calc-legal-ico .ico { width: 1.125rem; height: 1.125rem; }
+details[open] > summary .calc-legal-ico { transform: rotate(180deg); }
+.calc-adv-body { display: grid; gap: 1.375rem; padding-top: 0.875rem; }
+
+/* ------------------------------------------------ bảng kết quả (navy) */
+.calc-result { position: sticky; top: calc(var(--header-h, 4.75rem) + 1.25rem); display: grid; gap: 1.375rem; padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: var(--r-card); background: radial-gradient(120% 70% at 100% 0%, rgba(242, 207, 99, .13), transparent 60%), var(--navy-900); color: #f4f6fb; box-shadow: 0 1.875rem 3.75rem -1.875rem rgba(13, 26, 61, .55); overflow: hidden; }
+.calc-result-body { display: grid; gap: 1.125rem; }
+.calc-r-eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-on-dark); }
+.calc-r-big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; margin-top: -0.5rem; }
+.calc-r-big span { font-family: var(--display); font-stretch: 112%; font-weight: 700; font-size: clamp(2.3rem, 4.4vw, 3.7rem); line-height: 1; letter-spacing: -.03em; color: var(--gold); font-variant-numeric: tabular-nums; }
+.calc-r-big small { font-family: var(--mono); font-size: 0.8125rem; color: var(--muted-on-dark); }
+.calc-r-sub { font-size: 0.9375rem; line-height: 1.55; color: var(--muted-on-dark); }
+.calc-r-sub strong { color: #fff; font-weight: 600; }
+.calc-split { display: flex; height: 0.75rem; border-radius: 62.4375rem; background: rgba(244, 246, 251, .08); overflow: hidden; }
+.calc-split .seg { height: 100%; transition: width .6s var(--ease-out); }
+.seg-net, .sw-net { background: var(--gold); }
+.seg-ins, .sw-ins { background: var(--muted-on-dark); }
+.seg-tax, .sw-tax { background: var(--amber-deep); }
+.seg-base, .sw-base { background: #6d82c4; }
+.calc-legend { display: grid; gap: 0.625rem; }
+.calc-legend div, .calc-r-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.9063rem; }
+.calc-legend dt { display: flex; align-items: center; gap: 0.625rem; color: var(--muted-on-dark); }
+.calc-legend dd, .calc-r-row strong { margin: 0; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; text-align: right; }
+.sw { flex: none; width: 0.875rem; height: 0.375rem; border-radius: 0.1875rem; }
+.calc-r-row { padding-top: 0.75rem; border-top: 1px solid var(--line-dark); color: var(--muted-on-dark); }
+.calc-r-row + .calc-r-row { padding-top: 0.625rem; }
+.calc-delta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.625rem; padding: 0.75rem 0.875rem; border-radius: 0.875rem; background: rgba(242, 207, 99, .08); font-size: 0.8438rem; line-height: 1.5; color: var(--mist); }
+.calc-delta-badge { padding: 0.1875rem 0.625rem; border-radius: 62.4375rem; background: var(--gold); color: var(--navy-900); font-family: var(--mono); font-size: 0.7813rem; font-weight: 500; white-space: nowrap; }
+.calc-empty { display: grid; gap: 0.625rem; min-height: 12.5rem; align-content: center; color: var(--muted-on-dark); }
+.calc-ref { display: flex; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--line-dark); font-family: var(--mono); font-size: 0.7188rem; line-height: 1.55; letter-spacing: .04em; color: var(--muted-on-dark); }
+
+/* ------------------------------------------------ diễn giải */
+.calc-breakdown { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); margin-top: clamp(1rem, 2.4vw, 2rem); }
+.calc-breakdown-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.calc-breakdown:empty { display: none; }
+.calc-card { display: grid; align-content: start; gap: 1.125rem; min-width: 0; padding: clamp(1.375rem, 2.6vw, 2rem); border: 1px solid var(--line); border-radius: var(--r-card); background: #fff; }
+.calc-card header { display: grid; gap: 0.375rem; }
+.calc-card.is-dark { border-color: transparent; background: var(--navy-900); color: #f4f6fb; }
+.calc-card.is-dark .calc-step { color: var(--gold); }
+.calc-table { width: 100%; border-collapse: collapse; font-size: 0.9063rem; }
+.calc-table th, .calc-table td { padding: 0.625rem 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 400; vertical-align: baseline; }
+.calc-table td { padding-left: 0.75rem; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.calc-table thead th { font-family: var(--mono); font-size: 0.7188rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.calc-table thead th + th { text-align: right; padding-left: 0.75rem; }
+.calc-table .is-strong th, .calc-table .is-strong td { font-weight: 600; }
+.calc-table .is-sub th, .calc-table .is-sub td { font-weight: 600; color: var(--navy-800); }
+.calc-table .is-total th, .calc-table .is-total td { padding-top: 0.875rem; border-bottom: 0; font-family: var(--display); font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+.calc-card.is-dark .calc-table th, .calc-card.is-dark .calc-table td { border-color: var(--line-dark); color: var(--mist); }
+.calc-card.is-dark .calc-table .is-total th, .calc-card.is-dark .calc-table .is-total td { color: var(--gold); }
+.calc-note { padding: 0.625rem 0.875rem; border-radius: 0.75rem; background: var(--mist); font-size: 0.8438rem; line-height: 1.5; color: var(--muted); }
+.calc-note.is-warn { background: #fdecea; color: #8a1c12; }
+.calc-card.is-dark .calc-note { background: rgba(244, 246, 251, .06); color: var(--muted-on-dark); }
+.calc-notes { display: grid; gap: 0.75rem; padding-left: 1.125rem; font-size: 0.9063rem; line-height: 1.6; color: var(--mist); }
+.calc-card-foot { display: flex; justify-content: space-between; padding-top: 0.875rem; border-top: 1px solid var(--line); font-weight: 600; }
+.calc-card-foot strong { font-family: var(--display); font-size: 1.15rem; }
+
+.calc-brackets { display: grid; gap: 0.875rem; }
+.calc-brackets li { display: grid; gap: 0.375rem; opacity: .5; transition: opacity .4s var(--ease-out); }
+.calc-brackets li.is-active { opacity: 1; }
+.br-top { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) auto; gap: 0.625rem; align-items: baseline; font-size: 0.875rem; }
+.br-rate { font-family: var(--mono); font-weight: 500; color: var(--navy-800); }
+.br-range { color: var(--muted); }
+.br-tax { font-weight: 600; font-variant-numeric: tabular-nums; }
+.br-bar { height: 0.375rem; border-radius: 62.4375rem; background: var(--mist); overflow: hidden; }
+.br-bar span { display: block; height: 100%; border-radius: inherit; background: var(--amber); transition: width .6s var(--ease-out); }
+.br-amt { font-family: var(--mono); font-size: 0.7188rem; color: var(--muted); }
+
+.calc-legal { display: grid; gap: 0.75rem; max-width: 55rem; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.calc-legal summary { display: flex; align-items: center; gap: 0.625rem; min-height: 2.75rem; width: fit-content; font-weight: 600; color: var(--navy-800); cursor: pointer; list-style: none; }
+.calc-legal summary .calc-legal-ico { margin-left: 0; }
+.calc-legal ul { display: grid; gap: 0.5rem; padding: 0.25rem 0 0.5rem 1.125rem; list-style: disc; font-size: 0.875rem; line-height: 1.55; color: var(--muted); }
+.calc-legal .fine { display: flex; gap: 0.5rem; }
+
+/* ------------------------------------------------ lãi kép: biểu đồ, công thức, bảng năm */
+.calc-detail { display: grid; gap: clamp(1rem, 2vw, 1.5rem); margin-top: clamp(1rem, 2.4vw, 2rem); }
+.calc-detail[hidden] { display: none; }
+.calc-chart-head { display: flex !important; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 0.75rem 1.5rem; }
+.calc-chart-head > div { display: grid; gap: 0.375rem; }
+.calc-chart-head .check { align-items: center; color: var(--ink); font-size: 0.9063rem; font-weight: 500; }
+.calc-chart-head .check input { accent-color: var(--navy-800); margin: 0; }
+.calc-chart-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.375rem; font-size: 0.8438rem; color: var(--muted); }
+.calc-chart-legend li { display: flex; align-items: center; gap: 0.5rem; }
+.ln { width: 1.375rem; height: 0; border-top: 0.1875rem solid; border-radius: 2px; }
+.ln-bal { border-color: var(--amber-deep); }
+.ln-base { border-color: var(--navy-800); }
+.ln-simple { border-top-style: dashed; border-top-width: 2px; border-color: var(--muted); }
+.calc-chart { min-width: 0; }
+.calc-chart-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ch-grid { stroke: var(--line); stroke-width: 1; }
+.ch-tick { fill: var(--muted); font-family: var(--mono); font-size: 0.6875rem; }
+.ch-area { fill: rgba(242, 207, 99, .24); }
+.ch-bal { fill: none; stroke: var(--amber-deep); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.ch-base { fill: none; stroke: var(--navy-800); stroke-width: 2; stroke-linejoin: round; }
+.ch-simple { fill: none; stroke: var(--muted); stroke-width: 1.75; stroke-dasharray: 6 5; }
+.ch-dot { fill: var(--gold); stroke: var(--navy-900); stroke-width: 2; }
+.calc-duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); align-items: start; }
+.calc-formula-main { padding: 1rem 1.125rem; border-radius: 0.875rem; background: var(--navy-900); color: var(--gold); font-family: var(--mono); font-size: 0.875rem; line-height: 1.7; overflow-x: auto; white-space: nowrap; }
+.calc-vars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem 1.125rem; }
+.calc-vars div { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 0.5rem; }
+.calc-vars dt { font-family: var(--mono); font-weight: 500; color: var(--amber-deep); }
+.calc-vars dd { display: grid; gap: 2px; margin: 0; font-size: 0.8438rem; line-height: 1.45; color: var(--muted); }
+.calc-vars strong { color: var(--ink); font-weight: 600; }
+.calc-sub-h { margin-top: 0.375rem; }
+.calc-steps { display: grid; gap: 0.625rem; counter-reset: st; }
+.calc-steps li { display: grid; gap: 0.25rem; padding-bottom: 0.625rem; border-bottom: 1px solid var(--line); font-size: 0.8438rem; color: var(--muted); }
+.calc-steps code { font-family: var(--mono); font-size: 0.8125rem; color: var(--ink); overflow-wrap: anywhere; }
+.calc-steps .is-total code { font-weight: 500; color: var(--navy-800); font-size: 0.875rem; }
+.calc-years-wrap { max-height: 28.75rem; overflow: auto; border-radius: 0.75rem; overscroll-behavior: contain; }
+.calc-years thead th { position: sticky; top: 0; background: #fff; z-index: 1; }
+.calc-years td.is-gain { color: #2f6b3a; }
+
+/* ------------------------------------------------ hướng dẫn */
+.calc-howto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.calc-tips { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+.calc-howto li { display: grid; align-content: start; gap: 0.75rem; padding: clamp(1.375rem, 2.4vw, 1.875rem); border-radius: var(--r-card); background: rgba(255, 255, 255, .6); box-shadow: inset 0 0 0 1px var(--line); }
+.calc-howto-n { font-family: var(--display); font-stretch: 120%; font-weight: 700; font-size: 2.4rem; line-height: 1; color: var(--navy-600); }
+.calc-howto p, .calc-cases p:not(.calc-cases-rate), .calc-advice > p:not(.eyebrow) { font-size: 0.9375rem; line-height: 1.6; color: var(--muted); }
+.calc-guide-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+.calc-guide-top { margin-top: 0; align-items: center; }
+.calc-guide-top .sec-head { margin-bottom: 0; }
+.calc-ratecard .core { display: grid; gap: 1rem; padding: clamp(1.375rem, 2.6vw, 2rem); }
+.calc-ratecard .calc-table td { font-weight: 600; color: var(--navy-800); }
+.calc-advice { display: grid; gap: 1rem; align-content: start; }
+.calc-advice .h3 em { font-style: italic; font-weight: 500; color: var(--navy-600); }
+.calc-checklist { display: grid; gap: 0.625rem; }
+.calc-checklist li { display: flex; gap: 0.625rem; align-items: flex-start; font-size: 0.9375rem; line-height: 1.5; }
+.calc-checklist .ico { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 1px; color: var(--amber-deep); }
+.calc-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.calc-cases li { display: grid; align-content: start; gap: 0.625rem; padding: clamp(1.375rem, 2.4vw, 1.875rem); border-radius: var(--r-card); background: var(--navy-900); color: #f4f6fb; }
+.calc-cases .h4 { color: #fff; }
+.calc-cases-rate { font-family: var(--mono); font-size: 0.75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.calc-cases li p:not(.calc-cases-rate) { color: var(--muted-on-dark); }
+.calc-guide-sub { margin: clamp(3rem, 6vw, 5rem) 0 1.5rem; }
+.calc-vs td strong { display: block; color: var(--ink); }
+.calc-vs-bar { display: block; height: 0.25rem; margin-top: 0.375rem; border-radius: 62.4375rem; background: var(--mist); overflow: hidden; }
+.calc-vs-bar span { display: block; height: 100%; margin-left: auto; background: var(--amber); }
+
+/* ------------------------------------------------ đáp ứng */
+@media (max-width: 1080px) {
+  .calc-breakdown { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-breakdown > .is-dark:last-child:nth-child(3) { grid-column: 1 / -1; }
+  .calc-tips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-duo { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .calc-grid, .calc-breakdown, .calc-breakdown-two, .calc-guide-split, .calc-howto, .calc-tips, .calc-cases { grid-template-columns: minmax(0, 1fr); }
+  .calc-result { position: static; }
+  .calc-row, .calc-radios, .calc-vars { grid-template-columns: minmax(0, 1fr); }
+  .calc-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calc-facts div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .calc-badge { padding-left: 0; border-left: 0; flex-basis: 100%; }
+  .calc-group { grid-template-columns: minmax(0, 1fr); gap: 0.625rem; }
+  .calc-group-n { width: 1.875rem; height: 1.875rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .calc-split .seg, .br-bar span, .calc-brackets li, .calc-legal-ico, .calc-radio, .calc-reset, .calc-range input[type="range"]::-webkit-slider-thumb { transition: none; }
+}
+@media print {
+  .calc-form, .calc-legal details, .calc-reset { display: none; }
+  .calc-grid { grid-template-columns: minmax(0, 1fr); }
+  .calc-result { position: static; box-shadow: none; }
+}
+
+/* số tiền chạy (tools.js, tweenHtml): chữ số cùng bề rộng để không rung khi đếm */
+.tn { font-variant-numeric: tabular-nums; }

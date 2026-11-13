@@ -13,10 +13,11 @@ Các lệnh phổ biến:
 
 | Nhiệm vụ | Lệnh |
 | --- | --- |
-| Dev server | `npm run dev` (Turbopack qua `@tailwindcss/turbopack`) |
+| Dev server | `npm run dev` (Turbopack; Tailwind qua PostCSS `@tailwindcss/postcss`) |
 | Production build | `npm run build` |
 | Lint (flat config, `eslint-config-next@16`) | `npm run lint` |
 | Typecheck (no emit) | `npm run typecheck` |
+| Lint CSS (stylelint) | `npm run lint:css` |
 | Full test run (Vitest) | `npm test` |
 | Watch tests | `npm run test:watch` |
 | Single test file | `npx vitest run src/lib/quote/__tests__/classify.test.ts` |
@@ -42,18 +43,23 @@ The `AGENTS.md` block at the repo root (auto-maintained by `next dev` — do NOT
 
 App Router under `src/app/`. Route folders use Vietnamese slugs (`/dich-vu`, `/dich-vu/gioi-thieu` (About; a static segment that wins over `[slug]`), `/dich-vu/[slug]`, `/cau-chuyen` (company story), `/tin-tuc`, `/blog/[slug]`, `/case-studies`, `/lien-he`). Dynamic `[slug]` routes are prebuilt via `generateStaticParams()` from the `src/content/*.ts` arrays and export `instant = false` (their whole body reads `params`, which otherwise fails dev instant-navigation validation). `next.config.ts` 308-redirects `/blog` → `/tin-tuc` and `/gioi-thieu` → `/dich-vu/gioi-thieu`. `src/app/quan-tri/{bai-viet,case-studies,dich-vu,tin-tuc}` (admin) are empty placeholder folders — no admin UI or auth exists yet. Root layout (`src/app/layout.tsx`) hardcodes `data-theme="lighthuman"` and `data-color-scheme="light"` on `<html>` and loads three `next/font/google` variables: Inter (body), Merriweather (heading, also `--font-quote`), JetBrains Mono (numerals/code-ish text, use via `var(--font-jetbrains-mono)`).
 
-### Styling: Kết hợp Tailwind CSS và shadcn UI cùng stylesheet Light Human
+### Styling: bản mẫu đã duyệt (layer `mk`) + Tailwind/shadcn
 
-- Dự án tích hợp **Tailwind CSS v4** và **shadcn UI** kết hợp song song với hệ thống stylesheet nhận diện gốc `src/styles/lighthuman.css` (các class `.lh-*` scoped theo `[data-theme="lighthuman"]`).
-- `src/app/globals.css` cấu hình token `@theme inline` và `:root` variables cho shadcn UI, đồng bộ màu sắc với nhận diện thương hiệu Light Human (`--primary: #14285a`, `--radius: 0.625rem`, ...).
-- File tiện ích `cn()` nằm tại `src/lib/utils.ts` (sử dụng `clsx` + `tailwind-merge`), tương thích với shadcn UI. `src/lib/cn.ts` re-export lại từ `utils.ts`.
+- **Nguồn chân lý giao diện là bản mẫu tĩnh `E:\ClaudeMD\website\LightHuman`** (xem `DESIGN.md` ở gốc repo). CSS của mẫu được chép nguyên vào `src/styles/mk/{style,sections,tools,quote}.css` và import vào layer `mk`; markup của mẫu được dựng lại bằng component trong `src/components/mk/` (primitive ở `mk/ui.tsx`: `Ico`, `MkImg`, `Btn`, `LinkLine`, `Rich`, `SecHead`, `CtaBand`). Làm trang mới: dựng đúng class của mẫu, đừng viết lại bằng Tailwind. Hai class đổi tên để tránh trùng Tailwind: `.prose` → `.mk-prose`, `.static` → `.is-static`.
+- Thứ tự cascade trong `src/app/globals.css`: `@layer theme, base, lh, mk, components, utilities`. `lh` là stylesheet cũ `.lh-*` (đang bị thay dần, xoá khi không còn dùng); `mk` thắng `lh`; Tailwind utility thắng cả hai. Tailwind chạy qua `postcss.config.mjs` (`@tailwindcss/postcss`); đừng quay lại loader `@tailwindcss/turbopack`. `@plugin "@tailwindcss/typography"` còn cho bài viết cũ.
+- Font: **Archivo** (trục `wdth`, biến `--font-archivo`) cho tiêu đề và thân bài, **JetBrains Mono** (`--font-jetbrains-mono`) cho số/nhãn. Không còn Merriweather/Inter; `font-serif`/`font-sans` của Tailwind trỏ về Archivo.
+- Ảnh: bản webp cục bộ ở `public/img` (chép từ mẫu); `imgSrc()` trong `src/lib/mk.ts` đổi URL CMS sang bản cục bộ theo `src/content/mk/img-map.json`, kích thước ở `img-dims.json`.
+- Chuyển động **theo mẫu** (đã được duyệt, thay quy tắc "không hiệu ứng cuộn" cũ): `src/components/mk/Runtime.tsx` port `main.js` + `sections.js` của mẫu (GSAP + ScrollTrigger từ npm `gsap`, IntersectionObserver), chạy lại mỗi lần đổi route và tự dọn. Nó bám vào data-attribute của mẫu (`data-hero`, `data-lines`, `data-split`, `data-scrub-words`, `data-tl`, `data-tabs`, `data-acc`, `data-filter-*`, `data-count`, `data-speed`, `data-magnetic`, `data-video-open`, …). Tiêu đề có hiệu ứng tách chữ phải render sẵn `.wd > .wi` (dùng `<Rich split />`) và gắn `data-split-done="1"` để runtime không sửa DOM do React quản lý. Luôn tôn trọng `prefers-reduced-motion`.
+- Header (`layout/Header.tsx`) cố định, trong suốt trên hero ảnh (`.hero-home` / `.hero-page`) và đặc navy-900 khi cuộn qua; trang không có hero ảnh thì đặc từ đầu. Thanh liên hệ nổi, panel nhận bài, hộp video, quầng sáng con trỏ, lớp chuyển trang nằm ở `mk/Overlays.tsx`.
+- `cn()` lấy từ package npm `cn` (`import { cn } from "cn"`); không có `src/lib/utils.ts`.
+- Nút: dùng `Button` / `buttonVariants` (`@/components/ui/button`) với variant `brand` / `gold` / `text` (nền sáng) hoặc `inverse` / `inverse-outline` (nền navy), size `brand` / `brand-lg` / `pill`, thay cho `.lh-btn*`.
 - Thêm component shadcn mới: `npx shadcn@latest add <component>`. `components.json` dùng style `base-nova` → primitives là **`@base-ui/react`**, không phải Radix; đừng import `@radix-ui/*`.
-- Các biến CSS tái sử dụng: `--brand-navy`, `--brand-gold`, `--ink-{400..900}`, `--bg-{page,surface}`, `--border-1`, `--ease-out`, `--font-jetbrains-mono`.
+- Các biến CSS chuẩn: `--brand-{navy,gold,amber}*`, `--ink-{0..900}`, `--fg-*`, `--bg-{page,surface,sunken}`, `--border-*`, `--ease-out`, `--font-jetbrains-mono`. Alias `--lh-{navy,blue,gold,ink}*`, `--brand-{blue,yellow}`, `--bg-{1,2,3}` đã ngưng dùng.
 - Theme là single-light mặc định theo bản thiết kế thương hiệu Light Human.
 
 ### Content / data layer
 
-Each top-level page has a dedicated data file under `src/content/` (`about.ts`, `services.ts`, `contact.ts`, `posts.ts`, `case-studies.ts`, `partners.ts`, `faq.ts`, `home.ts`, `site.ts`). Section components under `src/components/sections/<page>/` are mostly dumb renderers that read from these. When adding or editing page content, edit the `src/content/*.ts` file — do not inline copy into components. Shared site strings and navigation (`mainNav`, `footerNav`, `serviceNav`, contact info) live in `src/content/site.ts`; `quoteHref` (`/lien-he#bao-gia`) is the single target for every "Báo giá" action, and "Tuyển dụng" in the nav is the external job board. Every page ends with one `ClosingCta` (the old `CtaGrid` is gone). `src/app/loading.tsx` is the branded fallback for blocking routes. On routes that open with a `.lh-hero--cinematic` the sticky header is transparent (`data-overlay`, decided from the pathname and confirmed against the visible hero; do not use CSS `:has()` for this, since cacheComponents keeps previous routes mounted but hidden) and the hero slides up under it; `data-solid` flips via an IntersectionObserver sentinel (no scroll listeners). Header and hero content share `--container-max` / `--container-pad`.
+Each top-level page has a dedicated data file under `src/content/` (`about.ts`, `services.ts`, `contact.ts`, `posts.ts`, `case-studies.ts`, `partners.ts`, `faq.ts`, `home.ts`, `site.ts`). Section components under `src/components/sections/<page>/` are mostly dumb renderers that read from these. When adding or editing page content, edit the `src/content/*.ts` file — do not inline copy into components. Shared site strings and navigation (`mainNav`, `footerNav`, `serviceNav`, contact info) live in `src/content/site.ts`; `quoteHref` (`/lien-he#bao-gia`) is the single target for every "Báo giá" action, and "Tuyển dụng" in the nav is the external job board. Pages end with the mock's gold `CtaBand` / `QuoteCta` (`src/components/mk/`), except where the mock has none (e.g. `/lien-he`). `src/app/loading.tsx` is the branded fallback for blocking routes. The header is fixed: transparent over a photo hero, navy-900 once scrolled past it (see Styling). Header and hero content share `--container-max` / `--container-pad`.
 
 **There is no database or ORM.** All content is static TypeScript; form submissions (contact + quote) are not persisted — contact optionally POSTs to `CONTACT_WEBHOOK_URL`, the quote action only computes and returns a result (quote code `BG-YYMMDD-XXXX` from `src/lib/quote/quote-code.ts` is random, not stored). Adding persistence is a new decision, not an existing pattern to follow.
 

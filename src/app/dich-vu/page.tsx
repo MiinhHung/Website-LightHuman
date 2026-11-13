@@ -1,30 +1,21 @@
 import type { Metadata } from "next";
-import { services, servicesPage } from "@/content/services";
-import { SuccessStories } from "@/components/sections/SuccessStories";
-import { ServiceHero } from "@/components/sections/services/ServiceHero";
-import { ServiceGroups } from "@/components/sections/services/ServiceGroups";
-import { CtaBand } from "@/components/sections/services/CtaBand";
+import { servicesMk, servicesPage } from "@/content/services";
+import { QuoteCta } from "@/components/mk/home/HomeSections";
+import { ServicesCasesStage, ServicesHero, ServicesIndex, StepsRow } from "@/components/mk/services/ServicesOverview";
 
 export const metadata: Metadata = {
-  title: servicesPage.title,
-  description: servicesPage.description,
+  title: servicesMk.meta.title,
+  description: servicesMk.meta.description,
 };
 
 export default function ServicesPage() {
-  const { hero, cta } = servicesPage;
   return (
     <>
-      <ServiceHero hero={hero} />
-      <ServiceGroups items={services} />
-      <SuccessStories
-        title={
-          <>
-            Khách hàng nói gì về <em>Light Human</em>
-          </>
-        }
-        lede="Năm câu chuyện, kể bằng lời của chính khách hàng và ứng viên."
-      />
-      <CtaBand cta={cta} />
+      <ServicesHero />
+      <ServicesIndex />
+      <StepsRow process={servicesPage.process} />
+      <ServicesCasesStage />
+      <QuoteCta title={servicesPage.cta.title} desc={servicesPage.cta.desc} />
     </>
   );
 }

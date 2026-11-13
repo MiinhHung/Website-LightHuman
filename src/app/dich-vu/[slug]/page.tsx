@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getService, services } from "@/content/services";
-import { Partners } from "@/components/sections/Partners";
-import { ServiceHero } from "@/components/sections/services/ServiceHero";
-import { ServiceScope } from "@/components/sections/services/ServiceCardsGrid";
-import { FeatureRows } from "@/components/sections/services/FeatureRows";
-import { ServiceProcess } from "@/components/sections/services/ServiceProcess";
-import { ServiceCases } from "@/components/sections/services/ServiceCases";
-import { ServiceFaq } from "@/components/sections/services/ServiceFaq";
-import { CtaBand } from "@/components/sections/services/CtaBand";
-import { ServiceSubnav } from "@/components/sections/services/ServiceSubnav";
+import { getService, services, servicesMk } from "@/content/services";
+import { site } from "@/content/site";
+import { fixCopy } from "@/lib/mk";
+import { PartnersBand, QuoteCta } from "@/components/mk/home/HomeSections";
+import {
+  RelatedServices,
+  ServiceCaseStrip,
+  ServiceFaq,
+  ServiceFeatures,
+  ServiceHero,
+  ServiceScope,
+  ServiceSubnav,
+  ServiceTimeline,
+} from "@/components/mk/services/ServiceDetail";
 
 // Every slug is prebuilt via generateStaticParams, but the page body depends on
 // `params`, so a navigation can't show a shared shell first; allow it to block.
@@ -19,62 +23,56 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
+const plain = (t: string) => fixCopy(t).replace(/\*/g, "").replace(/\n/g, " ");
+
 export async function generateMetadata({ params }: PageProps<"/dich-vu/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
-  return service ? { title: service.name, description: service.description } : {};
+  return service ? { title: fixCopy(service.name), description: plain(service.description).slice(0, 160) } : {};
 }
 
 export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/[slug]">) {
   const { slug } = await params;
-  const service = getService(slug);
-  if (!service) notFound();
+  const s = getService(slug);
+  if (!s) notFound();
 
-  const { hero, scope, features, process, cases, faq, cta } = service;
-  const ctaBand = <CtaBand cta={cta} />;
-  const faqBlock = (
-    <div id="hoi-dap" className="lh-anchor">
-      <ServiceFaq helper={faq.helper} items={faq.items} />
-    </div>
-  );
-  const subnav = [
-    ...(scope ? [{ id: "pham-vi", label: "Phạm vi" }] : []),
-    { id: "giai-phap", label: "Giải pháp" },
-    { id: "quy-trinh", label: "Quy trình" },
-    { id: "case-study", label: "Case study" },
-    { id: "hoi-dap", label: "Hỏi đáp" },
-  ];
+  const url = `${site.url}/dich-vu/${s.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: s.name,
+        description: plain(s.description),
+        serviceType: s.name,
+        url,
+        provider: { "@type": "EmploymentAgency", name: site.name, url: site.url },
+        areaServed: "VN",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { name: servicesMk.crumbs.home, item: site.url },
+          { name: servicesMk.crumbs.services, item: `${site.url}/dich-vu` },
+          { name: s.name, item: url },
+        ].map((c, i) => ({ "@type": "ListItem", position: i + 1, ...c })),
+      },
+    ],
+  };
 
   return (
-    <div className="lh-service-detail">
-      <ServiceHero hero={hero} />
-      <ServiceSubnav items={subnav} />
-      {service.partners && <Partners />}
-      {scope && (
-        <div id="pham-vi" className="lh-anchor">
-          <ServiceScope head={{ eyebrow: scope.eyebrow, title: scope.title }} items={scope.items} />
-        </div>
-      )}
-      <div id="giai-phap" className="lh-anchor">
-        <FeatureRows {...features} />
-      </div>
-      <div id="quy-trinh" className="lh-anchor">
-        <ServiceProcess process={process} />
-      </div>
-      <div id="case-study" className="lh-anchor">
-        <ServiceCases {...cases} />
-      </div>
-      {service.ctaBeforeFaq ? (
-        <>
-          {ctaBand}
-          {faqBlock}
-        </>
-      ) : (
-        <>
-          {faqBlock}
-          {ctaBand}
-        </>
-      )}
-    </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ServiceHero s={s} />
+      <ServiceSubnav s={s} />
+      {s.partners && <PartnersBand single />}
+      {s.scope && <ServiceScope scope={s.scope} />}
+      <ServiceFeatures features={s.features} />
+      <ServiceTimeline process={s.process} />
+      <ServiceCaseStrip cases={s.cases} />
+      <ServiceFaq faq={s.faq} />
+      <RelatedServices current={s.slug} />
+      <QuoteCta title={s.cta.title} desc={s.cta.desc} />
+    </>
   );
 }

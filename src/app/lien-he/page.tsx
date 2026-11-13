@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { ContactQuote } from "@/components/sections/contact/ContactQuote";
-import { ContactFaq } from "@/components/sections/contact/ContactFaq";
-import { VideoFeature } from "@/components/sections/VideoFeature";
-import { Partners } from "@/components/sections/Partners";
-import { contactVideo } from "@/content/contact";
+import { ContactFaq, ContactHero, ContactMap, ContactVideo, QuoteSection } from "@/components/mk/contact/ContactSections";
+import { contactMeta } from "@/content/contact";
 
 export const metadata: Metadata = {
-  title: "Liên hệ & Báo giá",
-  description: "Nhận báo giá tuyển dụng nhanh chóng và đặt lịch tư vấn miễn phí với đội ngũ nhân sự Light Human.",
+  title: { absolute: contactMeta.title },
+  description: contactMeta.description,
 };
 
 export const instant = false;
 
+// Order as in the approved mock (lien-he.html): no logo band and no closing CTA here.
 export default function ContactPage() {
   return (
     <>
-      <ContactQuote />
-      <Partners />
-      <VideoFeature {...contactVideo} />
+      <ContactHero />
+      <QuoteSection />
+      <ContactMap />
+      <ContactVideo />
       <ContactFaq />
     </>
   );

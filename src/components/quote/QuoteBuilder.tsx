@@ -15,7 +15,6 @@ import {
   type DragEndEvent,
   type DragStartEvent,
   type KeyboardCoordinateGetter,
-  type Over,
 } from "@dnd-kit/core";
 import Image from "next/image";
 import { createPortal, flushSync } from "react-dom";
@@ -33,7 +32,7 @@ import { POSITION_MAX, POSITION_MIN, QUANTITY_MAX } from "@/lib/quote/limits";
 import { contactSchema, quoteInputSchema } from "@/lib/quote/schema";
 import { ContactFields } from "./ContactFields";
 import { CardGhost, Deck, Req, cardKey, type CardData } from "./Deck";
-import { SlotRows } from "./Paper";
+import { SheetDrop, SlotRows } from "./Paper";
 import { QuoteResult, type ResultState } from "./QuoteResult";
 import { EMPTY_SELECTED, applyAdd, applyRemove, isValueSelected, valuesForGroup, type SelectedState } from "./selection";
 import { fill } from "./text";
@@ -134,7 +133,6 @@ const PROGRESS_KEYS = ["position", "industries", "experience", "region", "educat
 
 const cardData = (a: Active | null | undefined) => a?.data.current as CardData | undefined;
 const groupLabel = (g: GroupKey) => CATALOG.find((c) => c.key === g)?.label ?? g;
-const overGroup = (over: Over | null) => (over ? (String(over.id).replace(/^row:/, "") as GroupKey) : null);
 
 // Pointer drags follow the pointer like the mock's elementFromPoint; keyboard drags use rect overlap.
 const collision: CollisionDetection = (args) => (args.pointerCoordinates ? pointerWithin(args) : rectIntersection(args));
@@ -166,6 +164,7 @@ const today = () => {
 export function QuoteBuilder() {
   const [selected, setSelected] = useState<SelectedState>(EMPTY_SELECTED);
   const [drag, setDrag] = useState<CardData | null>(null);
+  const [overSheet, setOverSheet] = useState(false);
   const [snap, setSnap] = useState<Snap>(EMPTY_SNAP);
   const [tried, setTried] = useState(false);
   const [status, setStatus] = useState("");
@@ -251,16 +250,14 @@ export function QuoteBuilder() {
 
   function handleDragEnd(e: DragEndEvent) {
     setDrag(null);
+    setOverSheet(false);
     const data = cardData(e.active);
     if (!data) return;
     const from = (e.active.rect.current.translated as DOMRect | null) ?? null;
-    const target = overGroup(e.over);
-    if (target === data.groupKey) {
+    // Anywhere on the sheet counts (its own row, another row, blank paper): the card lands in its own slot.
+    if (e.over) {
       add(data.groupKey, data.value, data.label, from);
-      if (e.activatorEvent instanceof KeyboardEvent) flight.get(`slot:${target}`)?.scrollIntoView({ block: "nearest" });
-    } else if (target) {
-      setStatus(fill(vi.sheet.wrongSlot, { group: groupLabel(data.groupKey) }));
-      flight.shake(`row:${target}`);
+      if (e.activatorEvent instanceof KeyboardEvent) flight.get(`slot:${data.groupKey}`)?.scrollIntoView({ block: "nearest" });
     } else {
       flight.flyNow(`card:${cardKey(data.groupKey, data.value)}`, from);
     }
@@ -394,8 +391,12 @@ export function QuoteBuilder() {
         sensors={sensors}
         collisionDetection={collision}
         onDragStart={handleDragStart}
+        onDragOver={(e) => setOverSheet(e.over !== null)}
         onDragEnd={handleDragEnd}
-        onDragCancel={() => setDrag(null)}
+        onDragCancel={() => {
+          setDrag(null);
+          setOverSheet(false);
+        }}
         accessibility={{
           screenReaderInstructions: { draggable: vi.sheet.drag.instructions },
           announcements: {
@@ -406,8 +407,7 @@ export function QuoteBuilder() {
             onDragOver: ({ active, over }) => {
               const d = cardData(active);
               if (!d) return undefined;
-              const g = overGroup(over);
-              return g ? fill(vi.sheet.drag.over, { label: d.label, row: groupLabel(g) }) : fill(vi.sheet.drag.move, { label: d.label });
+              return over ? fill(vi.sheet.drag.over, { label: d.label, row: groupLabel(d.groupKey) }) : fill(vi.sheet.drag.move, { label: d.label });
             },
             // add()/handleDragEnd already report the outcome through the board's own live region.
             onDragEnd: () => undefined,
@@ -436,7 +436,7 @@ export function QuoteBuilder() {
             </ol>
           </div>
 
-          <article className="qd-paper" id="qd-paper" aria-labelledby="qd-paper-title" data-stamped={locked ? "" : undefined}>
+          <SheetDrop stamped={locked}>
             <div className="qd-stamp-box" aria-hidden="true">
               <div className="qd-stamp">
                 <span>{vi.board.stamp}</span>
@@ -519,6 +519,7 @@ export function QuoteBuilder() {
               <SlotRows
                 selected={selected}
                 dragGroup={drag?.groupKey ?? null}
+                overSheet={overSheet}
                 locked={locked}
                 errors={errors}
                 register={flight.register}
@@ -563,7 +564,7 @@ export function QuoteBuilder() {
                 {site.contact.address} · {site.contact.phone} · {site.contact.email}
               </p>
             </footer>
-          </article>
+          </SheetDrop>
 
           {result && <QuoteResult ref={resultRef} state={result} summary={summary} mailHref={mailHref} onPrint={print} onReset={reset} />}
         </div>

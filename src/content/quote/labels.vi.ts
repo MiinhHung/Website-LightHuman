@@ -49,7 +49,7 @@ export const vi = {
   /** Card deck (left) + quote sheet (right) layout. */
   board: {
     deckTitle: "Bộ thẻ yêu cầu",
-    deckHint: "Kéo thẻ sang tờ báo giá, hoặc bấm vào thẻ.",
+    deckHint: "Kéo thẻ thả vào bất kỳ đâu trên tờ báo giá, hoặc bấm vào thẻ.",
     deckHintTouch: "Chạm vào thẻ để thêm vào báo giá.",
     deckEmpty: "Đã dùng hết thẻ trong nhóm này.",
     next: "Sang mục tiếp",
@@ -92,8 +92,8 @@ export const vi = {
   sheet: {
     eyebrow: "Tờ báo giá",
     title: "Kéo thẻ vào tờ báo giá, *nhận mã ngay*",
-    lede: "Chọn thẻ ở bên trái, kéo vào đúng ô trên tờ giấy, rồi bấm Tạo báo giá để nhận mã và bản PDF. Chưa có đơn giá: đội BD báo sau.",
-    hintFine: "Kéo thẻ sang tờ báo giá, hoặc bấm vào thẻ.",
+    lede: "Chọn thẻ ở bên trái, kéo thả vào bất kỳ đâu trên tờ giấy (thẻ tự vào đúng ô), rồi bấm Tạo báo giá để nhận mã và bản PDF. Chưa có đơn giá: đội BD báo sau.",
+    hintFine: "Kéo thẻ thả vào bất kỳ đâu trên tờ báo giá, hoặc bấm vào thẻ.",
     hintTouch: "Chạm vào thẻ để thêm vào báo giá, hoặc giữ rồi kéo.",
     hintChip: "Bấm thẻ trên tờ giấy để bỏ ra.",
     dockRequired: "mục bắt buộc",
@@ -114,7 +114,6 @@ export const vi = {
     formErrors: "Còn {n} mục cần bổ sung, xem ghi chú đỏ trên tờ báo giá.",
     slotErrorMulti: "Kéo ít nhất 1 thẻ {group} vào ô này.",
     slotErrorSingle: "Kéo một thẻ {group} vào ô này.",
-    wrongSlot: "Thẻ này thuộc nhóm {group}, chưa thả đúng ô.",
     announce: "{verb} {label}, nhóm {group}.",
     footCompany: "Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng (Light Human) · MST 0316300874",
     reset: "Đã dọn tờ giấy, bắt đầu báo giá mới.",

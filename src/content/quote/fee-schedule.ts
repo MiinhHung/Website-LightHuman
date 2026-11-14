@@ -10,8 +10,7 @@
  * 7/14/30 ngày ≈ 3 ngày × 1.1 / 1.5 / 2; plan 2 rows ≈ ×1.2/1.3/1.5 and tiers ×1.15/×1.25.
  */
 
-import type { QuoteType } from "@/lib/quote/classify";
-import type { FeeCellValue, LineFees } from "@/lib/quote/snapshot";
+import type { FeeCellValue, LineFees, QuoteType } from "@/types";
 import { TABLE_LAYOUT } from "./tableLayout";
 
 // TODO(BA): the filled Mass example shows 15% / 25% / 50% for 3 / 7 / 14 ngày.

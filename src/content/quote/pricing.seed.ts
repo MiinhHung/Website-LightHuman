@@ -25,7 +25,7 @@
  * TODO(BA): confirm that POD really goes to manual review, or add real prices.
  */
 
-import type { PricingSeed } from "@/lib/quote/pricing/types";
+import type { PricingSeed } from "@/types";
 
 export const PRICING_SEED: PricingSeed = {
   version: "2026-11-draft-1",

@@ -7,7 +7,7 @@
  * TODO(BA): chờ BD duyệt layout Hunt.
  */
 
-import type { QuoteType } from "@/lib/quote/classify";
+import type { QuoteType } from "@/types";
 
 export type FeeKind = "vnd" | "salary";
 

@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildQuoteDocument } from "../build-quote-document";
-import { renderQuotePdf } from "../pdf/render";
+import { renderQuotePdf } from "@/pdf/render";
 import type { QuoteType } from "../classify";
 import type { QuoteSnapshot } from "../snapshot";
 import { MASS_SAMPLE_FEES, MASS_SAMPLE_WARRANTY, filledHuntFees, makeLine, makeSnapshot } from "./fixtures";

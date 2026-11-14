@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   },
   // Fonts and logo are read from disk at request time by the quote PDF route.
   outputFileTracingIncludes: {
-    "/api/quote/pdf": ["./src/lib/quote/pdf/fonts/*.ttf", "./src/lib/quote/pdf/assets/*"],
+    "/api/quote/pdf": ["./src/pdf/fonts/*.ttf", "./src/pdf/assets/*"],
   },
   async redirects() {
     // Site gốc dùng cả /blog và /tin-tuc; gom về một nơi.

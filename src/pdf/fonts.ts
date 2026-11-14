@@ -5,7 +5,7 @@ import { PDF_FONT } from "./theme";
 
 // Resolved from the project root; next.config.ts traces these files into the
 // /api/quote/pdf bundle via outputFileTracingIncludes.
-const PDF_DIR = path.join(process.cwd(), "src", "lib", "quote", "pdf");
+const PDF_DIR = path.join(process.cwd(), "src", "pdf");
 const FONT_DIR = path.join(PDF_DIR, "fonts");
 
 let logo: Buffer | null = null;

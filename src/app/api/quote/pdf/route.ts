@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { buildQuoteDocument, parseDraftMark } from "@/lib/quote/build-quote-document";
-import { renderQuotePdf } from "@/lib/quote/pdf/render";
+import { renderQuotePdf } from "@/pdf/render";
 import { getQuoteTokenSecret, quotePdfFilename, verifyQuoteToken } from "@/lib/quote/token";
 
 // Never "use cache" here: every response is a per-customer, signed snapshot.

@@ -1,4 +1,4 @@
-import type { QuoteDocument } from "../build-quote-document";
+import type { QuoteDocument } from "@/lib/quote/build-quote-document";
 import { Notes, SurchargeBlock } from "./components/Blocks";
 import { Plan1Section, Plan2Section, QuoteFrame } from "./components/QuoteFrame";
 

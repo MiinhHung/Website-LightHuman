@@ -1,6 +1,6 @@
 import { Document, Page, View } from "@react-pdf/renderer";
 import type { ReactNode } from "react";
-import type { QuoteDocument } from "../../build-quote-document";
+import type { QuoteDocument } from "@/lib/quote/build-quote-document";
 import { PDF_COLORS, PDF_FONT, PDF_PAGE, PDF_SPACE } from "../theme";
 import { ItalicLine, PlanHeading, UnitNote } from "./Blocks";
 import { Footer } from "./Footer";

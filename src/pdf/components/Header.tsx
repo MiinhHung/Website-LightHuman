@@ -1,5 +1,5 @@
 import { Image, Text, View } from "@react-pdf/renderer";
-import type { HeaderField, QuoteDocument } from "../../build-quote-document";
+import type { HeaderField, QuoteDocument } from "@/lib/quote/build-quote-document";
 import { getLogo } from "../fonts";
 import { PDF_FONT, PDF_SPACE } from "../theme";
 

@@ -1,5 +1,5 @@
 import { renderToBuffer } from "@react-pdf/renderer";
-import type { QuoteDocument } from "../build-quote-document";
+import type { QuoteDocument } from "@/lib/quote/build-quote-document";
 import { registerPdfFonts } from "./fonts";
 import { HuntQuote } from "./HuntQuote";
 import { MassQuote } from "./MassQuote";

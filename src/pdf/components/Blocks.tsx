@@ -1,5 +1,5 @@
 import { Text, View } from "@react-pdf/renderer";
-import type { QuoteDocument, TableModel } from "../../build-quote-document";
+import type { QuoteDocument, TableModel } from "@/lib/quote/build-quote-document";
 import { PDF_COLORS, PDF_FONT, PDF_SPACE } from "../theme";
 import { tableWidth } from "./Table";
 

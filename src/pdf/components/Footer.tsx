@@ -1,5 +1,5 @@
 import { Link, Text, View } from "@react-pdf/renderer";
-import type { QuoteDocument } from "../../build-quote-document";
+import type { QuoteDocument } from "@/lib/quote/build-quote-document";
 import { PDF_COLORS, PDF_FONT, PDF_PAGE } from "../theme";
 
 const footerFont = {

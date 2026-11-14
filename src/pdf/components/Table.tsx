@@ -1,5 +1,5 @@
 import { Text, View } from "@react-pdf/renderer";
-import type { Cell, TableColumn, TableModel } from "../../build-quote-document";
+import type { Cell, TableColumn, TableModel } from "@/lib/quote/build-quote-document";
 import { CONTENT_WIDTH, EMPTY_CELL, PDF_COLORS, PDF_FONT, PDF_TABLE, type PdfStyle as Style } from "../theme";
 
 const edge: Style = {

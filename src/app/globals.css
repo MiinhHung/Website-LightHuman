@@ -3,14 +3,12 @@
  * so a utility placed next to an .lh-* class always wins. New stylesheets: add an
  * `@import ... layer(lh)` line here, never in layout.tsx.
  */
-@layer theme, base, lh, mk, components, utilities;
+@layer theme, base, mk, components, utilities;
 
 @import "tailwindcss";
 /* `prose` classes for CMS article HTML. */
 @plugin "@tailwindcss/typography";
-@import "../styles/lighthuman.css" layer(lh);
-@import "../styles/header.css" layer(lh);
-/* The approved static mock (E:/ClaudeMD/website/LightHuman), ported as-is; wins over the legacy .lh-* sheets. */
+/* The approved static mock (E:/ClaudeMD/website/LightHuman), ported as-is */
 @import "../styles/mk/style.css" layer(mk);
 @import "../styles/mk/sections.css" layer(mk);
 @import "../styles/mk/tools.css" layer(mk);

@@ -29,14 +29,14 @@ export function ContactForm() {
     const error = errors[name];
     const errorId = `contact-${name}-error`;
     return (
-      <label className="lh-field">
-        <span className="lh-field__label">{label}</span>
+      <label className="block">
+        <span className="block text-xs font-medium text-[var(--ink-700)] mb-1.5">{label}</span>
         {control({
           "aria-invalid": error ? true : undefined,
           "aria-describedby": error ? errorId : undefined,
         })}
         {error && (
-          <span id={errorId} className="contact-form__helper block">
+          <span id={errorId} className="contact-form__helper block text-xs text-rose-500 mt-1">
             {error}
           </span>
         )}
@@ -44,12 +44,15 @@ export function ContactForm() {
     );
   };
 
+  const inputClass =
+    "w-full rounded-[10px] border border-[var(--border-1,#d9dfeb)] bg-[var(--bg-page,#fff)] px-3.5 py-3 text-[15px] text-[var(--ink-800)] outline-none transition-colors duration-150 focus:border-[var(--brand-gold,#f2cf63)]";
+
   const input = (name: ContactField, label: string, type: string, required: boolean) =>
     field(name, label, (a11y) => (
       <input
         type={type}
         required={required}
-        className="lh-field__input"
+        className={inputClass}
         name={name}
         defaultValue={values[name]}
         {...a11y}
@@ -57,12 +60,12 @@ export function ContactForm() {
     ));
 
   return (
-    <form className="lh-contact-form__form" action={formAction} aria-busy={pending || undefined}>
-      <div className="lh-contact-form__row lh-contact-form__row--2">
+    <form className="flex flex-col gap-4" action={formAction} aria-busy={pending || undefined}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {input("name", "Họ và tên *", "text", true)}
         {input("email", "Email công ty *", "email", true)}
       </div>
-      <div className="lh-contact-form__row lh-contact-form__row--2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {input("phone", "Số điện thoại *", "tel", true)}
         {input("role", "Chức vụ", "text", false)}
       </div>
@@ -71,7 +74,10 @@ export function ContactForm() {
         <select
           name="service"
           required
-          className="lh-field__input lh-field__select"
+          className={`${inputClass} appearance-none cursor-pointer pr-9 bg-[right_12px_center] bg-no-repeat`}
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235D6477' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
+          }}
           defaultValue={values.service ?? ""}
           {...a11y}
         >
@@ -90,7 +96,7 @@ export function ContactForm() {
           name="message"
           rows={4}
           required
-          className="lh-field__input lh-field__textarea"
+          className={`${inputClass} resize-y min-h-[96px]`}
           defaultValue={values.message}
           {...a11y}
         />
@@ -100,12 +106,12 @@ export function ContactForm() {
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="sr-only" />
 
       {state.status === "error" && state.message && (
-        <p className="contact-form__helper col-span-full" role="alert">
+        <p className="contact-form__helper col-span-full text-sm text-rose-500" role="alert">
           {state.message}
         </p>
       )}
 
-      <p className="lh-contact-form__privacy">
+      <p className="inline-flex items-center gap-2 text-[12.5px] text-[var(--ink-500)] m-0">
         <span aria-hidden="true">
           <ContactIcon name="shield-check" size={13} />
         </span>

@@ -75,7 +75,7 @@ export function Footer() {
             </a>
           </li>
         </ul>
-        <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--footer" />
+        <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="mt-5" />
         <Link className="f-policy" href="/chinh-sach-bao-mat">
           Chính sách bảo mật
         </Link>

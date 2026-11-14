@@ -191,7 +191,7 @@ export function Header() {
             </ul>
           </nav>
           <div className="header-cta">
-            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--bar" />
+            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="hidden lg:inline-flex" />
             <Link className="btn btn-gold btn-sm" href={quoteHref} data-magnetic="">
               <span>{t.quote}</span>
               <BtnIco />
@@ -261,7 +261,7 @@ export function Header() {
               <Ico name="envelope" />
               {site.contact.email}
             </a>
-            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="lh-lang--drawer" onSwitch={closeMenu} />
+            <LanguageSwitch pathname={pathname} locale={locale} label={t.language} className="h-11 self-start" onSwitch={closeMenu} />
           </div>
         </div>
       </header>

@@ -4,9 +4,9 @@
  * business logic lives in them.
  */
 
-import { QUOTE_COMPANY } from "@/content/quote/company";
-import { DOCUMENT_TEXT as T, EMPTY_CELL } from "@/content/quote/documentText";
-import { TABLE_LAYOUT, type PeriodColumn } from "@/content/quote/tableLayout";
+import { PDF_COMPANY as QUOTE_COMPANY } from "@/data/pdf/company";
+import { DOCUMENT_TEXT as T, EMPTY_CELL } from "@/data/pdf/documentText";
+import { PDF_TABLE_LAYOUT as TABLE_LAYOUT, type PeriodColumn } from "@/data/pdf/tableLayout";
 import type { QuoteType } from "./classify";
 import { isPricingComplete, type FeeCellValue, type QuoteSnapshot, type SnapshotLine } from "./snapshot";
 

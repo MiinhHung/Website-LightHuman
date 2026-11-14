@@ -73,3 +73,9 @@ export const DOCUMENT_TEXT = {
   watermark: "BẢN NHÁP, CHƯA ĐIỀN ĐƠN GIÁ",
   pageLabel: "Trang {n}/{total}",
 } as const;
+
+export type DocumentText = typeof DOCUMENT_TEXT;
+
+export function getDocumentText(): DocumentText {
+  return DOCUMENT_TEXT;
+}

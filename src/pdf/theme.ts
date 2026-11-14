@@ -5,7 +5,7 @@
 
 import type { Styles } from "@react-pdf/renderer";
 
-export { EMPTY_CELL } from "@/content/quote/documentText";
+export { EMPTY_CELL } from "@/data/pdf/documentText";
 
 export type PdfStyle = Styles[string];
 

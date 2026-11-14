@@ -11,7 +11,7 @@
  */
 
 import type { FeeCellValue, LineFees, QuoteType } from "@/types";
-import { TABLE_LAYOUT } from "./tableLayout";
+import { PDF_TABLE_LAYOUT as TABLE_LAYOUT } from "@/data/pdf/tableLayout";
 
 // TODO(BA): the filled Mass example shows 15% / 25% / 50% for 3 / 7 / 14 ngày.
 const WARRANTY_PCT: Record<QuoteType, readonly (number | null)[]> = {

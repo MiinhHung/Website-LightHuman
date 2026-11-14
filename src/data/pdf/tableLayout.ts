@@ -95,3 +95,9 @@ export const TABLE_LAYOUT: Record<QuoteType, TypeLayout> = {
     showMinimumFee: true,
   },
 };
+
+export const PDF_TABLE_LAYOUT = TABLE_LAYOUT;
+
+export function getPdfTableLayout(): Record<QuoteType, TypeLayout> {
+  return PDF_TABLE_LAYOUT;
+}

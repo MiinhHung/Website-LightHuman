@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { EMPTY_CELL } from "@/content/quote/documentText";
+import { EMPTY_CELL } from "@/data/pdf/documentText";
 import {
   buildQuoteDocument,
   formatQuoteDate,

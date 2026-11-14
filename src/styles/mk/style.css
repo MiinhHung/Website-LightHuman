@@ -951,3 +951,20 @@ main > .subnav { padding: 0; }
 /* /en wraps its page in <div lang="en">; give its sections the same rhythm as main > section. */
 main > div[lang] > section { padding-block: var(--sec-y); }
 main > div[lang] > .hero { padding: 0; }
+
+/* Home quote bento: cards deal themselves onto the sheet on a loop, no hover needed. */
+.bento-quote .q-chip { z-index: 2; animation: q-deal 6s var(--ease-out, ease-out) infinite; animation-delay: calc(var(--i) * .45s); }
+.bento-quote .q-sheet { z-index: 1; animation: q-sheet 6s ease-in-out infinite; animation-delay: 1.4s; }
+@keyframes q-deal {
+  0% { opacity: 0; translate: 0 -0.5rem; }
+  5%, 20% { opacity: 1; translate: 0 0; }
+  40%, 84% { opacity: 1; left: calc(100% - 8rem + var(--i) * 0.375rem); top: calc(100% - 4.75rem - var(--i) * 0.5rem); transform: rotate(calc(-3deg + var(--i) * 2deg)) scale(.62); }
+  94%, 100% { opacity: 0; left: calc(100% - 8rem + var(--i) * 0.375rem); top: calc(100% - 4.75rem - var(--i) * 0.5rem); transform: rotate(0deg) scale(.5); }
+}
+@keyframes q-sheet {
+  0%, 30%, 60%, 100% { transform: scale(1); box-shadow: none; }
+  42% { transform: scale(1.08); box-shadow: 0 0 0 0.375rem rgba(242, 207, 99, .28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-quote .q-chip, .bento-quote .q-sheet { animation: none !important; }
+}

@@ -7,6 +7,7 @@ import { CURRENT_RULE } from "@/lib/salary/rules";
 import type { homeToolkit } from "@/content/home";
 import type { Locale } from "@/i18n/config";
 import { Ico } from "../ui";
+import { Tn } from "../tools/fields";
 
 const fmt = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -22,7 +23,12 @@ export function MiniSalary({ t, locale }: { t: (typeof homeToolkit)["salary"]; l
     () => (amount ? grossToNet(amount, { dependents: dep, region: 1, insuranceBase: null, ruleId: CURRENT_RULE }) : null),
     [amount, dep],
   );
-  const money = (n: number) => `${fmt(n)} ${t.unit}`;
+  // Tn tweens from the previous value, so typing makes the figures roll like the tool pages.
+  const money = (n: number) => (
+    <>
+      <Tn v={n} /> {t.unit}
+    </>
+  );
   const change = (d: number) => setDep((v) => Math.max(0, Math.min(9, v + d)));
 
   return (

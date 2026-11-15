@@ -182,11 +182,25 @@ main > section, main > article > section { padding-block: var(--sec-y); }
 .nav-panel::before { content: ""; position: absolute; inset: -0.75rem 0 auto; height: 0.75rem; }
 .nav-panel::after { content: ""; position: absolute; top: -0.375rem; left: 50%; width: 0.875rem; height: 0.875rem; background: #fff; border-left: 1px solid var(--line); border-top: 1px solid var(--line); transform: translateX(-50%) rotate(45deg); border-radius: 2px 0 0 0; pointer-events: none; }
 .has-panel.is-open .nav-panel { opacity: 1; visibility: visible; transform: translate(-50%, 0) scale(1); transition-delay: 0s; }
-.nav-panel-wide { width: min(47.5rem, calc(100vw - 2.5rem)); display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.625rem; }
+.nav-panel-wide { width: min(65rem, calc(100vw - 2.5rem)); display: grid; grid-template-columns: 1fr 15.5rem; gap: 0.875rem; padding: 0.875rem; }
 .nav-panel ul { display: grid; gap: 2px; }
 .nav-panel-wide ul { grid-template-columns: 1fr 1fr; align-content: start; }
-.nav-panel li a { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem; border-radius: 0.875rem; text-decoration: none; transition: background .25s var(--ease-out); }
-.nav-panel li a:hover, .nav-panel li a[aria-current] { background: var(--mist); }
+.nav-panel-wide ul.np-cards-grid { grid-template-columns: repeat(3, 1fr); gap: 0.625rem; }
+.nav-panel li a.np-item { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem; border-radius: 0.875rem; text-decoration: none; transition: background .25s var(--ease-out); }
+.nav-panel li a.np-item:hover, .nav-panel li a.np-item[aria-current] { background: var(--mist); }
+
+/* Thẻ dịch vụ thiết kế theo dạng bài viết (ảnh thumbnail, tag vàng kim, tiêu đề, tóm tắt) */
+.np-card { display: flex; flex-direction: column; height: 100%; padding: 0.5rem; border-radius: 0.875rem; background: #fff; text-decoration: none; border: 1px solid transparent; transition: background .25s var(--ease-out), border-color .25s var(--ease-out), transform .25s var(--ease-spring), box-shadow .25s var(--ease-out); }
+.np-card:hover, .np-card[aria-current] { background: var(--mist); border-color: rgba(31, 53, 118, .08); transform: translateY(-2px); box-shadow: 0 0.5rem 1.25rem -0.25rem rgba(10, 20, 48, .08); }
+.np-card-thumb { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 0.625rem; overflow: hidden; background: #0f1c3f; }
+.np-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease-out); }
+.np-card:hover .np-card-img { transform: scale(1.05); }
+.np-card-body { display: flex; flex-direction: column; flex: 1; padding-top: 0.5rem; }
+.np-card-tag { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #c99326; margin-bottom: 0.1875rem; }
+.np-card-title { display: block; font-size: 0.875rem; font-weight: 700; line-height: 1.3; color: var(--ink); transition: color .2s var(--ease-out); }
+.np-card:hover .np-card-title { color: var(--navy-800); }
+.np-card-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 0.25rem; font-size: 0.7813rem; line-height: 1.4; color: var(--muted); }
+
 .np-ico { display: grid; place-items: center; flex: none; width: 2.375rem; height: 2.375rem; border-radius: 0.75rem; background: var(--navy-900); color: var(--gold); }
 .nav-panel strong { display: block; font-size: 0.9063rem; font-weight: 600; line-height: 1.3; }
 .nav-panel small { display: block; margin-top: 0.1875rem; font-size: 0.8125rem; line-height: 1.4; color: var(--muted); }
@@ -935,7 +949,7 @@ main > .subnav { padding: 0; }
   .hero-home, .hero-page { min-height: calc(min(100svh, 75rem) / var(--hz)); min-height: calc(min(100dvh, 75rem) / var(--hz)); }
   .hero-page { min-height: calc(min(88dvh, 53.75rem) / var(--hz)); }
   .nav-panel { width: 29rem; }
-  .nav-panel-wide { width: min(50rem, 90vw); }
+  .nav-panel-wide { width: min(68rem, 94vw); }
   .nav-panel strong { font-size: 1.125rem; }
   .nav-panel small { font-size: 0.9375rem; }
   .np-ico { width: 2.75rem; height: 2.75rem; }

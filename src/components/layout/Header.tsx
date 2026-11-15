@@ -153,17 +153,43 @@ export function Header() {
                       <Ico name="caret-down" className="ico-xs" />
                     </button>
                     <div className={`nav-panel${n.promo ? " nav-panel-wide" : ""}`} id={`panel-${i}`}>
-                      <ul>
+                      <ul className={n.children.some((c) => c.image) ? "np-cards-grid" : undefined}>
                         {n.children.map((c) => (
                           <li key={c.href + c.label}>
-                            <Link href={c.href} aria-current={c.href === best ? "page" : undefined} onClick={() => setPanel(null)}>
-                              <span className="np-ico">
-                                <Ico name={c.icon ?? "arrow-right"} />
-                              </span>
-                              <span>
-                                <strong>{c.label}</strong>
-                                {c.desc && <small>{fixCopy(c.desc)}</small>}
-                              </span>
+                            <Link
+                              className={c.image ? "np-card" : "np-item"}
+                              href={c.href}
+                              aria-current={c.href === best ? "page" : undefined}
+                              onClick={() => setPanel(null)}
+                            >
+                              {c.image ? (
+                                <>
+                                  <div className="np-card-thumb">
+                                    <Image
+                                      src={c.image}
+                                      alt={c.label}
+                                      width={320}
+                                      height={200}
+                                      className="np-card-img"
+                                    />
+                                  </div>
+                                  <div className="np-card-body">
+                                    {c.kicker && <span className="np-card-tag">{c.kicker}</span>}
+                                    <strong className="np-card-title">{c.label}</strong>
+                                    {c.desc && <small className="np-card-desc">{fixCopy(c.desc)}</small>}
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <span className="np-ico">
+                                    <Ico name={c.icon ?? "arrow-right"} />
+                                  </span>
+                                  <span>
+                                    <strong>{c.label}</strong>
+                                    {c.desc && <small>{fixCopy(c.desc)}</small>}
+                                  </span>
+                                </>
+                              )}
                             </Link>
                           </li>
                         ))}

@@ -60,7 +60,7 @@ export type NavIcon =
   | "tax"
   | "compound";
 
-export type NavLink = { label: string; href: string; desc?: string; icon?: NavIcon };
+export type NavLink = { label: string; href: string; desc?: string; icon?: NavIcon; image?: string; kicker?: string };
 
 export type NavItem = {
   label: string;
@@ -108,12 +108,54 @@ export const mainNav: NavItem[] = [
     href: S,
     overview: "Xem tổng quan dịch vụ",
     children: [
-      { label: "Tuyển dụng nhân sự cấp cao", href: `${S}/tuyen-dung-nhan-su-cao-cap`, desc: "Headhunting vị trí quản lý, lãnh đạo", icon: "executive" },
-      { label: "Tuyển dụng số lượng lớn", href: `${S}/tuyen-dung-nhan-su-so-luong-lon`, desc: "Hàng trăm vị trí cho nhà máy, chuỗi bán lẻ", icon: "mass" },
-      { label: "Tuyển dụng nhân sự tạm thời", href: `${S}/tuyen-dung-nhan-su-tam-thoi`, desc: "Nhân sự thời vụ, theo dự án", icon: "temporary" },
-      { label: "Xây dựng thương hiệu tuyển dụng", href: `${S}/xay-dung-thuong-hieu-tuyen-dung`, desc: "Thu hút và giữ chân nhân tài", icon: "branding" },
-      { label: "Đào tạo tuyển dụng", href: `${S}/dao-tao-tuyen-dung`, desc: "Nâng năng lực đội ngũ HR nội bộ", icon: "training" },
-      { label: "Hướng nghiệp & tư vấn cá nhân", href: `${S}/huong-nghiep-va-tu-van-ca-nhan`, desc: "Tư vấn sự nghiệp 1:1", icon: "career" },
+      {
+        label: "Tuyển dụng nhân sự cấp cao",
+        href: `${S}/tuyen-dung-nhan-su-cao-cap`,
+        desc: "Headhunting vị trí quản lý, lãnh đạo",
+        icon: "executive",
+        image: "/img/dich-vu/01-executive-search-1489950848.webp",
+        kicker: "Dịch vụ",
+      },
+      {
+        label: "Tuyển dụng số lượng lớn",
+        href: `${S}/tuyen-dung-nhan-su-so-luong-lon`,
+        desc: "Hàng trăm vị trí cho nhà máy, chuỗi bán lẻ",
+        icon: "mass",
+        image: "/img/dich-vu/02-mass-hiring-be2b05f192.webp",
+        kicker: "Dịch vụ",
+      },
+      {
+        label: "Tuyển dụng nhân sự tạm thời",
+        href: `${S}/tuyen-dung-nhan-su-tam-thoi`,
+        desc: "Nhân sự thời vụ, theo dự án",
+        icon: "temporary",
+        image: "/img/dich-vu/07-temp-staffing-6ecce3b3bd.webp",
+        kicker: "Dịch vụ",
+      },
+      {
+        label: "Xây dựng thương hiệu tuyển dụng",
+        href: `${S}/xay-dung-thuong-hieu-tuyen-dung`,
+        desc: "Thu hút và giữ chân nhân tài",
+        icon: "branding",
+        image: "/img/dich-vu/03-employer-branding-de017b1d9f.webp",
+        kicker: "Dịch vụ",
+      },
+      {
+        label: "Đào tạo tuyển dụng",
+        href: `${S}/dao-tao-tuyen-dung`,
+        desc: "Nâng năng lực đội ngũ HR nội bộ",
+        icon: "training",
+        image: "/img/dich-vu/04-training-620b2066d4.webp",
+        kicker: "Dịch vụ",
+      },
+      {
+        label: "Hướng nghiệp & tư vấn cá nhân",
+        href: `${S}/huong-nghiep-va-tu-van-ca-nhan`,
+        desc: "Tư vấn sự nghiệp 1:1",
+        icon: "career",
+        image: "/img/dich-vu/05-career-counseling-48fda77e5d.webp",
+        kicker: "Dịch vụ",
+      },
     ],
     promo: {
       title: "Báo giá trong vài phút",
@@ -153,12 +195,54 @@ export const mainNavEn: NavItem[] = [
     href: S,
     overview: "Services overview",
     children: [
-      { label: "Executive search", href: `${S}/tuyen-dung-nhan-su-cao-cap`, desc: "Headhunting for managers and leaders", icon: "executive" },
-      { label: "Mass recruitment", href: `${S}/tuyen-dung-nhan-su-so-luong-lon`, desc: "Hundreds of hires for plants and retail", icon: "mass" },
-      { label: "Temporary staffing", href: `${S}/tuyen-dung-nhan-su-tam-thoi`, desc: "Seasonal and project-based staff", icon: "temporary" },
-      { label: "Employer branding", href: `${S}/xay-dung-thuong-hieu-tuyen-dung`, desc: "Attract and keep the right people", icon: "branding" },
-      { label: "Recruitment training", href: `${S}/dao-tao-tuyen-dung`, desc: "Upskill your in-house HR team", icon: "training" },
-      { label: "Career coaching", href: `${S}/huong-nghiep-va-tu-van-ca-nhan`, desc: "One-to-one career guidance", icon: "career" },
+      {
+        label: "Executive search",
+        href: `${S}/tuyen-dung-nhan-su-cao-cap`,
+        desc: "Headhunting for managers and leaders",
+        icon: "executive",
+        image: "/img/dich-vu/01-executive-search-1489950848.webp",
+        kicker: "Service",
+      },
+      {
+        label: "Mass recruitment",
+        href: `${S}/tuyen-dung-nhan-su-so-luong-lon`,
+        desc: "Hundreds of hires for plants and retail",
+        icon: "mass",
+        image: "/img/dich-vu/02-mass-hiring-be2b05f192.webp",
+        kicker: "Service",
+      },
+      {
+        label: "Temporary staffing",
+        href: `${S}/tuyen-dung-nhan-su-tam-thoi`,
+        desc: "Seasonal and project-based staff",
+        icon: "temporary",
+        image: "/img/dich-vu/07-temp-staffing-6ecce3b3bd.webp",
+        kicker: "Service",
+      },
+      {
+        label: "Employer branding",
+        href: `${S}/xay-dung-thuong-hieu-tuyen-dung`,
+        desc: "Attract and keep the right people",
+        icon: "branding",
+        image: "/img/dich-vu/03-employer-branding-de017b1d9f.webp",
+        kicker: "Service",
+      },
+      {
+        label: "Recruitment training",
+        href: `${S}/dao-tao-tuyen-dung`,
+        desc: "Upskill your in-house HR team",
+        icon: "training",
+        image: "/img/dich-vu/04-training-620b2066d4.webp",
+        kicker: "Service",
+      },
+      {
+        label: "Career coaching",
+        href: `${S}/huong-nghiep-va-tu-van-ca-nhan`,
+        desc: "One-to-one career guidance",
+        icon: "career",
+        image: "/img/dich-vu/05-career-counseling-48fda77e5d.webp",
+        kicker: "Service",
+      },
     ],
     promo: {
       title: "A quote in minutes",

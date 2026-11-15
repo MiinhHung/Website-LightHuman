@@ -22,11 +22,51 @@ const store = {
   },
 };
 
+function ZaloIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 40 40"
+      width="28"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M20 5C11.163 5 4 11.5 4 19.5c0 4.143 1.91 7.893 5.013 10.597L7.6 34.5a.8.8 0 001.07.98l5.88-2.35C16.32 33.71 18.11 34 20 34c8.837 0 16-6.5 16-14.5S28.837 5 20 5z"
+        fill="#ffffff"
+      />
+      <g transform="translate(8, 8)">
+        <path
+          fill="#0084ff"
+          d="M12.49 10.272v-.45h1.347v6.322h-.77a.576.576 0 01-.577-.573v.001a3.27 3.27 0 01-1.938.632a3.284 3.284 0 01-3.284-3.282a3.284 3.284 0 013.284-3.282 3.27 3.27 0 011.937.632zM6.919 7.79v.205c0 .382-.051.694-.3 1.06l-.03.034a8 8 0 00-.242.285L2.024 14.8h4.895v.768a.576.576 0 01-.577.576H0v-.362c0-.443.11-.641.25-.847L4.858 9.23H.192V7.79zm8.551 8.354a.48.48 0 01-.48-.48V7.79h1.441v8.354zM20.693 9.6a3.306 3.306 0 11.002 6.612a3.306 3.306 0 01-.002-6.612m-10.14 5.253a1.932 1.932 0 100-3.863 1.932 1.932 0 000 3.863m10.14-.003a1.945 1.945 0 100-3.89 1.945 1.945 0 000 3.89"
+        />
+      </g>
+    </svg>
+  );
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12" />
+    </svg>
+  );
+}
+
 /** Floating contact rail + the email panel it opens (auto-opens once per session at mid-page). */
 function RailAndNotify() {
   const c = site.contact;
   const [open, setOpen] = useState(false);
-  const bell = useRef<HTMLButtonElement>(null);
   const email = useRef<HTMLInputElement | null>(null);
   const auto = useRef(false);
 
@@ -64,34 +104,28 @@ function RailAndNotify() {
   return (
     <>
       <div className="rail" data-contact-rail="">
-        <a className="rail-btn" data-contact="phone" href={c.phoneHref} aria-label={`Gọi ${c.phone}`}>
-          <Ico name="phone" />
+        <a
+          className="contact-pulse-btn contact-btn-zalo"
+          data-contact="zalo"
+          href={c.zalo}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Nhắn Zalo Light Human"
+        >
+          <ZaloIcon />
+          <span className="rail-tip">Chat Zalo</span>
+        </a>
+        <a
+          className="contact-pulse-btn contact-btn-phone"
+          data-contact="phone"
+          href={c.phoneHref}
+          aria-label={`Gọi ${c.phone}`}
+        >
+          <span className="contact-phone-shake">
+            <PhoneIcon />
+          </span>
           <span className="rail-tip">Gọi {c.phone}</span>
         </a>
-        <a className="rail-btn" data-contact="zalo" href={c.zalo} target="_blank" rel="noopener" aria-label="Nhắn Zalo Light Human">
-          <Ico name="chat" />
-          <span className="rail-tip">Zalo</span>
-        </a>
-        <a className="rail-btn" data-contact="facebook" href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook Light Human">
-          <Ico name="facebook" />
-          <span className="rail-tip">Facebook</span>
-        </a>
-        <a className="rail-btn" data-contact="email" href={`mailto:${c.email}`} aria-label={`Gửi email ${c.email}`}>
-          <Ico name="envelope" />
-          <span className="rail-tip">{c.email}</span>
-        </a>
-        <button
-          ref={bell}
-          className="rail-btn rail-bell"
-          type="button"
-          aria-expanded={open}
-          aria-controls="notify-panel"
-          aria-label="Nhận bài Góc nhìn qua email"
-          onClick={() => set(!open)}
-        >
-          <Ico name="bell" />
-          <span className="rail-tip">Nhận bài qua email</span>
-        </button>
       </div>
       <div
         className="notify"
@@ -103,7 +137,6 @@ function RailAndNotify() {
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             set(false);
-            bell.current?.focus();
           }
         }}
       >
@@ -113,7 +146,6 @@ function RailAndNotify() {
           aria-label="Đóng"
           onClick={() => {
             set(false);
-            bell.current?.focus();
           }}
         >
           <Ico name="x" />

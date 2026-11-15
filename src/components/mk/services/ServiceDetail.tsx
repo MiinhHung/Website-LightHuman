@@ -187,27 +187,34 @@ export function ServiceFaq({ faq }: { faq: Service["faq"] }) {
 }
 
 export function RelatedServices({ current }: { current: string }) {
+  const other = services.filter((x) => x.slug !== current).slice(0, 3);
   return (
     <section className="related tone-paper" aria-labelledby="dv-khac">
       <div className="wrap">
-        <h2 className="h3" id="dv-khac">
-          {ui.related}
-        </h2>
-        <ul className="related-list">
-          {services
-            .filter((x) => x.slug !== current)
-            .map((x) => (
-              <li key={x.slug}>
-                <MkLink href={`/dich-vu/${x.slug}`}>
-                  <span className="r-ico">
-                    <Ico name={x.icon} />
-                  </span>
-                  <span>{fixCopy(x.name)}</span>
-                  <Ico name="arrow-up-right" />
-                </MkLink>
-              </li>
-            ))}
-        </ul>
+        <div className="sec-head">
+          <p className="kicker">Khám phá thêm</p>
+          <h2 className="h3" id="dv-khac">
+            {ui.related}
+          </h2>
+        </div>
+        <div className="related-cards-grid">
+          {other.map((x) => (
+            <MkLink key={x.slug} href={`/dich-vu/${x.slug}`} className="related-card">
+              <div className="related-card-thumb">
+                <MkImg url={x.image} alt={x.name} sizes="(max-width: 760px) 100vw, 360px" />
+              </div>
+              <div className="related-card-body">
+                <span className="related-card-tag">Dịch vụ</span>
+                <h3 className="related-card-title">{fixCopy(x.name)}</h3>
+                <p className="related-card-desc">{fixCopy(x.summary)}</p>
+                <span className="related-card-more">
+                  <span>Xem chi tiết</span>
+                  <Ico name="arrow-right" />
+                </span>
+              </div>
+            </MkLink>
+          ))}
+        </div>
       </div>
     </section>
   );

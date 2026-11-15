@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { Ico } from "./ui";
-import { NotifyForm } from "./NotifyForm";
 
 const store = {
   get: (k: string) => {
@@ -22,32 +22,7 @@ const store = {
   },
 };
 
-function ZaloIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 40 40"
-      width="28"
-      height="28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M20 5C11.163 5 4 11.5 4 19.5c0 4.143 1.91 7.893 5.013 10.597L7.6 34.5a.8.8 0 001.07.98l5.88-2.35C16.32 33.71 18.11 34 20 34c8.837 0 16-6.5 16-14.5S28.837 5 20 5z"
-        fill="#ffffff"
-      />
-      <g transform="translate(8, 8)">
-        <path
-          fill="#0084ff"
-          d="M12.49 10.272v-.45h1.347v6.322h-.77a.576.576 0 01-.577-.573v.001a3.27 3.27 0 01-1.938.632a3.284 3.284 0 01-3.284-3.282a3.284 3.284 0 013.284-3.282 3.27 3.27 0 011.937.632zM6.919 7.79v.205c0 .382-.051.694-.3 1.06l-.03.034a8 8 0 00-.242.285L2.024 14.8h4.895v.768a.576.576 0 01-.577.576H0v-.362c0-.443.11-.641.25-.847L4.858 9.23H.192V7.79zm8.551 8.354a.48.48 0 01-.48-.48V7.79h1.441v8.354zM20.693 9.6a3.306 3.306 0 11.002 6.612a3.306 3.306 0 01-.002-6.612m-10.14 5.253a1.932 1.932 0 100-3.863 1.932 1.932 0 000 3.863m10.14-.003a1.945 1.945 0 100-3.89 1.945 1.945 0 000 3.89"
-        />
-      </g>
-    </svg>
-  );
-}
-
-function PhoneIcon({ className }: { className?: string }) {
+function ContactFabIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -58,38 +33,57 @@ function PhoneIcon({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
+      <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12zM21 4H11c-.55 0-1 .45-1 1v5c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-.5 2l-4.5 2.81L11.5 6V5.25l4.5 2.81 4.5-2.81V6z" />
+    </svg>
+  );
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12" />
     </svg>
   );
 }
 
-/** Floating contact rail + the email panel it opens (auto-opens once per session at mid-page). */
+/** 1 nút duy nhất nổi bật (Navy & Gold) liên hệ qua form email hoặc SĐT hotline. */
 function RailAndNotify() {
   const c = site.contact;
   const [open, setOpen] = useState(false);
-  const email = useRef<HTMLInputElement | null>(null);
+  const emailInput = useRef<HTMLInputElement | null>(null);
+  const [emailStatus, setEmailStatus] = useState<{ text: string; err: boolean } | null>(null);
   const auto = useRef(false);
 
   const set = (v: boolean, isAuto = false) => {
     auto.current = isAuto;
     setOpen(v);
-    if (!v) store.set("notify-dismissed", "1");
+    if (!v) store.set("contact-panel-dismissed", "1");
   };
 
   useEffect(() => {
-    if (open && !auto.current) email.current?.focus();
+    if (open && !auto.current) {
+      emailInput.current?.focus();
+    }
   }, [open]);
 
   useEffect(() => {
-    if (store.get("notify-dismissed") || !("IntersectionObserver" in window)) return;
+    if (store.get("contact-panel-dismissed") || !("IntersectionObserver" in window)) return;
     const mark = document.createElement("div");
     mark.setAttribute("aria-hidden", "true");
-    mark.style.cssText = `position:absolute;left:0;width:1px;height:1px;pointer-events:none;top:${Math.round(document.documentElement.scrollHeight * 0.5)}px`;
+    mark.style.cssText = `position:absolute;left:0;width:1px;height:1px;pointer-events:none;top:${Math.round(document.documentElement.scrollHeight * 0.55)}px`;
     document.body.appendChild(mark);
     const ob = new IntersectionObserver((l) => {
-      if (l[0].isIntersecting && !store.get("notify-dismissed")) {
+      if (l[0].isIntersecting && !store.get("contact-panel-dismissed")) {
         set(true, true);
-        store.set("notify-dismissed", "1");
+        store.set("contact-panel-dismissed", "1");
         ob.disconnect();
       }
     });
@@ -101,60 +95,135 @@ function RailAndNotify() {
     };
   }, []);
 
+  function handleEmailSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const emailEl = form.elements.namedItem("email") as HTMLInputElement;
+    const consentEl = form.elements.namedItem("consent") as HTMLInputElement;
+    const value = emailEl.value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+      setEmailStatus({ text: "Email chưa đúng định dạng (ví dụ: hr@congty.vn).", err: true });
+      emailEl.focus();
+      return;
+    }
+    if (!consentEl.checked) {
+      setEmailStatus({ text: "Vui lòng chọn đồng ý để nhận phản hồi.", err: true });
+      consentEl.focus();
+      return;
+    }
+
+    setEmailStatus({
+      text: `Đã ghi nhận ${value}! Đội ngũ tư vấn sẽ liên hệ lại trong 24h.`,
+      err: false,
+    });
+    form.reset();
+  }
+
   return (
     <>
+      {/* 1 nút nổi duy nhất mang màu chủ đạo Navy - Gold hoàng kim nổi bật */}
       <div className="rail" data-contact-rail="">
-        <a
-          className="contact-pulse-btn contact-btn-zalo"
-          data-contact="zalo"
-          href={c.zalo}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Nhắn Zalo Light Human"
+        <button
+          className={`contact-fab${open ? " is-active" : ""}`}
+          type="button"
+          aria-expanded={open}
+          aria-controls="contact-panel"
+          aria-label={open ? "Đóng bảng liên hệ" : "Mở liên hệ qua email hoặc số điện thoại"}
+          onClick={() => set(!open)}
         >
-          <ZaloIcon />
-          <span className="rail-tip">Chat Zalo</span>
-        </a>
-        <a
-          className="contact-pulse-btn contact-btn-phone"
-          data-contact="phone"
-          href={c.phoneHref}
-          aria-label={`Gọi ${c.phone}`}
-        >
-          <span className="contact-phone-shake">
-            <PhoneIcon />
-          </span>
-          <span className="rail-tip">Gọi {c.phone}</span>
-        </a>
+          {open ? <Ico name="x" className="contact-fab-ico" /> : <ContactFabIcon className="contact-fab-ico" />}
+          <span className="rail-tip">{open ? "Đóng" : "Liên hệ tư vấn"}</span>
+        </button>
       </div>
+
+      {/* Hộp thoại liên hệ nhanh qua Hotline hoặc Form Email */}
       <div
-        className="notify"
-        id="notify-panel"
+        className="contact-panel"
+        id="contact-panel"
         role="dialog"
         aria-modal="false"
-        aria-labelledby="notify-h"
+        aria-labelledby="contact-panel-h"
         hidden={!open}
         onKeyDown={(e) => {
-          if (e.key === "Escape") {
-            set(false);
-          }
+          if (e.key === "Escape") set(false);
         }}
       >
         <button
-          className="notify-x"
+          className="contact-panel-close"
           type="button"
           aria-label="Đóng"
-          onClick={() => {
-            set(false);
-          }}
+          onClick={() => set(false)}
         >
           <Ico name="x" />
         </button>
-        <p className="notify-h" id="notify-h">
-          Một bài Góc nhìn mới mỗi tuần
-        </p>
-        <p className="notify-p">Tuyển dụng, lương thưởng, xu hướng nhân sự. Không gửi quảng cáo.</p>
-        <NotifyForm consentText="Tôi đồng ý nhận email theo" autoFocusRef={(el) => (email.current = el)} />
+
+        <div className="contact-panel-head">
+          <span className="contact-panel-badge">Liên hệ tư vấn</span>
+          <h3 className="contact-panel-title" id="contact-panel-h">
+            Light Human sẵn sàng hỗ trợ
+          </h3>
+          <p className="contact-panel-sub">
+            Gọi hotline trực tiếp hoặc để lại email để nhận tư vấn nhanh nhất.
+          </p>
+        </div>
+
+        {/* Kênh 1: Hotline điện thoại */}
+        <div className="contact-phone-card">
+          <div className="contact-phone-info">
+            <span className="contact-phone-label">Hotline tư vấn</span>
+            <strong className="contact-phone-number">{c.phone}</strong>
+          </div>
+          <a
+            className="contact-call-btn"
+            href={c.phoneHref}
+            aria-label={`Gọi ngay số hotline ${c.phone}`}
+          >
+            <PhoneIcon />
+            <span>Gọi ngay</span>
+          </a>
+        </div>
+
+        <div className="contact-divider">
+          <span>hoặc liên hệ qua email</span>
+        </div>
+
+        {/* Kênh 2: Form gửi email */}
+        <form onSubmit={handleEmailSubmit} className="contact-email-form">
+          <div className="contact-input-wrap">
+            <input
+              ref={emailInput}
+              type="email"
+              name="email"
+              placeholder="Nhập email của bạn..."
+              required
+              className="contact-email-input"
+            />
+            <button type="submit" className="contact-submit-btn">
+              <span>Gửi</span>
+              <Ico name="arrow-right" />
+            </button>
+          </div>
+          {emailStatus && (
+            <p className={`contact-status${emailStatus.err ? " is-err" : ""}`}>
+              {emailStatus.text}
+            </p>
+          )}
+          <label className="contact-consent">
+            <input type="checkbox" name="consent" defaultChecked />
+            <span>
+              Đồng ý nhận email theo{" "}
+              <Link href="/chinh-sach-bao-mat">chính sách bảo mật</Link>.
+            </span>
+          </label>
+        </form>
+
+        <div className="contact-panel-foot">
+          <Link href="/lien-he" onClick={() => set(false)} className="contact-foot-link">
+            <span>Đến trang Liên hệ & Báo giá chi tiết</span>
+            <Ico name="arrow-up-right" />
+          </Link>
+        </div>
       </div>
     </>
   );

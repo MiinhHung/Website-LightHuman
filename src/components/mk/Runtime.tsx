@@ -380,8 +380,8 @@ function setup(): Off {
         let last = -1;
         ScrollTrigger.create({
           trigger: el,
-          start: "top 78%",
-          end: "bottom 45%",
+          start: "top 86%",
+          end: "center 48%",
           scrub: true,
           onUpdate: (self) => {
             const n = Math.round(self.progress * ws.length);
@@ -431,9 +431,9 @@ function setup(): Off {
         if (!els.length) return;
         gsap.set(els, { y: 48, opacity: 0 });
         ScrollTrigger.batch(els, {
-          start: "top 90%",
+          start: "top 95%",
           once: true,
-          onEnter: (b) => gsap.to(b, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out", stagger: 0.08, overwrite: true }),
+          onEnter: (b) => gsap.to(b, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out", stagger: 0.04, overwrite: true }),
         });
       });
     });

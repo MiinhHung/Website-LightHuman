@@ -140,7 +140,7 @@ export const processHead = {
 /** Copy of the home sections as approved in the static mock (E:/ClaudeMD/website/LightHuman). */
 export const mkHome = {
   services: { title: "Sáu cách chúng tôi *tìm đúng người*", lede: "Từ một vị trí giám đốc đến một nghìn công nhân cho dây chuyền mới.", all: "Tất cả dịch vụ", more: "Xem dịch vụ" },
-  process: { title: "Làm *như thế nào*", lede: "Sáu bước lặp lại cho mọi dự án, từ một vị trí giám đốc đến một nghìn công nhân.", cta: "Nhận báo giá" },
+  process: { title: "Quy trình *vận hành*", lede: "Sáu bước lặp lại cho mọi dự án, từ một vị trí giám đốc đến một nghìn công nhân.", cta: "Liên hệ" },
   cases: { title: "Kết quả *ra sao*", all: "Xem tất cả câu chuyện", more: "Xem câu chuyện", tablist: "Khách hàng" },
   testimonials: { title: "Khách hàng nói gì", sub: "Lời từ doanh nghiệp và ứng viên đã làm việc với Light Human", more: "Xem câu chuyện" },
   toolkit: { kicker: "Light Human Toolkit", taxTag: "Thuế TNCN 2026", taxTitle: "Biểu thuế 5 bậc mới", taxBody: "Cư trú, hợp đồng dưới 3 tháng, người không cư trú.", taxCta: "Tính thuế" },

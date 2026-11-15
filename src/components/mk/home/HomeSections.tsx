@@ -233,7 +233,7 @@ export function ProcessTimeline({
           <p className="lede">
             <Rich text={lede} />
           </p>
-          <Btn label={cta} href={quoteHref} kind="gold" />
+          <Btn label={cta} href="/lien-he" kind="gold" />
         </div>
         <ol className="tl" data-tl="">
           {steps.map((s, i) => (

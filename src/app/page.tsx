@@ -10,9 +10,7 @@ import {
   QuoteCta,
   ServicesAcc,
   SxFeatures,
-  SxParallax,
   SxTestimonials,
-  Toolkit,
 } from "@/components/mk/home/HomeSections";
 
 export const metadata: Metadata = {
@@ -27,15 +25,13 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <PartnersBand />
+      <PartnersBand single />
       <Manifesto />
       <ServicesAcc />
       <HomeProcess />
       <CasesStage />
-      <SxParallax />
       <SxFeatures />
       <SxTestimonials />
-      <Toolkit />
       <PostsIndex />
       <QuoteCta />
     </>

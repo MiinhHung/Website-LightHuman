@@ -12,16 +12,10 @@ export function AboutIntro() {
     <section className="ab-intro tone-paper" aria-label={`${a.mission.title} và ${a.vision.title.toLowerCase()}`}>
       <div className="wrap ab-intro-grid">
         <article className="ab-card ab-mission" id={a.mission.id} data-rise="">
-          <span className="ab-no" aria-hidden="true">
-            01
-          </span>
           <p className="ab-k">{a.mission.title}</p>
           <h2 className="ab-sentence">{fixCopy(a.mission.short)}</h2>
         </article>
         <article className="ab-card ab-vision" id={a.vision.id} data-rise="" style={css({ "--i": 1 })}>
-          <span className="ab-no" aria-hidden="true">
-            02
-          </span>
           <p className="ab-k">{a.vision.title}</p>
           <h2 className="ab-sentence">{fixCopy(a.vision.short)}</h2>
         </article>

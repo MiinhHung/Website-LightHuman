@@ -128,9 +128,10 @@
   background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 40%, var(--cream) 100%);
   position: relative;
 }
-.sx-head { max-width: 50rem; margin-inline: auto; text-align: center; }
-.sx-head-in { display: grid; justify-items: center; gap: 1.25rem; }
-.sx-features .sx-title { font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.06; max-width: 18ch; color: var(--navy-950); }
+.sx-head { max-width: 52rem; margin-inline: auto; text-align: center; }
+.sx-head-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; }
+.sx-features .sx-title { font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.15; max-width: none; text-align: center; color: var(--navy-950); margin-inline: auto; }
+.sx-features .sx-lede { max-width: 44rem; margin-inline: auto; text-align: center; }
 
 /* Khung bọc các lớp thẻ xếp chồng (Stacking Cards) */
 .sx-stack-wrap {
@@ -214,13 +215,30 @@
 .sx-card:hover::before { opacity: 1; height: 0.1875rem; }
 
 .sx-card-head { display: flex; align-items: center; justify-content: space-between; }
+.sx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+.sx-card-title {
+  min-height: 2.85rem;
+  display: flex;
+  align-items: flex-start;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--navy-950);
+}
+.sx-card-body p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-700);
+}
 .sx-num { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: -.02em; color: var(--amber-deep); }
 .sx-icon { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border-radius: 1rem; background: rgba(242, 207, 99, .2); color: var(--amber-deep); border: 1.5px solid rgba(212, 160, 23, .3); transition: background .3s var(--ease-out), transform .35s var(--ease-spring), border-color .3s; }
 .sx-icon .ico { display: block; width: 1.625rem; height: 1.625rem; }
 .sx-card:hover .sx-icon { background: rgba(242, 207, 99, .32); border-color: var(--amber-deep); transform: scale(1.06); }
-.sx-card-body { display: grid; gap: 0.75rem; }
-.sx-card-title { margin: 0; font-family: var(--display); font-stretch: 110%; font-size: 1.25rem; font-weight: 650; line-height: 1.25; letter-spacing: -.015em; color: var(--navy-950); }
-.sx-card-body p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); }
 .sx-more { display: inline-flex; align-items: center; align-self: stretch; gap: 0.375rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(20, 40, 90, .1); font-family: var(--mono); font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-900); font-weight: 600; text-decoration: none; transition: color .2s var(--ease-out); }
 .sx-more .ico { width: 0.875rem; height: 0.875rem; margin-left: auto; color: var(--amber-deep); transition: transform .35s var(--ease-spring); }
 .sx-more:hover { color: var(--amber-deep); }

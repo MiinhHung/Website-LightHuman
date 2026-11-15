@@ -42,10 +42,10 @@ export const aboutIntro = {
 
 /** Company film block (after mission and vision). */
 export const aboutVideo = {
-  eyebrow: "Phim giới thiệu",
+  eyebrow: "Video giới thiệu",
   title: "Light Human trong bốn phút",
   lede: "Con người, cách làm việc và những doanh nghiệp đã đồng hành cùng Light Human, kể bằng hình ảnh.",
-  play: "Xem phim",
+  play: "Video",
   close: "Đóng video",
 };
 

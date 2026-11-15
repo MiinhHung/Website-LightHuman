@@ -22,7 +22,7 @@ const store = {
   },
 };
 
-function ContactFabIcon({ className }: { className?: string }) {
+function ChatBubbleIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -33,7 +33,26 @@ function ContactFabIcon({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12zM21 4H11c-.55 0-1 .45-1 1v5c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-.5 2l-4.5 2.81L11.5 6V5.25l4.5 2.81 4.5-2.81V6z" />
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
+      <circle cx="8" cy="10" r="1.3" />
+      <circle cx="12" cy="10" r="1.3" />
+      <circle cx="16" cy="10" r="1.3" />
+    </svg>
+  );
+}
+
+function MailEnvelopeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
     </svg>
   );
 }
@@ -50,25 +69,6 @@ function PhoneIcon({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12" />
-    </svg>
-  );
-}
-
-function ChatBubbleIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
-      <circle cx="8" cy="10" r="1.25" />
-      <circle cx="12" cy="10" r="1.25" />
-      <circle cx="16" cy="10" r="1.25" />
     </svg>
   );
 }
@@ -100,7 +100,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
   {
     id: "welcome-1",
     sender: "bot",
-    text: "Xin chào! 👋 Tôi là tư vấn viên Light Human. Doanh nghiệp của bạn đang cần hỗ trợ dịch vụ nhân sự hay tuyển dụng nào?",
+    text: "Xin chào! 👋 Tôi là tư vấn viên trực tuyến của Light Human. Doanh nghiệp bạn đang cần tư vấn tuyển dụng hay dịch vụ nhân sự nào?",
     time: "Vừa xong",
   },
 ];
@@ -112,11 +112,10 @@ const QUICK_SUGGESTIONS = [
   "Cần tư vấn trực tiếp qua điện thoại",
 ];
 
-/** 1 nút duy nhất nổi bật (Navy & Gold) liên hệ qua form email, SĐT hotline hoặc nhắn tin trực tiếp trong trang. */
+/** 2 nút nổi riêng biệt: 1 nút nhắn tin trực tiếp trên web, 1 nút gửi email thông báo */
 function RailAndNotify() {
   const c = site.contact;
-  const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState<"menu" | "chat">("menu");
+  const [activePanel, setActivePanel] = useState<"chat" | "email" | null>(null);
   const emailInput = useRef<HTMLInputElement | null>(null);
   const chatInput = useRef<HTMLInputElement | null>(null);
   const chatStreamRef = useRef<HTMLDivElement | null>(null);
@@ -125,31 +124,28 @@ function RailAndNotify() {
   const [chatDraft, setChatDraft] = useState("");
   const auto = useRef(false);
 
-  const set = (v: boolean, isAuto = false) => {
-    auto.current = isAuto;
-    setOpen(v);
-    if (!v) {
-      store.set("contact-panel-dismissed", "1");
-      // Trở lại menu khi đóng
-      setMode("menu");
-    }
+  const togglePanel = (panel: "chat" | "email") => {
+    setActivePanel((prev) => (prev === panel ? null : panel));
+  };
+
+  const closePanel = () => {
+    setActivePanel(null);
+    store.set("contact-panel-dismissed", "1");
   };
 
   useEffect(() => {
-    if (open && !auto.current) {
-      if (mode === "menu") {
-        emailInput.current?.focus();
-      } else {
-        chatInput.current?.focus();
-      }
+    if (activePanel === "email") {
+      emailInput.current?.focus();
+    } else if (activePanel === "chat") {
+      chatInput.current?.focus();
     }
-  }, [open, mode]);
+  }, [activePanel]);
 
   useEffect(() => {
-    if (mode === "chat" && chatStreamRef.current) {
+    if (activePanel === "chat" && chatStreamRef.current) {
       chatStreamRef.current.scrollTop = chatStreamRef.current.scrollHeight;
     }
-  }, [chatMessages, mode]);
+  }, [chatMessages, activePanel]);
 
   useEffect(() => {
     if (store.get("contact-panel-dismissed") || !("IntersectionObserver" in window)) return;
@@ -159,7 +155,8 @@ function RailAndNotify() {
     document.body.appendChild(mark);
     const ob = new IntersectionObserver((l) => {
       if (l[0].isIntersecting && !store.get("contact-panel-dismissed")) {
-        set(true, true);
+        auto.current = true;
+        setActivePanel("email");
         store.set("contact-panel-dismissed", "1");
         ob.disconnect();
       }
@@ -191,7 +188,7 @@ function RailAndNotify() {
     }
 
     setEmailStatus({
-      text: `Đã ghi nhận ${value}! Đội ngũ tư vấn sẽ liên hệ lại trong 24h.`,
+      text: `Đã ghi nhận ${value}! Đội ngũ tư vấn sẽ gửi thông báo và liên hệ lại trong 24h.`,
       err: false,
     });
     form.reset();
@@ -211,12 +208,12 @@ function RailAndNotify() {
     setChatMessages((prev) => [...prev, userMsg]);
     setChatDraft("");
 
-    // Phản hồi tự động từ chuyên viên sau 600ms
+    // Phản hồi tự động từ tư vấn viên
     window.setTimeout(() => {
       const botReply: ChatMessage = {
         id: `b-${Date.now()}`,
         sender: "bot",
-        text: `Cảm ơn bạn! Light Human đã ghi nhận yêu cầu: "${cleanText}". Bạn vui lòng để lại Số điện thoại hoặc Email để chuyên viên phụ trách liên hệ tư vấn chi tiết ngay nhé!`,
+        text: `Cảm ơn bạn! Light Human đã nhận được yêu cầu: "${cleanText}". Bạn vui lòng để lại Số điện thoại hoặc Email để chuyên viên phụ trách hỗ trợ bạn ngay nhé!`,
         time: "Vừa xong",
       };
       setChatMessages((prev) => [...prev, botReply]);
@@ -230,228 +227,231 @@ function RailAndNotify() {
 
   return (
     <>
-      {/* 1 nút nổi duy nhất mang màu chủ đạo Navy - Gold hoàng kim nổi bật */}
+      {/* 2 nút nổi riêng biệt: 1 nút nhắn tin trực tiếp trên web, 1 nút gửi email thông báo */}
       <div className="rail" data-contact-rail="">
+        {/* Nút 1: Nhắn tin trực tiếp trên web */}
         <button
-          className={`contact-fab${open ? " is-active" : ""}`}
+          className={`contact-fab contact-fab-chat${activePanel === "chat" ? " is-active" : ""}`}
           type="button"
-          aria-expanded={open}
-          aria-controls="contact-panel"
-          aria-label={open ? "Đóng bảng liên hệ" : "Mở liên hệ qua email, số điện thoại hoặc tin nhắn trực tiếp"}
-          onClick={() => set(!open)}
+          aria-expanded={activePanel === "chat"}
+          aria-controls="chat-panel"
+          aria-label={activePanel === "chat" ? "Đóng khung chat" : "Nhắn tin trực tiếp trên web"}
+          onClick={() => togglePanel("chat")}
         >
-          {open ? <Ico name="x" className="contact-fab-ico" /> : <ContactFabIcon className="contact-fab-ico" />}
-          <span className="rail-tip">{open ? "Đóng" : "Liên hệ tư vấn"}</span>
+          {activePanel === "chat" ? (
+            <Ico name="x" className="contact-fab-ico" />
+          ) : (
+            <>
+              <ChatBubbleIcon className="contact-fab-ico" />
+              <span className="contact-fab-pulse-dot" aria-hidden="true" />
+            </>
+          )}
+          <span className="rail-tip">
+            {activePanel === "chat" ? "Đóng chat" : "Nhắn tin trực tiếp trên web"}
+          </span>
+        </button>
+
+        {/* Nút 2: Gửi email thông báo */}
+        <button
+          className={`contact-fab contact-fab-email${activePanel === "email" ? " is-active" : ""}`}
+          type="button"
+          aria-expanded={activePanel === "email"}
+          aria-controls="email-panel"
+          aria-label={activePanel === "email" ? "Đóng form email" : "Gửi email thông báo"}
+          onClick={() => togglePanel("email")}
+        >
+          {activePanel === "email" ? (
+            <Ico name="x" className="contact-fab-ico" />
+          ) : (
+            <MailEnvelopeIcon className="contact-fab-ico" />
+          )}
+          <span className="rail-tip">
+            {activePanel === "email" ? "Đóng thông báo" : "Gửi email thông báo"}
+          </span>
         </button>
       </div>
 
-      {/* Hộp thoại liên hệ nhanh qua Hotline, Form Email hoặc Chat trực tiếp */}
+      {/* POPUP 1: Khung Nhắn tin trực tiếp trên web */}
       <div
-        className={`contact-panel${mode === "chat" ? " is-chat-mode" : ""}`}
-        id="contact-panel"
+        className="contact-panel is-chat-mode"
+        id="chat-panel"
         role="dialog"
         aria-modal="false"
-        aria-labelledby="contact-panel-h"
-        hidden={!open}
+        aria-label="Khung nhắn tin trực tiếp trên web"
+        hidden={activePanel !== "chat"}
         onKeyDown={(e) => {
-          if (e.key === "Escape") set(false);
+          if (e.key === "Escape") closePanel();
         }}
       >
-        {mode === "menu" ? (
-          <>
+        <div className="contact-chat-view">
+          <div className="contact-chat-head">
+            <div className="contact-chat-user">
+              <div className="contact-chat-avatar-mini">
+                <ChatBubbleIcon />
+                <span className="contact-pulse-dot" aria-hidden="true" />
+              </div>
+              <div>
+                <h4 className="contact-chat-name">Tư vấn viên Light Human</h4>
+                <span className="contact-chat-online">Trực tuyến trên web • Sẵn sàng hỗ trợ</span>
+              </div>
+            </div>
+
             <button
-              className="contact-panel-close"
+              className="contact-panel-close-inline"
               type="button"
-              aria-label="Đóng"
-              onClick={() => set(false)}
+              aria-label="Đóng chat"
+              onClick={closePanel}
             >
               <Ico name="x" />
             </button>
-
-            <div className="contact-panel-head">
-              <span className="contact-panel-badge">Liên hệ tư vấn</span>
-              <h3 className="contact-panel-title" id="contact-panel-h">
-                Light Human sẵn sàng hỗ trợ
-              </h3>
-              <p className="contact-panel-sub">
-                Gọi hotline, để lại email hoặc nhắn tin trực tiếp trong trang này.
-              </p>
-            </div>
-
-            {/* Nút Nhắn tin trực tiếp trong trang */}
-            <button
-              type="button"
-              className="contact-livechat-trigger"
-              onClick={() => setMode("chat")}
-            >
-              <div className="contact-livechat-left">
-                <div className="contact-livechat-avatar">
-                  <ChatBubbleIcon />
-                  <span className="contact-pulse-dot" aria-hidden="true" />
-                </div>
-                <div className="contact-livechat-meta">
-                  <strong className="contact-livechat-title">Nhắn tin trực tiếp trong trang</strong>
-                  <span className="contact-livechat-sub">Tư vấn viên trực tuyến phản hồi ngay</span>
-                </div>
-              </div>
-              <span className="contact-livechat-cta">
-                <span>Nhắn ngay</span>
-                <Ico name="arrow-right" />
-              </span>
-            </button>
-
-            {/* Hotline điện thoại */}
-            <div className="contact-phone-card">
-              <div className="contact-phone-info">
-                <span className="contact-phone-label">Hotline tư vấn</span>
-                <strong className="contact-phone-number">{c.phone}</strong>
-              </div>
-              <a
-                className="contact-call-btn"
-                href={c.phoneHref}
-                aria-label={`Gọi ngay số hotline ${c.phone}`}
-              >
-                <PhoneIcon />
-                <span>Gọi ngay</span>
-              </a>
-            </div>
-
-            <div className="contact-divider">
-              <span>hoặc liên hệ qua email</span>
-            </div>
-
-            {/* Giữ nguyên form email */}
-            <form onSubmit={handleEmailSubmit} className="contact-email-form">
-              <div className="contact-input-wrap">
-                <input
-                  ref={emailInput}
-                  type="email"
-                  name="email"
-                  placeholder="Nhập email của bạn..."
-                  required
-                  className="contact-email-input"
-                />
-                <button type="submit" className="contact-submit-btn">
-                  <span>Gửi</span>
-                  <Ico name="arrow-right" />
-                </button>
-              </div>
-              {emailStatus && (
-                <p className={`contact-status${emailStatus.err ? " is-err" : ""}`}>
-                  {emailStatus.text}
-                </p>
-              )}
-              <label className="contact-consent">
-                <input type="checkbox" name="consent" defaultChecked />
-                <span>
-                  Đồng ý nhận email theo{" "}
-                  <Link href="/chinh-sach-bao-mat">chính sách bảo mật</Link>.
-                </span>
-              </label>
-            </form>
-
-            <div className="contact-panel-foot">
-              <Link href="/lien-he" onClick={() => set(false)} className="contact-foot-link">
-                <span>Đến trang Liên hệ & Báo giá chi tiết</span>
-                <Ico name="arrow-up-right" />
-              </Link>
-            </div>
-          </>
-        ) : (
-          /* Giao diện Nhắn tin trực tiếp trong trang */
-          <div className="contact-chat-view">
-            <div className="contact-chat-head">
-              <button
-                type="button"
-                className="contact-chat-back"
-                onClick={() => setMode("menu")}
-                aria-label="Quay lại danh sách liên hệ"
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-                <span>Quay lại</span>
-              </button>
-
-              <div className="contact-chat-user">
-                <div className="contact-chat-avatar-mini">
-                  <ChatBubbleIcon />
-                  <span className="contact-pulse-dot" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="contact-chat-name">Tư vấn viên Light Human</h4>
-                  <span className="contact-chat-online">Đang trực tuyến • Sẵn sàng hỗ trợ</span>
-                </div>
-              </div>
-
-              <button
-                className="contact-panel-close-inline"
-                type="button"
-                aria-label="Đóng"
-                onClick={() => set(false)}
-              >
-                <Ico name="x" />
-              </button>
-            </div>
-
-            {/* Dòng tin nhắn */}
-            <div className="contact-chat-stream" ref={chatStreamRef}>
-              <div className="contact-chat-date-divider">
-                <span>Hôm nay</span>
-              </div>
-
-              {chatMessages.map((m) => (
-                <div
-                  key={m.id}
-                  className={`contact-chat-bubble ${m.sender === "user" ? "is-user" : "is-bot"}`}
-                >
-                  <div className="contact-chat-bubble-content">{m.text}</div>
-                  <span className="contact-chat-bubble-time">{m.time}</span>
-                </div>
-              ))}
-
-              {/* Gợi ý nhanh nếu chưa gửi nhiều tin */}
-              {chatMessages.length <= 3 && (
-                <div className="contact-chat-chips">
-                  <span className="contact-chips-title">Gợi ý câu hỏi nhanh:</span>
-                  <div className="contact-chips-list">
-                    {QUICK_SUGGESTIONS.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        className="contact-chip"
-                        onClick={() => sendChatMessage(s)}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Ô nhập tin nhắn */}
-            <form onSubmit={handleChatSubmit} className="contact-chat-inputbar">
-              <input
-                ref={chatInput}
-                type="text"
-                placeholder="Nhập tin nhắn của bạn..."
-                value={chatDraft}
-                onChange={(e) => setChatDraft(e.target.value)}
-                className="contact-chat-input"
-                required
-              />
-              <button
-                type="submit"
-                className="contact-chat-send"
-                disabled={!chatDraft.trim()}
-                aria-label="Gửi tin nhắn"
-              >
-                <SendIcon />
-              </button>
-            </form>
           </div>
-        )}
+
+          {/* Dòng hội thoại */}
+          <div className="contact-chat-stream" ref={chatStreamRef}>
+            <div className="contact-chat-date-divider">
+              <span>Hôm nay</span>
+            </div>
+
+            {chatMessages.map((m) => (
+              <div
+                key={m.id}
+                className={`contact-chat-bubble ${m.sender === "user" ? "is-user" : "is-bot"}`}
+              >
+                <div className="contact-chat-bubble-content">{m.text}</div>
+                <span className="contact-chat-bubble-time">{m.time}</span>
+              </div>
+            ))}
+
+            {/* Gợi ý câu hỏi nhanh */}
+            {chatMessages.length <= 3 && (
+              <div className="contact-chat-chips">
+                <span className="contact-chips-title">Gợi ý câu hỏi nhanh:</span>
+                <div className="contact-chips-list">
+                  {QUICK_SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className="contact-chip"
+                      onClick={() => sendChatMessage(s)}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Ô nhập tin nhắn trực tiếp */}
+          <form onSubmit={handleChatSubmit} className="contact-chat-inputbar">
+            <input
+              ref={chatInput}
+              type="text"
+              placeholder="Nhập tin nhắn của bạn..."
+              value={chatDraft}
+              onChange={(e) => setChatDraft(e.target.value)}
+              className="contact-chat-input"
+              required
+            />
+            <button
+              type="submit"
+              className="contact-chat-send"
+              disabled={!chatDraft.trim()}
+              aria-label="Gửi tin nhắn"
+            >
+              <SendIcon />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* POPUP 2: Khung Gửi email thông báo */}
+      <div
+        className="contact-panel"
+        id="email-panel"
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="email-panel-h"
+        hidden={activePanel !== "email"}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") closePanel();
+        }}
+      >
+        <button
+          className="contact-panel-close"
+          type="button"
+          aria-label="Đóng"
+          onClick={closePanel}
+        >
+          <Ico name="x" />
+        </button>
+
+        <div className="contact-panel-head">
+          <span className="contact-panel-badge">Gửi email thông báo</span>
+          <h3 className="contact-panel-title" id="email-panel-h">
+            Nhận thông báo & Tư vấn
+          </h3>
+          <p className="contact-panel-sub">
+            Để lại email để nhận thông báo phân tích thị trường nhân sự hoặc yêu cầu tư vấn.
+          </p>
+        </div>
+
+        {/* Kênh Hotline */}
+        <div className="contact-phone-card">
+          <div className="contact-phone-info">
+            <span className="contact-phone-label">Hotline tư vấn</span>
+            <strong className="contact-phone-number">{c.phone}</strong>
+          </div>
+          <a
+            className="contact-call-btn"
+            href={c.phoneHref}
+            aria-label={`Gọi ngay số hotline ${c.phone}`}
+          >
+            <PhoneIcon />
+            <span>Gọi ngay</span>
+          </a>
+        </div>
+
+        <div className="contact-divider">
+          <span>hoặc nhận thông báo qua email</span>
+        </div>
+
+        {/* Form gửi email thông báo */}
+        <form onSubmit={handleEmailSubmit} className="contact-email-form">
+          <div className="contact-input-wrap">
+            <input
+              ref={emailInput}
+              type="email"
+              name="email"
+              placeholder="Nhập email của bạn..."
+              required
+              className="contact-email-input"
+            />
+            <button type="submit" className="contact-submit-btn">
+              <span>Gửi</span>
+              <Ico name="arrow-right" />
+            </button>
+          </div>
+          {emailStatus && (
+            <p className={`contact-status${emailStatus.err ? " is-err" : ""}`}>
+              {emailStatus.text}
+            </p>
+          )}
+          <label className="contact-consent">
+            <input type="checkbox" name="consent" defaultChecked />
+            <span>
+              Đồng ý nhận email theo{" "}
+              <Link href="/chinh-sach-bao-mat">chính sách bảo mật</Link>.
+            </span>
+          </label>
+        </form>
+
+        <div className="contact-panel-foot">
+          <Link href="/lien-he" onClick={closePanel} className="contact-foot-link">
+            <span>Đến trang Liên hệ & Báo giá chi tiết</span>
+            <Ico name="arrow-up-right" />
+          </Link>
+        </div>
       </div>
     </>
   );

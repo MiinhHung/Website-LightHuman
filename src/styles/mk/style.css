@@ -1311,7 +1311,8 @@ main>.hero {
   min-height: min(100svh, 75rem);
   min-height: min(100dvh, 75rem);
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .hero-page {
@@ -1351,9 +1352,11 @@ main>.hero {
 .hero-inner {
   position: relative;
   display: grid;
-  gap: 1.375rem;
-  padding-top: calc(var(--header-h) + 4.5rem);
-  padding-bottom: clamp(3rem, 7vw, 6rem);
+  gap: 1.125rem;
+  padding-top: calc(var(--header-h) + clamp(1.5rem, 3vw, 2.75rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  margin-top: auto;
+  width: 100%;
 }
 
 .hero .crumbs {
@@ -1365,9 +1368,9 @@ main>.hero {
 }
 
 .h1-home {
-  font-size: clamp(2.7rem, 7vw, 7rem);
-  line-height: .96;
-  max-width: 14ch;
+  font-size: clamp(2.25rem, 5.5vw, 6.25rem);
+  line-height: 1.05;
+  max-width: 18ch;
 }
 
 .h1-home .line {
@@ -6141,7 +6144,8 @@ main>.subnav {
   }
 
   .hero-inner {
-    padding-top: calc(var(--header-h) + 3rem);
+    padding-top: calc(var(--header-h) + 1.25rem);
+    padding-bottom: 2rem;
   }
 
   .hero-foot {

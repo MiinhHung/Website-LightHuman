@@ -21,6 +21,9 @@ function fixInternalHref(href: string): string {
  */
 export function cleanArticleBody(raw: string | undefined): { html: string; toc: [string, string][] } {
   let body = String(raw ?? "")
+    // Drop legacy CTA blocks from old site (includes 380x380 swirl SVG dashed circles, redundant CTA heading, and external links)
+    .replace(/<section[^>]*class="[^"]*lh-cta[^"]*"[^>]*>[\s\S]*?<\/section>/gi, "")
+    .replace(/<svg[^>]*class="[^"]*lh-cta__swirl[^"]*"[^>]*>[\s\S]*?<\/svg>/gi, "")
     .replace(/<\/?(section|div|span)[^>]*>/g, "")
     .replace(/\sclass="[^"]*"/g, "")
     .replace(/\sstyle="[^"]*"/g, "")

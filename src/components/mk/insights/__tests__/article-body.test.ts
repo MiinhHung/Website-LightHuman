@@ -24,4 +24,26 @@ describe("cleanArticleBody internal links", () => {
     expect(html).toContain(`href="/lien-he#bao-gia"`);
     expect(html).toContain(`href="https://example.com" target="_blank" rel="noopener"`);
   });
+
+  it("strips legacy CTA sections and swirl circle SVGs", () => {
+    const raw = `
+      <p>Nội dung bài viết.</p>
+      <section class="lh-section lh-cta lh-cta--dark">
+        <div class="lh-container">
+          <div class="lh-cta">
+            <svg class="lh-cta__swirl"><circle cx="190" cy="190" r="50"></circle></svg>
+            <h2>Đăng ký nhận bài viết</h2>
+            <a href="https://lighthuman.vn/">Khám phá</a>
+          </div>
+        </div>
+      </section>
+    `;
+    const { html, toc } = cleanArticleBody(raw);
+    expect(html).toContain("Nội dung bài viết.");
+    expect(html).not.toContain("lh-cta");
+    expect(html).not.toContain("<svg");
+    expect(html).not.toContain("<circle");
+    expect(html).not.toContain("Đăng ký nhận bài viết");
+    expect(toc).toHaveLength(0);
+  });
 });

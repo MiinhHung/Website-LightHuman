@@ -29,11 +29,11 @@
   --ease-spring: cubic-bezier(.32, .72, 0, 1);
   --ease-out: cubic-bezier(.16, 1, .3, 1);
 
-  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --gutter: clamp(2rem, 4vw, 3rem);
   --max: 82.5rem;
-  --sec-y: clamp(2.25rem, 3.5vw, 3rem);
+  --sec-y: clamp(3.5rem, 5vw, 6rem);
   /* Paired sections that read as one block (About intro → stats → values → team). */
-  --sec-y-tight: clamp(1.5rem, 2vw, 2rem);
+  --sec-y-tight: clamp(3.5rem, 2.5vw, 3rem);
   --header-h: 4.75rem;
   --shadow: 0 1.875rem 3.75rem -2.25rem rgba(13, 26, 61, .45);
 }
@@ -1416,7 +1416,7 @@ main>.hero {
 /* ---------------------------------------------------------------- logo khách hàng */
 .band-logos {
   overflow: hidden;
-  padding-block: clamp(3.5rem, 5.5vw, 4.75rem);
+  padding-block: var(--sec-y);
 }
 
 .logos-head {
@@ -1664,7 +1664,7 @@ main>.hero {
 
 /* ---------------------------------------------------------------- giới thiệu về chúng tôi (trang chủ) */
 .home-about {
-  padding-block: clamp(2.5rem, 4.5vw, 3.75rem);
+  padding-block: var(--sec-y);
   background: var(--paper);
   color: var(--ink);
   overflow: hidden;
@@ -2741,7 +2741,7 @@ a.bento-cell:hover .core {
 .cta-band {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(3rem, 5vw, 4.5rem);
+  padding-block: var(--sec-y);
 }
 
 .cta-band::before {

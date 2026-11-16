@@ -266,7 +266,7 @@
 }
 
 /* ---------------------------------------------------------------- 5. testimonials / marquee (nền sáng) */
-.sx-testimonials { padding: clamp(2.25rem, 3.5vw, 3rem) var(--gutter); overflow: hidden; }
+.sx-testimonials { padding: var(--sec-y) var(--gutter); overflow: hidden; }
 .sx-center { text-align: center; }
 .sx-testimonials .sx-title { max-width: none; font-size: clamp(2.25rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.04em; }
 .sx-sub { margin-top: 0.625rem; text-align: center; font-size: clamp(1.15rem, 1.7vw, 1.5rem); letter-spacing: -.015em; color: var(--sx-muted-fg); }

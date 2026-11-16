@@ -376,7 +376,7 @@ main>.ab-intro {
   overflow: hidden;
   vertical-align: top;
   /* Stacked Vietnamese marks (ấ, ắ, ế) rise above a line box of line-height <= 1; widen the clip without moving the line. */
-  padding-top: .2em;
+  padding-top: .32em;
   margin-top: -.2em;
   padding-bottom: .1em;
   margin-bottom: -.1em;
@@ -1372,12 +1372,23 @@ main>.hero {
 
 .h1-home {
   font-size: clamp(2.7rem, 7vw, 7rem);
-  line-height: .96;
+  line-height: 1.28;
   max-width: 14ch;
 }
 
 .h1-home .line {
   display: block;
+}
+
+.h1-home em {
+  display: block;
+}
+
+.h1-home .wd {
+  padding-top: .32em;
+  margin-top: 0;
+  padding-bottom: .08em;
+  margin-bottom: 0;
 }
 
 .hero-foot {
@@ -1574,7 +1585,7 @@ main>.hero {
 /* ---------------------------------------------------------------- hero trang chủ: số liệu chạy quanh ảnh */
 .hero-home .hero-inner {
   position: static;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.7fr);
 }
 
 .orbit {
@@ -6149,6 +6160,10 @@ main>.subnav {
   .hero-inner {
     padding-top: calc(var(--header-h) + 1.25rem);
     padding-bottom: 2rem;
+  }
+
+  .hero-home .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-foot {

@@ -223,10 +223,6 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
               <p className="aside-card-desc">
                 Liên hệ ngay đội ngũ tư vấn Light Human để nhận hồ sơ ứng viên và phương án tối ưu.
               </p>
-              <a href={site.contact.phoneHref} className="aside-card-call">
-                <Ico name="phone" />
-                <span>{site.contact.phone}</span>
-              </a>
               <Link href={quoteHref} className="aside-card-quote">
                 <span>Nhận bảng báo giá</span>
                 <Ico name="arrow-right" />

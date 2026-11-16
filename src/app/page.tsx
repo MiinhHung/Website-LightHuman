@@ -27,14 +27,14 @@ export default function HomePage() {
       {/* 2. Giới thiệu về chúng tôi */}
       <HomeAbout />
 
-      {/* 3. Dịch vụ */}
+      {/* 3. Chạy đối tác doanh nghiệp (ngay dưới Giới thiệu về chúng tôi) */}
+      <PartnersBand />
+
+      {/* 4. Dịch vụ */}
       <ServicesAcc />
 
-      {/* 4. Quy trình */}
+      {/* 5. Quy trình */}
       <HomeProcess />
-
-      {/* 5. Kết quả hợp tác doanh nghiệp (chạy đối tác đưa xuống dưới) */}
-      <PartnersBand single title="Kết quả hợp tác doanh nghiệp" />
 
       {/* 6. Feedback KH */}
       <SxTestimonials />

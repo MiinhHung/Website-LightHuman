@@ -31,9 +31,9 @@
 
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --max: 82.5rem;
-  --sec-y: clamp(1.75rem, 3vw, 2.25rem);
+  --sec-y: clamp(1rem, 1.5vw, 1.25rem);
   /* Paired sections that read as one block (About intro → stats → values → team). */
-  --sec-y-tight: clamp(1.25rem, 2vw, 1.75rem);
+  --sec-y-tight: clamp(0.75rem, 1.2vw, 1rem);
   --header-h: 4.75rem;
   --shadow: 0 1.875rem 3.75rem -2.25rem rgba(13, 26, 61, .45);
 }
@@ -350,9 +350,9 @@ main>.ab-intro {
 
 .sec-head {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.625rem;
   justify-items: start;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.875rem);
+  margin-bottom: 1.25rem;
   max-width: 53.75rem;
 }
 
@@ -1421,9 +1421,9 @@ main>.hero {
 .logos-head {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 1.25rem 2.5rem;
+  gap: 1rem 2rem;
   align-items: end;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: 1.25rem;
 }
 
 .logos-head .logos-count {
@@ -2071,10 +2071,10 @@ main>.hero {
 
 .process-head {
   display: grid;
-  gap: 0.875rem;
+  gap: 0.75rem;
   justify-items: start;
   max-width: 40rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 1.25rem;
 }
 
 /* ---------------------------------------------------------------- kết quả khách hàng: chọn khách, sân khấu đổi ảnh + trích dẫn */

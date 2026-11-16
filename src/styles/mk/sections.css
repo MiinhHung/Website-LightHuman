@@ -125,7 +125,7 @@
   flex-direction: column;
   gap: clamp(3.5rem, 6vw, 5rem);
   padding: clamp(6rem, 10vw, 9rem) var(--gutter);
-  background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 40%, var(--cream) 100%);
+  background: var(--cream);
   position: relative;
 }
 .sx-head { max-width: 52rem; margin-inline: auto; text-align: center; }
@@ -186,33 +186,10 @@
   overflow: hidden;
 }
 
-/* Dải ánh sáng vàng kim viền trên */
-.sx-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--amber), transparent);
-  opacity: .6;
-  transition: opacity .35s var(--ease-out);
-}
-
-/* Lớp viền xếp tầng tạo chiều sâu cho khung */
-.sx-card::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
-  pointer-events: none;
-}
-
 .sx-card:hover {
-  transform: translateY(-0.375rem);
   border-color: var(--amber-deep);
   box-shadow: 0 1.5rem 3.5rem -1rem rgba(20, 40, 90, .14), 0 0.5rem 1.25rem rgba(212, 160, 23, .1);
 }
-.sx-card:hover::before { opacity: 1; height: 0.1875rem; }
 
 .sx-card-head { display: flex; align-items: center; justify-content: space-between; }
 .sx-card-body {
@@ -235,11 +212,10 @@
   line-height: 1.6;
   color: var(--ink-700);
 }
-.sx-num { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: -.02em; color: var(--amber-deep); }
 .sx-icon { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border-radius: 1rem; background: rgba(242, 207, 99, .2); color: var(--amber-deep); border: 1.5px solid rgba(212, 160, 23, .3); transition: background .3s var(--ease-out), transform .35s var(--ease-spring), border-color .3s; }
 .sx-icon .ico { display: block; width: 1.625rem; height: 1.625rem; }
-.sx-card:hover .sx-icon { background: rgba(242, 207, 99, .32); border-color: var(--amber-deep); transform: scale(1.06); }
-.sx-more { display: inline-flex; align-items: center; align-self: stretch; gap: 0.375rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(20, 40, 90, .1); font-family: var(--mono); font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-900); font-weight: 600; text-decoration: none; transition: color .2s var(--ease-out); }
+.sx-card:hover .sx-icon { background: rgba(242, 207, 99, .32); border-color: var(--amber-deep); }
+.sx-more { display: inline-flex; align-items: center; align-self: stretch; gap: 0.375rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(20, 40, 90, .1); font-size: 0.875rem; color: var(--navy-900); font-weight: 600; text-decoration: none; transition: color .2s var(--ease-out); }
 .sx-more .ico { width: 0.875rem; height: 0.875rem; margin-left: auto; color: var(--amber-deep); transition: transform .35s var(--ease-spring); }
 .sx-more:hover { color: var(--amber-deep); }
 .sx-more:hover .ico { transform: translate(0.1875rem, -0.1875rem); }
@@ -290,11 +266,11 @@
 }
 
 /* ---------------------------------------------------------------- 5. testimonials / marquee (nền sáng) */
-.sx-testimonials { padding: 5rem var(--gutter); overflow: hidden; }
+.sx-testimonials { padding: clamp(1.75rem, 3vw, 2.25rem) var(--gutter); overflow: hidden; }
 .sx-center { text-align: center; }
 .sx-testimonials .sx-title { max-width: none; font-size: clamp(2.25rem, 3.6vw, 2.75rem); line-height: 1.1; letter-spacing: -.04em; }
-.sx-sub { margin-top: 0.875rem; text-align: center; font-size: clamp(1.15rem, 1.7vw, 1.5rem); letter-spacing: -.015em; color: var(--sx-muted-fg); }
-.sx-marquee { display: flex; margin-top: 3.5rem; overflow-x: auto; scrollbar-width: none; border: 1px solid var(--sx-border); background: var(--sx-muted); -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+.sx-sub { margin-top: 0.625rem; text-align: center; font-size: clamp(1.15rem, 1.7vw, 1.5rem); letter-spacing: -.015em; color: var(--sx-muted-fg); }
+.sx-marquee { display: flex; margin-top: 1.75rem; overflow-x: auto; scrollbar-width: none; border: 1px solid var(--sx-border); background: var(--sx-muted); -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
 .sx-marquee::-webkit-scrollbar { display: none; }
 .sx-marquee.is-running { overflow: hidden; }
 .sx-track { display: flex; flex: none; min-width: 100%; align-items: stretch; }

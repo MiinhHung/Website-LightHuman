@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { site } from "@/content/site";
-import { Ico } from "./ui";
+import { quoteHref, site } from "@/content/site";
+import { BtnIco, Ico } from "./ui";
 
 const store = {
   get: (k: string) => {
@@ -57,22 +57,6 @@ function MailEnvelopeIcon({ className }: { className?: string }) {
   );
 }
 
-function PhoneIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      width="16"
-      height="16"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1c0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1.12" />
-    </svg>
-  );
-}
-
 function SendIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -114,15 +98,16 @@ const QUICK_SUGGESTIONS = [
 
 /** 2 nút nổi riêng biệt: 1 nút nhắn tin trực tiếp trên web, 1 nút gửi email thông báo */
 function RailAndNotify() {
-  const c = site.contact;
   const [activePanel, setActivePanel] = useState<"chat" | "email" | null>(null);
   const emailInput = useRef<HTMLInputElement | null>(null);
   const chatInput = useRef<HTMLInputElement | null>(null);
   const chatStreamRef = useRef<HTMLDivElement | null>(null);
-  const [emailStatus, setEmailStatus] = useState<{ text: string; err: boolean } | null>(null);
+  const [emailStatus, setEmailStatus] = useState<{ text: string; field: "email" | "consent" } | null>(null);
+  const [subscribed, setSubscribed] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
   const [chatDraft, setChatDraft] = useState("");
   const auto = useRef(false);
+  const msgSeq = useRef(0);
 
   const togglePanel = (panel: "chat" | "email") => {
     setActivePanel((prev) => (prev === panel ? null : panel));
@@ -177,20 +162,19 @@ function RailAndNotify() {
     const value = emailEl.value.trim();
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-      setEmailStatus({ text: "Email chưa đúng định dạng (ví dụ: hr@congty.vn).", err: true });
+      setEmailStatus({ text: "Email chưa đúng định dạng (ví dụ: hr@congty.vn).", field: "email" });
       emailEl.focus();
       return;
     }
     if (!consentEl.checked) {
-      setEmailStatus({ text: "Vui lòng chọn đồng ý để nhận phản hồi.", err: true });
+      setEmailStatus({ text: "Vui lòng tick đồng ý nhận email.", field: "consent" });
       consentEl.focus();
       return;
     }
 
-    setEmailStatus({
-      text: `Đã ghi nhận ${value}! Đội ngũ tư vấn sẽ gửi thông báo và liên hệ lại trong 24h.`,
-      err: false,
-    });
+    // TODO(BA): no newsletter endpoint yet (same as NotifyForm); nothing is stored or sent.
+    setEmailStatus(null);
+    setSubscribed(value);
     form.reset();
   }
 
@@ -199,7 +183,7 @@ function RailAndNotify() {
     if (!cleanText) return;
 
     const userMsg: ChatMessage = {
-      id: `u-${Date.now()}`,
+      id: `u-${++msgSeq.current}`,
       sender: "user",
       text: cleanText,
       time: "Vừa xong",
@@ -211,7 +195,7 @@ function RailAndNotify() {
     // Phản hồi tự động từ tư vấn viên
     window.setTimeout(() => {
       const botReply: ChatMessage = {
-        id: `b-${Date.now()}`,
+        id: `b-${++msgSeq.current}`,
         sender: "bot",
         text: `Cảm ơn bạn! Light Human đã nhận được yêu cầu: "${cleanText}". Bạn vui lòng để lại Số điện thoại hoặc Email để chuyên viên phụ trách hỗ trợ bạn ngay nhé!`,
         time: "Vừa xong",
@@ -257,7 +241,7 @@ function RailAndNotify() {
           type="button"
           aria-expanded={activePanel === "email"}
           aria-controls="email-panel"
-          aria-label={activePanel === "email" ? "Đóng form email" : "Gửi email thông báo"}
+          aria-label={activePanel === "email" ? "Đóng khung email" : "Nhận tin qua email"}
           onClick={() => togglePanel("email")}
         >
           {activePanel === "email" ? (
@@ -266,7 +250,7 @@ function RailAndNotify() {
             <MailEnvelopeIcon className="contact-fab-ico" />
           )}
           <span className="rail-tip">
-            {activePanel === "email" ? "Đóng thông báo" : "Gửi email thông báo"}
+            {activePanel === "email" ? "Đóng" : "Nhận tin qua email"}
           </span>
         </button>
       </div>
@@ -386,72 +370,66 @@ function RailAndNotify() {
           <Ico name="x" />
         </button>
 
-        <div className="contact-panel-head">
-          <span className="contact-panel-badge">Gửi email thông báo</span>
-          <h3 className="contact-panel-title" id="email-panel-h">
-            Nhận thông báo & Tư vấn
-          </h3>
-          <p className="contact-panel-sub">
-            Để lại email để nhận thông báo phân tích thị trường nhân sự hoặc yêu cầu tư vấn.
+        <h3 className="contact-panel-title" id="email-panel-h">
+          Nhận tin qua email
+        </h3>
+        <p className="contact-panel-sub">
+          Phân tích thị trường nhân sự và cập nhật dịch vụ của Light Human. Hủy bất cứ lúc nào.
+        </p>
+
+        {subscribed ? (
+          <p className="contact-done" role="status">
+            <Ico name="check" />
+            <span>
+              Đã ghi nhận <strong>{subscribed}</strong>.
+            </span>
           </p>
-        </div>
-
-        {/* Kênh Hotline */}
-        <div className="contact-phone-card">
-          <div className="contact-phone-info">
-            <span className="contact-phone-label">Hotline tư vấn</span>
-            <strong className="contact-phone-number">{c.phone}</strong>
-          </div>
-          <a
-            className="contact-call-btn"
-            href={c.phoneHref}
-            aria-label={`Gọi ngay số hotline ${c.phone}`}
-          >
-            <PhoneIcon />
-            <span>Gọi ngay</span>
-          </a>
-        </div>
-
-        <div className="contact-divider">
-          <span>hoặc nhận thông báo qua email</span>
-        </div>
-
-        {/* Form gửi email thông báo */}
-        <form onSubmit={handleEmailSubmit} className="contact-email-form">
-          <div className="contact-input-wrap">
+        ) : (
+          <form onSubmit={handleEmailSubmit} className="contact-email-form" noValidate>
+            <label className="contact-field-label" htmlFor="email-panel-input">
+              Email công việc
+            </label>
             <input
               ref={emailInput}
+              id="email-panel-input"
               type="email"
               name="email"
-              placeholder="Nhập email của bạn..."
+              placeholder="ban@congty.vn"
+              autoComplete="email"
               required
+              aria-describedby={emailStatus?.field === "email" ? "email-panel-status" : undefined}
+              aria-invalid={emailStatus?.field === "email" || undefined}
               className="contact-email-input"
             />
-            <button type="submit" className="contact-submit-btn">
-              <span>Gửi</span>
-              <Ico name="arrow-right" />
+            {emailStatus && (
+              <p id="email-panel-status" className="contact-status is-err">
+                {emailStatus.text}
+              </p>
+            )}
+            <label className="contact-consent">
+              <input
+                type="checkbox"
+                name="consent"
+                aria-describedby={emailStatus?.field === "consent" ? "email-panel-status" : undefined}
+                aria-invalid={emailStatus?.field === "consent" || undefined}
+              />
+              <span>
+                Tôi đồng ý nhận email theo <Link href="/chinh-sach-bao-mat">chính sách bảo mật</Link>.
+              </span>
+            </label>
+            <button type="submit" className="btn btn-navy btn-sm contact-mail-submit">
+              <span>Đăng ký nhận tin</span>
+              <BtnIco />
             </button>
-          </div>
-          {emailStatus && (
-            <p className={`contact-status${emailStatus.err ? " is-err" : ""}`}>
-              {emailStatus.text}
-            </p>
-          )}
-          <label className="contact-consent">
-            <input type="checkbox" name="consent" defaultChecked />
-            <span>
-              Đồng ý nhận email theo{" "}
-              <Link href="/chinh-sach-bao-mat">chính sách bảo mật</Link>.
-            </span>
-          </label>
-        </form>
+          </form>
+        )}
 
-        <div className="contact-panel-foot">
-          <Link href="/lien-he" onClick={closePanel} className="contact-foot-link">
-            <span>Đến trang Liên hệ & Báo giá chi tiết</span>
-            <Ico name="arrow-up-right" />
+        <p className="contact-panel-foot">
+          Cần báo giá cho vị trí cụ thể?{" "}
+          <Link href={quoteHref} onClick={closePanel}>
+            Tạo báo giá
           </Link>
-        </div>
+        </p>
       </div>
     </>
   );

@@ -1,10 +1,10 @@
 import { QuoteBuilder } from "@/components/quote/QuoteBuilder";
-import { contactFaqHead, contactHero, contactMap, contactVideo } from "@/content/contact";
+import { contactFaqHead, contactHero, contactMap } from "@/content/contact";
 import { faqs } from "@/content/faq";
 import { vi } from "@/content/quote/labels.vi";
 import { site } from "@/content/site";
 import { fixCopy } from "@/lib/mk";
-import { Ico, MkImg, MkLink, Rich, SecHead } from "../ui";
+import { Ico, MkLink, Rich } from "../ui";
 
 /** Mock `{{hero-text}}`: `.hero-text` keeps the header solid. */
 export function ContactHero() {
@@ -60,30 +60,6 @@ export function ContactMap() {
         <div className="mc-map mc-map-full" data-clip-reveal="">
           <iframe title={contactMap.title} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={contactMap.embed} />
         </div>
-      </div>
-    </section>
-  );
-}
-
-/** Mock `videoFeature()`; the button opens the shared video dialog (Overlays). */
-export function ContactVideo() {
-  const c = contactVideo;
-  const v = site.introVideo;
-  return (
-    <section className="video-feature tone-deep" aria-labelledby="phim">
-      <div className="wrap">
-        <SecHead id="phim" title={c.title} kicker={c.eyebrow} lede={c.lede} center />
-        <button className="video-frame" type="button" data-video-open="" data-clip-reveal="" aria-label={`${c.play}: ${v.title}`}>
-          <MkImg url={v.poster} alt="" sizes="(max-width: 1024px) 100vw, 1100px" />
-          <span className="video-play">
-            <span className="video-play-ring">
-              <Ico name="play" />
-            </span>
-            <span>
-              {c.play} · {v.duration}
-            </span>
-          </span>
-        </button>
       </div>
     </section>
   );

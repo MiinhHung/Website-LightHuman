@@ -96,7 +96,7 @@ export const services: Service[] = [
     partners: true,
     features: {
       eyebrow: "Vì sao chọn Light Human?",
-      title: "Năng lực *khác biệt* Tạo nên giá trị *vượt trội*",
+      title: "Năng lực *khác biệt*\nTạo nên giá trị *vượt trội*",
       lede: "Chúng tôi kết hợp chuyên môn sâu rộng với dữ liệu thị trường toàn diện.",
       items: [
         {

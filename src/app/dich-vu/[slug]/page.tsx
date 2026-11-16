@@ -8,6 +8,7 @@ import { Crumbs } from "@/components/mk/insights/parts";
 import { Ico, MkImg } from "@/components/mk/ui";
 import { QuoteCta } from "@/components/mk/home/HomeSections";
 import { RelatedServices } from "@/components/mk/services/ServiceDetail";
+import { FaqList } from "@/components/mk/services/parts";
 
 export const instant = false;
 
@@ -16,6 +17,12 @@ export function generateStaticParams() {
 }
 
 const plain = (t: string) => fixCopy(t).replace(/\*/g, "").replace(/\n/g, " ");
+// Two-line display titles ("Năng lực *khác biệt*\nTạo nên…") read as one clause in prose.
+// A lowercase second line is a mid-phrase break ("Góc nhìn từ\nphía…"), not a second clause.
+const headingText = (t: string) =>
+  plain(t.replace(/\n(\S)/g, (_, c: string) => (c === c.toLowerCase() ? ` ${c}` : `, ${c.toLowerCase()}`)));
+// hero.lede and description often restate the same sentence.
+const sameStart = (a: string, b: string) => plain(a).slice(0, 40).toLowerCase() === plain(b).slice(0, 40).toLowerCase();
 
 export async function generateMetadata({ params }: PageProps<"/dich-vu/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -68,10 +75,10 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
 
   const toc: [string, string][] = [
     ["tong-quan", "Tổng quan giải pháp"],
-    ...(s.scope ? ([["pham-vi", fixCopy(s.scope.title || "Phạm vi triển khai")]] as [string, string][]) : []),
+    ...(s.scope ? ([["pham-vi", headingText(s.scope.title || "Phạm vi triển khai")]] as [string, string][]) : []),
     ["khac-biet", "Năng lực & Lợi thế"],
-    ["quy-trinh", fixCopy(s.process.title || s.process.eyebrow || "Quy trình triển khai")],
-    ...(s.cases.items.length > 0 ? ([["du-an", fixCopy(s.cases.title || "Dự án thực tế")]] as [string, string][]) : []),
+    ["quy-trinh", headingText(s.process.title || s.process.eyebrow || "Quy trình triển khai")],
+    ...(s.cases.items.length > 0 ? ([["du-an", headingText(s.cases.title || "Dự án thực tế")]] as [string, string][]) : []),
     ...(s.faq.items.length > 0 ? ([["hoi-dap", "Câu hỏi thường gặp"]] as [string, string][]) : []),
   ];
 
@@ -110,21 +117,14 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
           <div className="mk-prose">
             {/* Lời mở đầu & bối cảnh */}
             <div id="tong-quan">
-              <p className="lede">
-                {plain(s.hero.lede)}
-              </p>
-              <p>
-                {plain(s.summary)}
-              </p>
-              <blockquote>
-                &ldquo;{plain(s.description)}&rdquo;
-              </blockquote>
+              <p className="lede">{plain(s.hero.lede)}</p>
+              {!sameStart(s.description, s.hero.lede) && <p>{plain(s.description)}</p>}
             </div>
 
             {/* 1. Phạm vi triển khai nếu có */}
             {s.scope && (
               <section id="pham-vi">
-                <h2>{fixCopy(s.scope.title)}</h2>
+                <h2>{headingText(s.scope.title)}</h2>
                 <p>
                   Khung dịch vụ của Light Human được chuẩn hoá chuyên biệt cho từng bài toán nhân sự, đảm bảo tính phù hợp cao nhất với mô hình vận hành của từng doanh nghiệp:
                 </p>
@@ -140,26 +140,30 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
 
             {/* 2. Năng lực & Giá trị khác biệt */}
             <section id="khac-biet">
-              <h2>{plain(s.features.title)}</h2>
+              <h2>{headingText(s.features.title)}</h2>
               {s.features.lede && <p>{plain(s.features.lede)}</p>}
-              <div className="service-prose-features">
+              <dl className="service-prose-features">
                 {s.features.items.map((feat) => (
                   <div key={feat.title}>
-                    <h3>{fixCopy(feat.title)}</h3>
-                    <p>{fixCopy(feat.desc)}</p>
+                    <dt>
+                      <Ico name={feat.icon} />
+                      {fixCopy(feat.title)}
+                    </dt>
+                    <dd>{fixCopy(feat.desc)}</dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </section>
 
             {/* 3. Quy trình thực hiện */}
             <section id="quy-trinh">
-              <h2>{fixCopy(s.process.title || s.process.eyebrow || "Quy trình triển khai dịch vụ")}</h2>
+              <h2>{headingText(s.process.title || s.process.eyebrow || "Quy trình triển khai dịch vụ")}</h2>
               {s.process.lede && <p>{plain(s.process.lede)}</p>}
-              <ol>
+              <ol className="service-prose-steps">
                 {s.process.steps.map((step) => (
                   <li key={step.title}>
-                    <strong>{fixCopy(step.title)}:</strong> {fixCopy(step.desc)}
+                    <strong>{fixCopy(step.title)}</strong>
+                    <span>{fixCopy(step.desc)}</span>
                   </li>
                 ))}
               </ol>
@@ -168,7 +172,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
             {/* 4. Dự án & Tình huống thực tế */}
             {s.cases.items.length > 0 && (
               <section id="du-an">
-                <h2>{fixCopy(s.cases.title)}</h2>
+                <h2>{headingText(s.cases.title)}</h2>
                 <p>
                   Những câu chuyện hợp tác tiêu biểu minh chứng cho năng lực thực thi và cam kết đồng hành dài lâu của Light Human:
                 </p>
@@ -186,14 +190,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/dich-vu/
             {s.faq.items.length > 0 && (
               <section id="hoi-dap">
                 <h2>Câu hỏi thường gặp</h2>
-                <div className="service-faq-prose">
-                  {s.faq.items.map((item) => (
-                    <div key={item.q}>
-                      <h3>{fixCopy(item.q)}</h3>
-                      <p>{fixCopy(item.a)}</p>
-                    </div>
-                  ))}
-                </div>
+                <FaqList items={s.faq.items} />
                 {s.faq.helper && (
                   <p className="mt-4 italic">
                     {fixCopy(s.faq.helper.text)}{" "}

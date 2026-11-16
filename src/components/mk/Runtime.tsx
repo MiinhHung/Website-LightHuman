@@ -422,7 +422,7 @@ function setup(): Off {
       });
 
       const groups = [
-        ".logos-head > *", ".acc-item", ".cstage", ".tl-row", ".ab-card", ".ab-quote", ".ab-frame", ".val-card", ".team-row",
+        ".logos-head > *", ".acc-item", ".cstage", ".tl-row", ".ab-card", ".ab-frame", ".val-card", ".team-row",
         ".index-list > li", ".bento-cell", ".steps-row > li", ".member", ".case-card", ".post-card:not(.post-featured)",
         ".tool-card, .tool-suggest", ".scope-cell", ".feat-list > li", ".snap-card", ".faq-item", ".alt-k", ".related-list > li", ".mc-list > div",
       ];

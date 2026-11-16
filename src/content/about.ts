@@ -13,7 +13,7 @@ export const crumbsCopy = { label: "Đường dẫn", home: "Trang chủ" };
 
 export const aboutHero = {
   eyebrow: "Về Light Human",
-  title: "Building Better Teams, One Hire At A Time",
+  title: "Đội ngũ tốt hơn, từ mỗi lần tuyển đúng người",
   lede: "Light Human - đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Giải pháp nhân sự ánh sáng - đồng hành cùng doanh nghiệp Việt và quốc tế.",
   image: `${CMS}/hero_about_c25f683d35.png`,
   imageAlt: "Đội ngũ Light Human trao đổi cùng khách hàng",
@@ -35,14 +35,12 @@ export const aboutIntro = {
     short: "Công ty tuyển dụng am hiểu sâu sắc nhất, nằm trong 5 thương hiệu hàng đầu giai đoạn 2020-2025.",
     text: "Trở thành công ty dịch vụ tuyển dụng am hiểu sâu sắc nhất và đáp ứng chuyên nghiệp nhất các nhu cầu tuyển dụng của doanh nghiệp - thiết lập Light Human như một trong 5 thương hiệu dịch vụ tuyển dụng hàng đầu Việt Nam (2020-2025).",
   },
-  quote: "Hành trình vạn dặm, bắt đầu từ một bước chân",
   closing:
     "Sức cạnh tranh của một tổ chức phụ thuộc vào chất lượng vốn con người - việc lựa chọn nhân tài đúng tạo nền móng cho sự thành công của các đối tác kinh doanh.",
 };
 
-/** Company film block (after mission and vision). */
+/** Company film block, after mission and vision (moved here from /lien-he). */
 export const aboutVideo = {
-  eyebrow: "Video giới thiệu",
   title: "Light Human trong bốn phút",
   lede: "Con người, cách làm việc và những doanh nghiệp đã đồng hành cùng Light Human, kể bằng hình ảnh.",
   play: "Video",

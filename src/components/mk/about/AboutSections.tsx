@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { aboutIntro, aboutStats, aboutVideo, coreValuesSection, teamSection } from "@/content/about";
 import { site } from "@/content/site";
-import { fixCopy, pad } from "@/lib/mk";
+import { fixCopy } from "@/lib/mk";
 import { Ico, LinkLine, MkImg, Rich, SecHead } from "../ui";
 
 const css = (vars: Record<string, string | number>) => vars as CSSProperties;
@@ -19,21 +19,18 @@ export function AboutIntro() {
           <p className="ab-k">{a.vision.title}</p>
           <h2 className="ab-sentence">{fixCopy(a.vision.short)}</h2>
         </article>
-        <blockquote className="ab-quote" data-rise="">
-          <p>{a.quote}</p>
-        </blockquote>
       </div>
     </section>
   );
 }
 
 /** Mock `videoFeature()`; the button opens the global video lightbox. */
-export function VideoFeature({ copy = aboutVideo }: { copy?: { eyebrow: string; title: string; lede: string; play: string } }) {
+export function VideoFeature({ copy = aboutVideo }: { copy?: { title: string; lede: string; play: string } }) {
   const v = site.introVideo;
   return (
     <section className="video-feature tone-deep" aria-labelledby="phim">
       <div className="wrap">
-        <SecHead id="phim" title={copy.title} kicker={copy.eyebrow} lede={copy.lede} center />
+        <SecHead id="phim" title={copy.title} lede={copy.lede} center />
         <button className="video-frame" type="button" data-video-open="" data-clip-reveal="" aria-label={`${copy.play}: ${v.title}`}>
           <MkImg url={v.poster} alt="" sizes="(max-width: 1240px) 92vw, 1200px" />
           <span className="video-play">
@@ -87,9 +84,6 @@ export function CoreValues() {
         <div className="val-grid">
           {v.items.map((x, i) => (
             <article key={x.title} className={`val-card val-${i + 1}`} data-rise="" style={css({ "--i": i % 2 })}>
-              <span className="val-n" aria-hidden="true">
-                {pad(i + 1)}
-              </span>
               <span className="val-ico" aria-hidden="true">
                 <Ico name={x.icon} />
               </span>

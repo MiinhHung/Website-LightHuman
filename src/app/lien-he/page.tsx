@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactFaq, ContactHero, ContactMap, ContactVideo, QuoteSection } from "@/components/mk/contact/ContactSections";
+import { ContactFaq, ContactHero, ContactMap, QuoteSection } from "@/components/mk/contact/ContactSections";
 import { contactMeta } from "@/content/contact";
 
 export const metadata: Metadata = {
@@ -9,14 +9,13 @@ export const metadata: Metadata = {
 
 export const instant = false;
 
-// Order as in the approved mock (lien-he.html): no logo band and no closing CTA here.
+// Mock order minus the company film, which now lives on /dich-vu/gioi-thieu. No logo band or closing CTA here.
 export default function ContactPage() {
   return (
     <>
       <ContactHero />
       <QuoteSection />
       <ContactMap />
-      <ContactVideo />
       <ContactFaq />
     </>
   );

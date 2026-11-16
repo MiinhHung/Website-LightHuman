@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { aboutCta, aboutHero, aboutMeta, aboutVideo } from "@/content/about";
-import { AboutIntro, AboutStats, CoreValues, Team } from "@/components/mk/about/AboutSections";
+import { AboutIntro, AboutStats, CoreValues, Team, VideoFeature } from "@/components/mk/about/AboutSections";
 import { HeroPhoto } from "@/components/mk/about/PageHero";
 import { PartnersBand } from "@/components/mk/home/HomeSections";
 import { Btn, BtnIco, CtaBand } from "@/components/mk/ui";
@@ -33,6 +33,7 @@ export default function AboutPage() {
         }
       />
       <AboutIntro />
+      <VideoFeature />
       <AboutStats />
       <CoreValues />
       <Team />

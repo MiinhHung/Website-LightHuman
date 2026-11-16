@@ -1371,7 +1371,7 @@ main>.hero {
 }
 
 .h1-home {
-  font-size: clamp(2.7rem, 7vw, 7rem);
+  font-size: clamp(2.4rem, 5.5vw, 5.5rem);
   line-height: 1.08;
   max-width: 14ch;
 }

@@ -1671,7 +1671,7 @@ main>.hero {
 
 .home-about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: clamp(2.5rem, 5vw, 4.5rem);
   align-items: center;
 }
@@ -1683,7 +1683,7 @@ main>.hero {
 
 .home-about-title {
   margin-top: 0.5rem;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1.25rem;
   line-height: 1.2;
 }
 
@@ -1692,88 +1692,24 @@ main>.hero {
   font-style: italic;
 }
 
-.home-about-lede {
-  font-size: 1.0625rem;
-  line-height: 1.6;
+.home-about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.0313rem;
+  line-height: 1.65;
   color: var(--muted);
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
   max-width: 58ch;
 }
 
-.home-about-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.home-about-card {
-  padding: 1.125rem 1.25rem;
-  border-radius: 1rem;
-  background: #fff;
-  border: 1px solid rgba(10, 20, 48, .08);
-  box-shadow: 0 0.25rem 1rem rgba(10, 20, 48, .04);
-  transition: transform .2s var(--ease-spring), box-shadow .2s;
-}
-
-.home-about-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0.5rem 1.5rem rgba(10, 20, 48, .08);
-}
-
-.home-about-card-badge {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  border-radius: 62.4375rem;
-  background: rgba(242, 207, 99, .25);
-  color: #936a08;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.home-about-card p {
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: var(--ink);
+.home-about-text p {
   margin: 0;
-}
-
-.home-about-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.75rem 2.5rem;
-  padding-block: 1.25rem;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 2rem;
-}
-
-.home-about-stat-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-about-stat-num {
-  font-family: var(--display);
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--navy-950);
-  line-height: 1.1;
-}
-
-.home-about-stat-label {
-  font-size: 0.7813rem;
-  color: var(--muted);
-  margin-top: 0.25rem;
 }
 
 .home-about-cta {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 .home-about-media {
@@ -1790,51 +1726,15 @@ main>.hero {
 .home-about-img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 4 / 3.4;
+  aspect-ratio: 4 / 3.2;
   object-fit: cover;
   display: block;
-}
-
-.home-about-floater {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  right: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.875rem 1.25rem;
-  border-radius: 1rem;
-  background: rgba(10, 20, 48, .92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
-  border: 1px solid rgba(242, 207, 99, .35);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .25);
-}
-
-.home-about-floater-num {
-  font-family: var(--display);
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--gold);
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.home-about-floater-desc {
-  font-size: 0.8125rem;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, .9);
 }
 
 @media (max-width: 900px) {
   .home-about-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .home-about-cards {
-    grid-template-columns: 1fr;
+    gap: 2.25rem;
   }
 }
 

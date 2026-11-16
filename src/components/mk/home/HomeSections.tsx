@@ -105,7 +105,7 @@ export function HomeAbout({ locale = "vi" }: { locale?: Locale }) {
     <section className="home-about tone-paper" aria-labelledby="home-about-title">
       <div className="wrap home-about-grid">
         <div className="home-about-content">
-          <p className="kicker">{isEn ? "About us" : "Giới thiệu về chúng tôi"}</p>
+          <p className="kicker">{isEn ? "About Light Human" : "Giới thiệu về chúng tôi"}</p>
           <h2 className="h2 home-about-title" id="home-about-title">
             {isEn ? (
               <>
@@ -117,46 +117,18 @@ export function HomeAbout({ locale = "vi" }: { locale?: Locale }) {
               </>
             )}
           </h2>
-          <p className="home-about-lede">
-            {isEn
-              ? "Light Human is a premier human resources and executive search consulting firm in Vietnam, connecting top talents with sustainable career opportunities across leading domestic and global enterprises."
-              : "Light Human là đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Chúng tôi đồng hành cùng các doanh nghiệp xây dựng đội ngũ vững mạnh, gắn kết nhân tài và tối ưu hóa hiệu quả vận hành bộ máy."}
-          </p>
-
-          <div className="home-about-cards">
-            <div className="home-about-card">
-              <span className="home-about-card-badge">{isEn ? "Mission" : "Sứ mệnh"}</span>
-              <p>
-                {isEn
-                  ? "Bridge between growing businesses needing talent and high-caliber professionals seeking long-term careers."
-                  : "Cầu nối chiến lược giữa doanh nghiệp cần nhân tài và chuyên gia cần nơi nuôi dưỡng sự nghiệp lâu dài."}
-              </p>
-            </div>
-            <div className="home-about-card">
-              <span className="home-about-card-badge">{isEn ? "Vision" : "Tầm nhìn"}</span>
-              <p>
-                {isEn
-                  ? "The most insightful recruitment firm, ranking among the top 5 trusted HR service brands."
-                  : "Công ty tuyển dụng am hiểu sâu sắc nhất, nằm trong 5 thương hiệu dịch vụ nhân sự hàng đầu Việt Nam."}
-              </p>
-            </div>
+          <div className="home-about-text">
+            <p>
+              {isEn
+                ? "Light Human (Light Human Solutions Joint Stock Company) is a premier recruitment and human resources consulting firm in Vietnam. We partner with local and multinational corporations to solve critical staffing challenges, from executive search to large-scale workforce deployment."
+                : "Công ty Cổ phần Giải pháp Nhân sự Ánh Sáng (Light Human) là đơn vị tư vấn nhân sự và headhunting chuyên nghiệp hàng đầu tại Việt Nam. Chúng tôi đồng hành cùng hơn 800 doanh nghiệp trong nước và quốc tế giải quyết các bài toán nhân sự then chốt, từ vị trí lãnh đạo cấp cao đến tuyển dụng hàng loạt cho nhà máy và chuỗi bán lẻ."}
+            </p>
+            <p>
+              {isEn
+                ? "With a deep understanding of local labor markets and a rigorous 6-step recruitment process, Light Human serves as a strategic bridge between businesses seeking the right fit and talented professionals looking to cultivate long-term careers."
+                : "Với sự am hiểu sâu sắc thị trường lao động cùng quy trình tuyển dụng chuẩn mực, Light Human đóng vai trò là cầu nối bền vững giữa doanh nghiệp và nhân tài, giúp tối ưu chi phí vận hành và xây dựng đội ngũ gắn kết dài lâu."}
+            </p>
           </div>
-
-          <div className="home-about-stats">
-            <div className="home-about-stat-item">
-              <strong className="home-about-stat-num">6+</strong>
-              <span className="home-about-stat-label">{isEn ? "Years of Excellence" : "Năm kinh nghiệm"}</span>
-            </div>
-            <div className="home-about-stat-item">
-              <strong className="home-about-stat-num">1.200+</strong>
-              <span className="home-about-stat-label">{isEn ? "Completed Projects" : "Dự án hoàn thành"}</span>
-            </div>
-            <div className="home-about-stat-item">
-              <strong className="home-about-stat-num">98%</strong>
-              <span className="home-about-stat-label">{isEn ? "Client Satisfaction" : "Tỷ lệ giữ chân & hài lòng"}</span>
-            </div>
-          </div>
-
           <div className="home-about-cta">
             <Btn label={isEn ? "Learn more about us" : "Tìm hiểu về chúng tôi"} href="/dich-vu/gioi-thieu" kind="gold" />
           </div>
@@ -170,12 +142,6 @@ export function HomeAbout({ locale = "vi" }: { locale?: Locale }) {
               sizes="(max-width: 900px) 95vw, 560px"
               className="home-about-img"
             />
-            <div className="home-about-floater">
-              <span className="home-about-floater-num">800+</span>
-              <span className="home-about-floater-desc">
-                {isEn ? "Enterprise Partners Worldwide" : "Doanh nghiệp trong nước & quốc tế đồng hành"}
-              </span>
-            </div>
           </div>
         </div>
       </div>

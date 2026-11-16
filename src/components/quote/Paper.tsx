@@ -1,6 +1,7 @@
 "use client";
 
 import { useDroppable } from "@dnd-kit/core";
+import type { ReactNode } from "react";
 import { Ico } from "@/components/mk/ui";
 import { CATALOG, type Group, type GroupKey } from "@/content/quote/catalog";
 import { vi } from "@/content/quote/labels.vi";
@@ -14,11 +15,23 @@ type Props = {
   selected: SelectedState;
   /** Group of the card being dragged, if any. */
   dragGroup: GroupKey | null;
+  /** The dragged card is anywhere over the sheet: light up its own row. */
+  overSheet: boolean;
   locked: boolean;
   errors: Record<string, string>;
   register: (key: string) => (el: HTMLElement | null) => void;
   onRemove: (g: GroupKey, value: string, label: string, el: HTMLElement) => void;
 };
+
+/** The whole paper is one drop zone; rows keep their own droppables for the highlight and keyboard target. */
+export function SheetDrop({ stamped, children }: { stamped: boolean; children: ReactNode }) {
+  const { setNodeRef } = useDroppable({ id: "sheet" });
+  return (
+    <article ref={setNodeRef} className="qd-paper" id="qd-paper" aria-labelledby="qd-paper-title" data-stamped={stamped ? "" : undefined}>
+      {children}
+    </article>
+  );
+}
 
 /** One `.qd-row` per catalogue group: the drop slot on the paper sheet. */
 export function SlotRows(props: Props) {
@@ -31,12 +44,12 @@ export function SlotRows(props: Props) {
   );
 }
 
-function SlotRow({ group: g, selected, dragGroup, locked, errors, register, onRemove }: Props & { group: Group }) {
+function SlotRow({ group: g, selected, dragGroup, overSheet, locked, errors, register, onRemove }: Props & { group: Group }) {
   const { setNodeRef, isOver } = useDroppable({ id: rowId(g.key), data: { groupKey: g.key } });
   const chosen = g.options.filter((o) => isValueSelected(selected, g.key, o.value)).map((o) => ({ ...o, label: fixCopy(o.label) }));
   const error = errors[`lines.0.${g.key}`];
   const target = dragGroup === g.key;
-  const cls = ["qd-row", target && "is-target", target && isOver && "is-over", error && "has-error"].filter(Boolean).join(" ");
+  const cls = ["qd-row", target && "is-target", target && (isOver || overSheet) && "is-over", error && "has-error"].filter(Boolean).join(" ");
   return (
     <div
       ref={(el) => {

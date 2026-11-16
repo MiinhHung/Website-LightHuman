@@ -36,13 +36,13 @@ export const site = {
   /** Kênh trong cụm liên hệ nhanh (livechat) — trang gốc dùng trang tuyển dụng. */
   chat: {
     facebook: "https://www.facebook.com/Tuyendunglighthuman",
-    linkedin: "https://www.linkedin.com/company/gi-i-ph-p-nh-n-s-nh-s-ng-light-human/?viewAsMember=true",
+    linkedin: "https://www.linkedin.com/company/gi-i-ph-p-nh-n-s-nh-s-ng-light-human/",
   },
   /** Mạng xã hội ở footer. */
   socials: {
-    youtube: "https://www.youtube.com/@lighthuman",
-    facebook: "https://www.facebook.com/lighthuman.vn",
-    linkedin: "https://www.linkedin.com/company/lighthuman",
+    youtube: "https://www.youtube.com/@lighthuman7349",
+    facebook: "https://www.facebook.com/Tuyendunglighthuman",
+    linkedin: "https://www.linkedin.com/company/gi-i-ph-p-nh-n-s-nh-s-ng-light-human/",
   },
 } as const;
 

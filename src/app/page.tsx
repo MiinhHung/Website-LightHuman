@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { alternatesFor } from "@/i18n/config";
 import {
-  CasesStage,
+  HomeAbout,
   HomeHero,
   HomeProcess,
-  Manifesto,
   PartnersBand,
   PostsIndex,
   QuoteCta,
   ServicesAcc,
-  SxFeatures,
   SxTestimonials,
 } from "@/components/mk/home/HomeSections";
 
@@ -20,19 +18,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "/", ...alternatesFor("/") },
 };
 
-// Order and grounds as in the approved mock: photo, deep, navy, paper, navy, paper, layers, why, voices, mist, paper, gold.
 export default function HomePage() {
   return (
     <>
+      {/* 1. Banner trước */}
       <HomeHero />
-      <PartnersBand single />
-      <Manifesto />
+
+      {/* 2. Giới thiệu về chúng tôi */}
+      <HomeAbout />
+
+      {/* 3. Dịch vụ */}
       <ServicesAcc />
+
+      {/* 4. Quy trình */}
       <HomeProcess />
-      <CasesStage />
-      <SxFeatures />
+
+      {/* 5. Kết quả hợp tác doanh nghiệp (chạy đối tác đưa xuống dưới) */}
+      <PartnersBand single title="Kết quả hợp tác doanh nghiệp" />
+
+      {/* 6. Feedback KH */}
       <SxTestimonials />
+
+      {/* 7. Bản tin */}
       <PostsIndex />
+
+      {/* Nhận báo giá */}
       <QuoteCta />
     </>
   );

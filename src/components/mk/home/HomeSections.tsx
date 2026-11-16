@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { aboutHero } from "@/content/about";
 import { caseStudies } from "@/content/case-studies";
 import { partners, clientWall } from "@/content/partners";
 import { posts, type Post } from "@/content/posts";
@@ -97,8 +98,101 @@ export function HomeHero({ locale = "vi" }: { locale?: Locale }) {
   );
 }
 
+/* ------------------------------------------------------------------ about summary for home */
+export function HomeAbout({ locale = "vi" }: { locale?: Locale }) {
+  const isEn = locale === "en";
+  return (
+    <section className="home-about tone-paper" aria-labelledby="home-about-title">
+      <div className="wrap home-about-grid">
+        <div className="home-about-content">
+          <p className="kicker">{isEn ? "About us" : "Giới thiệu về chúng tôi"}</p>
+          <h2 className="h2 home-about-title" id="home-about-title">
+            {isEn ? (
+              <>
+                A stronger team from every <em>right hire</em>
+              </>
+            ) : (
+              <>
+                Đội ngũ tốt hơn từ mỗi lần <em>tuyển đúng người</em>
+              </>
+            )}
+          </h2>
+          <p className="home-about-lede">
+            {isEn
+              ? "Light Human is a premier human resources and executive search consulting firm in Vietnam, connecting top talents with sustainable career opportunities across leading domestic and global enterprises."
+              : "Light Human là đơn vị tư vấn nhân sự và headhunting hàng đầu Việt Nam. Chúng tôi đồng hành cùng các doanh nghiệp xây dựng đội ngũ vững mạnh, gắn kết nhân tài và tối ưu hóa hiệu quả vận hành bộ máy."}
+          </p>
+
+          <div className="home-about-cards">
+            <div className="home-about-card">
+              <span className="home-about-card-badge">{isEn ? "Mission" : "Sứ mệnh"}</span>
+              <p>
+                {isEn
+                  ? "Bridge between growing businesses needing talent and high-caliber professionals seeking long-term careers."
+                  : "Cầu nối chiến lược giữa doanh nghiệp cần nhân tài và chuyên gia cần nơi nuôi dưỡng sự nghiệp lâu dài."}
+              </p>
+            </div>
+            <div className="home-about-card">
+              <span className="home-about-card-badge">{isEn ? "Vision" : "Tầm nhìn"}</span>
+              <p>
+                {isEn
+                  ? "The most insightful recruitment firm, ranking among the top 5 trusted HR service brands."
+                  : "Công ty tuyển dụng am hiểu sâu sắc nhất, nằm trong 5 thương hiệu dịch vụ nhân sự hàng đầu Việt Nam."}
+              </p>
+            </div>
+          </div>
+
+          <div className="home-about-stats">
+            <div className="home-about-stat-item">
+              <strong className="home-about-stat-num">6+</strong>
+              <span className="home-about-stat-label">{isEn ? "Years of Excellence" : "Năm kinh nghiệm"}</span>
+            </div>
+            <div className="home-about-stat-item">
+              <strong className="home-about-stat-num">1.200+</strong>
+              <span className="home-about-stat-label">{isEn ? "Completed Projects" : "Dự án hoàn thành"}</span>
+            </div>
+            <div className="home-about-stat-item">
+              <strong className="home-about-stat-num">98%</strong>
+              <span className="home-about-stat-label">{isEn ? "Client Satisfaction" : "Tỷ lệ giữ chân & hài lòng"}</span>
+            </div>
+          </div>
+
+          <div className="home-about-cta">
+            <Btn label={isEn ? "Learn more about us" : "Tìm hiểu về chúng tôi"} href="/dich-vu/gioi-thieu" kind="gold" />
+          </div>
+        </div>
+
+        <div className="home-about-media">
+          <div className="home-about-img-box">
+            <MkImg
+              url={aboutHero.image}
+              alt={aboutHero.imageAlt}
+              sizes="(max-width: 900px) 95vw, 560px"
+              className="home-about-img"
+            />
+            <div className="home-about-floater">
+              <span className="home-about-floater-num">800+</span>
+              <span className="home-about-floater-desc">
+                {isEn ? "Enterprise Partners Worldwide" : "Doanh nghiệp trong nước & quốc tế đồng hành"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------ client logos */
-export function PartnersBand({ locale = "vi", single }: { locale?: Locale; single?: boolean }) {
+export function PartnersBand({
+  locale = "vi",
+  single,
+  title,
+}: {
+  locale?: Locale;
+  single?: boolean;
+  title?: string;
+}) {
   const list = partners.filter((p) => !p.placeholder);
   const w = clientWall[locale];
   const rows = single ? [list] : [list.filter((_, i) => i % 2 === 0), list.filter((_, i) => i % 2 === 1)];
@@ -112,7 +206,7 @@ export function PartnersBand({ locale = "vi", single }: { locale?: Locale; singl
         </p>
         <div>
           <h2 className="h3" id="khach-hang">
-            {w.heading}
+            {title ?? w.heading}
           </h2>
           <p className="muted-dark">{w.lede}</p>
         </div>
@@ -408,9 +502,6 @@ export function SxFeatures({ locale = "vi" }: { locale?: Locale }) {
                     <div className="sx-icon">
                       <Ico name={f.icon} />
                     </div>
-                    <span className="sx-num" aria-hidden="true">
-                      {pad(i + 1)}
-                    </span>
                   </div>
                   <div className="sx-card-body">
                     <h3 className="sx-card-title">{f.title}</h3>
@@ -435,9 +526,6 @@ export function SxFeatures({ locale = "vi" }: { locale?: Locale }) {
                     <div className="sx-icon">
                       <Ico name={f.icon} />
                     </div>
-                    <span className="sx-num" aria-hidden="true">
-                      {pad(i + 4)}
-                    </span>
                   </div>
                   <div className="sx-card-body">
                     <h3 className="sx-card-title">{f.title}</h3>
